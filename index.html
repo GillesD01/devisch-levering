@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/gilles/Downloads/index_2.html -->
+<!-- saved from url=(0046)file:///C:/Users/gilles/Downloads/index_5.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/fde16640-dd40-4571-84c0-ab8ccc4234f1">
+<link rel="manifest" id="pwa-manifest" href="blob:null/f1c5debf-a0aa-4c2f-8099-b48f5589ec6f">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -166,7 +166,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;"></div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">Data laden...</div>
   </div>
 
   <!-- LOGIN -->
@@ -336,13 +336,14 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <!-- MAIL OVERLAY -->
     <div class="sheet-bg" id="mail-ov" style="display:none;" onclick="mailBgClick(event)">
       <div class="sheet">
-        <h3>✉ Bon doormailen</h3>
+        <h3>✉ Bon mailen</h3>
         <p style="font-size:13px;color:#888780;margin-bottom:14px;" id="mail-bon-info">Bon wordt verstuurd</p>
-        <div class="mail-pair">
-          <div class="mail-box" style="flex:2;"><div class="mail-lbl">Versturen naar</div><div class="mail-addr">bestellingen@devisch.be</div></div>
+        <div style="background:#f5f4f0;border-radius:10px;padding:10px 12px;margin-bottom:14px;">
+          <div style="font-size:11px;color:#888780;font-weight:500;text-transform:uppercase;letter-spacing:.5px;">Naar</div>
+          <div style="font-size:13px;color:#2c2c2a;margin-top:3px;">bestellingen@devisch.be</div>
         </div>
         <div id="mail-status" style="background:#f5f4f0;border-radius:10px;padding:9px 12px;font-size:12px;margin-bottom:4px;"></div>
-        <button class="btn-full" onclick="doMail()">Versturen</button>
+        <button class="btn-full" onclick="doMail()">📧 Openen in Mail-app</button>
         <button class="btn-ghost" onclick="closeMail()">Annuleren</button>
       </div>
     </div>
@@ -479,30 +480,29 @@ function hideLoader(){
   document.getElementById('s-login').classList.add('active');
 }
 
-const EMBEDDED_DATA={"date": "09-06-2026", "deliveryDays": [9, 11, 12, 16, 18, 23, 25], "klanten": [{"id": 1, "name": "KENNETH'S FOODBAR", "addr": "Kursaallaan 5, 8670 Koksijde", "email": "", "chauffeur": "JA", "bons": [{"num": "70219", "datum": "09-06-2026", "klnr": "6471", "btwnr": "BE1005331457", "netto": "124,63", "btw": "7,48", "totaal": "132,11", "btwpct": "6,0%", "note": "Graag voor 10u", "prods": [{"id": "k1p1", "code": "362019", "name": "Olie chef 5 l Delizio (Frituurolie)", "ean": "5425014709544", "qty": 2}, {"id": "k1p2", "code": "174059", "name": "Coca Cola Zero 24x33cl blik", "ean": "", "qty": 1}, {"id": "k1p3", "code": "285023", "name": "Room 20% 1 liter Cul. Oresto", "ean": "5420053200922", "qty": 1}, {"id": "k1p4", "code": "239071", "name": "Mozzarella Sliced 400gr Zuger", "ean": "7640101092035", "qty": 2}, {"id": "k1p5", "code": "321167", "name": "Pesto culinair 800gr. Gran'Oliva", "ean": "5410921014430", "qty": 1}, {"id": "k1p6", "code": "381048", "name": "Smulham 26 sneetjes 1 kg Oresto", "ean": "5420053209666", "qty": 1}, {"id": "k1p7", "code": "381011", "name": "Kippenreepjes gefrit. 8mm 2.5kg Europoultry", "ean": "5706813014108", "qty": 1}, {"id": "k1p8", "code": "212021", "name": "Champignons hotel Pinguin 2.5kg", "ean": "5411683230687", "qty": 1}, {"id": "k1p9", "code": "212023", "name": "Courgettenkubus 10x10 2.5kg Pinguin", "ean": "5411683230885", "qty": 1}, {"id": "k1p10", "code": "212075", "name": "Soepgroenten 5s. Pinguin 2.5kg", "ean": "5411683232032", "qty": 1}, {"id": "k1p11", "code": "212019", "name": "Broccolimix Pinguin 2.5kg", "ean": "5411683232247", "qty": 1}]}]}, {"id": 2, "name": "ROSA - MULTHI BV", "addr": "Boulognestraat 7, B-8670 Koksijde", "email": "", "chauffeur": "JA", "bons": [{"num": "70196", "datum": "09-06-2026", "klnr": "6410", "btwnr": "BE1003955641", "netto": "69,09", "btw": "4,15", "totaal": "73,24", "btwpct": "6,0%", "prods": [{"id": "k2b1p1", "code": "271023", "name": "Blanke roux Oresto 10 kg - PROMO", "ean": "5420053208065", "qty": 1}]}, {"num": "70209", "datum": "09-06-2026", "klnr": "6410", "btwnr": "BE1003955641", "netto": "443,91", "btw": "30,23", "totaal": "491,26", "btwpct": "6,0%/21,0%", "prods": [{"id": "k2b2p1", "code": "282029", "name": "Volle melk brik 1/1 Oresto 12x1L", "ean": "5420053207341", "qty": 1}, {"id": "k2b2p2", "code": "321089", "name": "Olijven zwart ontpit Oresto 5l", "ean": "5420053200168", "qty": 3}, {"id": "k2b2p3", "code": "332029", "name": "Toblerone box 500 st 4 kg", "ean": "7622210421852", "qty": 1}, {"id": "k2b2p4", "code": "222002", "name": "IJsmix 10l vloeibaar Maestro", "ean": "5420046245206", "qty": 2}, {"id": "k2b2p5", "code": "461008", "name": "Randen geperf. rond 10cm 250st Duni", "ean": "7321011805815", "qty": 6}, {"id": "k2b2p6", "code": "111119", "name": "Friet McCain tradystyle 2.5kg", "ean": "8710438060256", "qty": 10}, {"id": "k2b2p7", "code": "372038", "name": "Scampi 16/20 1kg EZP Black tiger Oresto", "ean": "5420053201684", "qty": 10}, {"id": "k2b2p8", "code": "208041", "name": "Tarte fine pomme 12x170g Oresto", "ean": "5420053207686", "qty": 1}]}]}, {"id": 3, "name": "Royal Koksijde bvba", "addr": "E.Terlinckplein 12, B-8670 Koksijde", "email": "", "chauffeur": "JA", "bons": [{"num": "70217", "datum": "09-06-2026", "klnr": "3407", "btwnr": "BE0473924776", "netto": "199,23", "btw": "11,95", "totaal": "211,18", "btwpct": "6,0%", "prods": [{"id": "k3p1", "code": "311012", "name": "Americainsaus Suprima 5l", "ean": "0541217800705", "qty": 1}, {"id": "k3p2", "code": "251035", "name": "Gastrique 1l Extrait Bearnaise Tierenteyn", "ean": "5410445021006", "qty": 1}, {"id": "k3p3", "code": "254220", "name": "Oregano geritst 100g Oresto", "ean": "5420053208706", "qty": 1}, {"id": "k3p4", "code": "254218", "name": "Spaghettikruid 650 g Oresto", "ean": "5420053208621", "qty": 1}, {"id": "k3p5", "code": "381011", "name": "Kippenreepjes gefrit. 8mm 2.5kg Europoultry", "ean": "5706813014108", "qty": 2}, {"id": "k3p6", "code": "6043", "name": "Toastbrood wit 800gr 10st La Lorraine", "ean": "5412632510089", "qty": 1}, {"id": "k3p7", "code": "151014", "name": "Pagnotta Paesano 450gr 15st La Lorraine", "ean": "5412632511857", "qty": 2}, {"id": "k3p8", "code": "324022", "name": "Kippenuggets 2.5kg 20gr Europoultry", "ean": "5706813024244", "qty": 1}]}]}, {"id": 4, "name": "Basilico II", "addr": "Albert I laan 93, 8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70187", "datum": "09-06-2026", "klnr": "4673", "btwnr": "BE0673499506", "netto": "77,26", "btw": "4,64", "totaal": "81,90", "btwpct": "6,0%", "prods": [{"id": "k4p1", "code": "285023", "name": "Room 20% 1 liter Cul. Oresto", "ean": "5420053200922", "qty": 12}, {"id": "k4p2", "code": "161053", "name": "SP*Linguini Kookbestendig 2x5kg Soubry", "ean": "15410028095278", "qty": 1}]}]}, {"id": 5, "name": "Cust'o", "addr": "Albert I laan 56, 8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70214", "datum": "09-06-2026", "klnr": "6104", "btwnr": "BE0795918157", "netto": "193,71", "btw": "11,62", "totaal": "205,33", "btwpct": "6,0%", "prods": [{"id": "k5p1", "code": "282029", "name": "Volle melk brik 1/1 Oresto 12x1L", "ean": "5420053207341", "qty": 1}, {"id": "k5p2", "code": "314081", "name": "Bearnaisesaus Delino 3kg", "ean": "5412834000241", "qty": 1}, {"id": "k5p3", "code": "231002", "name": "Eieren L 90st Pr/kt", "ean": "5407008390013", "qty": 1}, {"id": "k5p4", "code": "161027", "name": "SP*Fettuccini all'uovo Napolina 2kg", "ean": "3011360007339", "qty": 1}, {"id": "k5p5", "code": "233001", "name": "Emmental gemalen 1kg Oresto", "ean": "5420053205804", "qty": 1}, {"id": "k5p6", "code": "285025", "name": "Room Recap 40% Tetra 1l Inex", "ean": "5410441120611", "qty": 12}, {"id": "k5p7", "code": "284004", "name": "Creme Brulée bourbon Debic 1l", "ean": "5410488821786", "qty": 2}, {"id": "k5p8", "code": "233014", "name": "Parmesan Geraspt 1 kg Zanetti", "ean": "8002710410089", "qty": 1}, {"id": "k5p9", "code": "244016", "name": "Nutroma Barista opschuimmelk 1.5l", "ean": "5414150998103", "qty": 1}, {"id": "k5p10", "code": "192046", "name": "Aardbeien Senga 2.5kg Dirafrost", "ean": "5410302003213", "qty": 1}, {"id": "k5p11", "code": "257001", "name": "Basilicum 1x250g Daregel", "ean": "3060730007134", "qty": 1}, {"id": "k5p12", "code": "212076", "name": "Soepgroenten brunoise Pinguin 2.5kg", "ean": "5411683232179", "qty": 1}]}]}, {"id": 6, "name": "Da Vinci", "addr": "Leopold II laan 213, 8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70127", "datum": "09-06-2026", "klnr": "6112", "btwnr": "BE0783724762", "netto": "184,39", "btw": "12,73", "totaal": "197,12", "btwpct": "6,0%/21,0%", "prods": [{"id": "k6p1", "code": "231002", "name": "Eieren L 90st Pr/kt (1)", "ean": "5407008390013", "qty": 1}, {"id": "k6p2", "code": "231002", "name": "Eieren L 90st Pr/kt (2)", "ean": "5407008390013", "qty": 1}, {"id": "k6p3", "code": "235016", "name": "Sneetjes kaas 10x10 Horeca Oresto 2x500gr", "ean": "5420053201127", "qty": 1}, {"id": "k6p4", "code": "321177", "name": "Kaastartinade rood 800gr", "ean": "5410921008477", "qty": 1}, {"id": "k6p5", "code": "236002", "name": "Boursin look & kruiden 1kg - PROMO", "ean": "3073780983877", "qty": 1}, {"id": "k6p6", "code": "232008", "name": "Geitekaas 5 x 100gr natuur", "ean": "5410863011016", "qty": 1}, {"id": "k6p7", "code": "153004", "name": "Bruschelle Maxi 8x400gr Morato", "ean": "28006837000226", "qty": 1}, {"id": "k6p8", "code": "381048", "name": "Smulham 26 sneetjes 1 kg Oresto", "ean": "5420053209666", "qty": 1}, {"id": "k6p9", "code": "381045", "name": "Gerookte spek gesned. 1kg Oresto (1)", "ean": "5420053209765", "qty": 1}, {"id": "k6p10", "code": "381045", "name": "Gerookte spek gesned. 1kg Oresto (2)", "ean": "5420053209765", "qty": 1}, {"id": "k6p11", "code": "335003", "name": "Lekstok 4.6gr 200st fruit Sweets", "ean": "8717729052549", "qty": 1}, {"id": "k6p12", "code": "209501", "name": "Brusselse Wafel Oresto 24st x 80gr", "ean": "5420053207860", "qty": 1}]}]}, {"id": 7, "name": "De Klipper", "addr": "Dorpstraat 6, B-8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70203", "datum": "09-06-2026", "klnr": "3626", "btwnr": "BE0870758607", "netto": "71,25", "btw": "4,28", "totaal": "75,53", "btwpct": "6,0%", "prods": [{"id": "k7p1", "code": "253529", "name": "Seaweed & Green herbs sauce Bresc 1kg", "ean": "", "qty": 2}, {"id": "k7p2", "code": "174019", "name": "Fanta sinaas 24x33cl pr/kt", "ean": "5449000011541", "qty": 2}]}]}, {"id": 8, "name": "De korre Restaurant", "addr": "Leopold II laan 278, 8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70210", "datum": "09-06-2026", "klnr": "4662", "btwnr": "BE0541616722", "netto": "27,32", "btw": "1,64", "totaal": "28,96", "btwpct": "6,0%", "prods": [{"id": "k8p1", "code": "311222", "name": "Licht Soy Sauce Healthy boy 700ml", "ean": "8850206011025", "qty": 1}, {"id": "k8p2", "code": "362037", "name": "Sesamolie 410ml Jia Brand", "ean": "3379145033721", "qty": 1}, {"id": "k8p3", "code": "122026", "name": "Kook wijn (Mirin-Fu) 500ml MARUKIN", "ean": "", "qty": 1}, {"id": "k8p4", "code": "254176", "name": "Steranijs 95gr Verstegen", "ean": "8712200903013", "qty": 1}, {"id": "k8p5", "code": "257024", "name": "Limoenblaadjes Lime Leaves 100gr", "ean": "8717677864690", "qty": 1}]}]}, {"id": 9, "name": "Tfornuis", "addr": "Polderstraat 116, 8670 Oostduinkerke", "email": "", "chauffeur": "JA", "bons": [{"num": "70222", "datum": "09-06-2026", "klnr": "5650", "btwnr": "BE0537190255", "netto": "188,42", "btw": "13,22", "totaal": "201,64", "btwpct": "6,0%/21,0%", "prods": [{"id": "k9b1p1", "code": "244001", "name": "Melkcups Moments 240x7.5gr", "ean": "5420053200236", "qty": 1}, {"id": "k9b1p2", "code": "442016", "name": "Soft Sel zoutkristallen 5-15 25kg", "ean": "5425000963332", "qty": 1}, {"id": "k9b1p3", "code": "239029", "name": "Mozarella Burrata 8x150gr Zanetti", "ean": "18002710333095", "qty": 1}, {"id": "k9b1p4", "code": "311089", "name": "Loempiasaus 1l Delino", "ean": "5412834001088", "qty": 1}, {"id": "k9b1p5", "code": "311205", "name": "Ketchup 1l Oresto", "ean": "5420053206764", "qty": 2}, {"id": "k9b1p6", "code": "203028", "name": "Chocoladepastillen fondant 2.5kg Callebaut", "ean": "5410522513691", "qty": 1}, {"id": "k9b1p7", "code": "251150", "name": "Vloeibare Rietsuiker 100cl Splash", "ean": "5410462603124", "qty": 2}, {"id": "k9b1p8", "code": "226141", "name": "Vanille Bourbon 5l Lo&Hugo", "ean": "", "qty": 2}, {"id": "k9b1p9", "code": "272007", "name": "Wakame 80% salades 1kg", "ean": "5411658011051", "qty": 1}, {"id": "k9b1p10", "code": "111117", "name": "Friet Belgische Lutosa 2.5kg", "ean": "5410376222800", "qty": 8}]}, {"num": "69757", "datum": "09-06-2026", "klnr": "5650", "btwnr": "BE0537190255", "netto": "5,70", "btw": "0,34", "totaal": "6,04", "btwpct": "6,0%", "note": "Leveren met de volgende bestelling", "prods": [{"id": "k9b2p1", "code": "272007", "name": "Wakame 80% salades 1kg", "ean": "5411658011051", "qty": 1}]}]}, {"id": 10, "name": "In The Box L&L BV", "addr": "Zuidstraat 22, 8630 Veurne", "email": "", "chauffeur": "JA", "bons": [{"num": "70204", "datum": "09-06-2026", "klnr": "5018", "btwnr": "BE0715796454", "netto": "599,53", "btw": "35,97", "totaal": "635,50", "btwpct": "6,0%", "prods": [{"id": "k10p1", "code": "271023", "name": "Blanke roux Oresto 10kg", "ean": "5420053208065", "qty": 1}, {"id": "k10p2", "code": "211051", "name": "Tomatenpuree Oresto 800gr dubbel", "ean": "5420053201226", "qty": 12}, {"id": "k10p3", "code": "282018", "name": "Kokosmelk 1l tetra Aroy-D UHT", "ean": "8851613101392", "qty": 12}, {"id": "k10p4", "code": "285045", "name": "Gastronom room 5l bib 20% Inex", "ean": "5410441991044", "qty": 4}, {"id": "k10p5", "code": "233001", "name": "Emmental gemalen 1kg Oresto", "ean": "5420053205804", "qty": 10}, {"id": "k10p6", "code": "282028", "name": "Volle melk 10l b.i.b. Inex", "ean": "5410441991105", "qty": 2}, {"id": "k10p7", "code": "381124", "name": "Gerookte Spekreepjes 2x500gr Oresto", "ean": "5420053208904", "qty": 9}, {"id": "k10p8", "code": "233014", "name": "Parmesan Geraspt 1kg Zanetti", "ean": "8002710410089", "qty": 6}, {"id": "k10p9", "code": "254051", "name": "Lookpoeder 550gr Oresto", "ean": "5420053208805", "qty": 1}, {"id": "k10p10", "code": "161018", "name": "Penne pasta concept 3x4kg The Smiling Cook", "ean": "5413835690073", "qty": 4}, {"id": "k10p11", "code": "274014", "name": "Bloemkoolrijst 1x2.5kg Pinguin", "ean": "5411683200017", "qty": 1}]}]}, {"id": 11, "name": "De Vette Os", "addr": "Zuidstraat 1, 8630 Veurne", "email": "", "chauffeur": "JA", "bons": [{"num": "70223", "datum": "09-06-2026", "klnr": "5335", "btwnr": "BE0740585991", "netto": "74,46", "btw": "4,47", "totaal": "78,93", "btwpct": "6,0%", "prods": [{"id": "k11p1", "code": "285001", "name": "Culinaire room Debic 1l Original", "ean": "5410488824558", "qty": 12}, {"id": "k11p2", "code": "233001", "name": "Emmental gemalen 1kg Oresto", "ean": "5420053205804", "qty": 2}, {"id": "k11p3", "code": "313024", "name": "Saus Anglaise bourbon Debic 1l", "ean": "5410488821878", "qty": 2}, {"id": "k11p4", "code": "253502", "name": "Knoflook gehakt Bresc 1kg", "ean": "8712698120183", "qty": 1}]}]}, {"id": 12, "name": "Diga Brasserie - Brexittnot", "addr": "Lauwestraat 2, 8670 Koksijde", "email": "", "chauffeur": "JA", "bons": [{"num": "69985", "datum": "09-06-2026", "klnr": "5493", "btwnr": "BE0704671643", "netto": "128,85", "btw": "27,06", "totaal": "155,91", "btwpct": "21,0%", "prods": [{"id": "k12p1", "code": "464013", "name": "Serv. 40x40cm 1/8 wit 60st Dunisoft bio", "ean": "7321012029296", "qty": 18}]}]}, {"id": 13, "name": "Frans & Bertha", "addr": "Vaartstraat 51, 8630 Veurne", "email": "", "chauffeur": "JA", "bons": [{"num": "70229", "datum": "09-06-2026", "klnr": "5413", "btwnr": "BE0731601516", "netto": "42,74", "btw": "2,56", "totaal": "45,30", "btwpct": "6,0%", "prods": [{"id": "k13p1", "code": "311224", "name": "Fish Sauce Tiparos 700ml", "ean": "8850545757578", "qty": 24}]}]}]};
-
 async function loadAppData(){
-  const d=EMBEDDED_DATA;
-  // Drivers bijwerken
-  if(d.drivers){DRIVERS.length=0;d.drivers.forEach(x=>DRIVERS.push(x));}
-  // Leveringsdagen bijwerken
-  if(d.deliveryDays){DEL_DAYS.length=0;d.deliveryDays.forEach(x=>DEL_DAYS.push(x));}
-  KLANTEN=cloneData(d.klanten||[]);
-  localStorage.setItem('def_loaded_date',d.date||'');
-  loadScanProgress();
-  // Kalender automatisch instellen op datum van de data
-  const parts=(d.date||'').split('-');
-  if(parts.length===3){
-    const dd=parseInt(parts[0]),mm=parseInt(parts[1])-1,yyyy=parseInt(parts[2]);
-    calY=yyyy; calM=mm;
-    const now=new Date();
-    // Auto-selecteer de dag als het vandaag of later is
-    const dataD=new Date(yyyy,mm,dd);
-    const nowD=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-    if(dataD>=nowD){selDay=dd;}
-    else{selDay=dd;} // toon altijd, chauffeur ziet "verleden" indicator
+  showLoader('Data laden...');
+  try{
+    const ctrl=new AbortController();
+    const timer=setTimeout(()=>ctrl.abort(),3000); // max 3 seconden wachten
+    const res=await fetch('./data.json?v='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+    clearTimeout(timer);
+    if(!res.ok) throw new Error('Geen data.json');
+    const data=await res.json();
+    const today=data.date||'';
+    localStorage.setItem('def_loaded_date',today);
+    if(data.deliveryDays){DEL_DAYS.length=0;data.deliveryDays.forEach(d=>DEL_DAYS.push(d));}
+    KLANTEN=cloneData(data.klanten||[]);
+    loadScanProgress();
+    showLoader('✓ Data geladen voor '+today);
+    setTimeout(hideLoader,600);
+  }catch(e){
+    // Geen data.json of timeout — gebruik ingebouwde data, direct door
+    KLANTEN=cloneData(RAW_KLANTEN_FALLBACK);
+    localStorage.setItem('def_loaded_date','09-06-2026');
+    loadScanProgress();
+    hideLoader();
   }
-  hideLoader();
   renderDrivers();
   appReady=true;
 }
@@ -1020,19 +1020,42 @@ function openMail(){
   const bon=aktKlant.bons[aktBonIdx];
   const miss=bon.prods.filter(p=>p.missing).length;
   document.getElementById('mail-bon-info').textContent='Bon '+bon.num+' · '+aktKlant.name;
-  document.getElementById('mail-klant').textContent=aktKlant.email;
   const st=document.getElementById('mail-status');
   if(miss>0){
-    st.innerHTML=`<span style="color:#a32d2d;">⚠ ${miss} product(en) niet beschikbaar — aangepaste bon wordt verstuurd</span>`;
+    st.innerHTML=`<span style="color:#a32d2d;">⚠ ${miss} product(en) niet beschikbaar</span>`;
   } else {
     st.innerHTML=`<span style="color:#3b6d11;">✓ Alle producten beschikbaar</span>`;
   }
   document.getElementById('mail-ov').style.display='flex';
 }
+
 function doMail(){
   const bon=aktKlant.bons[aktBonIdx];
+  const miss=bon.prods.filter(p=>p.missing);
+  const ok=bon.prods.filter(p=>!p.missing);
+
+  // Bouw mail inhoud
+  const subject=encodeURIComponent(`Leveringsbon ${bon.num} – ${aktKlant.name} – ${bon.datum}`);
+
+  let body=`Geachte,\n\nHierbij de leveringsbon voor ${aktKlant.name}.\n`;
+  body+=`Bon: ${bon.num} | Datum: ${bon.datum} | Chauffeur: ${selDriver?.name||''}\n\n`;
+  body+=`GELEVERDE PRODUCTEN:\n`;
+  ok.forEach(p=>{
+    body+=`✓ [${p.code}] ${p.name} — ${p.qty}x\n`;
+  });
+  if(miss.length>0){
+    body+=`\nNIET BESCHIKBAAR (tekort):\n`;
+    miss.forEach(p=>{
+      body+=`✗ [${p.code}] ${p.name} — ${p.qty}x\n`;
+    });
+  }
+  body+=`\nNetto: €${bon.netto} | BTW: €${bon.btw} | Totaal: €${bon.totaal}\n`;
+  body+=`\nMet vriendelijke groeten,\nDevisch – Esca Food\nT +32 (0)58 52 38 04 | info@devisch.be`;
+
+  const mailtoUrl=`mailto:bestellingen@devisch.be?subject=${subject}&body=${encodeURIComponent(body)}`;
+  window.location.href=mailtoUrl;
   closeMail();
-  showToast('✓ Bon '+bon.num+' verstuurd');
+  showToast('✓ Mail-app geopend');
 }
 function closeMail(){document.getElementById('mail-ov').style.display='none';}
 function mailBgClick(e){if(e.target===document.getElementById('mail-ov'))closeMail();}
