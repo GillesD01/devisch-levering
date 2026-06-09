@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/gilles/Downloads/index_6.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_17.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/c84dbba3-8913-468e-bc1c-6b0bfe2766ce">
+<link rel="manifest" id="pwa-manifest" href="blob:null/998c31ec-0924-45ea-91fb-640f734e542e">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -179,33 +179,33 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="scroll" id="login-scroll">
       <div class="label">Kies chauffeur</div>
       <div id="driver-list">
-    <div class="card" onclick="selectDriver(&#39;TJ&#39;)">
+    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">TJ</div>
-      <div><div class="name">Tjorven</div><div class="sub">Route Noord</div></div>
+      <div><div class="name">Tjorven</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;JA&#39;)">
+    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
       <div class="av">JA</div>
-      <div><div class="name">Jarne</div><div class="sub">Route Kust</div></div>
+      <div><div class="name">Jarne</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;FE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;FE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">FE</div>
-      <div><div class="name">Femija</div><div class="sub">Route West</div></div>
+      <div><div class="name">Femija</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;SE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;SE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">SE</div>
-      <div><div class="name">Selmir</div><div class="sub">Route Zuid</div></div>
+      <div><div class="name">Selmir</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;CH&#39;)">
+    <div class="card" onclick="selectDriver(&#39;CH&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">CH</div>
-      <div><div class="name">Christophe</div><div class="sub">Route Oost</div></div>
+      <div><div class="name">Christophe</div></div>
       <div class="chevron">›</div>
     </div></div>
-      <div id="pin-area" style="display:none;">
-        <div class="label" id="pin-label">Code voor chauffeur</div>
+      <div id="pin-area" style="display: block;">
+        <div class="label" id="pin-label">Code voor Jarne</div>
         <div class="pin-dots" id="pin-dots">
           <div class="dot"></div><div class="dot"></div>
           <div class="dot"></div><div class="dot"></div>
@@ -228,21 +228,248 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
   </div>
 
+  <!-- VOERTUIG -->
+  <div class="screen" id="s-voertuig">
+    <div class="topbar">
+      <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
+      <span class="topbar-title" id="vrt-driver-name">Jarne</span>
+      <span class="topbar-sub">D–EF</span>
+    </div>
+    <div class="scroll">
+      <div class="label">Kies jouw bestelwagen vandaag</div>
+      <div id="voertuig-list"><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1FDN178</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco Daily</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1HVC234&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1HVC234</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco 120EL</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE435&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE435</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE447&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE447</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Nissan</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SAK672&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SAK672</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Doblo</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG928&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG928</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG974&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG974</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1WGW842&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1WGW842</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2-JKW-334&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2-JKW-334</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2CDZ134&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2CDZ134</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA105&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA105</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DUK997&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DUK997</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco BE-Combi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2HLS390&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2HLS390</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div></div>
+      <div style="margin-top:8px;">
+        <div class="label">Ander voertuig?</div>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="vrt-custom" placeholder="Nummerplaat invullen..." style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:10px;padding:13px 14px;font-size:15px;font-family:monospace;font-weight:600;color:#2c2c2a;outline:none;text-transform:uppercase;">
+          <button onclick="kiesVoertuig(document.getElementById(&#39;vrt-custom&#39;).value)" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:13px 18px;font-size:14px;font-weight:700;cursor:pointer;">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CALENDAR -->
   <div class="screen" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="cal-driver-name">Chauffeur</span>
-      <span class="topbar-sub">D–EF</span>
+      <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA069</span>
+      <button onclick="openNotifStuur()" style="background:none;border:none;color:#e8855a;font-size:20px;cursor:pointer;padding:0;position:relative;" title="Bericht sturen">
+        🔔
+        <span id="notif-badge" style="display:none;position:absolute;top:-4px;right:-4px;width:10px;height:10px;background:#e8855a;border-radius:50%;"></span>
+      </button>
+    </div>
+
+    <!-- NOTIF STUUR PANEL -->
+    <div class="sheet-bg" id="notif-stuur-ov" style="display:none;" onclick="if(event.target===this)closeNotifStuur()">
+      <div class="sheet">
+        <h3>🔔 Bericht sturen naar chauffeur</h3>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Het bericht verschijnt de volgende keer dat de chauffeur inlogt.</p>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Naar chauffeur:</label>
+          <select id="notif-to" style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:9px 12px;font-size:14px;color:#2c2c2a;outline:none;">
+            <option value="ALL">Alle chauffeurs</option>
+            <option value="TJ">Tjorven</option>
+            <option value="JA">Jarne</option>
+            <option value="FE">Femija</option>
+            <option value="SE">Selmir</option>
+            <option value="CH">Christophe</option>
+          </select>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Bericht:</label>
+          <textarea id="notif-tekst" placeholder="Typ hier je bericht..." style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:10px 12px;font-size:14px;color:#2c2c2a;outline:none;resize:none;height:100px;font-family:inherit;"></textarea>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
+          <div style="font-size:11px;color:#888780;font-weight:600;width:100%;text-transform:uppercase;letter-spacing:.5px;">Snelle berichten:</div>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Pas op: rijstrookwerkzaamheden op route&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">⚠️ Rijstrookwerken</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Klant belt: even opbellen voor levering&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">📞 Klant opbellen</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Kom eerst naar het magazijn&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">🏭 Eerst magazijn</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Extra doos meenemen&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">📦 Extra doos</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Vertraging verwacht: bel kantoor&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">⏰ Vertraging</button>
+        </div>
+        <button class="btn-full" onclick="verstuurNotif()">📤 Versturen</button>
+        <button class="btn-ghost" onclick="closeNotifStuur()">Annuleren</button>
+      </div>
     </div>
     <div class="scroll">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
         <button class="cal-nav" onclick="chMonth(-1)">‹</button>
-        <span class="cal-month" id="cal-month-lbl"></span>
+        <span class="cal-month" id="cal-month-lbl">Juni 2026</span>
         <button class="cal-nav" onclick="chMonth(1)">›</button>
       </div>
-      <div class="cal-grid" id="cal-grid"></div>
-      <div id="cal-summary"></div>
+      <div class="cal-grid" id="cal-grid"><div class="cal-dl">Ma</div><div class="cal-dl">Di</div><div class="cal-dl">Wo</div><div class="cal-dl">Do</div><div class="cal-dl">Vr</div><div class="cal-dl">Za</div><div class="cal-dl">Zo</div><div class="cal-d" onclick="">
+      1
+    </div><div class="cal-d" onclick="">
+      2
+    </div><div class="cal-d" onclick="">
+      3
+    </div><div class="cal-d" onclick="">
+      4
+    </div><div class="cal-d" onclick="">
+      5
+    </div><div class="cal-d" onclick="">
+      6
+    </div><div class="cal-d" onclick="">
+      7
+    </div><div class="cal-d" onclick="">
+      8
+    </div><div class="cal-d has-del sel today" onclick="pickDay(9)">
+      9<div class="dot-del"></div>
+    </div><div class="cal-d" onclick="">
+      10
+    </div><div class="cal-d" onclick="">
+      11
+    </div><div class="cal-d" onclick="">
+      12
+    </div><div class="cal-d" onclick="">
+      13
+    </div><div class="cal-d" onclick="">
+      14
+    </div><div class="cal-d" onclick="">
+      15
+    </div><div class="cal-d" onclick="">
+      16
+    </div><div class="cal-d" onclick="">
+      17
+    </div><div class="cal-d" onclick="">
+      18
+    </div><div class="cal-d" onclick="">
+      19
+    </div><div class="cal-d" onclick="">
+      20
+    </div><div class="cal-d" onclick="">
+      21
+    </div><div class="cal-d" onclick="">
+      22
+    </div><div class="cal-d" onclick="">
+      23
+    </div><div class="cal-d" onclick="">
+      24
+    </div><div class="cal-d" onclick="">
+      25
+    </div><div class="cal-d" onclick="">
+      26
+    </div><div class="cal-d" onclick="">
+      27
+    </div><div class="cal-d" onclick="">
+      28
+    </div><div class="cal-d" onclick="">
+      29
+    </div><div class="cal-d" onclick="">
+      30
+    </div></div>
+      <div id="cal-summary"><div class="sum-bar">
+    <div>
+      <div style="color:#888780;font-size:12px;">📅 Vandaag — di 9 juni 2026</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">13 klanten</div>
+    </div>
+    <button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>
+  </div></div>
     </div>
   </div>
 
@@ -250,21 +477,429 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-klanten">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-calendar&#39;)">‹</button>
-      <span class="topbar-title" id="kl-title">Klanten</span>
+      <span class="topbar-title" id="kl-title">9 jun – Jarne</span>
       <span class="topbar-sub">D–EF</span>
     </div>
-    <div class="scroll" id="kl-list"></div>
+    <div class="scroll" id="kl-list">
+    <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:13px 15px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:12px;color:#888780;font-weight:500;">Dagvoortgang</span>
+        <span style="font-size:12px;font-weight:700;color:#2c2c2a;">0/13 · 0%</span>
+      </div>
+      <div style="background:#f1efe8;border-radius:6px;height:10px;overflow:hidden;">
+        <div style="background:#e8855a;height:100%;width:0%;border-radius:6px;transition:width .3s;"></div>
+      </div>
+      
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div class="label" style="margin:0;">Klanten vandaag (13)</div>
+      <button onclick="toggleSorteer()" id="btn-sorteer" style="background:#f1efe8;color:#888780;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">
+        ⇅ Volgorde
+      </button>
+    </div>
+    
+    <div id="klant-sorteer-lijst"><div class="card" data-id="1" data-idx="0" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(1,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">1</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">KENNETH'S FOODBAR</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kursaallaan 5, 8670 Koksijde</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(1,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(1)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Kursaallaan%205%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="2" data-idx="1" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(2,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">2</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ROSA - MULTHI BV</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Boulognestraat 7, B-8670 Koksijde</div>
+          
+        </div>
+        <div class="badge badge-orange">2 bonnen</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(2,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(2)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Boulognestraat%207%2C%20B-8670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="3" data-idx="2" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(3,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">3</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Royal Koksijde bvba</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">E.Terlinckplein 12, B-8670 Koksijde</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(3,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(3)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=E.Terlinckplein%2012%2C%20B-8670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="4" data-idx="3" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(4,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">4</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Basilico II</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Albert I laan 93, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(4,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(4)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Albert%20I%20laan%2093%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="5" data-idx="4" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(5,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">5</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Cust'o</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Albert I laan 56, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(5,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(5)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Albert%20I%20laan%2056%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="6" data-idx="5" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">6</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Da Vinci</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Leopold II laan 213, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(6,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(6)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Leopold%20II%20laan%20213%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="7" data-idx="6" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(7,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">7</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">De Klipper</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dorpstraat 6, B-8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(7,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(7)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Dorpstraat%206%2C%20B-8670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="8" data-idx="7" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(8,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">8</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">De korre Restaurant</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Leopold II laan 278, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(8,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(8)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Leopold%20II%20laan%20278%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="9" data-idx="8" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(9,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">9</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tfornuis</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Polderstraat 116, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">2 bonnen</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(9,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(9)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Polderstraat%20116%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="10" data-idx="9" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(10,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">10</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">In The Box L&amp;L BV</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zuidstraat 22, 8630 Veurne</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(10,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(10)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zuidstraat%2022%2C%208630%20Veurne" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="11" data-idx="10" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(11,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">11</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">De Vette Os</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zuidstraat 1, 8630 Veurne</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(11,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(11)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zuidstraat%201%2C%208630%20Veurne" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="12" data-idx="11" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(12,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">12</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Diga Brasserie - Brexittnot</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Lauwestraat 2, 8670 Koksijde</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(12,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(12)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Lauwestraat%202%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="13" data-idx="12" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(13,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">13</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Frans &amp; Bertha</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Vaartstraat 51, 8630 Veurne</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(13,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(13)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Vaartstraat%2051%2C%208630%20Veurne" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div></div></div>
   </div>
 
   <!-- BON -->
   <div class="screen" id="s-bon">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-klanten&#39;)">‹</button>
-      <span class="topbar-title" id="bon-klant-name">Bon</span>
+      <span class="topbar-title" id="bon-klant-name">KENNETH'S FOODBAR</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="bon-tabs" id="bon-tabs" style="display:none;"></div>
-    <div class="scroll" id="bon-content"></div>
+    <div class="scroll" id="bon-content"><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:7px;">
+      <span style="font-size:12px;color:#888780;font-weight:500;">Voortgang</span>
+      <span style="font-size:12px;font-weight:600;color:#2c2c2a;">0/11</span>
+    </div>
+    <div style="background:#f1efe8;border-radius:6px;height:8px;overflow:hidden;">
+      <div style="background:#63991a;height:100%;width:0%;border-radius:6px;transition:width .3s;"></div>
+    </div>
+    
+  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:14px;margin-bottom:10px;font-size:12px;">
+
+    <!-- Logo rij -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:10px;border-bottom:.5px solid rgba(0,0,0,.08);margin-bottom:10px;">
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#2c2c2a;letter-spacing:-.5px;">devisch – esca food</div>
+        <div style="font-size:12px;color:#e8855a;font-weight:600;">oresto partner</div>
+      </div>
+      <div style="text-align:right;font-size:10px;color:#e8855a;font-weight:600;line-height:1.6;">
+        Devisch - Oresto Partner<br>
+        <span style="color:#888780;font-weight:400;">Devisch Foodservice bv<br>
+        Koksijdestraat 20, B-8630 Veurne<br>
+        T +32 (0)58 52 38 04<br>
+        info@devisch.be</span>
+      </div>
+    </div>
+
+    <!-- Bestelnota info -->
+    <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+      <div>
+        <div style="font-weight:700;color:#2c2c2a;font-size:13px;">BESTELNOTA 70219</div>
+        <div style="color:#888780;margin-top:2px;">Datum : 09-06-2026</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-weight:600;color:#2c2c2a;">KENNETH'S FOODBAR</div>
+        <div style="color:#888780;">Kursaallaan 5, 8670 Koksijde</div>
+      </div>
+    </div>
+
+    <!-- Klant meta -->
+    <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:.5px solid rgba(0,0,0,.08);">
+      <div style="color:#888780;">Klantnummer 6471<br>BE1005331457</div>
+      <div style="text-align:right;color:#888780;">Chauffeur: <span style="color:#2c2c2a;font-weight:600;">Jarne</span></div>
+    </div>
+    <div style="margin-top:8px;background:#f5f4f0;border-radius:6px;padding:6px 10px;font-size:11px;color:#444441;font-style:italic;">Graag voor 10u</div>
+  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead>
+        <tr style="background:#2c2c2a;color:#fff;">
+          <th style="padding:8px 10px;text-align:left;font-weight:600;width:14%;">Code</th>
+          <th style="padding:8px 6px;text-align:left;font-weight:600;">Omschrijving</th>
+          <th style="padding:8px 6px;text-align:center;font-weight:600;width:10%;">Aantal</th>
+          <th style="padding:8px 8px;text-align:right;font-weight:600;width:12%;">Status</th>
+        </tr>
+      </thead>
+      <tbody><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">362019</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Olie chef 5 l Delizio (Frituurolie)
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5425014709544</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/2</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">174059</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Coca Cola Zero 24x33cl blik
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">285023</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Room 20% 1 liter Cul. Oresto
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5420053200922</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">239071</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Mozzarella Sliced 400gr Zuger
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">7640101092035</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/2</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">321167</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Pesto culinair 800gr. Gran'Oliva
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5410921014430</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">381048</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Smulham 26 sneetjes 1 kg Oresto
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5420053209666</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">381011</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Kippenreepjes gefrit. 8mm 2.5kg Europoultry
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5706813014108</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">212021</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Champignons hotel Pinguin 2.5kg
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5411683230687</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">212023</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Courgettenkubus 10x10 2.5kg Pinguin
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5411683230885</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">212075</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Soepgroenten 5s. Pinguin 2.5kg
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5411683232032</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">212019</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Broccolimix Pinguin 2.5kg
+        <div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">5411683232247</div>
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr></tbody></table></div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:4px;font-size:12px;">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;">
+      <span style="color:#888780;">Netto Basis</span><span style="color:#888780;">BTW %</span><span style="color:#888780;">BTW-bedrag</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:.5px solid rgba(0,0,0,.08);padding-bottom:10px;">
+      <span style="font-weight:600;color:#2c2c2a;">€ 124,63</span>
+      <span style="color:#2c2c2a;">6,0%</span>
+      <span style="color:#2c2c2a;">€ 7,48</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;">
+      <span style="font-size:13px;font-weight:700;color:#2c2c2a;">TOTAAL TE BETALEN</span>
+      <span style="font-size:18px;font-weight:800;color:#2c2c2a;">€ 132,11</span>
+    </div>
+  </div>
+  <div style="height:24px;"></div></div>
     <div class="bot-bar">
       <button class="btn-scan" onclick="openScan()">▣ Scannen</button>
       <button class="btn-miss" onclick="openMiss()">Ontbrekend</button>
@@ -350,10 +985,33 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <!-- MISSING OVERLAY -->
     <div class="sheet-bg" id="miss-ov" style="display:none;" onclick="missBgClick(event)">
       <div class="sheet">
-        <h3>Niet beschikbaar</h3>
+        <h3>Niet beschikbaar markeren</h3>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Zet de schakelaar aan en kies een reden.</p>
         <div id="miss-list"></div>
         <button class="btn-full dark" onclick="confirmMiss()">Bevestigen</button>
         <button class="btn-ghost" onclick="closeMiss()">Annuleren</button>
+      </div>
+    </div>
+
+    <!-- FOTO OVERLAY -->
+    <div class="sheet-bg" id="foto-ov" style="display:none;" onclick="fotoBgClick(event)">
+      <div class="sheet">
+        <h3>📷 Foto bij levering</h3>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Optioneel: maak een foto als bewijs van aflevering.</p>
+        <div id="foto-preview" style="margin-bottom:14px;"></div>
+        <input type="file" id="foto-input" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(event)">
+        <button class="btn-full" onclick="document.getElementById(&#39;foto-input&#39;).click()" style="margin-bottom:8px;">📷 Camera openen</button>
+        <button class="btn-full dark" id="btn-foto-ok" onclick="fotoBevestigen()">✓ Opslaan zonder foto</button>
+        <button class="btn-ghost" onclick="closeFoto()">Annuleren</button>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIE OVERLAY -->
+    <div class="sheet-bg" id="notif-ov" style="display:none;" onclick="notifBgClick(event)">
+      <div class="sheet">
+        <h3>🔔 Bericht van kantoor</h3>
+        <div id="notif-inhoud" style="background:#faece7;border-radius:10px;padding:14px;margin-bottom:16px;font-size:14px;color:#2c2c2a;line-height:1.6;"></div>
+        <button class="btn-full" onclick="closeNotif()">Begrepen</button>
       </div>
     </div>
   </div>
@@ -362,14 +1020,14 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
 <script>
 const MONTHS=['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
 const DAYS=['Ma','Di','Wo','Do','Vr','Za','Zo'];
-const DEL_DAYS=[9,11,12,16,18,23,25];
+const DEL_DAYS=[9]; // wordt bijgewerkt vanuit data
 
 const DRIVERS=[
-  {id:'TJ',name:'Tjorven',route:'Route Noord',pin:'1111'},
-  {id:'JA',name:'Jarne',route:'Route Kust',pin:'2222'},
-  {id:'FE',name:'Femija',route:'Route West',pin:'3333'},
-  {id:'SE',name:'Selmir',route:'Route Zuid',pin:'4444'},
-  {id:'CH',name:'Christophe',route:'Route Oost',pin:'5555'},
+  {id:'TJ',name:'Tjorven',pin:'1111'},
+  {id:'JA',name:'Jarne',pin:'2222'},
+  {id:'FE',name:'Femija',pin:'3333'},
+  {id:'SE',name:'Selmir',pin:'4444'},
+  {id:'CH',name:'Christophe',pin:'5555'},
 ];
 
 function mp(id,code,name,ean,qty){return{id,code,name,ean,qty,scanned:0,missing:false};}
@@ -437,10 +1095,36 @@ let appReady=false;
 // Save/restore scan progress to localStorage
 function saveState(){
   try{
-    localStorage.setItem('def_klanten',JSON.stringify(KLANTEN));
+    // Sla klanten op zonder foto data (te groot voor localStorage)
+    const klantenZonderFoto=KLANTEN.map(k=>{
+      const {fotos,...rest}=k;
+      return rest;
+    });
+    localStorage.setItem('def_klanten',JSON.stringify(klantenZonderFoto));
     localStorage.setItem('def_state',JSON.stringify({calY,calM,selDay}));
     localStorage.setItem('def_data_date',localStorage.getItem('def_loaded_date')||'');
-  }catch(e){}
+    // Sla fotos apart op per klant (compacter)
+    KLANTEN.forEach(k=>{
+      if(k.fotos&&Object.keys(k.fotos).length>0){
+        try{localStorage.setItem('fotos_'+k.id,JSON.stringify(k.fotos));}catch(e){}
+      }
+    });
+  }catch(e){
+    // localStorage vol — probeer zonder foto's
+    try{
+      const minimal=KLANTEN.map(k=>({...k,fotos:undefined}));
+      localStorage.setItem('def_klanten',JSON.stringify(minimal));
+    }catch(e2){console.warn('localStorage vol');}
+  }
+}
+
+function loadFotos(){
+  KLANTEN.forEach(k=>{
+    try{
+      const f=localStorage.getItem('fotos_'+k.id);
+      if(f)k.fotos=JSON.parse(f);
+    }catch(e){}
+  });
 }
 function loadScanProgress(){
   try{
@@ -529,7 +1213,7 @@ function renderDrivers(){
   el.innerHTML=DRIVERS.map(d=>`
     <div class="card" onclick="selectDriver('${d.id}')">
       <div class="av">${d.id}</div>
-      <div><div class="name">${d.name}</div><div class="sub">${d.route}</div></div>
+      <div><div class="name">${d.name}</div></div>
       <div class="chevron">›</div>
     </div>`).join('');
 }
@@ -565,12 +1249,72 @@ function nkOk(){
   if(!selDriver)return;
   if(pinVal===selDriver.pin){
     document.getElementById('cal-driver-name').textContent=selDriver.name;
-    renderCalendar();
-    go('s-calendar');
+    document.getElementById('vrt-driver-name').textContent=selDriver.name;
+    pinVal=''; updateDots();
+    renderVoertuigen();
+    go('s-voertuig');
   } else {
     pinVal=''; updateDots();
     showToast('Verkeerde code — probeer opnieuw');
   }
+}
+
+// Voertuigen
+const VASTE_VOERTUIGEN=[
+  '1FDN178 – Iveco Daily',
+  '1HVC234 – Iveco 120EL',
+  '1JVE435 – Renault Master',
+  '1JVE447 – Nissan',
+  '1SAK672 – Fiat Doblo',
+  '1SCG928 – Renault Master',
+  '1SCG974 – Renault Master',
+  '1WGW842 – Renault Master',
+  '2-JKW-334 – Fiat Ducato Maxi',
+  '2CDZ134 – Fiat Ducato Maxi',
+  '2DJA069 – Renault Master',
+  '2DJA105 – Renault Master',
+  '2DUK997 – Iveco BE-Combi',
+  '2HLS390 – Renault Master',
+];
+let selVoertuig='';
+
+function renderVoertuigen(){
+  // Laad recent gebruikte voertuigen
+  let recent=[];
+  try{recent=JSON.parse(localStorage.getItem('recent_voertuigen_'+(selDriver?.id||''))||'[]');}catch(e){}
+  const alle=[...new Set([...recent,...VASTE_VOERTUIGEN])];
+  const el=document.getElementById('voertuig-list');
+  el.innerHTML=alle.map(v=>{
+    const parts=v.split(' – ');
+    const kode=parts[0]||v;
+    const omschr=parts[1]||'';
+    return `<div class="card" onclick="kiesVoertuig('${kode}')" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">${kode}</div>
+        ${omschr?`<div style="font-size:12px;color:#888780;margin-top:2px;">${omschr}</div>`:''}
+      </div>
+      <div class="chevron">›</div>
+    </div>`;
+  }).join('');
+}
+
+function kiesVoertuig(numplaat){
+  if(!numplaat||!numplaat.trim())return;
+  selVoertuig=numplaat.trim().toUpperCase();
+  // Sla op in recent
+  try{
+    let recent=JSON.parse(localStorage.getItem('recent_voertuigen_'+(selDriver?.id||''))||'[]');
+    recent=recent.filter(v=>v!==selVoertuig);
+    recent.unshift(selVoertuig);
+    recent=recent.slice(0,5);
+    localStorage.setItem('recent_voertuigen_'+(selDriver?.id||''),JSON.stringify(recent));
+  }catch(e){}
+  document.getElementById('cal-driver-name').textContent=selDriver.name+' · '+selVoertuig;
+  renderCalendar();
+  go('s-calendar');
+  // Controleer op berichten van kantoor
+  setTimeout(checkNotificaties, 500);
 }
 
 // Calendar
@@ -583,7 +1327,13 @@ function renderCalendar(){
   const dim=new Date(calY,calM+1,0).getDate();
   for(let i=0;i<off;i++) grid.innerHTML+=`<div class="cal-d empty"></div>`;
   for(let d=1;d<=dim;d++){
-    const isDel=calY===2026&&calM===5&&DEL_DAYS.includes(d);
+    // Enkel de dag van de geladen data aanklikbaar maken
+    const dataDate=localStorage.getItem('def_loaded_date')||'';
+    const dataParts=dataDate.split('-');
+    const dataD=dataParts.length===3?parseInt(dataParts[0]):0;
+    const dataM=dataParts.length===3?parseInt(dataParts[1])-1:-1;
+    const dataY=dataParts.length===3?parseInt(dataParts[2]):0;
+    const isDel=d===dataD&&calM===dataM&&calY===dataY;
     const isSel=d===selDay&&calY===2026&&calM===5;
     const isToday=d===9&&calY===2026&&calM===5;
     grid.innerHTML+=`<div class="cal-d${isDel?' has-del':''}${isSel?' sel':''}${isToday?' today':''}" onclick="${isDel?`pickDay(${d})`:''}">
@@ -597,10 +1347,23 @@ function renderCalSummary(){
   const el=document.getElementById('cal-summary');
   if(!selDay){el.innerHTML='';return;}
   const driverK=KLANTEN.filter(k=>k.chauffeur===(selDriver?.id||'JA'));
+  const maandenNL=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+  const dagenNL=['zo','ma','di','wo','do','vr','za'];
+  const selDate=new Date(calY,calM,selDay);
+  const dagNaam=dagenNL[selDate.getDay()];
+  const maandNaam=maandenNL[calM];
+  const vandaag=new Date();
+  const isVandaag=selDay===vandaag.getDate()&&calM===vandaag.getMonth()&&calY===vandaag.getFullYear();
+  const isVerleden=selDate<new Date(vandaag.getFullYear(),vandaag.getMonth(),vandaag.getDate());
+  // Controleer of er data is voor deze dag
+  const heeftData=driverK.length>0;
   el.innerHTML=`<div class="sum-bar">
-    <div><div style="color:#888780;font-size:12px;">di ${selDay} juni 2026</div>
-    <div style="color:#fff;font-size:20px;font-weight:600;">${driverK.length} klanten</div></div>
-    <button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>
+    <div>
+      <div style="color:#888780;font-size:12px;">${isVandaag?'📅 Vandaag — ':''}${dagNaam} ${selDay} ${maandNaam} ${calY}${isVerleden?' · verleden':''}</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">${heeftData?driverK.length+' klanten':'Geen leveringen'}</div>
+    </div>
+    ${heeftData?`<button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>`
+    :`<div style="color:#5f5e5a;font-size:12px;">Geen ritten</div>`}
   </div>`;
 }
 
@@ -615,24 +1378,240 @@ function pickDay(d){
   selDay=d; renderCalendar();
 }
 
+// ── VOLGORDE BEHEER ──────────────────────────────────
+function getVolgorde(driverId){
+  try{
+    const v=localStorage.getItem('volgorde_'+driverId);
+    return v?JSON.parse(v):null;
+  }catch(e){return null;}
+}
+function saveVolgorde(driverId, ids){
+  try{localStorage.setItem('volgorde_'+driverId,JSON.stringify(ids));}catch(e){}
+}
+function lerenVanLevering(driverId, klantId){
+  // Registreer de volgorde van bezochte klanten (slim leren)
+  try{
+    const key='geleerd_'+driverId;
+    const data=JSON.parse(localStorage.getItem(key)||'{}');
+    const vandaag=new Date().toDateString();
+    if(!data[vandaag])data[vandaag]=[];
+    if(!data[vandaag].includes(klantId))data[vandaag].push(klantId);
+    localStorage.setItem(key,JSON.stringify(data));
+    // Na 3+ dagen: stel automatisch volgorde in op basis van meest gebruikte volgorde
+    const dagen=Object.values(data).filter(d=>d.length>1);
+    if(dagen.length>=3){
+      const score={};
+      dagen.forEach(dag=>{dag.forEach((id,i)=>{if(!score[id])score[id]=0;score[id]+=(dag.length-i);});});
+      const gesorteerd=Object.keys(score).sort((a,b)=>score[b]-score[a]).map(Number);
+      saveVolgorde(driverId,gesorteerd);
+    }
+  }catch(e){}
+}
+
+let sorteerModus=false;
+let dragSrcIdx=null;
+let touchStartY=0;
+let touchEl=null;
+
 function openKlanten(){
   const driverK=KLANTEN.filter(k=>k.chauffeur===(selDriver?.id||'JA'));
-  document.getElementById('kl-title').textContent=`di ${selDay} juni – ${selDriver?.name||''}`;
+  const _maanden=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  document.getElementById('kl-title').textContent=`${selDay} ${_maanden[calM]} – ${selDriver?.name||''}`;
+
+  // Pas volgorde toe
+  const savedOrder=getVolgorde(selDriver?.id||'JA');
+  if(savedOrder){
+    driverK.sort((a,b)=>{
+      const ia=savedOrder.indexOf(a.id);
+      const ib=savedOrder.indexOf(b.id);
+      if(ia===-1&&ib===-1)return 0;
+      if(ia===-1)return 1;
+      if(ib===-1)return -1;
+      return ia-ib;
+    });
+  }
+
+  // Dag voortgang
+  const totaalProds=driverK.reduce((s,k)=>s+k.bons.reduce((s2,b)=>s2+b.prods.length,0),0);
+  const gedaanProds=driverK.reduce((s,k)=>s+k.bons.reduce((s2,b)=>s2+b.prods.filter(p=>p.scanned>=p.qty||p.missing).length,0),0);
+  const dagPct=totaalProds>0?Math.round(gedaanProds/totaalProds*100):0;
+  const gedaanKlanten=driverK.filter(k=>k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing))).length;
+
   const el=document.getElementById('kl-list');
-  el.innerHTML=`<div class="label">Klanten vandaag (${driverK.length})</div>`;
+  el.innerHTML=`
+    <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:13px 15px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:12px;color:#888780;font-weight:500;">Dagvoortgang</span>
+        <span style="font-size:12px;font-weight:700;color:${dagPct===100?'#3b6d11':'#2c2c2a'};">${gedaanKlanten}/${driverK.length} · ${dagPct}%</span>
+      </div>
+      <div style="background:#f1efe8;border-radius:6px;height:10px;overflow:hidden;">
+        <div style="background:${dagPct===100?'#63991a':'#e8855a'};height:100%;width:${dagPct}%;border-radius:6px;transition:width .3s;"></div>
+      </div>
+      ${dagPct===100?'<div style="font-size:12px;color:#3b6d11;font-weight:600;margin-top:6px;text-align:center;">✓ Alle leveringen voltooid!</div>':''}
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div class="label" style="margin:0;">Klanten vandaag (${driverK.length})</div>
+      <button onclick="toggleSorteer()" id="btn-sorteer" style="background:${sorteerModus?'#e8855a':'#f1efe8'};color:${sorteerModus?'#fff':'#888780'};border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">
+        ${sorteerModus?'✓ Klaar':'⇅ Volgorde'}
+      </button>
+    </div>
+    ${sorteerModus?'<div style="background:#faece7;border-radius:8px;padding:8px 12px;font-size:12px;color:#993c1d;margin-bottom:10px;text-align:center;">Sleep klanten om de volgorde aan te passen</div>':''}
+    <div id="klant-sorteer-lijst"></div>`;
+
+  renderKlantenLijst(driverK);
+  go('s-klanten');
+}
+
+function renderKlantenLijst(driverK){
+  const container=document.getElementById('klant-sorteer-lijst');
+  if(!container)return;
+  container.innerHTML='';
+
   driverK.forEach((k,i)=>{
     const allDone=k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing));
     const nBons=k.bons.length;
-    el.innerHTML+=`<div class="card" onclick="openBon(${k.id},0)">
-      <div class="av-sq">${i+1}</div>
-      <div style="flex:1;min-width:0;">
-        <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${k.name}</div>
-        <div class="sub">${k.addr}</div>
+    const totP=k.bons.reduce((s,b)=>s+b.prods.length,0);
+    const gedP=k.bons.reduce((s,b)=>s+b.prods.filter(p=>p.scanned>=p.qty||p.missing).length,0);
+    const pct=totP>0?Math.round(gedP/totP*100):0;
+    const hasNote=k.note&&k.note.trim();
+    const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(k.addr)}`;
+
+    const div=document.createElement('div');
+    div.className='card';
+    div.dataset.id=k.id;
+    div.dataset.idx=i;
+    div.style.cssText='flex-direction:column;align-items:stretch;padding:0;overflow:hidden;margin-bottom:9px;'+(sorteerModus?'border-color:#e8855a;':'');
+
+    div.innerHTML=`
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;${sorteerModus?'cursor:grab;':''}" ${sorteerModus?'':`onclick="openBonEnLeer(${k.id},0)"`}>
+        ${sorteerModus?`<div style="color:#b4b2a9;font-size:20px;padding:0 4px;cursor:grab;touch-action:none;">⠿</div>`:''}
+        <div class="av-sq" style="background:${allDone?'#eaf3de':'#faece7'};color:${allDone?'#3b6d11':'#e8855a'};">${allDone?'✓':i+1}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${k.name}</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${k.addr}</div>
+          ${hasNote?`<div style="font-size:11px;color:#e8855a;margin-top:3px;">📝 ${k.note}</div>`:''}
+        </div>
+        <div class="badge ${allDone?'badge-green':'badge-orange'}">${allDone?'✓ Klaar':nBons+' bon'+(nBons>1?'nen':'')}</div>
       </div>
-      <div class="badge ${allDone?'badge-green':'badge-orange'}">${allDone?'✓ Klaar':nBons+' bon'+(nBons>1?'nen':'')}</div>
-    </div>`;
+      ${pct>0&&!allDone?`<div style="height:3px;background:#f1efe8;"><div style="height:3px;background:#e8855a;width:${pct}%;"></div></div>`:''}
+      ${!sorteerModus?`<div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(${k.id},0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(${k.id})" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="${mapsUrl}" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div>`:''}`;
+
+    // Drag & drop voor sorteren (touch + mouse)
+    if(sorteerModus){
+      // Touch events (iOS/Android)
+      div.addEventListener('touchstart',e=>onTouchStart(e,div),{passive:true});
+      div.addEventListener('touchmove',e=>onTouchMove(e),{passive:false});
+      div.addEventListener('touchend',e=>onTouchEnd(e,container),{passive:true});
+      // Mouse events (desktop)
+      div.setAttribute('draggable','true');
+      div.addEventListener('dragstart',e=>onDragStart(e,i));
+      div.addEventListener('dragover',e=>onDragOver(e,div));
+      div.addEventListener('drop',e=>onDrop(e,container));
+      div.addEventListener('dragend',()=>onDragEnd(container));
+    }
+
+    container.appendChild(div);
   });
-  go('s-klanten');
+}
+
+function openBonEnLeer(klantId, bonIdx){
+  lerenVanLevering(selDriver?.id||'JA', klantId);
+  openBon(klantId, bonIdx);
+}
+
+function toggleSorteer(){
+  sorteerModus=!sorteerModus;
+  if(!sorteerModus){
+    // Sla nieuwe volgorde op
+    const items=document.querySelectorAll('#klant-sorteer-lijst .card');
+    const ids=Array.from(items).map(el=>parseInt(el.dataset.id));
+    saveVolgorde(selDriver?.id||'JA', ids);
+    showToast('✓ Volgorde opgeslagen');
+  }
+  openKlanten();
+}
+
+// ── DRAG & DROP (desktop) ──
+function onDragStart(e, idx){dragSrcIdx=idx;e.currentTarget.style.opacity='.4';}
+function onDragOver(e, el){e.preventDefault();el.style.borderColor='#e8855a';el.style.borderStyle='dashed';}
+function onDrop(e, container){
+  e.preventDefault();
+  const items=Array.from(container.querySelectorAll('.card'));
+  const targetEl=e.currentTarget;
+  const targetIdx=items.indexOf(targetEl);
+  if(dragSrcIdx!==null&&dragSrcIdx!==targetIdx){
+    const driverK=KLANTEN.filter(k=>k.chauffeur===(selDriver?.id||'JA'));
+    const savedOrder=getVolgorde(selDriver?.id||'JA')||driverK.map(k=>k.id);
+    const [moved]=savedOrder.splice(dragSrcIdx,1);
+    savedOrder.splice(targetIdx,0,moved);
+    saveVolgorde(selDriver?.id||'JA',savedOrder);
+    openKlanten();
+  }
+}
+function onDragEnd(container){
+  dragSrcIdx=null;
+  container.querySelectorAll('.card').forEach(el=>{el.style.opacity='';el.style.borderColor='';el.style.borderStyle='';});
+}
+
+// ── TOUCH DRAG (iOS/Android) ──
+let touchClone=null;
+let touchOrigEl=null;
+let touchOffsetY=0;
+
+function onTouchStart(e, el){
+  touchOrigEl=el;
+  touchStartY=e.touches[0].clientY;
+  touchOffsetY=e.touches[0].clientY-el.getBoundingClientRect().top;
+  // Maak kloon voor visuele feedback
+  touchClone=el.cloneNode(true);
+  touchClone.style.cssText=`position:fixed;left:${el.getBoundingClientRect().left}px;top:${el.getBoundingClientRect().top}px;width:${el.offsetWidth}px;opacity:.85;z-index:100;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.2);border-radius:14px;transition:none;`;
+  document.body.appendChild(touchClone);
+  el.style.opacity='.3';
+}
+
+function onTouchMove(e){
+  e.preventDefault();
+  if(!touchClone)return;
+  const y=e.touches[0].clientY;
+  touchClone.style.top=(y-touchOffsetY)+'px';
+}
+
+function onTouchEnd(e, container){
+  if(!touchClone||!touchOrigEl)return;
+  const y=e.changedTouches[0].clientY;
+  touchClone.remove(); touchClone=null;
+  touchOrigEl.style.opacity='';
+  // Vind target element
+  const items=Array.from(container.querySelectorAll('.card'));
+  const srcIdx=items.indexOf(touchOrigEl);
+  let targetIdx=srcIdx;
+  items.forEach((item,i)=>{
+    const rect=item.getBoundingClientRect();
+    if(y>=rect.top&&y<=rect.bottom) targetIdx=i;
+  });
+  if(srcIdx!==targetIdx){
+    const driverK=KLANTEN.filter(k=>k.chauffeur===(selDriver?.id||'JA'));
+    const savedOrder=getVolgorde(selDriver?.id||'JA')||driverK.map(k=>k.id);
+    const [moved]=savedOrder.splice(srcIdx,1);
+    savedOrder.splice(targetIdx,0,moved);
+    saveVolgorde(selDriver?.id||'JA',savedOrder);
+    sorteerModus=true;
+    openKlanten();
+  }
+  touchOrigEl=null;
+}
+
+function addNote(klantId){
+  const k=KLANTEN.find(x=>x.id===klantId);
+  if(!k)return;
+  const note=prompt('Notitie voor '+k.name+':',(k.note||''));
+  if(note!==null){k.note=note;saveState();openKlanten();}
 }
 
 function openBon(klantId, bonIdx){
@@ -733,7 +1712,7 @@ function renderBon(){
   bon.prods.forEach((p,i)=>{
     const done=p.scanned>=p.qty;
     const bg=p.missing?'#fcebeb':done?'#eaf3de':i%2===0?'#fff':'#fafaf8';
-    const statusIcon=p.missing?'<span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>'
+    const statusIcon=p.missing?`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`
       :done?'<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>'
       :`<span style="color:#888780;">${p.scanned}/${p.qty}</span>`;
     html+=`<tr style="background:${bg};border-top:.5px solid rgba(0,0,0,.05);">
@@ -982,7 +1961,11 @@ function handleScannedEan(ean){
     const bon2=aktKlant.bons[aktBonIdx];
     const allDone=bon2.prods.every(x=>x.scanned>=x.qty||x.missing);
     if(allDone){
-      setTimeout(()=>{closeScan();showToast('✓ Alle producten gecontroleerd!');},800);
+      setTimeout(()=>{
+        closeScan();
+        // Toon grote groene bevestiging
+        showAlleGescand();
+      },800);
     } else {
       setTimeout(()=>{scanCooldown=false;setStatus('Richt op een EAN barcode','#888780');},1200);
     }
@@ -1013,6 +1996,32 @@ function closeScan(){
   scanCooldown=false;
   document.getElementById('scan-ov').style.display='none';
   document.getElementById('quagga-container').innerHTML='';
+}
+
+function showAlleGescand(){
+  const miss=aktKlant.bons[aktBonIdx].prods.filter(p=>p.missing).length;
+  const ov=document.createElement('div');
+  ov.id='done-ov';
+  ov.style.cssText='position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(59,109,17,.95);z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;';
+  ov.innerHTML=`
+    <div style="font-size:72px;">✓</div>
+    <div style="color:#fff;font-size:22px;font-weight:800;text-align:center;">Alle producten<br>gecontroleerd!</div>
+    ${miss>0?`<div style="background:rgba(255,255,255,.2);border-radius:10px;padding:10px 20px;color:#fff;font-size:14px;text-align:center;">⚠ ${miss} product(en) niet beschikbaar</div>`:''}
+    <div style="display:flex;flex-direction:column;gap:10px;width:100%;margin-top:8px;">
+      <button onclick="document.getElementById('done-ov').remove();openMail();" style="background:#fff;color:#3b6d11;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;cursor:pointer;">
+        📧 Mail bon versturen
+      </button>
+      <button onclick="document.getElementById('done-ov').remove();openFoto(aktKlant.id,aktKlant.bons[aktBonIdx].num);" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;">
+        📷 Foto nemen (optioneel)
+      </button>
+      <button onclick="document.getElementById('done-ov').remove();go('s-klanten');" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:none;border-radius:12px;padding:11px;font-size:13px;font-weight:500;cursor:pointer;">
+        ← Terug naar klanten
+      </button>
+    </div>`;
+  document.getElementById('s-bon').appendChild(ov);
+  if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);
+  renderBon();
+  // Also refresh klanten done status
 }
 
 // Mail
@@ -1092,6 +2101,7 @@ function doMail(){
     <div style="text-align:right;">
       <div style="font-size:11px;color:#888780;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Chauffeur</div>
       <div style="font-size:13px;font-weight:600;color:#2c2c2a;">${selDriver?.name||''}</div>
+      ${selVoertuig?`<div style="font-size:11px;color:#888780;font-family:monospace;margin-top:2px;">🚐 ${selVoertuig}</div>`:''}
     </div>
   </div>
 
@@ -1147,7 +2157,7 @@ function doMail(){
   // Open mail met plain text body + link naar HTML versie
   const plainBody=`Geachte,\n\nHierbij de leveringsbon ${bon.num} voor ${aktKlant.name}.\nDatum: ${bon.datum} | Chauffeur: ${selDriver?.name||''}\n\nGELEVERDE PRODUCTEN:\n`
     +ok.map(p=>`✓ [${p.code}] ${p.name} — ${p.qty}x`).join('\n')
-    +(miss.length>0?'\n\nNIET BESCHIKBAAR:\n'+miss.map(p=>`✗ [${p.code}] ${p.name} — ${p.qty}x`).join('\n'):'')
+    +(miss.length>0?'\n\nNIET BESCHIKBAAR:\n'+miss.map(p=>`✗ [${p.code}] ${p.name} — ${p.qty}x${p.missReden?' ('+p.missReden+')':''}`).join('\n'):'')
     +`\n\nNetto: €${bon.netto} | BTW ${bon.btwpct}: €${bon.btw} | TOTAAL: €${bon.totaal}`
     +`\n\nMet vriendelijke groeten,\nDevisch – Esca Food\nKoksijdestraat 20, B-8630 Veurne\nT +32 (0)58 52 38 04 | info@devisch.be`;
 
@@ -1163,29 +2173,68 @@ function closeMail(){document.getElementById('mail-ov').style.display='none';}
 function mailBgClick(e){if(e.target===document.getElementById('mail-ov'))closeMail();}
 
 // Missing
+const MISS_REDENEN=['Niet in stock','Vergeten te laden','Beschadigd','Vervangen door ander product','Klant niet aanwezig'];
+let missRedens={};
+
 function openMiss(){
   const bon=aktKlant.bons[aktBonIdx];
   missToggles={};
-  bon.prods.forEach(p=>{missToggles[p.id]=p.missing;});
-  const el=document.getElementById('miss-list');
-  el.innerHTML=bon.prods.map(p=>`
-    <div class="miss-row">
-      <div>
-        <span class="code-tag">${p.code}</span>
-        <div class="miss-name">${p.name}</div>
-      </div>
-      <button class="toggle${p.missing?' on':''}" id="tog-${p.id}" onclick="toggleMiss('${p.id}')"></button>
-    </div>`).join('');
+  missRedens={};
+  bon.prods.forEach(p=>{
+    missToggles[p.id]=p.missing;
+    missRedens[p.id]=p.missReden||'';
+  });
+  renderMissList();
   document.getElementById('miss-ov').style.display='flex';
 }
+
+function renderMissList(){
+  const bon=aktKlant.bons[aktBonIdx];
+  const el=document.getElementById('miss-list');
+  el.innerHTML=bon.prods.map(p=>`
+    <div class="miss-row" id="miss-row-${p.id}" style="flex-direction:column;align-items:stretch;padding:10px 0;border-bottom:.5px solid rgba(0,0,0,.07);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="flex:1;">
+          <span class="code-tag">${p.code}</span>
+          <div class="miss-name">${p.name}</div>
+        </div>
+        <button class="toggle${missToggles[p.id]?' on':''}" id="tog-${p.id}" onclick="toggleMiss('${p.id}')"></button>
+      </div>
+      ${missToggles[p.id]?`
+      <div style="margin-top:8px;padding-left:4px;">
+        <div style="font-size:11px;color:#888780;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Reden:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          ${MISS_REDENEN.map(r=>`
+            <button onclick="setReden('${p.id}','${r}')" style="background:${missRedens[p.id]===r?'#e8855a':'#f5f4f0'};color:${missRedens[p.id]===r?'#fff':'#444441'};border:none;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;">${r}</button>
+          `).join('')}
+        </div>
+        ${missRedens[p.id]?`<div style="font-size:11px;color:#3b6d11;margin-top:5px;">✓ ${missRedens[p.id]}</div>`:'<div style="font-size:11px;color:#e8855a;margin-top:5px;">⚠ Kies een reden</div>'}
+      </div>`:''}
+    </div>`).join('');
+}
+
 function toggleMiss(id){
   missToggles[id]=!missToggles[id];
-  document.getElementById('tog-'+id).classList.toggle('on',missToggles[id]);
+  if(!missToggles[id])missRedens[id]='';
+  renderMissList();
 }
+
+function setReden(id, reden){
+  missRedens[id]=reden;
+  renderMissList();
+}
+
 function confirmMiss(){
   const bon=aktKlant.bons[aktBonIdx];
+  // Controleer of alle missing producten een reden hebben
+  const zonderReden=bon.prods.filter(p=>missToggles[p.id]&&!missRedens[p.id]);
+  if(zonderReden.length>0){
+    showToast('⚠ Kies een reden voor elk tekort');
+    return;
+  }
   bon.prods.forEach(p=>{
     p.missing=missToggles[p.id]??p.missing;
+    p.missReden=missRedens[p.id]||'';
     if(p.missing)p.scanned=0;
   });
   const ki=KLANTEN.findIndex(k=>k.id===aktKlant.id);
@@ -1193,10 +2242,95 @@ function confirmMiss(){
   saveState();
   closeMiss();
   renderBon();
-  showToast('Tekorten opgeslagen');
+  showToast('✓ Tekorten opgeslagen');
 }
 function closeMiss(){document.getElementById('miss-ov').style.display='none';}
 function missBgClick(e){if(e.target===document.getElementById('miss-ov'))closeMiss();}
+
+// ── FOTO BIJ LEVERING ──
+let fotoData=null;
+let fotoKlantId=null;
+let fotoBonNum=null;
+
+function openFoto(klantId, bonNum){
+  fotoKlantId=klantId;
+  fotoBonNum=bonNum;
+  fotoData=null;
+  document.getElementById('foto-preview').innerHTML='';
+  document.getElementById('btn-foto-ok').textContent='✓ Verder zonder foto';
+  document.getElementById('foto-ov').style.display='flex';
+}
+
+function fotoGekozen(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=r=>{
+    fotoData=r.result;
+    document.getElementById('foto-preview').innerHTML=`<img src="${fotoData}" style="width:100%;border-radius:10px;max-height:200px;object-fit:cover;">`;
+    document.getElementById('btn-foto-ok').textContent='✓ Opslaan met foto';
+  };
+  reader.readAsDataURL(file);
+}
+
+function fotoBevestigen(){
+  // Sla foto op bij klant
+  if(fotoKlantId){
+    const k=KLANTEN.find(x=>x.id===fotoKlantId);
+    if(k){
+      if(!k.fotos)k.fotos={};
+      if(fotoData)k.fotos[fotoBonNum]=fotoData;
+    }
+    saveState();
+  }
+  closeFoto();
+  if(fotoData)showToast('✓ Foto opgeslagen');
+}
+function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
+function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
+
+// ── PUSH NOTIFICATIES ──
+function checkNotificaties(){
+  try{
+    const key='notif_'+((selDriver?.id)||'');
+    const notifs=JSON.parse(localStorage.getItem(key)||'[]');
+    const ongezien=notifs.filter(n=>!n.gezien);
+    if(ongezien.length>0){
+      const n=ongezien[0];
+      document.getElementById('notif-inhoud').innerHTML=`
+        <div style="font-size:11px;color:#888780;margin-bottom:6px;">${n.van||'Kantoor'} · ${n.tijd||''}</div>
+        <div>${n.tekst}</div>`;
+      document.getElementById('notif-ov').style.display='flex';
+      // Markeer als gezien
+      n.gezien=true;
+      localStorage.setItem(key,JSON.stringify(notifs));
+    }
+  }catch(e){}
+}
+function closeNotif(){document.getElementById('notif-ov').style.display='none';}
+function notifBgClick(e){if(e.target===document.getElementById('notif-ov'))closeNotif();}
+
+function openNotifStuur(){document.getElementById('notif-stuur-ov').style.display='flex';}
+function closeNotifStuur(){document.getElementById('notif-stuur-ov').style.display='none';}
+function verstuurNotif(){
+  const to=document.getElementById('notif-to').value;
+  const tekst=document.getElementById('notif-tekst').value.trim();
+  if(!tekst){showToast('⚠ Typ een bericht');return;}
+  const targets=to==='ALL'?['TJ','JA','FE','SE','CH']:[to];
+  targets.forEach(id=>stuurNotificatie(id,tekst,'Kantoor'));
+  closeNotifStuur();
+  document.getElementById('notif-tekst').value='';
+  showToast('✓ Bericht verstuurd naar '+(to==='ALL'?'alle chauffeurs':to));
+}
+
+function stuurNotificatie(driverId, tekst, van){
+  try{
+    const key='notif_'+driverId;
+    const notifs=JSON.parse(localStorage.getItem(key)||'[]');
+    notifs.push({tekst,van:van||'Kantoor',tijd:new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'}),gezien:false});
+    localStorage.setItem(key,JSON.stringify(notifs));
+  }catch(e){}
+}
 
 // PWA manifest inline
 const manifest={
@@ -1245,6 +2379,31 @@ function checkInstallHint(){
 function dismissInstall(el){localStorage.setItem('install_dismissed','1');el.remove();}
 checkInstallHint();
 loadAppData();
+
+// ── BLUETOOTH BARCODE SCANNER SUPPORT ──
+// Bluetooth scanners sturen barcode als snelle keyboard input gevolgd door Enter
+let barcodeBuffer='';
+let barcodeTimer=null;
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    if(barcodeBuffer.length>=8){
+      // Barcode ontvangen via bluetooth scanner
+      const ean=barcodeBuffer.trim();
+      barcodeBuffer='';
+      clearTimeout(barcodeTimer);
+      // Verwerk scan als we op bon scherm zijn
+      if(document.getElementById('s-bon').classList.contains('active')&&aktKlant){
+        handleScannedEan(ean);
+        showToast('📡 Scanner: '+ean);
+      }
+    }
+    barcodeBuffer='';
+  } else if(e.key.length===1){
+    barcodeBuffer+=e.key;
+    clearTimeout(barcodeTimer);
+    barcodeTimer=setTimeout(()=>{barcodeBuffer='';},100);
+  }
+});
 </script>
 
 </body></html>
