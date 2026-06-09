@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/gilles/Downloads/index_5.html -->
+<!-- saved from url=(0046)file:///C:/Users/gilles/Downloads/index_6.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/f1c5debf-a0aa-4c2f-8099-b48f5589ec6f">
+<link rel="manifest" id="pwa-manifest" href="blob:null/c84dbba3-8913-468e-bc1c-6b0bfe2766ce">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -1033,29 +1033,131 @@ function doMail(){
   const bon=aktKlant.bons[aktBonIdx];
   const miss=bon.prods.filter(p=>p.missing);
   const ok=bon.prods.filter(p=>!p.missing);
-
-  // Bouw mail inhoud
   const subject=encodeURIComponent(`Leveringsbon ${bon.num} – ${aktKlant.name} – ${bon.datum}`);
 
-  let body=`Geachte,\n\nHierbij de leveringsbon voor ${aktKlant.name}.\n`;
-  body+=`Bon: ${bon.num} | Datum: ${bon.datum} | Chauffeur: ${selDriver?.name||''}\n\n`;
-  body+=`GELEVERDE PRODUCTEN:\n`;
-  ok.forEach(p=>{
-    body+=`✓ [${p.code}] ${p.name} — ${p.qty}x\n`;
+  // Producten rijen
+  let prodRijen='';
+  bon.prods.forEach((p,i)=>{
+    const bg=p.missing?'#fcebeb':i%2===0?'#ffffff':'#f9f8f6';
+    const kleur=p.missing?'#a32d2d':'#2c2c2a';
+    const status=p.missing?'✗ Niet beschikbaar':'✓ Geleverd';
+    const statusKleur=p.missing?'#a32d2d':'#3b6d11';
+    prodRijen+=`<tr style="background:${bg};">
+      <td style="padding:8px 12px;font-family:monospace;font-size:11px;color:#e8855a;font-weight:700;border-bottom:1px solid #f0ede8;">${p.code}</td>
+      <td style="padding:8px 12px;font-size:12px;color:${kleur};border-bottom:1px solid #f0ede8;${p.missing?'text-decoration:line-through;':''}">${p.name}</td>
+      <td style="padding:8px 12px;font-size:12px;font-weight:700;color:#2c2c2a;text-align:center;border-bottom:1px solid #f0ede8;">${p.qty}</td>
+      <td style="padding:8px 12px;font-size:12px;color:${statusKleur};font-weight:600;border-bottom:1px solid #f0ede8;">${status}</td>
+    </tr>`;
   });
-  if(miss.length>0){
-    body+=`\nNIET BESCHIKBAAR (tekort):\n`;
-    miss.forEach(p=>{
-      body+=`✗ [${p.code}] ${p.name} — ${p.qty}x\n`;
-    });
-  }
-  body+=`\nNetto: €${bon.netto} | BTW: €${bon.btw} | Totaal: €${bon.totaal}\n`;
-  body+=`\nMet vriendelijke groeten,\nDevisch – Esca Food\nT +32 (0)58 52 38 04 | info@devisch.be`;
 
-  const mailtoUrl=`mailto:bestellingen@devisch.be?subject=${subject}&body=${encodeURIComponent(body)}`;
+  // Tekort sectie
+  let tekortSectie='';
+  if(miss.length>0){
+    tekortSectie=`<tr><td colspan="4" style="padding:10px 12px;background:#fcebeb;font-size:12px;color:#a32d2d;font-weight:600;">
+      ⚠ ${miss.length} product(en) niet beschikbaar bij levering
+    </td></tr>`;
+  }
+
+  const htmlBody=`<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:20px;background:#f0ede8;font-family:Arial,sans-serif;">
+<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+  <!-- HEADER -->
+  <div style="background:#2c2c2a;padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;">
+    <div>
+      <div style="color:#888780;font-size:22px;font-weight:bold;letter-spacing:-0.5px;">devisch – esca food</div>
+      <div style="color:#e8855a;font-size:13px;font-weight:600;margin-top:3px;">oresto partner</div>
+      <div style="color:#5f5e5a;font-size:10px;margin-top:6px;line-height:1.6;">
+        Devisch Foodservice bv<br>
+        Koksijdestraat 20, B-8630 Veurne<br>
+        T +32 (0)58 52 38 04 · info@devisch.be
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <div style="color:#888780;font-size:10px;text-transform:uppercase;letter-spacing:1px;">Leveringsbon</div>
+      <div style="color:#e8855a;font-size:20px;font-weight:bold;">${bon.num}</div>
+      <div style="color:#888780;font-size:11px;">${bon.datum}</div>
+    </div>
+  </div>
+
+  <!-- KLANT INFO -->
+  <div style="padding:16px 24px;border-bottom:2px solid #f0ede8;display:flex;justify-content:space-between;">
+    <div>
+      <div style="font-size:11px;color:#888780;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Klant</div>
+      <div style="font-size:14px;font-weight:bold;color:#2c2c2a;">${aktKlant.name}</div>
+      <div style="font-size:12px;color:#888780;margin-top:2px;">${aktKlant.addr}</div>
+      <div style="font-size:11px;color:#b4b2a9;margin-top:2px;">Klantnr: ${bon.klnr} · ${bon.btwnr}</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:#888780;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Chauffeur</div>
+      <div style="font-size:13px;font-weight:600;color:#2c2c2a;">${selDriver?.name||''}</div>
+    </div>
+  </div>
+
+  ${bon.note?`<div style="padding:10px 24px;background:#fff8e6;font-size:12px;color:#7a5c00;font-style:italic;">📝 ${bon.note}</div>`:''}
+
+  <!-- PRODUCTEN TABEL -->
+  <div style="padding:0 24px 16px;">
+    <div style="font-size:11px;color:#888780;text-transform:uppercase;letter-spacing:0.5px;padding:14px 0 8px;font-weight:600;">Producten (${bon.prods.length})</div>
+    <table style="width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;border:1px solid #f0ede8;">
+      <thead>
+        <tr style="background:#2c2c2a;">
+          <th style="padding:9px 12px;text-align:left;font-size:11px;color:#e8855a;font-weight:600;width:14%;">Code</th>
+          <th style="padding:9px 12px;text-align:left;font-size:11px;color:#fff;font-weight:600;">Omschrijving</th>
+          <th style="padding:9px 12px;text-align:center;font-size:11px;color:#fff;font-weight:600;width:10%;">Aantal</th>
+          <th style="padding:9px 12px;text-align:left;font-size:11px;color:#fff;font-weight:600;width:18%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${prodRijen}
+        ${tekortSectie}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOTALEN -->
+  <div style="margin:0 24px 20px;background:#f5f4f0;border-radius:8px;padding:14px 16px;">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:#888780;">
+      <span>Netto basis</span><span>€ ${bon.netto}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:#888780;border-bottom:1px solid #e0ddd6;padding-bottom:10px;">
+      <span>BTW ${bon.btwpct}</span><span>€ ${bon.btw}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding-top:10px;">
+      <span style="font-size:14px;font-weight:bold;color:#2c2c2a;">Totaal te betalen</span>
+      <span style="font-size:16px;font-weight:bold;color:#2c2c2a;">€ ${bon.totaal}</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#f5f4f0;padding:14px 24px;font-size:11px;color:#888780;text-align:center;line-height:1.6;">
+    Tijdens de maanden juli en augustus zijn we open op zondag van 9-12u.<br>
+    Devisch Foodservice bv · Koksijdestraat 20, B-8630 Veurne · info@devisch.be · www.devisch.be
+  </div>
+
+</div>
+</body>
+</html>`;
+
+  // Maak een Blob en open in nieuw venster om te kopiëren
+  const blob=new Blob([htmlBody],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+
+  // Open mail met plain text body + link naar HTML versie
+  const plainBody=`Geachte,\n\nHierbij de leveringsbon ${bon.num} voor ${aktKlant.name}.\nDatum: ${bon.datum} | Chauffeur: ${selDriver?.name||''}\n\nGELEVERDE PRODUCTEN:\n`
+    +ok.map(p=>`✓ [${p.code}] ${p.name} — ${p.qty}x`).join('\n')
+    +(miss.length>0?'\n\nNIET BESCHIKBAAR:\n'+miss.map(p=>`✗ [${p.code}] ${p.name} — ${p.qty}x`).join('\n'):'')
+    +`\n\nNetto: €${bon.netto} | BTW ${bon.btwpct}: €${bon.btw} | TOTAAL: €${bon.totaal}`
+    +`\n\nMet vriendelijke groeten,\nDevisch – Esca Food\nKoksijdestraat 20, B-8630 Veurne\nT +32 (0)58 52 38 04 | info@devisch.be`;
+
+  const mailtoUrl=`mailto:bestellingen@devisch.be?subject=${subject}&body=${encodeURIComponent(plainBody)}`;
   window.location.href=mailtoUrl;
+
+  // Sla ook HTML op voor referentie
+  window._lastBonHtml=htmlBody;
   closeMail();
-  showToast('✓ Mail-app geopend');
+  showToast('✓ Mail-app geopend met leveringsbon');
 }
 function closeMail(){document.getElementById('mail-ov').style.display='none';}
 function mailBgClick(e){if(e.target===document.getElementById('mail-ov'))closeMail();}
