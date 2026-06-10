@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///C:/Users/gilles/Downloads/DEVISCH_DASHBOARD_2.html -->
+<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Devisch–Esca · Live Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0ede8;min-height:100vh;}
+.header{background:#2c2c2a;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.header-left{display:flex;flex-direction:column;}
+.header-logo{color:#888780;font-size:17px;font-weight:600;}
+.header-sub{color:#e8855a;font-size:11px;font-weight:500;margin-top:2px;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.live-dot{width:9px;height:9px;border-radius:50%;background:#63991a;animation:pulse 2s infinite;}
+.live-dot.offline{background:#e8855a;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.header-time{color:#5f5e5a;font-size:12px;}
+.btn{background:#e8855a;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;}
+.btn:hover{background:#d97548;}
+.btn-dark{background:#444441;}
+.btn-dark:hover{background:#555;}
+.main{max-width:1280px;margin:0 auto;padding:20px;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:16px;text-align:center;}
+.stat-n{font-size:32px;font-weight:800;color:#2c2c2a;}
+.stat-l{font-size:11px;color:#888780;text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}
+.stat-card.groen .stat-n{color:#3b6d11;}
+.stat-card.rood .stat-n{color:#a32d2d;}
+.stat-card.oranje .stat-n{color:#e8855a;}
+.drv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;margin-bottom:20px;}
+.drv-card{background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;overflow:hidden;}
+.drv-header{background:#2c2c2a;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.drv-av{width:38px;height:38px;border-radius:50%;background:#e8855a;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.drv-name{color:#fff;font-size:15px;font-weight:600;flex:1;}
+.drv-badge{font-size:11px;padding:3px 9px;border-radius:7px;font-weight:600;}
+.badge-groen{background:#eaf3de;color:#3b6d11;}
+.badge-oranje{background:#faece7;color:#993c1d;}
+.badge-grijs{background:#444441;color:#888780;}
+.badge-rood{background:#fcebeb;color:#a32d2d;}
+.drv-body{padding:14px 16px;}
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:#888780;margin-bottom:6px;}
+.prog-bar{background:#f1efe8;border-radius:6px;height:10px;overflow:hidden;margin-bottom:12px;}
+.prog-fill{height:100%;border-radius:6px;transition:width .5s;}
+.klant-rij{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:.5px solid rgba(0,0,0,.05);font-size:13px;cursor:pointer;}
+.klant-rij:last-child{border-bottom:none;}
+.klant-rij:hover{background:#fafaf8;margin:0 -4px;padding:7px 4px;border-radius:6px;}
+.klant-naam{flex:1;color:#2c2c2a;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.k-ok{color:#3b6d11;font-weight:600;}
+.k-bezig{color:#e8855a;font-weight:600;}
+.k-wacht{color:#b4b2a9;}
+.k-tekort{color:#a32d2d;font-weight:600;}
+.drv-acties{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:.5px solid rgba(0,0,0,.06);}
+.drv-btn{flex:1;background:#f5f4f0;color:#444441;border:none;border-radius:8px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;}
+.drv-btn:hover{background:#e8855a;color:#fff;}
+.notif-sectie{background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:20px;margin-bottom:20px;}
+.notif-sectie h2{font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;}
+.notif-sectie p{font-size:13px;color:#888780;margin-bottom:16px;}
+.notif-form{display:grid;grid-template-columns:200px 1fr auto;gap:10px;align-items:end;}
+.field label{font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;}
+.field select,.field textarea{background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:9px 12px;font-size:14px;color:#2c2c2a;outline:none;font-family:inherit;width:100%;}
+.field textarea{resize:none;height:76px;}
+.snelle-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.snel-btn{background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;}
+.snel-btn:hover{background:#e8855a;color:#fff;}
+.log-sectie{background:#2c2c2a;border-radius:14px;padding:16px;}
+.log-sectie h2{color:#fff;font-size:15px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;}
+.log-items{max-height:240px;overflow-y:auto;}
+.log-item{display:flex;gap:10px;padding:6px 0;border-bottom:.5px solid rgba(255,255,255,.06);font-size:12px;}
+.log-item:last-child{border-bottom:none;}
+.log-tijd{color:#5f5e5a;font-family:monospace;width:60px;flex-shrink:0;}
+.log-drv{color:#e8855a;font-weight:700;width:24px;flex-shrink:0;}
+.log-tekst{color:#888780;flex:1;}
+.log-tekst.ok{color:#63991a;}
+.log-tekst.err{color:#e8855a;}
+.modal-bg{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(44,44,42,.85);z-index:50;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:24px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;}
+.modal h3{font-size:17px;font-weight:700;color:#2c2c2a;margin-bottom:16px;}
+.dag-sectie{border:.5px solid rgba(0,0,0,.09);border-radius:14px;margin-bottom:20px;overflow:hidden;}
+.dag-header{background:#f5f4f0;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.dag-header:hover{background:#eeece7;}
+.dag-header h2{font-size:14px;font-weight:600;color:#888780;display:flex;align-items:center;gap:8px;}
+.dag-body{background:#fff;padding:18px;display:none;}
+.dag-body.open{display:block;}
+.dag-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px;}
+.dag-drop{border:2px dashed #d3d1c7;border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:#fafaf8;transition:all .2s;}
+.dag-drop:hover,.dag-drop.over{border-color:#e8855a;background:#faece7;}
+.dag-fi{display:flex;align-items:center;gap:8px;background:#f5f4f0;border-radius:8px;padding:6px 10px;margin-top:6px;font-size:12px;}
+.dag-fi-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#2c2c2a;}
+.dag-prog{background:#f1efe8;border-radius:8px;height:8px;overflow:hidden;margin:10px 0;}
+.dag-prog-fill{background:#e8855a;height:100%;border-radius:8px;transition:width .4s;}
+.dag-log{background:#2c2c2a;border-radius:8px;padding:10px 12px;font-family:monospace;font-size:11px;max-height:120px;overflow-y:auto;line-height:1.8;margin-top:10px;}
+.dag-log-ok{color:#63991a;}.dag-log-err{color:#e8855a;}.dag-log-info{color:#888780;}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2c2c2a;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:100;display:none;white-space:nowrap;}
+.toast.show{display:block;}
+@media(max-width:768px){.stat-grid{grid-template-columns:repeat(2,1fr);}.notif-form{grid-template-columns:1fr;}.drv-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">devisch – esca food · Live Dashboard</div>
+    <div class="header-sub">Ververs elke 15 seconden automatisch</div>
+  </div>
+  <div class="header-right">
+    <div class="live-dot" id="live-dot"></div>
+    <div class="header-time" id="hdr-time">wo 10 juni · 19:55:48</div>
+    <button class="btn btn-dark" onclick="refresh()" style="padding:7px 14px;font-size:12px;">↻ Ververs</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- NIEUWE DAG — subtiel inklapbaar -->
+  <div class="dag-sectie">
+    <div class="dag-header" onclick="toggleDag()">
+      <h2>📂 Nieuwe leveringsdag instellen</h2>
+      <span id="dag-chevron" style="color: rgb(136, 135, 128); font-size: 18px; transition: transform 0.2s;">›</span>
+    </div>
+    <div class="dag-body" id="dag-body">
+      <div class="dag-grid">
+        <div>
+          <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">Leveringsdatum</label>
+          <input type="date" id="dag-datum" style="background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:9px 12px;font-size:14px;color:#2c2c2a;outline:none;width:100%;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px;">PDF bonnen</label>
+          <div class="dag-drop" id="dag-drop" onclick="document.getElementById(&#39;dag-input&#39;).click()" ondragover="event.preventDefault();this.classList.add(&#39;over&#39;)" ondragleave="this.classList.remove(&#39;over&#39;)" ondrop="event.preventDefault();this.classList.remove(&#39;over&#39;);dagAddFiles(event.dataTransfer.files)">
+            <input type="file" id="dag-input" accept=".pdf" multiple="" style="display:none;" onchange="dagAddFiles(event.target.files)">
+            <div style="font-size:22px;margin-bottom:4px;">📄</div>
+            <div style="font-size:13px;color:#888780;"><strong style="color:#2c2c2a;">Sleep PDF's hier</strong> of klik</div>
+          </div>
+          <div id="dag-filelist"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <button id="dag-btn" onclick="dagVerwerk()" disabled="" style="background:#b4b2a9;color:#fff;border:none;border-radius:10px;padding:14px 20px;font-size:14px;font-weight:700;cursor:not-allowed;white-space:nowrap;">⚡ Verwerken</button>
+        </div>
+      </div>
+      <div id="dag-progress" style="display:none;">
+        <div class="dag-prog"><div class="dag-prog-fill" id="dag-prog-fill" style="width:0%"></div></div>
+        <div class="dag-log" id="dag-log"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-n" id="s-actief">0</div><div class="stat-l">Actief</div></div>
+    <div class="stat-card groen"><div class="stat-n" id="s-klaar">0</div><div class="stat-l">Klanten klaar</div></div>
+    <div class="stat-card rood"><div class="stat-n" id="s-tekort">0</div><div class="stat-l">Tekorten</div></div>
+    <div class="stat-card oranje"><div class="stat-n" id="s-pct">0%</div><div class="stat-l">Voortgang</div></div>
+  </div>
+
+  <div class="notif-sectie">
+    <h2>🔔 Melding sturen naar chauffeur</h2>
+    <p>Chauffeurs zien het bericht binnen 30 seconden op hun scherm.</p>
+    <div class="notif-form">
+      <div class="field"><label>Naar</label>
+        <select id="notif-to">
+          <option value="ALL">Alle chauffeurs</option>
+          <option value="TJ">Tjorven</option>
+          <option value="JA">Jarne</option>
+          <option value="FE">Femija</option>
+          <option value="SE">Selmir</option>
+          <option value="CH">Christophe</option>
+        </select>
+      </div>
+      <div class="field"><label>Bericht</label>
+        <textarea id="notif-tekst" placeholder="Typ je bericht..."></textarea>
+      </div>
+      <button class="btn" onclick="verstuurNotif()" style="height:76px;padding:0 20px;font-size:14px;">📤 Sturen</button>
+    </div>
+    <div class="snelle-btns">
+      <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;align-self:center;margin-right:4px;">Snel:</span>
+      <button class="snel-btn" onclick="snel(&#39;Pas op: rijstrookwerkzaamheden op uw route&#39;)">⚠️ Rijstrookwerken</button>
+      <button class="snel-btn" onclick="snel(&#39;Bel de klant even op voor levering&#39;)">📞 Bel klant</button>
+      <button class="snel-btn" onclick="snel(&#39;Kom eerst langs het magazijn&#39;)">🏭 Eerst magazijn</button>
+      <button class="snel-btn" onclick="snel(&#39;Extra doos meenemen&#39;)">📦 Extra doos</button>
+      <button class="snel-btn" onclick="snel(&#39;Vertraging verwacht — bel kantoor&#39;)">⏰ Vertraging</button>
+      <button class="snel-btn" onclick="snel(&#39;Leveringen klaar — kom terug naar magazijn&#39;)">✅ Afronden</button>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;margin-bottom:12px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;">Chauffeurs vandaag</h2>
+    <span style="font-size:12px;color:#888780;margin-left:8px;" id="laatste-update">· 19:55:46</span>
+  </div>
+  <div class="drv-grid" id="drv-grid"><div class="drv-card"><div class="drv-header">
+        <div class="drv-av">TJ</div>
+        <div class="drv-name">Tjorven</div>
+        <div class="drv-badge badge-grijs">Inactief</div>
+      </div>
+      <div class="drv-body">
+         
+        <div class="geen-data">Nog geen activiteit</div>
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar(&#39;TJ&#39;)">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles(&#39;TJ&#39;)">📋 Alle producten</button>
+        </div>
+      </div></div><div class="drv-card"><div class="drv-header">
+        <div class="drv-av">JA</div>
+        <div class="drv-name">Jarne</div>
+        <div class="drv-badge badge-grijs">Inactief</div>
+      </div>
+      <div class="drv-body">
+         
+        <div class="geen-data">Nog geen activiteit</div>
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar(&#39;JA&#39;)">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles(&#39;JA&#39;)">📋 Alle producten</button>
+        </div>
+      </div></div><div class="drv-card"><div class="drv-header">
+        <div class="drv-av">FE</div>
+        <div class="drv-name">Femija</div>
+        <div class="drv-badge badge-grijs">Inactief</div>
+      </div>
+      <div class="drv-body">
+         
+        <div class="geen-data">Nog geen activiteit</div>
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar(&#39;FE&#39;)">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles(&#39;FE&#39;)">📋 Alle producten</button>
+        </div>
+      </div></div><div class="drv-card"><div class="drv-header">
+        <div class="drv-av">SE</div>
+        <div class="drv-name">Selmir</div>
+        <div class="drv-badge badge-grijs">Inactief</div>
+      </div>
+      <div class="drv-body">
+         
+        <div class="geen-data">Nog geen activiteit</div>
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar(&#39;SE&#39;)">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles(&#39;SE&#39;)">📋 Alle producten</button>
+        </div>
+      </div></div><div class="drv-card"><div class="drv-header">
+        <div class="drv-av">CH</div>
+        <div class="drv-name">Christophe</div>
+        <div class="drv-badge badge-grijs">Inactief</div>
+      </div>
+      <div class="drv-body">
+         
+        <div class="geen-data">Nog geen activiteit</div>
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar(&#39;CH&#39;)">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles(&#39;CH&#39;)">📋 Alle producten</button>
+        </div>
+      </div></div></div>
+
+  <div class="log-sectie">
+    <h2>📋 Activiteitenlog <button onclick="logItems=[];renderLog();" style="background:none;border:none;color:#5f5e5a;font-size:12px;cursor:pointer;font-weight:400;">Wissen</button></h2>
+    <div class="log-items" id="log-items"><div class="log-item"><span class="log-tijd">19:55:46</span><span class="log-drv">↻</span><span class="log-tekst info">0 rijen geladen</span></div><div class="log-item"><span class="log-tijd">19:55:31</span><span class="log-drv">↻</span><span class="log-tekst info">0 rijen geladen</span></div><div class="log-item"><span class="log-tijd">19:55:31</span><span class="log-drv">🚀</span><span class="log-tekst ok">Dashboard gestart</span></div></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+    <button class="btn" onclick="closeModal()" style="width:100%;margin-top:16px;">Sluiten</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPA_URL='https://pbogaopudoawkwsosjqy.supabase.co';
+const SUPA_KEY='sb_publishable_tIPI6f4RfE4a5DCfibFn5Q_NVZPvlbN';
+const DRIVERS=[{id:'TJ',name:'Tjorven'},{id:'JA',name:'Jarne'},{id:'FE',name:'Femija'},{id:'SE',name:'Selmir'},{id:'CH',name:'Christophe'}];
+let logItems=[],allVoortgang=[];
+
+setInterval(()=>{
+  const n=new Date();
+  document.getElementById('hdr-time').textContent=n.toLocaleDateString('nl-BE',{weekday:'short',day:'numeric',month:'long'})+' · '+n.toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+},1000);
+
+let toastT;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3000);}
+
+async function supaFetch(endpoint,method='GET',body=null){
+  try{
+    const opts={method,headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'}};
+    if(body)opts.body=JSON.stringify(body);
+    const r=await fetch(SUPA_URL+'/rest/v1/'+endpoint,opts);
+    document.getElementById('live-dot').classList.remove('offline');
+    if(r.status===204||r.status===201)return true;
+    const txt=await r.text();
+    return txt?JSON.parse(txt):true;
+  }catch(e){document.getElementById('live-dot').classList.add('offline');return null;}
+}
+
+function getVandaag(){const n=new Date();return `${String(n.getDate()).padStart(2,'0')}-${String(n.getMonth()+1).padStart(2,'0')}-${n.getFullYear()}`;}
+
+async function laadVoortgang(){
+  const datum=getVandaag();
+  const data=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datum)}&order=updated_at.desc`);
+  if(data){allVoortgang=data;addLog('↻',data.length+' rijen geladen','info');}
+}
+
+function getStats(driverId){
+  const rows=allVoortgang.filter(r=>r.chauffeur_id===driverId);
+  if(!rows.length)return null;
+  const klanten={};
+  rows.forEach(r=>{if(!klanten[r.klant_id])klanten[r.klant_id]={naam:r.klant_naam,prods:[]};klanten[r.klant_id].prods.push(r);});
+  const gedaan=rows.filter(r=>r.gescand>=r.totaal||r.missing).length;
+  const tekorten=rows.filter(r=>r.missing).length;
+  const pct=rows.length>0?Math.round(gedaan/rows.length*100):0;
+  return{klanten,totProds:rows.length,gedaan,tekorten,pct};
+}
+
+function renderDashboard(){
+  const grid=document.getElementById('drv-grid');grid.innerHTML='';
+  let totActief=0,totKlaar=0,totTekorten=0,pctSom=0,pctN=0;
+  DRIVERS.forEach(d=>{
+    const s=getStats(d.id);
+    const isActief=s&&s.pct>0&&s.pct<100;
+    const isKlaar=s&&s.pct===100;
+    if(isActief)totActief++;
+    if(s){totTekorten+=s.tekorten;pctSom+=s.pct;pctN++;}
+    let klantenHTML='';
+    if(s){
+      Object.values(s.klanten).forEach(k=>{
+        const alles=k.prods.every(p=>p.gescand>=p.totaal||p.missing);
+        const bezig=k.prods.some(p=>p.gescand>0&&!alles);
+        const tekort=k.prods.some(p=>p.missing);
+        const gedP=k.prods.filter(p=>p.gescand>=p.totaal||p.missing).length;
+        if(alles&&!tekort)totKlaar++;
+        const icon=alles?(tekort?'⚠':'✓'):bezig?'⟳':'○';
+        const klas=alles?(tekort?'k-tekort':'k-ok'):bezig?'k-bezig':'k-wacht';
+        klantenHTML+=`<div class="klant-rij" onclick="toonDetail('${d.id}','${k.naam.replace(/'/g,"\\'")}')">
+          <span style="font-size:13px;width:18px;text-align:center;flex-shrink:0;">${icon}</span>
+          <span class="klant-naam">${k.naam}</span>
+          <span style="font-size:11px;flex-shrink:0;" class="${klas}">${alles?(tekort?'Tekort':'Klaar'):bezig?gedP+'/'+k.prods.length:'Wacht'}</span>
+        </div>`;
+        const tekortProds=k.prods.filter(p=>p.missing);
+        if(tekortProds.length)klantenHTML+=`<div style="padding:2px 0 5px 26px;font-size:11px;color:#a32d2d;line-height:1.6;">${tekortProds.map(p=>`✗ ${p.product_code} ${p.product_naam.substring(0,28)}${p.miss_reden?' · '+p.miss_reden:''}`).join('<br>')}</div>`;
+      });
+    } else klantenHTML='<div class="geen-data">Nog geen activiteit</div>';
+
+    const card=document.createElement('div');card.className='drv-card';
+    card.innerHTML=`<div class="drv-header">
+        <div class="drv-av">${d.id}</div>
+        <div class="drv-name">${d.name}</div>
+        <div class="drv-badge ${isKlaar?'badge-groen':isActief?'badge-oranje':s?'badge-rood':'badge-grijs'}">${isKlaar?'✓ Klaar':isActief?'Actief':s?'Data':'Inactief'}</div>
+      </div>
+      <div class="drv-body">
+        ${s?`<div class="prog-row"><span>Voortgang</span><span style="font-weight:700;color:${isKlaar?'#3b6d11':'#2c2c2a'};">${s.gedaan}/${s.totProds} · ${s.pct}%</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${s.pct}%;background:${s.tekorten>0?'#e8855a':'#63991a'};"></div></div>
+        ${s.tekorten>0?`<div style="font-size:11px;color:#a32d2d;margin-bottom:8px;font-weight:600;">⚠ ${s.tekorten} tekort(en)</div>`:''}`:''} 
+        ${klantenHTML}
+        <div class="drv-acties">
+          <button class="drv-btn" onclick="stuurNaar('${d.id}')">🔔 Bericht</button>
+          <button class="drv-btn" onclick="toonAlles('${d.id}')">📋 Alle producten</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('s-actief').textContent=totActief;
+  document.getElementById('s-klaar').textContent=totKlaar;
+  document.getElementById('s-tekort').textContent=totTekorten;
+  document.getElementById('s-pct').textContent=(pctN>0?Math.round(pctSom/pctN):0)+'%';
+  document.getElementById('laatste-update').textContent='· '+new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+
+function toonDetail(driverId,klantNaam){
+  const rows=allVoortgang.filter(r=>r.chauffeur_id===driverId&&r.klant_naam===klantNaam);
+  document.getElementById('modal-title').textContent=klantNaam;
+  document.getElementById('modal-body').innerHTML=rows.map(p=>{
+    const done=p.gescand>=p.totaal;
+    const bg=p.missing?'#fcebeb':done?'#eaf3de':'#fff';
+    return `<div style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;background:${bg};margin-bottom:4px;">
+      <span style="font-family:monospace;font-size:10px;background:#2c2c2a;color:#e8855a;padding:2px 6px;border-radius:4px;flex-shrink:0;">${p.product_code}</span>
+      <span style="flex:1;font-size:13px;color:#2c2c2a;">${p.product_naam}</span>
+      <span style="font-size:12px;font-weight:600;" class="${p.missing?'k-tekort':done?'k-ok':'k-wacht'}">${p.missing?'✗ '+p.miss_reden:done?'✓ '+p.totaal+'x':p.gescand+'/'+p.totaal}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('modal-bg').classList.add('open');
+}
+
+function toonAlles(driverId){
+  const d=DRIVERS.find(x=>x.id===driverId);
+  const rows=allVoortgang.filter(r=>r.chauffeur_id===driverId);
+  document.getElementById('modal-title').textContent=d.name+' — Alle producten';
+  const klanten={};
+  rows.forEach(r=>{if(!klanten[r.klant_naam])klanten[r.klant_naam]=[];klanten[r.klant_naam].push(r);});
+  let html='';
+  Object.entries(klanten).forEach(([naam,prods])=>{
+    html+=`<div style="font-size:11px;font-weight:700;color:#888780;text-transform:uppercase;margin:12px 0 6px;">${naam}</div>`;
+    html+=prods.map(p=>{const done=p.gescand>=p.totaal;const bg=p.missing?'#fcebeb':done?'#eaf3de':'#fff';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:7px;border-radius:6px;background:${bg};margin-bottom:3px;">
+        <span style="font-family:monospace;font-size:10px;background:#2c2c2a;color:#e8855a;padding:2px 5px;border-radius:4px;">${p.product_code}</span>
+        <span style="flex:1;font-size:12px;color:#2c2c2a;">${p.product_naam}</span>
+        <span style="font-size:12px;font-weight:600;" class="${p.missing?'k-tekort':done?'k-ok':'k-wacht'}">${p.missing?'✗':done?'✓':p.gescand+'/'+p.totaal}</span>
+      </div>`;}).join('');
+  });
+  document.getElementById('modal-body').innerHTML=html||'<div class="geen-data">Geen data</div>';
+  document.getElementById('modal-bg').classList.add('open');
+}
+
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');}
+
+function stuurNaar(id){document.getElementById('notif-to').value=id;document.querySelector('.notif-sectie').scrollIntoView({behavior:'smooth'});document.getElementById('notif-tekst').focus();}
+function snel(tekst){document.getElementById('notif-tekst').value=tekst;}
+
+async function verstuurNotif(){
+  const naar=document.getElementById('notif-to').value;
+  const tekst=document.getElementById('notif-tekst').value.trim();
+  if(!tekst){showToast('⚠ Typ een bericht');return;}
+  const targets=naar==='ALL'?DRIVERS.map(d=>d.id):[naar];
+  let ok=true;
+  for(const id of targets){const r=await supaFetch('notificaties','POST',{van:'Kantoor',naar:id,tekst,gelezen:false});if(!r)ok=false;}
+  if(ok){
+    const naam=naar==='ALL'?'alle chauffeurs':DRIVERS.find(d=>d.id===naar)?.name||naar;
+    addLog('📤','Bericht naar '+naam+': "'+tekst.substring(0,40)+'"','ok');
+    document.getElementById('notif-tekst').value='';
+    showToast('✓ Verstuurd naar '+naam+'!');
+    renderLog();
+  } else showToast('✗ Fout bij versturen — check verbinding');
+}
+
+function addLog(drv,tekst,type){
+  const tijd=new Date().toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  logItems.unshift({drv,tekst,type,tijd});
+  if(logItems.length>100)logItems=logItems.slice(0,100);
+}
+
+function renderLog(){
+  const el=document.getElementById('log-items');
+  if(!logItems.length){el.innerHTML='<div class="geen-data" style="color:#5f5e5a;">Geen activiteit.</div>';return;}
+  el.innerHTML=logItems.map(l=>`<div class="log-item"><span class="log-tijd">${l.tijd}</span><span class="log-drv">${l.drv}</span><span class="log-tekst ${l.type||''}">${l.tekst}</span></div>`).join('');
+}
+
+async function refresh(){
+  addLog('↻','Ververs...','info');
+  await laadVoortgang();
+  renderDashboard();
+  renderLog();
+}
+
+setInterval(async()=>{await laadVoortgang();renderDashboard();renderLog();},15000);
+
+// ── NIEUWE DAG ────────────────────────────────────────
+let dagFiles=[];
+
+function toggleDag(){
+  const body=document.getElementById('dag-body');
+  const chev=document.getElementById('dag-chevron');
+  const open=body.classList.toggle('open');
+  chev.style.transform=open?'rotate(90deg)':'';
+}
+
+// Init datum morgen
+(()=>{
+  const tom=new Date();tom.setDate(tom.getDate()+1);
+  document.getElementById('dag-datum').value=tom.toISOString().split('T')[0];
+})();
+
+function dagAddFiles(files){
+  Array.from(files).forEach(f=>{
+    if((f.type==='application/pdf'||f.name.endsWith('.pdf'))&&!dagFiles.find(x=>x.name===f.name))dagFiles.push(f);
+  });
+  renderDagFiles();
+  document.getElementById('dag-btn').disabled=dagFiles.length===0;
+  document.getElementById('dag-btn').style.background=dagFiles.length>0?'#e8855a':'#b4b2a9';
+  document.getElementById('dag-btn').style.cursor=dagFiles.length>0?'pointer':'not-allowed';
+}
+
+function renderDagFiles(){
+  document.getElementById('dag-filelist').innerHTML=dagFiles.map(f=>`
+    <div class="dag-fi">
+      <span style="color:#e8855a;">📄</span>
+      <span class="dag-fi-name">${f.name}</span>
+      <span style="font-size:11px;color:#b4b2a9;">${(f.size/1024).toFixed(0)}KB</span>
+      <button onclick="dagFiles=dagFiles.filter(x=>x.name!=='${f.name}');renderDagFiles();document.getElementById('dag-btn').disabled=dagFiles.length===0;" style="background:none;border:none;color:#b4b2a9;cursor:pointer;font-size:14px;">✕</button>
+    </div>`).join('');
+}
+
+function dagLog(msg,t='info'){
+  const el=document.getElementById('dag-log');
+  el.innerHTML+=`<div class="dag-log-${t}">${msg}</div>`;
+  el.scrollTop=el.scrollHeight;
+}
+function dagProg(p){document.getElementById('dag-prog-fill').style.width=p+'%';}
+
+function toBase64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(f);});}
+
+async function dagVerwerk(){
+  if(!dagFiles.length)return;
+  document.getElementById('dag-btn').disabled=true;
+  document.getElementById('dag-progress').style.display='block';
+  document.getElementById('dag-log').innerHTML='';
+  dagProg(5);
+
+  const dateVal=document.getElementById('dag-datum').value;
+  const dateFmt=dateVal.split('-').reverse().join('-');
+  dagLog(`📅 Datum: ${dateFmt}`);
+  dagLog(`📄 ${dagFiles.length} PDF bestand(en) laden...`);
+
+  const pdfs=[];
+  for(let i=0;i<dagFiles.length;i++){
+    try{
+      const b64=await toBase64(dagFiles[i]);
+      pdfs.push({name:dagFiles[i].name,data:b64});
+      dagLog(`✓ ${dagFiles[i].name}`,'ok');
+      dagProg(5+Math.round((i+1)/dagFiles.length*20));
+    }catch(e){dagLog(`✗ ${dagFiles[i].name}: ${e.message}`,'err');}
+  }
+
+  dagLog('⚡ AI verwerkt bonnen...');
+  dagProg(30);
+
+  const content=[{type:'text',text:`Leveringsdatum: ${dateFmt}
+Chauffeurs: TJ=Tjorven, JA=Jarne, FE=Femija, SE=Selmir, CH=Christophe
+
+Verwerk alle bonnen. Geef ALLEEN geldige JSON terug, geen uitleg, geen backticks.
+Formaat:
+{"date":"DD-MM-JJJJ","deliveryDays":[dag-nummers],"drivers":[{"id":"TJ","name":"Naam","pin":"1234"}],"klanten":[{"id":1,"name":"NAAM","addr":"Adres","email":"","chauffeur":"JA","bons":[{"num":"70219","datum":"DD-MM-JJJJ","klnr":"","btwnr":"","netto":"","btw":"","totaal":"","btwpct":"6,0%","note":"","prods":[{"id":"k1p1","code":"123456","name":"Naam","ean":"","qty":1}]}]}]}
+Regels: chauffeur ID uit naam. EAN leeg als onbekend. qty integer. ALLEEN JSON.`}];
+  pdfs.forEach(p=>content.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:p.data}}));
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content}]})
+    });
+    dagProg(75);
+    if(!resp.ok){dagLog(`✗ AI fout: ${await resp.text()}`,'err');document.getElementById('dag-btn').disabled=false;return;}
+    const result=await resp.json();
+    const raw=result.content?.map(c=>c.type==='text'?c.text:'').join('')||'';
+    dagLog('✓ AI response ontvangen','ok');
+    dagProg(82);
+
+    let parsed;
+    try{parsed=JSON.parse(raw.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim());}
+    catch(e){dagLog(`✗ JSON fout: ${e.message}`,'err');document.getElementById('dag-btn').disabled=false;return;}
+
+    dagLog('📤 Opslaan in database...');
+    dagProg(88);
+
+    // Sla op in Supabase leveringen tabel
+    const r=await supaFetch('leveringen','POST',{
+      datum:dateFmt,
+      chauffeur_id:'ALL',
+      chauffeur_naam:'Alle chauffeurs',
+      voertuig:'',
+      klanten:parsed
+    });
+
+    if(r){
+      const totBons=parsed.klanten?.reduce((s,k)=>s+(k.bons?.length||0),0)||0;
+      const totProds=parsed.klanten?.reduce((s,k)=>k.bons?.reduce((s2,b)=>s2+(b.prods?.length||0),0)+s,0)||0;
+      dagProg(100);
+      dagLog(`✓ ${parsed.klanten?.length||0} klanten, ${totBons} bonnen, ${totProds} producten opgeslagen`,'ok');
+      dagLog(`✓ Chauffeurs zien de nieuwe ritten bij het openen van de app`,'ok');
+      showToast(`✓ Leveringen ${dateFmt} opgeslagen!`);
+      addLog('📂',`Nieuwe leveringsdag ${dateFmt} geladen: ${parsed.klanten?.length||0} klanten`,'ok');
+      dagFiles=[];renderDagFiles();
+    } else {
+      dagLog('✗ Fout bij opslaan in database','err');
+    }
+  }catch(e){dagLog(`✗ Fout: ${e.message}`,'err');}
+  document.getElementById('dag-btn').disabled=false;
+  document.getElementById('dag-btn').style.background='#e8855a';
+}
+
+(async()=>{addLog('🚀','Dashboard gestart','ok');await laadVoortgang();renderDashboard();renderLog();})();
+</script>
+
+
+</body></html>
