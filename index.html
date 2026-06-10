@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_20.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_24.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/85548857-edd3-4b5e-b4a9-ea4275d3124f">
+<link rel="manifest" id="pwa-manifest" href="blob:null/2671c6d6-ecfd-43e9-a8e0-e4fbe5751905">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -166,7 +166,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">Data laden...</div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ Ritten geladen voor vandaag</div>
   </div>
 
   <!-- LOGIN -->
@@ -179,33 +179,33 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="scroll" id="login-scroll">
       <div class="label">Kies chauffeur</div>
       <div id="driver-list">
-    <div class="card" onclick="selectDriver(&#39;TJ&#39;)">
+    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">TJ</div>
       <div><div class="name">Tjorven</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;JA&#39;)">
+    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
       <div class="av">JA</div>
       <div><div class="name">Jarne</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;FE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;FE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">FE</div>
       <div><div class="name">Femija</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;SE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;SE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">SE</div>
       <div><div class="name">Selmir</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;CH&#39;)">
+    <div class="card" onclick="selectDriver(&#39;CH&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">CH</div>
       <div><div class="name">Christophe</div></div>
       <div class="chevron">›</div>
     </div></div>
-      <div id="pin-area" style="display:none;">
-        <div class="label" id="pin-label">Code voor chauffeur</div>
+      <div id="pin-area" style="display: block;">
+        <div class="label" id="pin-label">Code voor Jarne</div>
         <div class="pin-dots" id="pin-dots">
           <div class="dot"></div><div class="dot"></div>
           <div class="dot"></div><div class="dot"></div>
@@ -232,12 +232,117 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-voertuig">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="vrt-driver-name">Voertuig</span>
+      <span class="topbar-title" id="vrt-driver-name">Jarne</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="scroll">
       <div class="label">Kies jouw bestelwagen vandaag</div>
-      <div id="voertuig-list"></div>
+      <div id="voertuig-list"><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1FDN178</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco Daily</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1HVC234&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1HVC234</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco 120EL</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE435&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE435</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE447&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE447</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Nissan</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SAK672&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SAK672</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Doblo</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG928&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG928</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG974&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG974</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1WGW842&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1WGW842</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2-JKW-334&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2-JKW-334</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2CDZ134&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2CDZ134</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA105&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA105</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DUK997&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DUK997</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco BE-Combi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2HLS390&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2HLS390</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div></div>
       <div style="margin-top:8px;">
         <div class="label">Ander voertuig?</div>
         <div style="display:flex;gap:8px;">
@@ -252,7 +357,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="cal-driver-name">Chauffeur</span>
+      <span class="topbar-title" id="cal-driver-name">Jarne</span>
       <button onclick="openNotifStuur()" style="background:none;border:none;color:#e8855a;font-size:20px;cursor:pointer;padding:0;position:relative;" title="Bericht sturen">
         🔔
         <span id="notif-badge" style="display:none;position:absolute;top:-4px;right:-4px;width:10px;height:10px;background:#e8855a;border-radius:50%;"></span>
@@ -677,6 +782,31 @@ function hideLoader(){
 async function loadAppData(){
   showLoader('Data laden...');
 
+  // Bewaar altijd de standaard chauffeurs als fallback
+  const DEFAULT_DRIVERS=[
+    {id:'TJ',name:'Tjorven',pin:'1111'},
+    {id:'JA',name:'Jarne',pin:'2222'},
+    {id:'FE',name:'Femija',pin:'3333'},
+    {id:'SE',name:'Selmir',pin:'4444'},
+    {id:'CH',name:'Christophe',pin:'5555'},
+  ];
+
+  // Laad chauffeur config uit Supabase
+  try{
+    const config=await supaFetch(`notificaties?van=eq.SYSTEEM&naar=eq.CHAUFFEUR_CONFIG&gelezen=eq.false&order=created_at.desc&limit=1`);
+    if(config&&config.length>0){
+      const drivers=JSON.parse(config[0].tekst);
+      if(drivers&&drivers.length===5){
+        // Alleen vervangen als alle 5 chauffeurs aanwezig zijn
+        DRIVERS.length=0;drivers.forEach(x=>DRIVERS.push(x));
+      }
+      // Anders: behoud de standaard DRIVERS array
+    }
+  }catch(e){
+    // Fout: behoud standaard DRIVERS
+    console.log('Config niet geladen, gebruik standaard drivers');
+  }
+
   // 1. Probeer eerst Supabase voor ritten van vandaag
   try{
     const nu=new Date();
@@ -684,8 +814,12 @@ async function loadAppData(){
     const supLev=await supaFetch(`leveringen?datum=eq.${encodeURIComponent(datumVandaag)}&order=created_at.desc&limit=1`);
     if(supLev&&supLev.length>0&&supLev[0].klanten&&supLev[0].klanten.klanten){
       const d=supLev[0].klanten;
-      if(d.drivers){DRIVERS.length=0;d.drivers.forEach(x=>DRIVERS.push(x));}
-      if(d.deliveryDays){DEL_DAYS.length=0;d.deliveryDays.forEach(x=>DEL_DAYS.push(x));}
+      // Alleen drivers updaten als alle 5 aanwezig zijn
+      if(d.drivers&&d.drivers.length===5){
+        DRIVERS.length=0;d.drivers.forEach(x=>DRIVERS.push(x));
+      }
+      // Anders behoud de al geladen DRIVERS (uit config of standaard)
+      if(d.deliveryDays&&d.deliveryDays.length>0){DEL_DAYS.length=0;d.deliveryDays.forEach(x=>DEL_DAYS.push(x));}
       KLANTEN=cloneData(d.klanten||[]);
       localStorage.setItem('def_loaded_date',datumVandaag);
       calY=nu.getFullYear();calM=nu.getMonth();selDay=nu.getDate();
@@ -701,6 +835,9 @@ async function loadAppData(){
     }
   }catch(e){console.log('Supabase niet beschikbaar');}
 
+  // Zorg dat drivers altijd gevuld zijn
+  if(DRIVERS.length===0)DEFAULT_DRIVERS.forEach(x=>DRIVERS.push(x));
+
   // 2. Fallback: data.json van GitHub
   try{
     const ctrl=new AbortController();
@@ -710,7 +847,7 @@ async function loadAppData(){
     if(!res.ok)throw new Error('Geen data.json');
     const data=await res.json();
     const today=data.date||'';
-    if(data.drivers){DRIVERS.length=0;data.drivers.forEach(x=>DRIVERS.push(x));}
+    if(data.drivers&&data.drivers.length>0){DRIVERS.length=0;data.drivers.forEach(x=>DRIVERS.push(x));}
     if(data.deliveryDays){DEL_DAYS.length=0;data.deliveryDays.forEach(d=>DEL_DAYS.push(d));}
     localStorage.setItem('def_loaded_date',today);
     KLANTEN=cloneData(data.klanten||[]);
