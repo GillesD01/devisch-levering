@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_25.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_29.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/1dbd049f-9cf7-4bbf-9113-064e6d9c6237">
+<link rel="manifest" id="pwa-manifest" href="blob:null/d3cb34b1-da4b-4295-b1f0-3685ff22b64f">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -166,11 +166,11 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ Ritten geladen voor vandaag</div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">Geen ritten gevonden voor vandaag</div>
   </div>
 
   <!-- LOGIN -->
-  <div class="screen active" id="s-login">
+  <div class="screen" id="s-login">
     <div class="login-hero">
       <div class="brand-main">devisch – esca food</div>
       <div class="brand-sub">oresto partner</div>
@@ -179,33 +179,33 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="scroll" id="login-scroll">
       <div class="label">Kies chauffeur</div>
       <div id="driver-list">
-    <div class="card" onclick="selectDriver(&#39;TJ&#39;)">
+    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">TJ</div>
       <div><div class="name">Tjorven</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;JA&#39;)">
+    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
       <div class="av">JA</div>
       <div><div class="name">Jarne</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;FE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;FE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">FE</div>
       <div><div class="name">Femija</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;SE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;SE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">SE</div>
       <div><div class="name">Selmir</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;CH&#39;)">
+    <div class="card" onclick="selectDriver(&#39;CH&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">CH</div>
       <div><div class="name">Christophe</div></div>
       <div class="chevron">›</div>
     </div></div>
-      <div id="pin-area" style="display:none;">
-        <div class="label" id="pin-label">Code voor chauffeur</div>
+      <div id="pin-area" style="display: block;">
+        <div class="label" id="pin-label">Code voor Jarne</div>
         <div class="pin-dots" id="pin-dots">
           <div class="dot"></div><div class="dot"></div>
           <div class="dot"></div><div class="dot"></div>
@@ -232,12 +232,124 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-voertuig">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="vrt-driver-name">Voertuig</span>
+      <span class="topbar-title" id="vrt-driver-name">Jarne</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="scroll">
       <div class="label">Kies jouw bestelwagen vandaag</div>
-      <div id="voertuig-list"></div>
+      <div id="voertuig-list"><div class="card" onclick="kiesVoertuig(&#39;2DJA105&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA105</div>
+        
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1FDN178</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco Daily</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1HVC234&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1HVC234</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco 120EL</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE435&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE435</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1JVE447&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1JVE447</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Nissan</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SAK672&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SAK672</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Doblo</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG928&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG928</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1SCG974&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1SCG974</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;1WGW842&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1WGW842</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2-JKW-334&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2-JKW-334</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2CDZ134&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2CDZ134</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Fiat Ducato Maxi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA105&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA105</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DUK997&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DUK997</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Iveco BE-Combi</div>
+      </div>
+      <div class="chevron">›</div>
+    </div><div class="card" onclick="kiesVoertuig(&#39;2HLS390&#39;)" style="margin-bottom:8px;">
+      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2HLS390</div>
+        <div style="font-size:12px;color:#888780;margin-top:2px;">Renault Master</div>
+      </div>
+      <div class="chevron">›</div>
+    </div></div>
       <div style="margin-top:8px;">
         <div class="label">Ander voertuig?</div>
         <div style="display:flex;gap:8px;">
@@ -248,11 +360,24 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
   </div>
 
+  <!-- CODES KLANTEN SCREEN -->
+  <div class="screen" id="s-codes">
+    <div class="topbar">
+      <button class="topbar-back" onclick="go(&#39;s-calendar&#39;)">‹</button>
+      <span class="topbar-title">🔑 Codes klanten</span>
+    </div>
+    <div style="padding:12px 16px 8px;background:#fff;border-bottom:.5px solid rgba(0,0,0,.08);">
+      <input type="search" id="codes-zoek" placeholder="Zoek klant of gemeente..." oninput="filterCodes(this.value)" style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:10px;padding:10px 14px;font-size:15px;outline:none;font-family:inherit;">
+    </div>
+    <div class="scroll" id="codes-lijst" style="padding:12px 16px;"></div>
+  </div>
+
   <!-- CALENDAR -->
-  <div class="screen" id="s-calendar">
+  <div class="screen active" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="cal-driver-name">Chauffeur</span>
+      <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA069</span>
+      <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
       <button onclick="openNotifStuur()" style="background:none;border:none;color:#e8855a;font-size:20px;cursor:pointer;padding:0;position:relative;" title="Bericht sturen">
         🔔
         <span id="notif-badge" style="display:none;position:absolute;top:-4px;right:-4px;width:10px;height:10px;background:#e8855a;border-radius:50%;"></span>
@@ -262,43 +387,106 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <!-- NOTIF STUUR PANEL -->
     <div class="sheet-bg" id="notif-stuur-ov" style="display:none;" onclick="if(event.target===this)closeNotifStuur()">
       <div class="sheet">
-        <h3>🔔 Bericht sturen naar chauffeur</h3>
-        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Het bericht verschijnt de volgende keer dat de chauffeur inlogt.</p>
-        <div style="margin-bottom:12px;">
-          <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Naar chauffeur:</label>
-          <select id="notif-to" style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:9px 12px;font-size:14px;color:#2c2c2a;outline:none;">
-            <option value="ALL">Alle chauffeurs</option>
-            <option value="TJ">Tjorven</option>
-            <option value="JA">Jarne</option>
-            <option value="FE">Femija</option>
-            <option value="SE">Selmir</option>
-            <option value="CH">Christophe</option>
-          </select>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:#e8855a;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🔔</div>
+          <div>
+            <h3 style="margin:0;">Bericht naar kantoor</h3>
+            <div style="font-size:12px;color:#888780;margin-top:2px;">Stuur een bericht naar Devisch–Esca</div>
+          </div>
+        </div>
+        <div style="background:#f5f4f0;border-radius:8px;padding:8px 12px;margin:12px 0;font-size:12px;color:#888780;display:flex;align-items:center;gap:6px;">
+          <span>📍</span> Van: <strong style="color:#2c2c2a;" id="notif-van-naam">Chauffeur</strong> → Kantoor
         </div>
         <div style="margin-bottom:14px;">
           <label style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Bericht:</label>
-          <textarea id="notif-tekst" placeholder="Typ hier je bericht..." style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:10px 12px;font-size:14px;color:#2c2c2a;outline:none;resize:none;height:100px;font-family:inherit;"></textarea>
+          <textarea id="notif-tekst" placeholder="Typ hier je bericht aan kantoor..." style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:10px 12px;font-size:14px;color:#2c2c2a;outline:none;resize:none;height:100px;font-family:inherit;"></textarea>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
           <div style="font-size:11px;color:#888780;font-weight:600;width:100%;text-transform:uppercase;letter-spacing:.5px;">Snelle berichten:</div>
-          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Pas op: rijstrookwerkzaamheden op route&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">⚠️ Rijstrookwerken</button>
-          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Klant belt: even opbellen voor levering&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">📞 Klant opbellen</button>
-          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Kom eerst naar het magazijn&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">🏭 Eerst magazijn</button>
-          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Extra doos meenemen&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">📦 Extra doos</button>
-          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Vertraging verwacht: bel kantoor&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">⏰ Vertraging</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Ik heb vertraging, kom later aan&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">⏰ Vertraging</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Klant was niet aanwezig&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">🚪 Klant afwezig</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Ik heb een probleem met het voertuig&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">🚐 Voertuig probleem</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Klant weigert levering&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">❌ Weigering</button>
+          <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Alle leveringen zijn klaar&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">✅ Klaar</button>
         </div>
-        <button class="btn-full" onclick="verstuurNotif()">📤 Versturen</button>
+        <button class="btn-full" onclick="verstuurNaarKantoor()">📤 Sturen naar kantoor</button>
         <button class="btn-ghost" onclick="closeNotifStuur()">Annuleren</button>
       </div>
     </div>
     <div class="scroll">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
         <button class="cal-nav" onclick="chMonth(-1)">‹</button>
-        <span class="cal-month" id="cal-month-lbl"></span>
+        <span class="cal-month" id="cal-month-lbl">Juni 2026</span>
         <button class="cal-nav" onclick="chMonth(1)">›</button>
       </div>
-      <div class="cal-grid" id="cal-grid"></div>
-      <div id="cal-summary"></div>
+      <div class="cal-grid" id="cal-grid"><div class="cal-dl">Ma</div><div class="cal-dl">Di</div><div class="cal-dl">Wo</div><div class="cal-dl">Do</div><div class="cal-dl">Vr</div><div class="cal-dl">Za</div><div class="cal-dl">Zo</div><div class="cal-d" onclick="">
+      1
+    </div><div class="cal-d" onclick="">
+      2
+    </div><div class="cal-d" onclick="">
+      3
+    </div><div class="cal-d" onclick="">
+      4
+    </div><div class="cal-d" onclick="">
+      5
+    </div><div class="cal-d" onclick="">
+      6
+    </div><div class="cal-d" onclick="">
+      7
+    </div><div class="cal-d" onclick="">
+      8
+    </div><div class="cal-d today" onclick="">
+      9
+    </div><div class="cal-d" onclick="">
+      10
+    </div><div class="cal-d has-del sel" onclick="pickDay(11)">
+      11<div class="dot-del"></div>
+    </div><div class="cal-d" onclick="">
+      12
+    </div><div class="cal-d" onclick="">
+      13
+    </div><div class="cal-d" onclick="">
+      14
+    </div><div class="cal-d" onclick="">
+      15
+    </div><div class="cal-d" onclick="">
+      16
+    </div><div class="cal-d" onclick="">
+      17
+    </div><div class="cal-d" onclick="">
+      18
+    </div><div class="cal-d" onclick="">
+      19
+    </div><div class="cal-d" onclick="">
+      20
+    </div><div class="cal-d" onclick="">
+      21
+    </div><div class="cal-d" onclick="">
+      22
+    </div><div class="cal-d" onclick="">
+      23
+    </div><div class="cal-d" onclick="">
+      24
+    </div><div class="cal-d" onclick="">
+      25
+    </div><div class="cal-d" onclick="">
+      26
+    </div><div class="cal-d" onclick="">
+      27
+    </div><div class="cal-d" onclick="">
+      28
+    </div><div class="cal-d" onclick="">
+      29
+    </div><div class="cal-d" onclick="">
+      30
+    </div></div>
+      <div id="cal-summary"><div class="sum-bar">
+    <div>
+      <div style="color:#888780;font-size:12px;">📅 Vandaag — do 11 juni 2026</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">Geen leveringen</div>
+    </div>
+    <div style="color:#5f5e5a;font-size:12px;">Geen ritten</div>
+  </div></div>
     </div>
   </div>
 
@@ -307,7 +495,8 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-calendar&#39;)">‹</button>
       <span class="topbar-title" id="kl-title">Klanten</span>
-      <span class="topbar-sub">D–EF</span>
+      <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
+      <button onclick="stuurDagsamenvatting()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Dagsamenvatting mailen">📊</button>
     </div>
     <div class="scroll" id="kl-list"></div>
   </div>
@@ -416,14 +605,14 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
 
     <!-- FOTO OVERLAY -->
-    <div class="sheet-bg" id="foto-ov" style="display:none;" onclick="fotoBgClick(event)">
+    <div class="sheet-bg" id="foto-ov" style="display:none;">
       <div class="sheet">
         <h3>📷 Foto bij levering</h3>
-        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Optioneel: maak een foto als bewijs van aflevering.</p>
-        <div id="foto-preview" style="margin-bottom:14px;"></div>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering bij deze klant.</p>
+        <div id="foto-preview" style="margin-bottom:14px;min-height:40px;"></div>
         <input type="file" id="foto-input" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(event)">
         <button class="btn-full" onclick="document.getElementById(&#39;foto-input&#39;).click()" style="margin-bottom:8px;">📷 Camera openen</button>
-        <button class="btn-full dark" id="btn-foto-ok" onclick="fotoBevestigen()">✓ Opslaan zonder foto</button>
+        <button class="btn-full dark" id="btn-foto-ok" onclick="this.disabled=true;this.textContent=&#39;Bezig...&#39;;fotoBevestigen();">✓ Opslaan zonder foto</button>
         <button class="btn-ghost" onclick="closeFoto()">Annuleren</button>
       </div>
     </div>
@@ -676,6 +865,107 @@ function hideLoader(){
   document.getElementById('s-login').classList.add('active');
 }
 
+// ── DAGSAMENVATTING ──────────────────────────────────────
+function stuurDagsamenvatting(){
+  if(!selDriver||!KLANTEN.length){showToast('Geen ritten gevonden');return;}
+  const datum=localStorage.getItem('def_loaded_date')||'';
+  const klanten=KLANTEN.filter(k=>k.chauffeur===selDriver.id);
+  if(!klanten.length){showToast('Geen klanten gevonden');return;}
+  const gedaan=klanten.filter(k=>k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing)));
+  const tekorten=klanten.flatMap(k=>k.bons.flatMap(b=>b.prods.filter(p=>p.missing).map(p=>({...p,klant:k.name}))));
+  const totBons=klanten.reduce((s,k)=>s+k.bons.length,0);
+  const subject=encodeURIComponent(`Dagsamenvatting ${selDriver.name} — ${datum}`);
+  let body=`Dagsamenvatting ${selDriver.name}\n`;
+  body+=`Datum: ${datum} | Voertuig: ${selVoertuig||'?'}\n`;
+  body+=`${'━'.repeat(30)}\n\n`;
+  body+=`LEVERINGEN: ${gedaan.length}/${klanten.length} klanten afgerond (${totBons} bonnen)\n\n`;
+  klanten.forEach(k=>{
+    const alles=k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing));
+    const hasTekort=k.bons.some(b=>b.prods.some(p=>p.missing));
+    body+=`${alles?(hasTekort?'⚠':'✓'):'✗'} ${k.name}\n`;
+  });
+  if(tekorten.length>0){
+    body+=`\nTEKORTEN (${tekorten.length}):\n`;
+    tekorten.forEach(p=>{body+=`  ✗ [${p.code}] ${p.name}${p.missReden?' — '+p.missReden:''} (${p.klant})\n`;});
+  }
+  const niets=klanten.filter(k=>!k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing)));
+  if(niets.length>0){body+=`\nNIET AFGEROND:\n`;niets.forEach(k=>{body+=`  ✗ ${k.name}\n`;});}
+  body+=`\nMet vriendelijke groeten,\n${selDriver.name} — Devisch–Esca Food`;
+  window.location.href=`mailto:bestellingen@devisch.be?subject=${subject}&body=${encodeURIComponent(body)}`;
+  showToast('✓ Dagsamenvatting mail geopend');
+}
+
+const KLANT_CODES = [{"gemeente": "De Panne", "klant": "Side shore surfer", "code": "2144"}, {"gemeente": "De Panne", "klant": "Robinson", "code": "5656"}, {"gemeente": "De Panne", "klant": "Piccadilly", "code": "1313"}, {"gemeente": "De Panne", "klant": "Kursaal", "code": "0505"}, {"gemeente": "Sint Idesbald", "klant": "Zeezicht", "code": "2655 (sleutelkast links van de veranda)"}, {"gemeente": "Sint Idesbald", "klant": "ID aan zee", "code": "6666 voor sleutel / alarm naast de deur 1000"}, {"gemeente": "Koksijde", "klant": "Rosa", "code": "626610"}, {"gemeente": "Koksijde", "klant": "De fruitmand", "code": "2381"}, {"gemeente": "Koksijde", "klant": "Resto real", "code": "2004 bel"}, {"gemeente": "Koksijde", "klant": "Mama Thai", "code": "8670 + batch"}, {"gemeente": "Koksijde", "klant": "Pinot", "code": "1193"}, {"gemeente": "Koksijde", "klant": "Int dorp", "code": "0309"}, {"gemeente": "Koksijde", "klant": "Kommilfoo", "code": "4951bel"}, {"gemeente": "Koksijde", "klant": "Liefoord", "code": "1995"}, {"gemeente": "Koksijde", "klant": "Resto Real", "code": "2004"}, {"gemeente": "Koksijde", "klant": "Kenneth's foodbar", "code": "8848"}, {"gemeente": "Koksijde", "klant": "Dali", "code": "4221"}, {"gemeente": "Oostduinkerke", "klant": "Domein Westhoek", "code": "2013"}, {"gemeente": "Oostduinkerke", "klant": "Caricol", "code": "0607"}, {"gemeente": "Oostduinkerke", "klant": "Surf & bite", "code": "0607"}, {"gemeente": "Oostduinkerke", "klant": "Mamazel", "code": "5582"}, {"gemeente": "Oostduinkerke", "klant": "De drie meisjes", "code": "2323"}, {"gemeente": "Oostduinkerke", "klant": "Odé", "code": "1625 linker kastje"}, {"gemeente": "Oostduinkerke", "klant": "Sycod", "code": "0702"}, {"gemeente": "Oostduinkerke", "klant": "Sonja", "code": "4201"}, {"gemeente": "Oostduinkerke", "klant": "Huize Roose", "code": "2021"}, {"gemeente": "Oostduinkerke", "klant": "Café Hazebeek", "code": "2401"}, {"gemeente": "Oostduinkerke", "klant": "Hoogtij", "code": "7210"}, {"gemeente": "Nieuwpoort Bad", "klant": "Dijk 69", "code": "1313 voor sleutel en batch (alarm achter de deur)"}, {"gemeente": "Nieuwpoort Bad", "klant": "Wok to go", "code": "0804"}, {"gemeente": "Nieuwpoort Bad", "klant": "De Kroon Nieuwpoort", "code": "4466"}, {"gemeente": "Nieuwpoort Bad", "klant": "Kompas", "code": "3804"}, {"gemeente": "Nieuwpoort Bad", "klant": "Apostrof", "code": "1213"}, {"gemeente": "Nieuwpoort Bad", "klant": "Bareel zeedijk", "code": "2019"}, {"gemeente": "Nieuwpoort Stad", "klant": "Passarelle", "code": "1982"}, {"gemeente": "Middelkerke", "klant": "Zeebries", "code": "C-6789"}, {"gemeente": "Middelkerke", "klant": "Zeebries loods", "code": "1207 pijltje"}, {"gemeente": "Middelkerke", "klant": "Lefever Godfried", "code": "0508"}, {"gemeente": "Middelkerke", "klant": "Sportivents", "code": "4498 linkerkant hotel / 9876 deur padel"}, {"gemeente": "Middelkerke", "klant": "Rievera", "code": "2506"}, {"gemeente": "Middelkerke", "klant": "Slagboom Westende", "code": "4498B"}, {"gemeente": "Veurne", "klant": "In de box", "code": "0209"}, {"gemeente": "Veurne", "klant": "Veurne snack foods", "code": "0850"}, {"gemeente": "Veurne", "klant": "Delva versmarkt", "code": "9876 / sleutel"}, {"gemeente": "Veurne", "klant": "Fit & Fresh", "code": "201919 bel"}, {"gemeente": "Veurne", "klant": "Brasserie Christophe", "code": "Bel1234 bel1"}, {"gemeente": "Veurne", "klant": "Cafe Mange", "code": "2326 / 2018"}, {"gemeente": "Veurne", "klant": "Pastorant", "code": "5656#"}, {"gemeente": "Veurne", "klant": "De vette os", "code": "1212"}, {"gemeente": "Veurne", "klant": "In the box", "code": "0209"}, {"gemeente": "Veurne", "klant": "Pepsico", "code": "0880"}, {"gemeente": "Veurne", "klant": "Cargo", "code": "8630"}, {"gemeente": "Veurne", "klant": "'t Sud", "code": "3134 links"}, {"gemeente": "Diksmuide", "klant": "Brooderie", "code": "2431MW"}, {"gemeente": "Diksmuide", "klant": "Feestzaal De kroon", "code": "1247"}, {"gemeente": "Diksmuide", "klant": "Brouwershuis", "code": "2448 of 1224 (nieuw)"}, {"gemeente": "Diksmuide", "klant": "Gouden mandeke", "code": "0030"}, {"gemeente": "Diksmuide", "klant": "Restaurant Nikolaas", "code": "1959"}, {"gemeente": "Binnenland", "klant": "Zonnegloed", "code": "1463 binnen / 1640 of 8640 buiten"}];
+
+function openCodes(){
+  go('s-codes');
+  document.getElementById('codes-zoek').value='';
+  // Toon eerst lokale codes
+  renderCodes(KLANT_CODES);
+  // Dan probeer Supabase
+  supaFetch('notificaties?van=eq.SYSTEEM&naar=eq.KLANT_CODES&gelezen=eq.false&order=created_at.desc&limit=1')
+    .then(data=>{
+      if(data&&data.length>0){
+        try{
+          const codes=JSON.parse(data[0].tekst);
+          if(codes&&codes.length>0){
+            KLANT_CODES.length=0;
+            codes.forEach(c=>KLANT_CODES.push(c));
+            renderCodes(KLANT_CODES);
+          }
+        }catch(e){}
+      }
+    })
+    .catch(()=>{});
+}
+
+function filterCodes(q){
+  if(!q.trim()){renderCodes(KLANT_CODES);return;}
+  const qLow=q.toLowerCase();
+  const filtered=KLANT_CODES.filter(c=>
+    c.klant.toLowerCase().includes(qLow)||
+    c.gemeente.toLowerCase().includes(qLow)||
+    c.code.toLowerCase().includes(qLow)
+  );
+  renderCodes(filtered);
+}
+
+function renderCodes(lijst){
+  const el=document.getElementById('codes-lijst');
+  if(!lijst.length){el.innerHTML='<div style="text-align:center;padding:40px;color:#888780;font-size:14px;">Geen resultaten</div>';return;}
+  const perGemeente={};
+  lijst.forEach(c=>{
+    if(!perGemeente[c.gemeente])perGemeente[c.gemeente]=[];
+    perGemeente[c.gemeente].push(c);
+  });
+  el.innerHTML=Object.entries(perGemeente).map(([gemeente,klanten])=>`
+    <div style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-bottom:4px;border-bottom:.5px solid rgba(0,0,0,.08);">
+        📍 ${gemeente}
+      </div>
+      ${klanten.map(k=>{
+        const langCode=k.code.length>8;
+        const langNaam=k.klant.length>20;
+        // Als naam of code lang is: toon naam boven, code onder
+        if(langCode||langNaam){
+          return`<div style="background:#fff;border-radius:10px;padding:11px 14px;margin-bottom:6px;border:.5px solid rgba(0,0,0,.08);">
+            <div style="font-size:14px;font-weight:600;color:#2c2c2a;margin-bottom:7px;">${k.klant}</div>
+            <div style="background:#2c2c2a;border-radius:7px;padding:7px 12px;display:inline-block;">
+              <span style="color:#e8855a;font-size:14px;font-weight:800;font-family:monospace;">${k.code}</span>
+            </div>
+          </div>`;
+        }
+        return`<div style="background:#fff;border-radius:10px;padding:11px 14px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:10px;border:.5px solid rgba(0,0,0,.08);">
+          <div style="font-size:14px;font-weight:600;color:#2c2c2a;">${k.klant}</div>
+          <div style="background:#2c2c2a;border-radius:7px;padding:7px 12px;flex-shrink:0;">
+            <span style="color:#e8855a;font-size:15px;font-weight:800;font-family:monospace;">${k.code}</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
 async function loadAppData(){
   showLoader('Data laden...');
 
@@ -708,53 +998,50 @@ async function loadAppData(){
   try{
     const nu=new Date();
     const datumVandaag=`${String(nu.getDate()).padStart(2,'0')}-${String(nu.getMonth()+1).padStart(2,'0')}-${nu.getFullYear()}`;
-    const supLev=await supaFetch(`leveringen?datum=eq.${encodeURIComponent(datumVandaag)}&order=created_at.desc&limit=1`);
+    const supLev=await supaFetch(`leveringen?chauffeur_id=eq.${selDriver?.id||'ALL'}&datum=eq.${encodeURIComponent(datumVandaag)}&order=created_at.desc&limit=1`);
     if(supLev&&supLev.length>0&&supLev[0].klanten&&supLev[0].klanten.klanten){
       const d=supLev[0].klanten;
-      // Alleen drivers updaten als alle 5 aanwezig zijn
-      if(d.drivers&&d.drivers.length===5){
-        DRIVERS.length=0;d.drivers.forEach(x=>DRIVERS.push(x));
-      }
-      // Anders behoud de al geladen DRIVERS (uit config of standaard)
       if(d.deliveryDays&&d.deliveryDays.length>0){DEL_DAYS.length=0;d.deliveryDays.forEach(x=>DEL_DAYS.push(x));}
       KLANTEN=cloneData(d.klanten||[]);
+      // Bewaar offline
+      localStorage.setItem('def_klanten',JSON.stringify(KLANTEN));
       localStorage.setItem('def_loaded_date',datumVandaag);
+      localStorage.setItem('def_chauffeur_id',selDriver?.id||'');
       calY=nu.getFullYear();calM=nu.getMonth();selDay=nu.getDate();
       showLoader('✓ Ritten geladen voor vandaag');
       setTimeout(hideLoader,600);
       // Herstel voortgang
-      const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datumVandaag)}&order=updated_at.desc`);
+      const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datumVandaag)}&chauffeur_id=eq.${selDriver?.id||''}&order=updated_at.desc`);
       if(vData&&vData.length>0){
         vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
       }
       renderDrivers();appReady=true;
       return;
     }
-  }catch(e){console.log('Supabase niet beschikbaar');}
+  }catch(e){console.log('Supabase niet beschikbaar - gebruik offline data');}
 
-  // Zorg dat drivers altijd gevuld zijn
-  if(DRIVERS.length===0)DEFAULT_DRIVERS.forEach(x=>DRIVERS.push(x));
-
-  // 2. Fallback: data.json van GitHub
+  // 2. Offline fallback: gebruik lokaal opgeslagen data van vandaag
   try{
-    const ctrl=new AbortController();
-    const timer=setTimeout(()=>ctrl.abort(),3000);
-    const res=await fetch('./data.json?v='+Date.now(),{cache:'no-store',signal:ctrl.signal});
-    clearTimeout(timer);
-    if(!res.ok)throw new Error('Geen data.json');
-    const data=await res.json();
-    const today=data.date||'';
-    if(data.drivers&&data.drivers.length>0){DRIVERS.length=0;data.drivers.forEach(x=>DRIVERS.push(x));}
-    if(data.deliveryDays){DEL_DAYS.length=0;data.deliveryDays.forEach(d=>DEL_DAYS.push(d));}
-    localStorage.setItem('def_loaded_date',today);
-    KLANTEN=cloneData(data.klanten||[]);
-    showLoader('✓ Data geladen voor '+today);
-    setTimeout(hideLoader,600);
-  }catch(e){
-    KLANTEN=cloneData(RAW_KLANTEN_FALLBACK);
-    localStorage.setItem('def_loaded_date','09-06-2026');
-    hideLoader();
-  }
+    const savedKlanten=localStorage.getItem('def_klanten');
+    const savedDate=localStorage.getItem('def_loaded_date');
+    const savedChauffeur=localStorage.getItem('def_chauffeur_id');
+    const nu=new Date();
+    const datumVandaag=`${String(nu.getDate()).padStart(2,'0')}-${String(nu.getMonth()+1).padStart(2,'0')}-${nu.getFullYear()}`;
+    if(savedKlanten&&savedDate===datumVandaag&&savedChauffeur===selDriver?.id){
+      KLANTEN=cloneData(JSON.parse(savedKlanten));
+      const parts=savedDate.split('-');
+      calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);
+      loadScanProgress();
+      showLoader('📱 Offline — lokale data geladen');
+      setTimeout(hideLoader,800);
+      renderDrivers();appReady=true;
+      return;
+    }
+  }catch(e){}
+
+  // 3. Geen data beschikbaar
+  showLoader('Geen ritten gevonden voor vandaag');
+  setTimeout(()=>{hideLoader();renderDrivers();appReady=true;},1500);
 
   // 3. Herstel voortgang
   const datum=localStorage.getItem('def_loaded_date')||'';
@@ -1877,25 +2164,31 @@ function fotoGekozen(e){
 }
 
 async function fotoBevestigen(){
-  if(fotoKlantId&&fotoData){
-    const k=KLANTEN.find(x=>x.id===fotoKlantId);
-    const datum=localStorage.getItem('def_loaded_date')||'';
-    // Sla op in localStorage
-    if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoData;saveState();}
-    // Sla op in Supabase
-    supaFetch('fotos','POST',{
-      datum,
-      chauffeur_id:selDriver?.id||'',
-      klant_id:fotoKlantId,
-      klant_naam:k?.name||'',
-      bon_num:fotoBonNum,
-      foto_data:fotoData
-    });
+  const btn=document.getElementById('btn-foto-ok');
+  try{
+    if(fotoKlantId&&fotoData){
+      const k=KLANTEN.find(x=>x.id===fotoKlantId);
+      const datum=localStorage.getItem('def_loaded_date')||'';
+      if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoData;saveState();}
+      // Sla op in Supabase
+      await supaFetch('fotos','POST',{
+        datum,
+        chauffeur_id:selDriver?.id||'',
+        klant_id:fotoKlantId,
+        klant_naam:k?.name||'',
+        bon_num:fotoBonNum,
+        foto_data:fotoData
+      });
+      closeFoto();
+      showToast('✓ Foto opgeslagen!');
+    } else {
+      closeFoto();
+    }
+  }catch(e){
     closeFoto();
-    showToast('✓ Foto opgeslagen!');
-  } else {
-    closeFoto();
+    showToast('Foto lokaal opgeslagen');
   }
+  if(btn){btn.disabled=false;btn.textContent=fotoData?'✓ Foto opslaan':'✓ Opslaan zonder foto';}
 }
 function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
 function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
@@ -1923,7 +2216,33 @@ function checkNotificaties(){
 function closeNotif(){document.getElementById('notif-ov').style.display='none';}
 function notifBgClick(e){if(e.target===document.getElementById('notif-ov'))closeNotif();}
 
-function openNotifStuur(){document.getElementById('notif-stuur-ov').style.display='flex';}
+function openNotifStuur(){
+  // Toon naam van ingelogde chauffeur
+  const naam=selDriver?.name||'Chauffeur';
+  const el=document.getElementById('notif-van-naam');
+  if(el)el.textContent=naam;
+  document.getElementById('notif-tekst').value='';
+  document.getElementById('notif-stuur-ov').style.display='flex';
+}
+function closeNotifStuur(){document.getElementById('notif-stuur-ov').style.display='none';}
+
+async function verstuurNaarKantoor(){
+  const tekst=document.getElementById('notif-tekst').value.trim();
+  if(!tekst){showToast('⚠ Typ een bericht');return;}
+  const van=selDriver?.name||'Chauffeur';
+  const vanId=selDriver?.id||'?';
+
+  // Stuur naar KANTOOR via Supabase
+  await stuurNotificatieSupabase('KANTOOR', `${van}: ${tekst}`);
+  // Ook via localStorage voor fallback
+  stuurNotificatie('KANTOOR', `${van}: ${tekst}`, van);
+
+  closeNotifStuur();
+  showToast('✓ Bericht verstuurd naar kantoor!');
+  addLog?.('📤', `${van} → kantoor: "${tekst.substring(0,40)}"`, 'ok');
+}
+
+function verstuurNotif(){verstuurNaarKantoor();}
 function closeNotifStuur(){document.getElementById('notif-stuur-ov').style.display='none';}
 function verstuurNotif(){
   const to=document.getElementById('notif-to').value;
