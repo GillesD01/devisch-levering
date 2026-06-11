@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_30.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_32.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/e3618fca-642a-4b7c-a30d-fcf1687861ad">
+<link rel="manifest" id="pwa-manifest" href="blob:null/0729ef7d-ff66-49d7-a5fe-31849759da3f">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -166,11 +166,11 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ 11 klanten geladen</div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">Geen ritten gevonden voor vandaag</div>
   </div>
 
   <!-- LOGIN -->
-  <div class="screen" id="s-login">
+  <div class="screen active" id="s-login">
     <div class="login-hero">
       <div class="brand-main">devisch – esca food</div>
       <div class="brand-sub">oresto partner</div>
@@ -373,7 +373,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   </div>
 
   <!-- CALENDAR -->
-  <div class="screen active" id="s-calendar">
+  <div class="screen" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
       <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA105</span>
@@ -483,9 +483,9 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div id="cal-summary"><div class="sum-bar">
     <div>
       <div style="color:#888780;font-size:12px;">📅 Vandaag — do 11 juni 2026</div>
-      <div style="color:#fff;font-size:20px;font-weight:600;">11 klanten</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">Geen leveringen</div>
     </div>
-    <button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>
+    <div style="color:#5f5e5a;font-size:12px;">Geen ritten</div>
   </div></div>
     </div>
   </div>
@@ -608,10 +608,14 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="sheet-bg" id="foto-ov" style="display:none;">
       <div class="sheet">
         <h3>📷 Foto bij levering</h3>
-        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering bij deze klant.</p>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering.</p>
         <div id="foto-preview" style="margin-bottom:14px;min-height:40px;"></div>
-        <input type="file" id="foto-input" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(event)">
-        <button class="btn-full" onclick="document.getElementById(&#39;foto-input&#39;).click()" style="margin-bottom:8px;">📷 Camera openen</button>
+        <input type="file" id="foto-input" accept="image/*" capture="environment" style="display:none;">
+        <input type="file" id="foto-input-lib" accept="image/*" style="display:none;">
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <button class="btn-full" onclick="document.getElementById(&#39;foto-input&#39;).click()" style="flex:1;">📷 Camera</button>
+          <button class="btn-full" onclick="document.getElementById(&#39;foto-input-lib&#39;).click()" style="flex:1;background:#2c2c2a;">🖼 Bibliotheek</button>
+        </div>
         <button class="btn-full dark" id="btn-foto-ok" onclick="this.disabled=true;this.textContent=&#39;Bezig...&#39;;fotoBevestigen();">✓ Opslaan zonder foto</button>
         <button class="btn-ghost" onclick="closeFoto()">Annuleren</button>
       </div>
@@ -636,10 +640,18 @@ const SUPA_KEY='sb_publishable_tIPI6f4RfE4a5DCfibFn5Q_NVZPvlbN';
 
 async function supaFetch(endpoint, method='GET', body=null){
   try{
-    const opts={method,headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'}};
+    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+    if(method==='DELETE')headers['Prefer']='return=minimal';
+    else headers['Prefer']='return=minimal';
+    const opts={method,headers};
     if(body)opts.body=JSON.stringify(body);
     const r=await fetch(SUPA_URL+'/rest/v1/'+endpoint,opts);
-    if(r.status===204||r.status===201)return true;
+    if(r.status===204||r.status===201||r.status===200)return true;
+    if(!r.ok){
+      const err=await r.text();
+      console.warn('Supabase fout:',r.status,err.substring(0,200));
+      return null;
+    }
     const txt=await r.text();
     return txt?JSON.parse(txt):true;
   }catch(e){console.warn('Supabase fout:',e.message);return null;}
@@ -2144,7 +2156,17 @@ function openFoto(klantId, bonNum){
   fotoBonNum=bonNum;
   fotoData=null;
   document.getElementById('foto-preview').innerHTML='';
-  document.getElementById('btn-foto-ok').textContent='✓ Verder zonder foto';
+  const btn=document.getElementById('btn-foto-ok');
+  if(btn){btn.disabled=false;btn.textContent='✓ Opslaan zonder foto';}
+  // iOS fix: vervang input elementen zodat onchange altijd werkt
+  ['foto-input','foto-input-lib'].forEach(id=>{
+    const old=document.getElementById(id);
+    if(old){
+      const fresh=old.cloneNode(true);
+      old.parentNode.replaceChild(fresh,old);
+      fresh.addEventListener('change',fotoGekozen,{once:true});
+    }
+  });
   document.getElementById('foto-ov').style.display='flex';
 }
 
@@ -2181,24 +2203,47 @@ async function fotoBevestigen(){
     if(fotoKlantId&&fotoData){
       const k=KLANTEN.find(x=>x.id===fotoKlantId);
       const datum=localStorage.getItem('def_loaded_date')||'';
-      if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoData;saveState();}
+
+      // Verklein extra voor Supabase (max 500KB)
+      let fotoVersturen=fotoData;
+      if(fotoData.length>500000){
+        const img=new Image();
+        await new Promise(res=>{img.onload=res;img.src=fotoData;});
+        const canvas=document.createElement('canvas');
+        const maxW=600;
+        const scale=Math.min(1,maxW/img.width);
+        canvas.width=img.width*scale;
+        canvas.height=img.height*scale;
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        fotoVersturen=canvas.toDataURL('image/jpeg',0.5);
+      }
+
+      // Sla lokaal op
+      if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoVersturen;saveState();}
+
       // Sla op in Supabase
-      await supaFetch('fotos','POST',{
+      const r=await supaFetch('fotos','POST',{
         datum,
         chauffeur_id:selDriver?.id||'',
         klant_id:fotoKlantId,
         klant_naam:k?.name||'',
         bon_num:fotoBonNum,
-        foto_data:fotoData
+        foto_data:fotoVersturen
       });
+
       closeFoto();
-      showToast('✓ Foto opgeslagen!');
+      if(r!==null){
+        showToast('✓ Foto opgeslagen in dashboard!');
+      } else {
+        showToast('✓ Foto lokaal opgeslagen (geen internet)');
+      }
     } else {
       closeFoto();
     }
   }catch(e){
+    console.error('Foto fout:',e);
     closeFoto();
-    showToast('Foto lokaal opgeslagen');
+    showToast('⚠ Fout: '+e.message);
   }
   if(btn){btn.disabled=false;btn.textContent=fotoData?'✓ Foto opslaan':'✓ Opslaan zonder foto';}
 }
