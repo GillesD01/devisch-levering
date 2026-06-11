@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/gilles/Downloads/DEVISCH_DASHBOARD_7.html -->
+<!-- saved from url=(0059)file:///C:/Users/gilles/Downloads/DEVISCH_DASHBOARD_17.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,31 +98,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div><div class="logo">devisch – esca food · Dashboard</div><div class="sub">Live leveringsoverzicht</div></div>
   <div class="hdr-right">
     <div class="dot" id="dot"></div>
-    <div class="hdr-time" id="hdr-time">wo 10 juni · 22:54:40</div>
+    <div class="hdr-time" id="hdr-time">do 11 juni · 12:36:40</div>
     <button class="btn btn-dark" onclick="refresh()" style="padding:7px 14px;font-size:12px;">↻</button>
   </div>
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab(&#39;vandaag&#39;)">📊 Vandaag</div>
-  <div class="tab" onclick="showTab(&#39;upload&#39;)">📂 Nieuwe dag</div>
-  <div class="tab" onclick="showTab(&#39;meldingen&#39;)">🔔 Meldingen</div>
-  <div class="tab" onclick="showTab(&#39;chauffeurs&#39;)">👥 Chauffeurs</div>
-  <div class="tab" onclick="showTab(&#39;historiek&#39;)">📋 Historiek</div>
-  <div class="tab" onclick="showTab(&#39;fotos&#39;)">📷 Foto's</div>
+  <div class="tab active" onclick="showTab(&#39;vandaag&#39;,this)">📊 Vandaag</div>
+  <div class="tab" onclick="showTab(&#39;upload&#39;,this)">📂 Nieuwe dag</div>
+  <div class="tab" onclick="showTab(&#39;meldingen&#39;,this)">🔔 Meldingen</div>
+  <div class="tab" onclick="showTab(&#39;chauffeurs&#39;,this)">👥 Chauffeurs</div>
+  <div class="tab" onclick="showTab(&#39;historiek&#39;,this)">📋 Historiek</div>
+  <div class="tab" onclick="showTab(&#39;fotos&#39;,this)">📷 Foto's</div>
+  <div class="tab" onclick="showTab(&#39;codes&#39;,this)">🔑 Codes</div>
 </div>
 
 <!-- TAB: VANDAAG -->
-<div id="tab-vandaag" class="main" style="display: block;">
+<div id="tab-vandaag" class="main">
   <div class="stat-grid">
     <div class="stat"><div class="stat-n" id="s-actief">0</div><div class="stat-l">Actief</div></div>
     <div class="stat groen"><div class="stat-n" id="s-klaar">0</div><div class="stat-l">Klanten klaar</div></div>
-    <div class="stat rood"><div class="stat-n" id="s-tekort">2</div><div class="stat-l">Tekorten</div></div>
+    <div class="stat rood"><div class="stat-n" id="s-tekort">0</div><div class="stat-l">Tekorten</div></div>
     <div class="stat oranje"><div class="stat-n" id="s-pct">0%</div><div class="stat-l">Voortgang</div></div>
   </div>
   <div style="display:flex;align-items:center;margin-bottom:12px;">
     <h2 style="font-size:15px;font-weight:700;color:#2c2c2a;">Chauffeurs vandaag</h2>
-    <span style="font-size:12px;color:#888780;margin-left:8px;" id="update-tijd">· 22:54:34</span>
+    <span style="font-size:12px;color:#888780;margin-left:8px;" id="update-tijd">· 12:36:33</span>
   </div>
   <div class="drv-grid" id="drv-grid"><div class="drv-card"><div class="drv-head">
       <div class="av">TJ</div>
@@ -138,62 +139,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div></div><div class="drv-card"><div class="drv-head">
       <div class="av">JA</div>
-      <div><div class="drv-name">Jarne</div><div class="drv-sub">12 klanten vandaag</div></div>
-      <div class="badge br">Data</div>
+      <div><div class="drv-name">Jarne</div><div class="drv-sub"></div></div>
+      <div class="badge bd">Inactief</div>
     </div>
     <div class="drv-body">
-      <div class="prog-row"><span>Klanten geleverd</span><span style="font-weight:700;color:#2c2c2a;">0/12 · 0%</span></div>
-      <div class="prog-bar"><div class="prog-fill" style="width:0%;background:#e8855a;"></div></div>
-      <div style="font-size:11px;color:#a32d2d;margin-bottom:8px;font-weight:600;">⚠ 1 tekort(en)</div> 
-      <div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;FRILIN BV - Maison Siesi&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">FRILIN BV - Maison Siesi</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Kaffee André&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Kaffee André</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Verzetje (\&#39;t)&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Verzetje ('t)</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;AMARYLLIS GROUP BVBA&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">AMARYLLIS GROUP BVBA</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;De Beurs - Give BV&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">De Beurs - Give BV</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Flandria Brasserie&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Flandria Brasserie</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Hof van Hemel (\&#39;t)&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Hof van Hemel ('t)</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Op goed geluk&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Op goed geluk</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;VERDONCK VEURNE&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">VERDONCK VEURNE</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;Steffi\&#39;s Lunch&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Steffi's Lunch</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div style="padding:2px 0 4px 26px;font-size:11px;color:#a32d2d;">✗ 141015 Nutella choco 3 kg · Vergeten te laden</div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;De Vette Os&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">De Vette Os</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;JA&#39;,&#39;De Brooderie bvba&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">De Brooderie bvba</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div>
+       
+      <div class="geen">Nog geen activiteit</div>
       <div class="drv-btns">
         <button class="drv-btn" onclick="stuurNaar(&#39;JA&#39;)">🔔 Bericht</button>
         <button class="drv-btn" onclick="toonAlles(&#39;JA&#39;)">📋 Producten</button>
@@ -212,72 +163,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div></div><div class="drv-card"><div class="drv-head">
       <div class="av">SE</div>
-      <div><div class="drv-name">Selmir</div><div class="drv-sub">15 klanten vandaag</div></div>
+      <div><div class="drv-name">Selmir</div><div class="drv-sub">8 klanten vandaag</div></div>
       <div class="badge br">Data</div>
     </div>
     <div class="drv-body">
-      <div class="prog-row"><span>Klanten geleverd</span><span style="font-weight:700;color:#2c2c2a;">0/15 · 0%</span></div>
-      <div class="prog-bar"><div class="prog-fill" style="width:0%;background:#e8855a;"></div></div>
-      <div style="font-size:11px;color:#a32d2d;margin-bottom:8px;font-weight:600;">⚠ 1 tekort(en)</div> 
-      <div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Vrije Basisschool ODK&#39;)">
+      <div class="prog-row"><span>Klanten geleverd</span><span style="font-weight:700;color:#2c2c2a;">0/8 · 0%</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:0%;background:#63991a;"></div></div>
+       
+      <div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;ESCA FOODSERVICE BV&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Vrije Basisschool ODK</span>
+          <span class="kl-naam">ESCA FOODSERVICE BV</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;la Piazza bvba&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;De Brooderie bvba&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">la Piazza bvba</span>
+          <span class="kl-naam">De Brooderie bvba</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Boothuis (\&#39;t)&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;De Zeebries Brasserie&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Boothuis ('t)</span>
+          <span class="kl-naam">De Zeebries Brasserie</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;DOMBROWSKI ONTVANGEN&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;De Hooipiete BVBA&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">DOMBROWSKI ONTVANGEN</span>
+          <span class="kl-naam">De Hooipiete BVBA</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Hoge duin vzw&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;LIMBO - BENA BV&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Hoge duin vzw</span>
+          <span class="kl-naam">LIMBO - BENA BV</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Dijk 69&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Gouden Mandeken&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Dijk 69</span>
+          <span class="kl-naam">Gouden Mandeken</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;ASDOO bvba&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Fredt - Vaname BV&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">ASDOO bvba</span>
+          <span class="kl-naam">Fredt - Vaname BV</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;De korre Restaurant&#39;)">
+        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Via Maris - Schuurke&#39;)">
           <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">De korre Restaurant</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;SEA COAST GROUP AC BV&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">SEA COAST GROUP AC BV</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;De Luwte Frederik Declercq BV&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">De Luwte Frederik Declercq BV</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Cabane Delicatessen BV&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Cabane Delicatessen BV</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div style="padding:2px 0 4px 26px;font-size:11px;color:#a32d2d;">✗ 321133 Knoflookolijven vers 400g Gran · Vergeten te laden</div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Da Vinci&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Da Vinci</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Lulu\&#39;s Kitchen&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Lulu's Kitchen</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Sec&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Sec</span>
-          <span style="font-size:11px;" class="wacht">Wacht</span>
-        </div><div class="kl-row" onclick="toonDetail(&#39;SE&#39;,&#39;Camouflage&#39;)">
-          <span style="font-size:13px;width:18px;text-align:center;">○</span>
-          <span class="kl-naam">Camouflage</span>
+          <span class="kl-naam">Via Maris - Schuurke</span>
           <span style="font-size:11px;" class="wacht">Wacht</span>
         </div>
       <div class="drv-btns">
@@ -299,12 +222,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div></div></div>
   <div class="log-wrap">
     <h3>📋 Activiteitenlog <button onclick="logItems=[];renderLog();" style="background:none;border:none;color:#5f5e5a;font-size:12px;cursor:pointer;font-weight:400;">Wissen</button></h3>
-    <div class="log-items" id="log-items"><div class="log-item"><span class="lt">22:54:34</span><span class="ld">↻</span><span class="lm info">27 klanten, 9 scans</span></div><div class="log-item"><span class="lt">22:54:19</span><span class="ld">↻</span><span class="lm info">27 klanten, 9 scans</span></div><div class="log-item"><span class="lt">22:54:18</span><span class="ld">🚀</span><span class="lm ok">Dashboard gestart</span></div></div>
+    <div class="log-items" id="log-items"><div class="log-item"><span class="lt">12:36:33</span><span class="ld">↻</span><span class="lm info">8 klanten, 0 scans</span></div><div class="log-item"><span class="lt">12:36:33</span><span class="ld">🚀</span><span class="lm ok">Dashboard gestart</span></div></div>
   </div>
 </div>
 
 <!-- TAB: UPLOAD -->
-<div id="tab-upload" class="main" style="display: none;">
+<div id="tab-upload" class="main" style="display:none;">
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
     <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">📂 Nieuwe leveringsdag instellen</h2>
     <p style="font-size:13px;color:#888780;margin-bottom:20px;">Upload per chauffeur de PDF bonnen. Je kan meerdere PDF's tegelijk uploaden voor 1 chauffeur.</p>
@@ -343,22 +266,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <!-- Uploads van vandaag -->
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:20px;">
     <h3 style="font-size:15px;font-weight:700;color:#2c2c2a;margin-bottom:12px;">✓ Al geüpload vandaag</h3>
-    <div id="upload-lijst"><div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f5f4f0;border-radius:10px;margin-bottom:8px;">
-      <div style="width:32px;height:32px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">ALL</div>
-      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#2c2c2a;">Alle chauffeurs</div>
-      <div style="font-size:12px;color:#888780;">15 klanten · 17 bonnen · 22:20</div></div>
-      <span style="background:#eaf3de;color:#3b6d11;font-size:11px;font-weight:600;padding:3px 9px;border-radius:7px;">✓ Opgeslagen</span>
-    </div><div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f5f4f0;border-radius:10px;margin-bottom:8px;">
-      <div style="width:32px;height:32px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">ALL</div>
-      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#2c2c2a;">Alle chauffeurs</div>
-      <div style="font-size:12px;color:#888780;">12 klanten · 13 bonnen · 20:26</div></div>
-      <span style="background:#eaf3de;color:#3b6d11;font-size:11px;font-weight:600;padding:3px 9px;border-radius:7px;">✓ Opgeslagen</span>
-    </div></div>
+    <div id="upload-lijst"><div class="geen">Nog niets geüpload</div></div>
   </div>
 </div>
 
 <!-- TAB: MELDINGEN -->
 <div id="tab-meldingen" class="main" style="display:none;">
+
+  <!-- BERICHTEN VAN CHAUFFEURS -->
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;">📨 Berichten van chauffeurs</h2>
+      <button onclick="laadBerichtenVanChauffeurs()" style="background:#f5f4f0;color:#888780;border:none;border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;">↻ Ververs</button>
+    </div>
+    <div id="kantoor-berichten"><div class="geen">Laden...</div></div>
+  </div>
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">🔗 App-link sturen naar chauffeurs</h2>
+    <p style="font-size:13px;color:#888780;margin-bottom:14px;">Stuur de app-URL via mail naar één of alle chauffeurs. De link blijft altijd hetzelfde.</p>
+    <div style="background:#f5f4f0;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:13px;font-family:monospace;color:#2c2c2a;flex:1;font-weight:600;">https://gillesd01.github.io/devisch-levering</span>
+      <button onclick="navigator.clipboard.writeText(&#39;https://gillesd01.github.io/devisch-levering&#39;);showToast(&#39;✓ Gekopieerd!&#39;)" style="background:#2c2c2a;color:#fff;border:none;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">📋 Kopieer</button>
+    </div>
+    <div style="display:grid;grid-template-columns:200px auto;gap:10px;align-items:end;">
+      <div class="field"><label>Sturen naar</label>
+        <select id="url-to">
+          <option value="ALL">Alle chauffeurs</option>
+          <option value="TJ">Tjorven</option>
+          <option value="JA">Jarne</option>
+          <option value="FE">Femija</option>
+          <option value="SE">Selmir</option>
+          <option value="CH">Christophe</option>
+        </select>
+      </div>
+      <button class="btn" onclick="mailAppUrl()">📧 Mail app-link</button>
+    </div>
+  </div>
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
     <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">🔔 Melding sturen</h2>
     <p style="font-size:13px;color:#888780;margin-bottom:16px;">Chauffeurs zien het bericht binnen 30 seconden op hun scherm.</p>
@@ -389,84 +332,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- TAB: CHAUFFEURS -->
-<div id="tab-chauffeurs" class="main" style="display: none;">
+<div id="tab-chauffeurs" class="main" style="display:none;">
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
     <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">👥 Chauffeurs &amp; PIN codes</h2>
     <p style="font-size:13px;color:#888780;margin-bottom:16px;">Wijzigingen zijn direct actief bij de volgende login van de chauffeur.</p>
-    <div class="chauf-grid" id="chauf-grid">
-    <div class="chauf-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div style="width:30px;height:30px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">TJ</div>
-        <input value="Tjorven" id="cn-0" style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;font-weight:500;outline:none;">
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;">PIN:</span>
-        <input value="1111" id="cp-0" maxlength="6" style="width:70px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;color:#e8855a;font-weight:700;font-family:monospace;outline:none;">
-      </div>
-    </div>
-    <div class="chauf-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div style="width:30px;height:30px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">JA</div>
-        <input value="Jarne" id="cn-1" style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;font-weight:500;outline:none;">
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;">PIN:</span>
-        <input value="8630" id="cp-1" maxlength="6" style="width:70px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;color:#e8855a;font-weight:700;font-family:monospace;outline:none;">
-      </div>
-    </div>
-    <div class="chauf-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div style="width:30px;height:30px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">FE</div>
-        <input value="Femija" id="cn-2" style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;font-weight:500;outline:none;">
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;">PIN:</span>
-        <input value="3333" id="cp-2" maxlength="6" style="width:70px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;color:#e8855a;font-weight:700;font-family:monospace;outline:none;">
-      </div>
-    </div>
-    <div class="chauf-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div style="width:30px;height:30px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">SE</div>
-        <input value="Selmir" id="cn-3" style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;font-weight:500;outline:none;">
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;">PIN:</span>
-        <input value="4444" id="cp-3" maxlength="6" style="width:70px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;color:#e8855a;font-weight:700;font-family:monospace;outline:none;">
-      </div>
-    </div>
-    <div class="chauf-card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div style="width:30px;height:30px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">CH</div>
-        <input value="Christophe" id="cn-4" style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;font-weight:500;outline:none;">
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span style="font-size:11px;color:#888780;font-weight:600;text-transform:uppercase;">PIN:</span>
-        <input value="5555" id="cp-4" maxlength="6" style="width:70px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 8px;font-size:13px;color:#e8855a;font-weight:700;font-family:monospace;outline:none;">
-      </div>
-    </div></div>
+    <div class="chauf-grid" id="chauf-grid"></div>
     <button class="btn" onclick="slaChauffeursOp()">💾 Opslaan</button>
     <span id="chauf-msg" style="font-size:13px;color:#3b6d11;margin-left:12px;display:none;">✓ Opgeslagen!</span>
   </div>
 </div>
 
 <!-- TAB: HISTORIEK -->
-<div id="tab-historiek" class="main" style="display: none;">
+<div id="tab-historiek" class="main" style="display:none;">
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
     <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">📋 Historiek (laatste 30 dagen)</h2>
     <p style="font-size:13px;color:#888780;margin-bottom:16px;">Klik op een dag om de details te zien.</p>
-    <div id="hist-lijst">
-    <div class="hist-dag" onclick="toonHistoriekDag(&#39;10-06-2026&#39;)">
-      <div class="hist-dag-header">
-        <div class="hist-dag-datum">10-06-2026</div>
-        <div class="hist-dag-stats">27 klanten · 30 bonnen</div>
-      </div>
-      <div style="font-size:12px;color:#888780;margin-top:4px;">Chauffeurs: Alle chauffeurs</div>
-    </div></div>
+    <div id="hist-lijst"><div class="geen">Laden...</div></div>
   </div>
 </div>
 
 <!-- TAB: FOTO'S -->
-<div id="tab-fotos" class="main" style="display: none;">
+<div id="tab-fotos" class="main" style="display:none;">
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
       <div>
@@ -485,14 +371,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <input type="date" id="foto-filter-datum" onchange="laadFotos()" style="background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:7px 12px;font-size:13px;color:#2c2c2a;outline:none;">
       </div>
     </div>
-    <div id="fotos-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;"><div class="geen">Geen foto's gevonden</div></div>
+    <div id="fotos-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;">
+      <div class="geen">Laden...</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: CODES -->
+<div id="tab-codes" class="main" style="display:none;">
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;">🔑 Codes klanten</h2>
+        <p style="font-size:13px;color:#888780;margin-top:2px;">Beheer toegangscodes per klant. Chauffeurs zien deze lijst in de app.</p>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="codeNieuw()" class="btn" style="padding:9px 16px;font-size:13px;">+ Toevoegen</button>
+        <button onclick="codesOpslaan()" class="btn btn-dark" style="padding:9px 16px;font-size:13px;">💾 Opslaan</button>
+      </div>
+    </div>
+    <input type="search" id="codes-filter" placeholder="Zoek klant of gemeente..." oninput="filterDashCodes(this.value)" style="width:100%;background:#f5f4f0;border:.5px solid rgba(0,0,0,.1);border-radius:10px;padding:10px 14px;font-size:14px;outline:none;margin-bottom:16px;">
+    <div id="codes-tabel"></div>
+    <div id="codes-msg" style="font-size:13px;color:#3b6d11;margin-top:10px;display:none;">✓ Opgeslagen! Chauffeurs zien de wijzigingen direct.</div>
   </div>
 </div>
 
 <!-- FOTO MODAL -->
 <div class="modal-bg" id="foto-modal-bg" onclick="if(event.target===this)this.style.display=&#39;none&#39;" style="background:rgba(0,0,0,.92);">
   <div style="max-width:600px;width:90%;text-align:center;">
-    <img id="foto-modal-img" src="file:///C:/Users/gilles/Downloads/DEVISCH_DASHBOARD_7.html" style="width:100%;border-radius:14px;max-height:75vh;object-fit:contain;">
+    <img id="foto-modal-img" src="file:///C:/Users/gilles/Downloads/DEVISCH_DASHBOARD_17.html" style="width:100%;border-radius:14px;max-height:75vh;object-fit:contain;">
     <div id="foto-modal-info" style="color:#fff;font-size:13px;margin-top:12px;opacity:.8;"></div>
     <button onclick="document.getElementById(&#39;foto-modal-bg&#39;).style.display=&#39;none&#39;" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;margin-top:14px;">Sluiten</button>
   </div>
@@ -536,13 +443,16 @@ async function supaFetch(endpoint,method='GET',body=null){
   try{
     const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
     if(method==='GET')headers['Prefer']='return=representation';
-    else headers['Prefer']='return=representation';
+    else if(method==='POST')headers['Prefer']='return=representation';
+    else if(method==='PATCH')headers['Prefer']='return=representation';
+    // DELETE krijgt geen Prefer header
     const opts={method,headers};
     if(body)opts.body=JSON.stringify(body);
     const r=await fetch(SUPA_URL+'/rest/v1/'+endpoint,opts);
     document.getElementById('dot').classList.remove('off');
+    if(r.status===204||r.status===200&&method==='DELETE')return true;
     const txt=await r.text();
-    if(!r.ok){console.error('Supabase error:',txt);return null;}
+    if(!r.ok){console.error('Supabase error:',r.status,txt);return null;}
     return txt?JSON.parse(txt):true;
   }catch(e){
     document.getElementById('dot').classList.add('off');
@@ -554,15 +464,18 @@ async function supaFetch(endpoint,method='GET',body=null){
 function getVandaag(){const n=new Date();return`${String(n.getDate()).padStart(2,'0')}-${String(n.getMonth()+1).padStart(2,'0')}-${n.getFullYear()}`;}
 
 // Tabs
-function showTab(tab){
-  document.querySelectorAll('[id^=tab-]').forEach(el=>el.style.display='none');
-  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+function showTab(tab,el){
+  document.querySelectorAll('[id^=tab-]').forEach(t=>t.style.display='none');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+tab).style.display='block';
-  event.target.classList.add('active');
+  if(el)el.classList.add('active');
+  else document.querySelectorAll('.tab')[['vandaag','upload','meldingen','chauffeurs','historiek','fotos','codes'].indexOf(tab)]?.classList.add('active');
   if(tab==='historiek')laadHistoriek();
   if(tab==='chauffeurs')renderChauffeurGrid();
   if(tab==='upload')renderUploadLijst();
   if(tab==='fotos')laadFotos();
+  if(tab==='meldingen')laadBerichtenVanChauffeurs();
+  if(tab==='codes')laadCodesTab();
 }
 
 // ── FOTO'S ────────────────────────────────────────
@@ -805,6 +718,13 @@ async function dagVerwerk(){
 
     const parsed=result.data;
     dlog('✓ Bonnen verwerkt','ok');dprog(85);
+
+    // Als specifieke chauffeur gekozen: forceer alle klanten naar die chauffeur
+    if(chauffeurId!=='ALL'&&parsed.klanten){
+      parsed.klanten.forEach(k=>k.chauffeur=chauffeurId);
+      dlog(`✓ Alle klanten toegewezen aan ${chauffeurNaam}`,'ok');
+    }
+
     dlog('📤 Opslaan in database...');
 
     // Sla op per chauffeur als aparte rij
@@ -856,11 +776,63 @@ async function renderUploadLijst(){
       <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#2c2c2a;">${r.chauffeur_naam}</div>
       <div style="font-size:12px;color:#888780;">${k} klanten · ${b} bonnen · ${new Date(r.created_at).toLocaleTimeString('nl-BE',{hour:'2-digit',minute:'2-digit'})}</div></div>
       <span style="background:#eaf3de;color:#3b6d11;font-size:11px;font-weight:600;padding:3px 9px;border-radius:7px;">✓ Opgeslagen</span>
+      <button onclick="verwijderUpload('${r.id}','${r.chauffeur_naam}')" style="background:#fcebeb;color:#a32d2d;border:none;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0;">✕ Verwijderen</button>
     </div>`;
   }).join('');
 }
 
+async function verwijderUpload(id, naam){
+  if(!confirm(`Leveringen van ${naam} verwijderen?`))return;
+  const r=await supaFetch(`leveringen?id=eq.${id}`,'DELETE');
+  if(r!==null){
+    showToast(`✓ ${naam} verwijderd`);
+    addLog('🗑️',`Leveringen ${naam} verwijderd`,'info');
+    renderUploadLijst();
+    await laadVoortgang();
+    renderDashboard();
+    renderLog();
+  } else {
+    showToast('✗ Fout bij verwijderen');
+  }
+}
+
 // ── MELDINGEN ────────────────────────────────────────
+async function laadBerichtenVanChauffeurs(){
+  const el=document.getElementById('kantoor-berichten');
+  if(!el)return;
+  const data=await supaFetch(`notificaties?naar=eq.KANTOOR&order=created_at.desc&limit=20`);
+  if(!data||!data.length){el.innerHTML='<div class="geen">Geen berichten van chauffeurs</div>';return;}
+  el.innerHTML=data.map(b=>{
+    const tijd=new Date(b.created_at).toLocaleString('nl-BE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    const isNieuw=!b.gelezen;
+    return`<div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:${isNieuw?'#faece7':'#f5f4f0'};border-radius:10px;margin-bottom:8px;border-left:3px solid ${isNieuw?'#e8855a':'transparent'};">
+      <div style="width:36px;height:36px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        ${DRIVERS.find(d=>b.tekst.startsWith(d.name+':'))?.id||'?'}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;color:#2c2c2a;line-height:1.5;">${b.tekst}</div>
+        <div style="font-size:11px;color:#888780;margin-top:4px;">${tijd}${isNieuw?' · <span style="color:#e8855a;font-weight:600;">Nieuw</span>':''}</div>
+      </div>
+      ${isNieuw?`<button onclick="markeerGelezen('${b.id}',this)" style="background:#e8855a;color:#fff;border:none;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;flex-shrink:0;">✓ Gelezen</button>`:''}
+    </div>`;
+  }).join('');
+}
+
+async function markeerGelezen(id,btn){
+  await supaFetch(`notificaties?id=eq.${id}`,'PATCH',{gelezen:true});
+  laadBerichtenVanChauffeurs();
+}
+
+function mailAppUrl(){
+  const naar=document.getElementById('url-to').value;
+  const targets=naar==='ALL'?DRIVERS:DRIVERS.filter(d=>d.id===naar);
+  const namen=targets.map(d=>d.name).join(', ');
+  const subject=encodeURIComponent('Devisch–Esca Leveringsapp');
+  const body=encodeURIComponent(`Beste ${namen},\n\nHieronder vind je de link naar de leveringsapp. Sla deze op als bladwijzer of installeer hem op je beginscherm.\n\n📱 App-link:\nhttps://gillesd01.github.io/devisch-levering\n\nInstallatietip iPhone:\n1. Open de link in Safari\n2. Tik op het deel-icoontje onderaan\n3. Kies "Zet op beginscherm"\n\nInstallatietip Android:\n1. Open de link in Chrome\n2. Tik op de drie puntjes rechtsboven\n3. Kies "Toevoegen aan beginscherm"\n\nMet vriendelijke groeten,\nDevisch – Esca Food`);
+  window.location.href=`mailto:?subject=${subject}&body=${body}`;
+  showToast('✓ Mail-app geopend!');
+}
+
 function stuurNaar(id){
   showTab('meldingen');
   document.querySelectorAll('.tab').forEach((el,i)=>{el.classList.remove('active');if(i===2)el.classList.add('active');});
@@ -977,11 +949,103 @@ async function refresh(){
   showToast('↻ Ververst');
 }
 
+
+// ── CODES KLANTEN ──────────────────────────────────────
+let KLANT_CODES_DASH = [{"gemeente": "De Panne", "klant": "Side shore surfer", "code": "2144"}, {"gemeente": "De Panne", "klant": "Robinson", "code": "5656"}, {"gemeente": "De Panne", "klant": "Piccadilly", "code": "1313"}, {"gemeente": "De Panne", "klant": "Kursaal", "code": "0505"}, {"gemeente": "Sint Idesbald", "klant": "Zeezicht", "code": "2655 (sleutelkast links van de veranda)"}, {"gemeente": "Sint Idesbald", "klant": "ID aan zee", "code": "6666 voor sleutel / alarm naast de deur 1000"}, {"gemeente": "Koksijde", "klant": "Rosa", "code": "626610"}, {"gemeente": "Koksijde", "klant": "De fruitmand", "code": "2381"}, {"gemeente": "Koksijde", "klant": "Resto real", "code": "2004 bel"}, {"gemeente": "Koksijde", "klant": "Mama Thai", "code": "8670 + batch"}, {"gemeente": "Koksijde", "klant": "Pinot", "code": "1193"}, {"gemeente": "Koksijde", "klant": "Int dorp", "code": "0309"}, {"gemeente": "Koksijde", "klant": "Kommilfoo", "code": "4951bel"}, {"gemeente": "Koksijde", "klant": "Liefoord", "code": "1995"}, {"gemeente": "Koksijde", "klant": "Resto Real", "code": "2004"}, {"gemeente": "Koksijde", "klant": "Kenneth's foodbar", "code": "8848"}, {"gemeente": "Koksijde", "klant": "Dali", "code": "4221"}, {"gemeente": "Oostduinkerke", "klant": "Domein Westhoek", "code": "2013"}, {"gemeente": "Oostduinkerke", "klant": "Caricol", "code": "0607"}, {"gemeente": "Oostduinkerke", "klant": "Surf & bite", "code": "0607"}, {"gemeente": "Oostduinkerke", "klant": "Mamazel", "code": "5582"}, {"gemeente": "Oostduinkerke", "klant": "De drie meisjes", "code": "2323"}, {"gemeente": "Oostduinkerke", "klant": "Odé", "code": "1625 linker kastje"}, {"gemeente": "Oostduinkerke", "klant": "Sycod", "code": "0702"}, {"gemeente": "Oostduinkerke", "klant": "Sonja", "code": "4201"}, {"gemeente": "Oostduinkerke", "klant": "Huize Roose", "code": "2021"}, {"gemeente": "Oostduinkerke", "klant": "Café Hazebeek", "code": "2401"}, {"gemeente": "Oostduinkerke", "klant": "Hoogtij", "code": "7210"}, {"gemeente": "Nieuwpoort Bad", "klant": "Dijk 69", "code": "1313 voor sleutel en batch (alarm achter de deur)"}, {"gemeente": "Nieuwpoort Bad", "klant": "Wok to go", "code": "0804"}, {"gemeente": "Nieuwpoort Bad", "klant": "De Kroon Nieuwpoort", "code": "4466"}, {"gemeente": "Nieuwpoort Bad", "klant": "Kompas", "code": "3804"}, {"gemeente": "Nieuwpoort Bad", "klant": "Apostrof", "code": "1213"}, {"gemeente": "Nieuwpoort Bad", "klant": "Bareel zeedijk", "code": "2019"}, {"gemeente": "Nieuwpoort Stad", "klant": "Passarelle", "code": "1982"}, {"gemeente": "Middelkerke", "klant": "Zeebries", "code": "C-6789"}, {"gemeente": "Middelkerke", "klant": "Zeebries loods", "code": "1207 pijltje"}, {"gemeente": "Middelkerke", "klant": "Lefever Godfried", "code": "0508"}, {"gemeente": "Middelkerke", "klant": "Sportivents", "code": "4498 linkerkant hotel / 9876 deur padel"}, {"gemeente": "Middelkerke", "klant": "Rievera", "code": "2506"}, {"gemeente": "Middelkerke", "klant": "Slagboom Westende", "code": "4498B"}, {"gemeente": "Veurne", "klant": "In de box", "code": "0209"}, {"gemeente": "Veurne", "klant": "Veurne snack foods", "code": "0850"}, {"gemeente": "Veurne", "klant": "Delva versmarkt", "code": "9876 / sleutel"}, {"gemeente": "Veurne", "klant": "Fit & Fresh", "code": "201919 bel"}, {"gemeente": "Veurne", "klant": "Brasserie Christophe", "code": "Bel1234 bel1"}, {"gemeente": "Veurne", "klant": "Cafe Mange", "code": "2326 / 2018"}, {"gemeente": "Veurne", "klant": "Pastorant", "code": "5656#"}, {"gemeente": "Veurne", "klant": "De vette os", "code": "1212"}, {"gemeente": "Veurne", "klant": "In the box", "code": "0209"}, {"gemeente": "Veurne", "klant": "Pepsico", "code": "0880"}, {"gemeente": "Veurne", "klant": "Cargo", "code": "8630"}, {"gemeente": "Veurne", "klant": "'t Sud", "code": "3134 links"}, {"gemeente": "Diksmuide", "klant": "Brooderie", "code": "2431MW"}, {"gemeente": "Diksmuide", "klant": "Feestzaal De kroon", "code": "1247"}, {"gemeente": "Diksmuide", "klant": "Brouwershuis", "code": "2448 of 1224 (nieuw)"}, {"gemeente": "Diksmuide", "klant": "Gouden mandeke", "code": "0030"}, {"gemeente": "Diksmuide", "klant": "Restaurant Nikolaas", "code": "1959"}, {"gemeente": "Binnenland", "klant": "Zonnegloed", "code": "1463 binnen / 1640 of 8640 buiten"}];
+
+function laadCodesTab(){
+  // Laad uit localStorage als beschikbaar
+  try{const s=localStorage.getItem('klant_codes');if(s)KLANT_CODES_DASH=JSON.parse(s);}catch(e){}
+  renderCodesTabel(KLANT_CODES_DASH);
+}
+
+function filterDashCodes(q){
+  if(!q.trim()){renderCodesTabel(KLANT_CODES_DASH);return;}
+  const qL=q.toLowerCase();
+  renderCodesTabel(KLANT_CODES_DASH.filter(c=>c.klant.toLowerCase().includes(qL)||c.gemeente.toLowerCase().includes(qL)||c.code.toLowerCase().includes(qL)));
+}
+
+function renderCodesTabel(lijst){
+  const el=document.getElementById('codes-tabel');
+  if(!lijst.length){el.innerHTML='<div class="geen">Geen resultaten</div>';return;}
+  
+  // Groepeer per gemeente
+  const perG={};
+  lijst.forEach((c,origIdx)=>{
+    const realIdx=KLANT_CODES_DASH.indexOf(c);
+    if(!perG[c.gemeente])perG[c.gemeente]=[];
+    perG[c.gemeente].push({...c,idx:realIdx});
+  });
+
+  el.innerHTML=Object.entries(perG).map(([gem,klanten])=>`
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.08);">📍 ${gem}</div>
+      ${klanten.map(k=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#f5f4f0;border-radius:10px;margin-bottom:6px;">
+          <input value="${k.klant}" onchange="KLANT_CODES_DASH[${k.idx}].klant=this.value"
+            style="flex:1;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:7px;padding:7px 10px;font-size:13px;font-weight:500;outline:none;min-width:0;">
+          <input value="${k.code}" onchange="KLANT_CODES_DASH[${k.idx}].code=this.value"
+            style="width:180px;background:#2c2c2a;border:none;border-radius:7px;padding:7px 10px;font-size:13px;font-weight:700;color:#e8855a;font-family:monospace;outline:none;">
+          <input value="${k.gemeente}" onchange="KLANT_CODES_DASH[${k.idx}].gemeente=this.value"
+            style="width:130px;background:#fff;border:.5px solid rgba(0,0,0,.1);border-radius:7px;padding:7px 10px;font-size:12px;color:#888780;outline:none;">
+          <button onclick="codeVerwijder(${k.idx})" style="background:#fcebeb;color:#a32d2d;border:none;border-radius:7px;padding:7px 10px;font-size:12px;cursor:pointer;flex-shrink:0;">✕</button>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function codeNieuw(){
+  KLANT_CODES_DASH.push({gemeente:'Nieuwe gemeente',klant:'Nieuwe klant',code:'0000'});
+  renderCodesTabel(KLANT_CODES_DASH);
+  // Scroll naar beneden
+  document.getElementById('codes-tabel').lastElementChild?.scrollIntoView({behavior:'smooth'});
+}
+
+function codeVerwijder(idx){
+  if(confirm('Verwijder '+KLANT_CODES_DASH[idx].klant+'?')){
+    KLANT_CODES_DASH.splice(idx,1);
+    renderCodesTabel(KLANT_CODES_DASH);
+  }
+}
+
+async function codesOpslaan(){
+  // Opslaan in localStorage
+  localStorage.setItem('klant_codes',JSON.stringify(KLANT_CODES_DASH));
+  // Opslaan in Supabase als config
+  await supaFetch(`notificaties?van=eq.SYSTEEM&naar=eq.KLANT_CODES`,'DELETE');
+  await supaFetch('notificaties','POST',{van:'SYSTEEM',naar:'KLANT_CODES',tekst:JSON.stringify(KLANT_CODES_DASH),gelezen:false});
+  const msg=document.getElementById('codes-msg');
+  msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',3000);
+  showToast('✓ Codes opgeslagen! Chauffeurs zien de wijzigingen direct.');
+}
+
 // Laad chauffeur config
 try{const s=localStorage.getItem('chauffeur_config');if(s)DRIVERS=JSON.parse(s);}catch(e){}
 
-setInterval(async()=>{await laadVoortgang();renderDashboard();renderLog();},15000);
-(async()=>{addLog('🚀','Dashboard gestart','ok');await laadVoortgang();renderDashboard();renderLog();})();
+// Init foto filter op vandaag
+(()=>{const n=new Date();const el=document.getElementById('foto-filter-datum');if(el)el.value=n.toISOString().split('T')[0];})();
+
+// Start — render meteen dan data laden
+addLog('🚀','Dashboard gestart','ok');
+renderDashboard();
+renderLog();
+
+(async()=>{
+  try{
+    await laadVoortgang();
+    renderDashboard();
+    renderLog();
+  }catch(e){
+    addLog('⚠','Verbinding mislukt: '+e.message,'err');
+    renderLog();
+  }
+})();
+
+setInterval(async()=>{
+  try{await laadVoortgang();renderDashboard();renderLog();}catch(e){}
+},15000);
 </script>
 
 
