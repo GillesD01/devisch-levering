@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_42.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_46.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/198e6089-dd64-419b-8c28-7fad39f8ec95">
+<link rel="manifest" id="pwa-manifest" href="blob:null/3d2bf8ef-5da4-462f-8c62-7a47781775eb">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -166,7 +166,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ 11 klanten geladen</div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">Geen ritten gevonden voor vandaag</div>
   </div>
 
   <!-- LOGIN -->
@@ -244,10 +244,10 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
         
       </div>
       <div class="chevron">›</div>
-    </div><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
+    </div><div class="card" onclick="kiesVoertuig(&#39;2DJA105&#39;)" style="margin-bottom:8px;">
       <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1FDN178</div>
+        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA105</div>
         
       </div>
       <div class="chevron">›</div>
@@ -376,7 +376,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="cal-driver-name">Jarne</span>
+      <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA105</span>
       <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
       <button onclick="openNotifStuur()" style="background:none;border:none;color:#e8855a;font-size:20px;cursor:pointer;padding:0;position:relative;" title="Bericht sturen">
         🔔
@@ -641,20 +641,21 @@ const SUPA_KEY='sb_publishable_tIPI6f4RfE4a5DCfibFn5Q_NVZPvlbN';
 async function supaFetch(endpoint, method='GET', body=null){
   try{
     const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
-    if(method==='GET')headers['Prefer']='return=representation';
-    else if(method==='POST')headers['Prefer']='return=representation';
-    else if(method==='PATCH')headers['Prefer']='return=representation';
-    // DELETE krijgt geen Prefer header
+    if(method==='DELETE')headers['Prefer']='return=minimal';
+    else headers['Prefer']='return=minimal';
     const opts={method,headers};
     if(body)opts.body=JSON.stringify(body);
     const r=await fetch(SUPA_URL+'/rest/v1/'+endpoint,opts);
-    if(r.status===204)return true;
-    if(!r.ok){const e=await r.text();console.warn('Supabase fout:',r.status,e.substring(0,100));return null;}
+    if(r.status===204||r.status===201||r.status===200)return true;
+    if(!r.ok){
+      const err=await r.text();
+      console.warn('Supabase fout:',r.status,err.substring(0,200));
+      return null;
+    }
     const txt=await r.text();
     return txt?JSON.parse(txt):true;
   }catch(e){console.warn('Supabase fout:',e.message);return null;}
 }
-
 
 // Laad leveringen voor chauffeur vanuit Supabase
 async function laadLeveringenVanSupabase(datum){
@@ -991,14 +992,14 @@ async function loadAppData(){
 
   // Laad chauffeur config uit Supabase
   try{
-    const config=await supaFetch(`notificaties?van=eq.SYSTEEM&naar=eq.CHAUFFEUR_CONFIG&order=created_at.desc&limit=1`);
-    if(config&&Array.isArray(config)&&config.length>0){
-      try{
-        const drivers=JSON.parse(config[0].tekst);
-        if(drivers&&drivers.length===5){
-          DRIVERS.length=0;drivers.forEach(x=>DRIVERS.push(x));
-        }
-      }catch(e){}
+    const config=await supaFetch(`notificaties?van=eq.SYSTEEM&naar=eq.CHAUFFEUR_CONFIG&gelezen=eq.false&order=created_at.desc&limit=1`);
+    if(config&&config.length>0){
+      const drivers=JSON.parse(config[0].tekst);
+      if(drivers&&drivers.length===5){
+        // Alleen vervangen als alle 5 chauffeurs aanwezig zijn
+        DRIVERS.length=0;drivers.forEach(x=>DRIVERS.push(x));
+      }
+      // Anders: behoud de standaard DRIVERS array
     }
   }catch(e){
     // Fout: behoud standaard DRIVERS
@@ -1604,6 +1605,8 @@ function renderBon(){
     const statusIcon=p.missing?`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`
       :done?'<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>'
       :`<span style="color:#888780;">${p.scanned}/${p.qty}</span>`;
+    // Handmatig afvinken knop — alleen als nog niet gescand en niet missing
+    const manualBtn=(!done&&!p.missing)?`<button onclick="manuaalAfvinken('${p.id}')" style="display:block;width:100%;margin-top:5px;padding:4px 6px;background:#f5f4f0;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:10px;color:#888780;cursor:pointer;text-align:center;">✓ Handmatig afvinken</button>`:'';
     html+=`<tr style="background:${bg};border-top:.5px solid rgba(0,0,0,.05);">
       <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">${p.code}</td>
       <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
@@ -1611,7 +1614,7 @@ function renderBon(){
         ${p.ean?`<div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">${p.ean}</div>`:''}
       </td>
       <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">${p.qty}</td>
-      <td style="padding:8px 8px;text-align:right;">${statusIcon}</td>
+      <td style="padding:8px 8px;text-align:right;">${statusIcon}${manualBtn}</td>
     </tr>`;
   });
 
@@ -1636,6 +1639,23 @@ function renderBon(){
 
   el.innerHTML=html;
   el.scrollTop=0;
+}
+
+function manuaalAfvinken(prodId){
+  if(!aktKlant)return;
+  const bon=aktKlant.bons[aktBonIdx];
+  const p=bon.prods.find(x=>x.id===prodId);
+  if(!p||p.missing)return;
+  p.scanned=p.qty;
+  showToast('✓ Handmatig afgevinkt — '+p.code);
+  updateVoortgangSupabase(aktKlant,bon,p);
+  const ki=KLANTEN.findIndex(k=>k.id===aktKlant.id);
+  KLANTEN[ki]=aktKlant;
+  saveState();
+  renderBon();
+  // Check of alles klaar is
+  const allDone=bon.prods.every(x=>x.scanned>=x.qty||x.missing);
+  if(allDone)setTimeout(showAlleGescand,400);
 }
 
 // ── SCAN ──────────────────────────────────────────────
