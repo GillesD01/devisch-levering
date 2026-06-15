@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_57.html -->
+<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_58.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/2a212e6a-174b-4eb8-85de-4c8d13645983">
+<link rel="manifest" id="pwa-manifest" href="blob:null/7472d124-777b-4cdb-a65b-c60e32bd78be">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -1037,25 +1037,22 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
 
     <!-- FOTO OVERLAY -->
-    <div class="sheet-bg" id="foto-ov" style="display: none;" onclick="fotoBgClick(event)">
-      <div class="sheet">
-        <h3>📷 Foto bij levering</h3>
+    <div id="foto-ov" style="display: none; position: absolute; inset: 0px; background: rgba(44, 44, 42, 0.85); z-index: 20; align-items: flex-end;">
+      <div style="background:#fff;border-radius:20px 20px 0 0;padding:22px 18px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));width:100%;max-height:85%;overflow-y:auto;">
+        <h3 style="font-size:17px;font-weight:600;color:#2c2c2a;margin-bottom:8px;">📷 Foto bij levering</h3>
         <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering.</p>
-        <div id="foto-preview" style="margin-bottom:14px;min-height:40px;"></div>
+        <div id="foto-preview" style="margin-bottom:14px;"></div>
 
-        <!-- iOS-compatibele file inputs: verborgen achter styled labels -->
-        <div style="display:flex;gap:8px;margin-bottom:8px;">
-          <label style="flex:1;background:#e8855a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;display:block;">
-            📷 Camera
-            <input type="file" accept="image/*" capture="environment" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" onchange="fotoGekozen(this)">
-          </label>
-          <label style="flex:1;background:#2c2c2a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;display:block;">
-            🖼 Bibliotheek
-            <input type="file" accept="image/*" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" onchange="fotoGekozen(this)">
-          </label>
-        </div>
-        <button class="btn-full" id="btn-foto-ok" onclick="fotoBevestigen()" style="display:none;background:#e8855a;">📤 Versturen naar dashboard</button>
-        <button class="btn-ghost" id="btn-foto-skip" onclick="closeFoto()" style="display: block;">Overslaan — geen foto</button>
+        <label style="display:block;width:100%;background:#e8855a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;margin-bottom:8px;box-sizing:border-box;">
+          📷 Camera
+          <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(this)">
+        </label>
+        <label style="display:block;width:100%;background:#2c2c2a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;margin-bottom:8px;box-sizing:border-box;">
+          🖼 Bibliotheek
+          <input type="file" accept="image/*" style="display:none;" onchange="fotoGekozen(this)">
+        </label>
+        <button id="btn-foto-ok" style="display:none;width:100%;background:#3b6d11;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;" onclick="fotoBevestigen()">📤 Versturen naar dashboard</button>
+        <button id="btn-foto-skip" style="width: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(136, 135, 128); font-size: 13px; cursor: pointer; padding: 10px; display: block;" onclick="closeFoto()">Overslaan — geen foto</button>
       </div>
     </div>
 
@@ -2652,6 +2649,11 @@ function openFoto(klantId, bonNum){
   document.getElementById('btn-foto-skip').style.display='block';
   document.getElementById('foto-ov').style.display='flex';
 }
+function closeFoto(){
+  document.getElementById('foto-ov').style.display='none';
+  fotoData=null;
+}
+function fotoBgClick(e){}
 
 function fotoGekozen(input){
   const file=input.files[0];
@@ -2757,8 +2759,7 @@ async function stuurWachtendeFotos(){
     }
   }catch(e){}
 }
-function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
-function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
+
 
 // ── PUSH NOTIFICATIES ──
 function checkNotificaties(){
