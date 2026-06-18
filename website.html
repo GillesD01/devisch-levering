@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Devisch Foodservice – Uw gespecialiseerde leverancier van topkwaliteit foodservice producten voor de horeca in West-Vlaanderen. Dagelijkse leveringen vanuit Veurne en Kortrijk.">
+<title>Devisch Foodservice – Smaakvol leverbaar</title>
+<style>
+  :root {
+    --dark: #2c2c2a;
+    --orange: #e8855a;
+    --orange-dark: #d97548;
+    --orange-light: #faece7;
+    --warm: #f5f4f0;
+    --warm2: #f0ede8;
+    --gray: #888780;
+    --gray-mid: #5f5e5a;
+    --gray-light: #b4b2a9;
+    --white: #ffffff;
+    --green: #3b6d11;
+    --green-bg: #eaf3de;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(44,44,42,0);backdrop-filter:blur(0);transition:background .4s,backdrop-filter .4s;}
+  nav.scrolled{background:rgba(44,44,42,.97);backdrop-filter:blur(12px);}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--white);letter-spacing:-1px;flex-shrink:0;}
+  .nav-logo-text{display:flex;flex-direction:column;}
+  .nav-logo-name{color:var(--white);font-size:15px;font-weight:700;letter-spacing:-.3px;line-height:1;}
+  .nav-logo-sub{color:var(--gray);font-size:10px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;margin-top:2px;}
+  .nav-links{display:flex;align-items:center;gap:32px;}
+  .nav-links a{color:rgba(255,255,255,.7);font-size:14px;font-weight:500;text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{background:var(--orange);color:var(--white)!important;padding:9px 20px;border-radius:8px;font-weight:600!important;transition:background .2s!important;}
+  .nav-cta:hover{background:var(--orange-dark)!important;}
+  .nav-burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;}
+  .nav-burger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s;}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:36px;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{color:var(--white);font-size:22px;font-weight:600;text-decoration:none;transition:color .2s;}
+  .mobile-menu a:hover{color:var(--orange);}
+  .mobile-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--gray);font-size:28px;cursor:pointer;}
+
+  /* ── HERO ── */
+  .hero{min-height:100vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 60% 50%, rgba(232,133,90,.12) 0%, transparent 70%),radial-gradient(ellipse 50% 60% at 20% 80%, rgba(232,133,90,.07) 0%, transparent 60%);}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);background-size:60px 60px;}
+  .hero-content{max-width:900px;margin:0 auto;padding:120px 24px 80px;text-align:center;position:relative;z-index:1;}
+  .hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(232,133,90,.15);border:1px solid rgba(232,133,90,.3);border-radius:50px;padding:6px 16px;margin-bottom:32px;}
+  .hero-chip-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.2);}}
+  .hero-chip-txt{color:var(--orange);font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+  .hero-title{font-size:clamp(40px,7vw,80px);font-weight:800;color:var(--white);line-height:1.05;letter-spacing:-2px;margin-bottom:24px;}
+  .hero-title span{color:var(--orange);}
+  .hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--gray);line-height:1.7;max-width:640px;margin:0 auto 48px;}
+  .hero-sub strong{color:rgba(255,255,255,.85);}
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:var(--orange);color:var(--white);padding:16px 32px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 8px 32px rgba(232,133,90,.35);}
+  .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,133,90,.5);}
+  .btn-ghost{background:rgba(255,255,255,.07);color:var(--white);padding:16px 32px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);}
+  .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:72px;flex-wrap:wrap;}
+  .hero-stat{text-align:center;}
+  .hero-stat-n{font-size:40px;font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1;}
+  .hero-stat-n span{color:var(--orange);}
+  .hero-stat-l{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;margin-top:6px;}
+  .hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:float 2s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-8px);}}
+  .hero-scroll span{color:var(--gray-mid);font-size:11px;letter-spacing:1px;text-transform:uppercase;}
+  .hero-scroll svg{color:var(--gray);}
+
+  /* ── SECTION BASE ── */
+  section{padding:100px 24px;}
+  .section-inner{max-width:1200px;margin:0 auto;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+  .section-title{font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--dark);letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px;}
+  .section-sub{font-size:17px;color:var(--gray);line-height:1.7;max-width:600px;}
+
+  /* ── DIENSTEN ── */
+  .diensten{background:var(--warm2);}
+  .diensten-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+  .dienst-card{background:var(--white);border-radius:20px;padding:36px 32px;border:.5px solid rgba(0,0,0,.07);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+  .dienst-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+  .dienst-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.1);}
+  .dienst-card:hover::before{transform:scaleX(1);}
+  .dienst-icon{width:56px;height:56px;background:var(--orange-light);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:24px;}
+  .dienst-title{font-size:20px;font-weight:700;color:var(--dark);margin-bottom:12px;}
+  .dienst-text{font-size:14px;color:var(--gray);line-height:1.7;}
+  .dienst-tag{display:inline-block;margin-top:20px;font-size:11px;font-weight:600;color:var(--orange);background:var(--orange-light);padding:4px 10px;border-radius:6px;}
+
+  /* ── ASSORTIMENT ── */
+  .assortiment{background:var(--white);}
+  .assort-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:gap;}
+  .assort-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .assort-card{border-radius:20px;overflow:hidden;cursor:pointer;position:relative;aspect-ratio:4/5;transition:transform .3s;}
+  .assort-card:hover{transform:scale(1.03);}
+  .assort-card:hover .assort-overlay{opacity:1;}
+  .assort-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;}
+  .assort-overlay{position:absolute;inset:0;background:linear-gradient(180deg, transparent 30%, rgba(44,44,42,.9) 100%);opacity:.85;transition:opacity .3s;}
+  .assort-info{position:absolute;bottom:0;left:0;right:0;padding:24px 20px;}
+  .assort-cat{font-size:11px;color:var(--orange);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;}
+  .assort-name{font-size:17px;font-weight:700;color:var(--white);line-height:1.2;}
+  .assort-count{font-size:12px;color:var(--gray-light);margin-top:4px;}
+  .assort-c1{background:linear-gradient(135deg,#2c2c2a 0%,#3d3c3a 100%);}
+  .assort-c2{background:linear-gradient(135deg,#1a2e0f 0%,#2c4d18 100%);}
+  .assort-c3{background:linear-gradient(135deg,#2d1a0e 0%,#5a3216 100%);}
+  .assort-c4{background:linear-gradient(135deg,#0e1f2d 0%,#163250 100%);}
+  .assort-c5{background:linear-gradient(135deg,#2d0e1a 0%,#501627 100%);}
+  .assort-c6{background:linear-gradient(135deg,#1a2a1a 0%,#2a4a2a 100%);}
+  .assort-c7{background:linear-gradient(135deg,#2d2a0e 0%,#504a16 100%);}
+  .assort-c8{background:linear-gradient(135deg,#1a0e2d 0%,#2d1650 100%);}
+
+  /* ── WAAROM ── */
+  .waarom{background:var(--dark);padding:100px 24px;}
+  .waarom-inner{max-width:1200px;margin:0 auto;}
+  .waarom .section-title{color:var(--white);}
+  .waarom .section-sub{color:var(--gray);}
+  .waarom-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px;align-items:center;}
+  .waarom-list{display:flex;flex-direction:column;gap:28px;}
+  .waarom-item{display:flex;gap:20px;align-items:flex-start;}
+  .waarom-num{width:40px;height:40px;border-radius:10px;background:rgba(232,133,90,.15);border:1px solid rgba(232,133,90,.25);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--orange);flex-shrink:0;}
+  .waarom-item-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;}
+  .waarom-item-text{font-size:14px;color:var(--gray);line-height:1.65;}
+  .waarom-visual{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:20px;}
+  .wv-stat{background:rgba(232,133,90,.08);border:1px solid rgba(232,133,90,.15);border-radius:16px;padding:24px 28px;}
+  .wv-stat-n{font-size:48px;font-weight:800;color:var(--orange);letter-spacing:-2px;line-height:1;}
+  .wv-stat-l{font-size:13px;color:var(--gray);margin-top:6px;}
+  .wv-row{display:flex;gap:16px;}
+  .wv-mini{flex:1;background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 20px;}
+  .wv-mini-n{font-size:28px;font-weight:800;color:var(--white);letter-spacing:-1px;}
+  .wv-mini-l{font-size:11px;color:var(--gray);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+
+  /* ── REGIO ── */
+  .regio{background:var(--warm2);padding:100px 24px;}
+  .regio-inner{max-width:1200px;margin:0 auto;}
+  .regio-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px;align-items:start;}
+  .regio-map{background:var(--dark);border-radius:24px;padding:40px;position:relative;min-height:380px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .regio-map-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 40% 60%, rgba(232,133,90,.15) 0%, transparent 70%);}
+  .regio-pin{position:absolute;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;}
+  .regio-pin-dot{width:16px;height:16px;background:var(--orange);border-radius:50%;border:3px solid rgba(232,133,90,.35);box-shadow:0 0 0 6px rgba(232,133,90,.1);animation:pulse-pin 2.5s infinite;}
+  @keyframes pulse-pin{0%,100%{box-shadow:0 0 0 6px rgba(232,133,90,.1);}50%{box-shadow:0 0 0 12px rgba(232,133,90,.05);}}
+  .regio-pin-label{background:var(--dark);border:1px solid rgba(232,133,90,.3);color:var(--white);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;}
+  .regio-pin-label span{color:var(--orange);}
+  .regio-pin-veurne{bottom:38%;left:28%;}
+  .regio-pin-kortrijk{top:30%;right:22%;}
+  .regio-map-title{color:rgba(255,255,255,.07);font-size:80px;font-weight:800;position:absolute;bottom:20px;right:20px;letter-spacing:-3px;line-height:1;}
+  .regio-areas{display:flex;flex-direction:column;gap:16px;}
+  .regio-area-card{background:var(--white);border-radius:16px;padding:24px 28px;border:.5px solid rgba(0,0,0,.07);display:flex;align-items:center;gap:20px;transition:transform .2s,box-shadow .2s;}
+  .regio-area-card:hover{transform:translateX(6px);box-shadow:4px 0 0 0 var(--orange), 0 4px 20px rgba(0,0,0,.06);}
+  .regio-area-icon{width:48px;height:48px;background:var(--orange-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .regio-area-name{font-size:18px;font-weight:700;color:var(--dark);}
+  .regio-area-sub{font-size:13px;color:var(--gray);margin-top:3px;}
+  .regio-area-badge{margin-left:auto;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;flex-shrink:0;}
+
+  /* ── TEAM ── */
+  .team{background:var(--white);padding:100px 24px;}
+  .team-inner{max-width:1200px;margin:0 auto;}
+  .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:56px;}
+  .team-card{text-align:center;cursor:default;}
+  .team-avatar{width:80px;height:80px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--orange);margin:0 auto 14px;border:3px solid transparent;transition:border-color .2s,transform .2s;}
+  .team-card:hover .team-avatar{border-color:var(--orange);transform:scale(1.05);}
+  .team-name{font-size:15px;font-weight:600;color:var(--dark);}
+  .team-role{font-size:12px;color:var(--gray);margin-top:4px;}
+  .team-route{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--orange);background:var(--orange-light);padding:3px 8px;border-radius:5px;margin-top:8px;font-weight:600;}
+
+  /* ── PARTNERS ── */
+  .partners{background:var(--warm2);padding:80px 24px;}
+  .partners-inner{max-width:1200px;margin:0 auto;text-align:center;}
+  .partners-label{font-size:12px;color:var(--gray);font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:36px;}
+  .partners-row{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;}
+  .partner-logo{background:var(--white);border-radius:14px;padding:18px 30px;border:.5px solid rgba(0,0,0,.07);transition:box-shadow .2s;}
+  .partner-logo:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);}
+  .partner-logo-text{font-size:18px;font-weight:700;color:var(--dark);letter-spacing:-1px;}
+  .partner-logo-sub{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+
+  /* ── TESTIMONIAL ── */
+  .testimonials{background:var(--dark);padding:100px 24px;}
+  .testimonials-inner{max-width:1000px;margin:0 auto;text-align:center;}
+  .testimonials .section-title{color:var(--white);}
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+  .testi-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 28px;text-align:left;transition:background .2s;}
+  .testi-card:hover{background:rgba(255,255,255,.08);}
+  .testi-stars{color:var(--orange);font-size:16px;margin-bottom:16px;}
+  .testi-text{font-size:14px;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:24px;}
+  .testi-author{display:flex;align-items:center;gap:12px;}
+  .testi-av{width:40px;height:40px;border-radius:50%;background:rgba(232,133,90,.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0;}
+  .testi-name{font-size:14px;font-weight:600;color:var(--white);}
+  .testi-biz{font-size:12px;color:var(--gray);margin-top:2px;}
+
+  /* ── CTA ── */
+  .cta-section{background:linear-gradient(135deg, var(--orange) 0%, #d97548 100%);padding:80px 24px;text-align:center;}
+  .cta-inner{max-width:700px;margin:0 auto;}
+  .cta-title{font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;}
+  .cta-sub{font-size:17px;color:rgba(255,255,255,.8);margin-bottom:40px;line-height:1.6;}
+  .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-white{background:var(--white);color:var(--orange);padding:16px 32px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 8px 32px rgba(0,0,0,.15);}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.2);}
+  .btn-outline-white{background:transparent;color:var(--white);padding:16px 32px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;border:2px solid rgba(255,255,255,.5);transition:all .2s;}
+  .btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1);}
+
+  /* ── CONTACT ── */
+  .contact{background:var(--warm2);padding:100px 24px;}
+  .contact-inner{max-width:1200px;margin:0 auto;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:56px;align-items:start;}
+  .contact-info{display:flex;flex-direction:column;gap:24px;}
+  .contact-item{display:flex;gap:16px;align-items:flex-start;}
+  .contact-icon{width:44px;height:44px;background:var(--orange-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .contact-item-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px;}
+  .contact-item-text{font-size:14px;color:var(--gray);line-height:1.6;}
+  .contact-item-text a{color:var(--orange);text-decoration:none;}
+  .contact-form{background:var(--white);border-radius:24px;padding:40px;border:.5px solid rgba(0,0,0,.07);}
+  .contact-form h3{font-size:22px;font-weight:700;color:var(--dark);margin-bottom:28px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  .form-field label{font-size:12px;font-weight:600;color:var(--gray-mid);text-transform:uppercase;letter-spacing:.5px;}
+  .form-field input,.form-field select,.form-field textarea{background:var(--warm);border:.5px solid rgba(0,0,0,.1);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--dark);font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s;}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,133,90,.1);}
+  .form-field textarea{resize:none;height:100px;}
+  .form-submit{width:100%;background:var(--orange);color:var(--white);border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:8px;}
+  .form-submit:hover{background:var(--orange-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,133,90,.35);}
+  .form-success{display:none;text-align:center;padding:40px 20px;}
+  .form-success.show{display:block;}
+  .form-success-icon{font-size:48px;margin-bottom:16px;}
+  .form-success-title{font-size:20px;font-weight:700;color:var(--dark);margin-bottom:8px;}
+  .form-success-text{font-size:14px;color:var(--gray);}
+
+  /* ── FOOTER ── */
+  footer{background:var(--dark);padding:60px 24px 32px;}
+  .footer-inner{max-width:1200px;margin:0 auto;}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+  .footer-brand{}
+  .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .footer-logo-mark{width:36px;height:36px;background:var(--orange);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--white);}
+  .footer-logo-name{color:var(--white);font-size:14px;font-weight:700;}
+  .footer-tagline{font-size:13px;color:var(--gray);line-height:1.7;max-width:260px;}
+  .footer-col-title{font-size:12px;font-weight:700;color:var(--gray-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-links a{font-size:13px;color:var(--gray);text-decoration:none;transition:color .2s;}
+  .footer-links a:hover{color:var(--white);}
+  .footer-bottom{border-top:.5px solid rgba(255,255,255,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .footer-bottom-l{font-size:12px;color:var(--gray-mid);}
+  .footer-bottom-r{font-size:12px;color:var(--gray-mid);}
+  .footer-bottom-r a{color:var(--gray);text-decoration:none;}
+  .footer-bottom-r a:hover{color:var(--white);}
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+  .fade-in-delay-1{transition-delay:.1s;}
+  .fade-in-delay-2{transition-delay:.2s;}
+  .fade-in-delay-3{transition-delay:.3s;}
+  .fade-in-delay-4{transition-delay:.4s;}
+  .fade-in-delay-5{transition-delay:.5s;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .nav-burger{display:flex;}
+    .diensten-grid{grid-template-columns:1fr;}
+    .assort-grid{grid-template-columns:repeat(2,1fr);}
+    .waarom-grid{grid-template-columns:1fr;}
+    .regio-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:repeat(3,1fr);}
+    .testimonials-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+  @media(max-width:600px){
+    .assort-grid{grid-template-columns:1fr 1fr;}
+    .hero-stats{gap:28px;}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-top{grid-template-columns:1fr;}
+    .partners-row{gap:24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#diensten" onclick="closeMobileMenu()">Diensten</a>
+  <a href="#assortiment" onclick="closeMobileMenu()">Assortiment</a>
+  <a href="#regio" onclick="closeMobileMenu()">Regio</a>
+  <a href="#team" onclick="closeMobileMenu()">Team</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">D</div>
+      <div class="nav-logo-text">
+        <div class="nav-logo-name">Devisch Foodservice</div>
+        <div class="nav-logo-sub">Esca Food · Oresto Partner</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#diensten">Diensten</a>
+      <a href="#assortiment">Assortiment</a>
+      <a href="#regio">Regio</a>
+      <a href="#team">Team</a>
+      <a href="#contact" class="nav-cta">Neem contact op</a>
+    </div>
+    <button class="nav-burger" onclick="openMobileMenu()" aria-label="Menu openen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-chip">
+      <div class="hero-chip-dot"></div>
+      <span class="hero-chip-txt">Dagelijkse leveringen · West-Vlaanderen</span>
+    </div>
+    <h1 class="hero-title">
+      Verse smaken,<br><span>elke dag</span> aan uw deur
+    </h1>
+    <p class="hero-sub">
+      Devisch Foodservice levert <strong>topkwaliteit horecaproducten</strong> aan restaurants, cateraars en grootkeukens in heel West-Vlaanderen. Betrouwbaar, vers en persoonlijk.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Word klant</a>
+      <a href="#assortiment" class="btn-ghost">Ontdek ons assortiment</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-n">400<span>+</span></div>
+        <div class="hero-stat-l">Tevreden klanten</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">5</div>
+        <div class="hero-stat-l">Chauffeurs &amp; routes</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">2</div>
+        <div class="hero-stat-l">Depots: Veurne &amp; Kortrijk</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">6</div>
+        <div class="hero-stat-l">Jaar leveringservaring</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+      <path d="M8 3v14M3 13l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- DIENSTEN -->
+<section class="diensten" id="diensten">
+  <div class="section-inner">
+    <div class="section-label fade-in">Wat wij doen</div>
+    <h2 class="section-title fade-in">Elke dag opnieuw,<br>voor uw keuken</h2>
+    <p class="section-sub fade-in">Van het depot naar uw keuken, met de zorg en nauwkeurigheid die topkoks verdienen. Wij zijn meer dan een leverancier – wij zijn uw voedselpartner.</p>
+    <div class="diensten-grid">
+      <div class="dienst-card fade-in fade-in-delay-1">
+        <div class="dienst-icon">🚚</div>
+        <div class="dienst-title">Dagelijkse levering</div>
+        <div class="dienst-text">Uw bestelling 's morgens vroeg op de juiste plek, vers van het depot. Vaste chauffeurs die uw keuken kennen en uw verwachtingen overtreffen.</div>
+        <div class="dienst-tag">Maandag t/m Zaterdag</div>
+      </div>
+      <div class="dienst-card fade-in fade-in-delay-2">
+        <div class="dienst-icon">🧊</div>
+        <div class="dienst-title">Gekoelde transport</div>
+        <div class="dienst-text">Onze voertuigen zijn uitgerust met geavanceerde koelcellen. Zo blijft elk product – van zuivel tot vlees – op de perfecte temperatuur.</div>
+        <div class="dienst-tag">HACCP gecertificeerd</div>
+      </div>
+      <div class="dienst-card fade-in fade-in-delay-3">
+        <div class="dienst-icon">📦</div>
+        <div class="dienst-title">Breed assortiment</div>
+        <div class="dienst-text">Meer dan 2.000 artikelen van topmerken én huismerken. Van verse groenten tot gespecialiseerde horeca-ingrediënten, alles op één bestelbon.</div>
+        <div class="dienst-tag">2.000+ artikelen</div>
+      </div>
+      <div class="dienst-card fade-in fade-in-delay-1">
+        <div class="dienst-icon">💼</div>
+        <div class="dienst-title">Persoonlijk advies</div>
+        <div class="dienst-text">Onze accountmanagers denken mee over uw menukaart, seizoensproducten en kostprijs. U bent geen nummer bij Devisch.</div>
+        <div class="dienst-tag">Dedicated contact</div>
+      </div>
+      <div class="dienst-card fade-in fade-in-delay-2">
+        <div class="dienst-icon">📱</div>
+        <div class="dienst-title">Digitale bestelapp</div>
+        <div class="dienst-text">Bestel snel en eenvoudig via onze professionele app. Track uw levering in real-time en beheer al uw bestellingen digitaal.</div>
+        <div class="dienst-tag">iOS &amp; Android</div>
+      </div>
+      <div class="dienst-card fade-in fade-in-delay-3">
+        <div class="dienst-icon">✅</div>
+        <div class="dienst-title">Kwaliteitsgarantie</div>
+        <div class="dienst-text">Niet tevreden met een product? Wij lossen het dezelfde dag op. Onze chauffeurs controleren elk pakket bij levering en rapporteren direct.</div>
+        <div class="dienst-tag">100% garantie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSORTIMENT -->
+<section class="assortiment" id="assortiment">
+  <div class="section-inner">
+    <div class="section-label fade-in">Ons aanbod</div>
+    <h2 class="section-title fade-in">Alles voor de professionele keuken</h2>
+    <p class="section-sub fade-in">Van verse groenten tot diepvriesspecialiteiten — wij leveren het volledige spectrum voor uw horeca-onderneming.</p>
+    <div class="assort-grid" style="margin-top:48px;">
+      <div class="assort-card assort-c1 fade-in fade-in-delay-1">
+        <div class="assort-bg">🥩</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Vlees &amp; gevogelte</div>
+          <div class="assort-name">Premium vleesproducten</div>
+          <div class="assort-count">350+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c2 fade-in fade-in-delay-2">
+        <div class="assort-bg">🥦</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Groenten &amp; fruit</div>
+          <div class="assort-name">Verse seizoensgroenten</div>
+          <div class="assort-count">200+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c3 fade-in fade-in-delay-3">
+        <div class="assort-bg">🧀</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Zuivel &amp; kaas</div>
+          <div class="assort-name">Artisanale zuivels</div>
+          <div class="assort-count">180+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c4 fade-in fade-in-delay-4">
+        <div class="assort-bg">🐟</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Vis &amp; zeevruchten</div>
+          <div class="assort-name">Verse zeeproducten</div>
+          <div class="assort-count">150+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c5 fade-in fade-in-delay-1">
+        <div class="assort-bg">🍝</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Droge waren</div>
+          <div class="assort-name">Pasta, rijst &amp; granen</div>
+          <div class="assort-count">300+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c6 fade-in fade-in-delay-2">
+        <div class="assort-bg">🫙</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Sauzen &amp; condimenten</div>
+          <div class="assort-name">Smaakmakers voor chefs</div>
+          <div class="assort-count">250+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c7 fade-in fade-in-delay-3">
+        <div class="assort-bg">🍰</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Bakkerij &amp; patisserie</div>
+          <div class="assort-name">Ambachtelijke gebakken waren</div>
+          <div class="assort-count">120+ artikelen</div>
+        </div>
+      </div>
+      <div class="assort-card assort-c8 fade-in fade-in-delay-4">
+        <div class="assort-bg">🍷</div>
+        <div class="assort-overlay"></div>
+        <div class="assort-info">
+          <div class="assort-cat">Dranken</div>
+          <div class="assort-name">Wijnen, bieren &amp; frisdranken</div>
+          <div class="assort-count">450+ artikelen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAAROM -->
+<section class="waarom" id="waarom">
+  <div class="waarom-inner">
+    <div class="section-label fade-in" style="color:var(--orange);">Waarom Devisch?</div>
+    <h2 class="section-title fade-in" style="color:var(--white);">De partner die<br>uw keuken verdient</h2>
+    <div class="waarom-grid">
+      <div class="waarom-list">
+        <div class="waarom-item fade-in fade-in-delay-1">
+          <div class="waarom-num">01</div>
+          <div>
+            <div class="waarom-item-title">Regionale expertise</div>
+            <div class="waarom-item-text">Als West-Vlaams familiebedrijf kennen wij elke klant persoonlijk. Wij weten wat de regio nodig heeft en reageren snel op uw vragen.</div>
+          </div>
+        </div>
+        <div class="waarom-item fade-in fade-in-delay-2">
+          <div class="waarom-num">02</div>
+          <div>
+            <div class="waarom-item-title">Stiptheid gegarandeerd</div>
+            <div class="waarom-item-text">Uw leveringsvenster is heilig. Onze chauffeurs volgen vaste routes en u ontvangt uw bestelling op het afgesproken moment.</div>
+          </div>
+        </div>
+        <div class="waarom-item fade-in fade-in-delay-3">
+          <div class="waarom-num">03</div>
+          <div>
+            <div class="waarom-item-title">Oresto geïntegreerd</div>
+            <div class="waarom-item-text">Als officieel Oresto-partner profiteert u van een volledig geïntegreerd systeem voor bestellen, factureren en rapporteren.</div>
+          </div>
+        </div>
+        <div class="waarom-item fade-in fade-in-delay-4">
+          <div class="waarom-num">04</div>
+          <div>
+            <div class="waarom-item-title">Transparante prijzen</div>
+            <div class="waarom-item-text">Geen verborgen kosten. Vaste, eerlijke prijzen met wekelijkse updates op basis van marktprijzen. Altijd inzicht in uw kosten.</div>
+          </div>
+        </div>
+      </div>
+      <div class="waarom-visual fade-in">
+        <div class="wv-stat">
+          <div class="wv-stat-n">98.4%</div>
+          <div class="wv-stat-l">Leverbetrouwbaarheid over de afgelopen 12 maanden</div>
+        </div>
+        <div class="wv-row">
+          <div class="wv-mini">
+            <div class="wv-mini-n">6</div>
+            <div class="wv-mini-l">Voertuigen</div>
+          </div>
+          <div class="wv-mini">
+            <div class="wv-mini-n">5</div>
+            <div class="wv-mini-l">Chauffeurs</div>
+          </div>
+        </div>
+        <div class="wv-row">
+          <div class="wv-mini">
+            <div class="wv-mini-n">2</div>
+            <div class="wv-mini-l">Depots</div>
+          </div>
+          <div class="wv-mini">
+            <div class="wv-mini-n">5×</div>
+            <div class="wv-mini-l">Per week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIO -->
+<section class="regio" id="regio">
+  <div class="regio-inner">
+    <div class="section-label fade-in">Levergebied</div>
+    <h2 class="section-title fade-in">Actief in<br>heel West-Vlaanderen</h2>
+    <p class="section-sub fade-in">Vanuit onze twee depots bedienen wij restaurants, cateraars en grootkeukens in de hele regio. Bent u buiten ons standaardgebied? Neem contact op.</p>
+    <div class="regio-grid">
+      <div class="regio-map fade-in">
+        <div class="regio-map-bg"></div>
+        <div style="position:relative;width:100%;height:300px;">
+          <!-- Simplified West-Flanders visual map -->
+          <svg viewBox="0 0 300 250" width="100%" height="100%" style="position:absolute;inset:0;">
+            <defs>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- Province outline (stylized) -->
+            <path d="M30,60 L80,30 L160,20 L230,35 L270,70 L280,120 L260,180 L220,220 L160,235 L90,230 L40,200 L20,150 Z" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+            <!-- Coverage zone fill -->
+            <path d="M30,60 L80,30 L160,20 L230,35 L270,70 L280,120 L260,180 L220,220 L160,235 L90,230 L40,200 L20,150 Z" fill="rgba(232,133,90,0.07)"/>
+            <!-- Route lines -->
+            <line x1="80" y1="160" x2="200" y2="95" stroke="rgba(232,133,90,0.25)" stroke-width="1.5" stroke-dasharray="4,4"/>
+            <line x1="80" y1="160" x2="140" y2="200" stroke="rgba(232,133,90,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
+            <line x1="200" y1="95" x2="240" y2="60" stroke="rgba(232,133,90,0.15)" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- Veurne pin -->
+            <circle cx="80" cy="160" r="8" fill="rgba(232,133,90,0.2)" filter="url(#glow)"/>
+            <circle cx="80" cy="160" r="5" fill="#e8855a"/>
+            <text x="95" y="158" fill="white" font-size="11" font-weight="600" font-family="sans-serif">Veurne</text>
+            <text x="95" y="172" fill="#e8855a" font-size="9" font-family="sans-serif">Depot 1</text>
+            <!-- Kortrijk pin -->
+            <circle cx="200" cy="95" r="8" fill="rgba(232,133,90,0.2)" filter="url(#glow)"/>
+            <circle cx="200" cy="95" r="5" fill="#e8855a"/>
+            <text x="215" y="93" fill="white" font-size="11" font-weight="600" font-family="sans-serif">Kortrijk</text>
+            <text x="215" y="107" fill="#e8855a" font-size="9" font-family="sans-serif">Depot 2</text>
+            <!-- Small client dots -->
+            <circle cx="130" cy="130" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="160" cy="150" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="110" cy="110" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="170" cy="80" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="230" cy="130" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="60" cy="120" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="140" cy="190" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="250" cy="160" r="3" fill="rgba(255,255,255,0.3)"/>
+          </svg>
+        </div>
+        <div class="regio-map-title">WVL</div>
+      </div>
+      <div class="regio-areas">
+        <div class="regio-area-card fade-in fade-in-delay-1">
+          <div class="regio-area-icon">🏙️</div>
+          <div>
+            <div class="regio-area-name">Veurne &amp; Westkust</div>
+            <div class="regio-area-sub">Koksijde · De Panne · Diksmuide · Nieuwpoort</div>
+          </div>
+          <div class="regio-area-badge">Depot aanwezig</div>
+        </div>
+        <div class="regio-area-card fade-in fade-in-delay-2">
+          <div class="regio-area-icon">🏙️</div>
+          <div>
+            <div class="regio-area-name">Kortrijk &amp; Leiestreek</div>
+            <div class="regio-area-sub">Harelbeke · Waregem · Menen · Wervik</div>
+          </div>
+          <div class="regio-area-badge">Depot aanwezig</div>
+        </div>
+        <div class="regio-area-card fade-in fade-in-delay-3">
+          <div class="regio-area-icon">🌊</div>
+          <div>
+            <div class="regio-area-name">Brugge &amp; Kust</div>
+            <div class="regio-area-sub">Oostende · Knokke · Middelkerke · Zeebrugge</div>
+          </div>
+          <div class="regio-area-badge">Dagelijkse route</div>
+        </div>
+        <div class="regio-area-card fade-in fade-in-delay-4">
+          <div class="regio-area-icon">🌿</div>
+          <div>
+            <div class="regio-area-name">Ieper &amp; Heuvelland</div>
+            <div class="regio-area-sub">Poperinge · Roeselare · Tielt</div>
+          </div>
+          <div class="regio-area-badge">Wekelijkse route</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <div class="section-label fade-in">Ons team</div>
+    <h2 class="section-title fade-in">De mensen achter<br>elke levering</h2>
+    <p class="section-sub fade-in">Onze chauffeurs zijn meer dan bezorgers – zij zijn het gezicht van Devisch. Elke dag leveren zij niet alleen producten, maar ook vertrouwen.</p>
+    <div class="team-grid">
+      <div class="team-card fade-in fade-in-delay-1">
+        <div class="team-avatar">TJ</div>
+        <div class="team-name">Tjorven</div>
+        <div class="team-role">Chauffeur &amp; logistiek</div>
+        <div class="team-route">🚐 Route Veurne</div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-2">
+        <div class="team-avatar">JA</div>
+        <div class="team-name">Jarne</div>
+        <div class="team-role">Chauffeur &amp; logistiek</div>
+        <div class="team-route">🚐 Route Kust</div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-3">
+        <div class="team-avatar">FE</div>
+        <div class="team-name">Femija</div>
+        <div class="team-role">Chauffeur &amp; logistiek</div>
+        <div class="team-route">🚐 Route Kortrijk</div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-4">
+        <div class="team-avatar">SE</div>
+        <div class="team-name">Selmir</div>
+        <div class="team-role">Chauffeur &amp; logistiek</div>
+        <div class="team-route">🚐 Route Leiestreek</div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-5">
+        <div class="team-avatar">CH</div>
+        <div class="team-name">Christophe</div>
+        <div class="team-role">Chauffeur &amp; logistiek</div>
+        <div class="team-route">🚐 Route Ieper</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+  <div class="partners-inner">
+    <div class="partners-label fade-in">Gecertificeerd &amp; erkend door toonaangevende partners</div>
+    <div class="partners-row fade-in">
+      <div class="partner-logo">
+        <div class="partner-logo-text">oresto</div>
+        <div class="partner-logo-sub">Officieel partner</div>
+      </div>
+      <div class="partner-logo">
+        <div class="partner-logo-text">ESCA FOOD</div>
+        <div class="partner-logo-sub">Distributiepartner</div>
+      </div>
+      <div class="partner-logo">
+        <div class="partner-logo-text">FAVV</div>
+        <div class="partner-logo-sub">Levensmiddelenveiligheid</div>
+      </div>
+      <div class="partner-logo">
+        <div class="partner-logo-text">HACCP</div>
+        <div class="partner-logo-sub">Voedselveiligheid</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-label fade-in">Wat klanten zeggen</div>
+    <h2 class="section-title fade-in">Vertrouwd door<br>West-Vlaamse koks</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card fade-in fade-in-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Al vijf jaar werken we met Devisch. De chauffeurs kennen ons keukenritme, de producten zijn altijd vers en bij problemen reageren ze binnen het uur. Absoluut aanraden!"</div>
+        <div class="testi-author">
+          <div class="testi-av">MV</div>
+          <div>
+            <div class="testi-name">Marc Van De Walle</div>
+            <div class="testi-biz">Restaurant De Zilte Bries, Koksijde</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Als cateraar heb ik dagelijks verse grondstoffen nodig op exact de juiste tijd. Devisch levert zonder uitzondering. De digitale bestelbon is bovendien bijzonder handig."</div>
+        <div class="testi-author">
+          <div class="testi-av">SL</div>
+          <div>
+            <div class="testi-name">Sofie Lagrou</div>
+            <div class="testi-biz">Lagrou Catering, Kortrijk</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"De overstap naar Devisch was de beste beslissing die we hebben gemaakt. Persoonlijker, betrouwbaarder en eerlijkere prijzen dan de grote nationale spelers."</div>
+        <div class="testi-author">
+          <div class="testi-av">PD</div>
+          <div>
+            <div class="testi-name">Peter Desmet</div>
+            <div class="testi-biz">Brasserie 't Veurne, Veurne</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-title fade-in">Klaar om te starten?</h2>
+    <p class="cta-sub fade-in">Sluit u aan bij meer dan 400 horecazaken in West-Vlaanderen die dagelijks op Devisch rekenen. Vraag vandaag nog een vrijblijvend gesprek aan.</p>
+    <div class="cta-btns fade-in">
+      <a href="#contact" class="btn-white">Vrijblijvend gesprek aanvragen</a>
+      <a href="tel:+3258000000" class="btn-outline-white">Bel ons direct</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-label fade-in">Contact</div>
+    <h2 class="section-title fade-in">Laten we kennismaken</h2>
+    <p class="section-sub fade-in">Stuur ons een bericht of bel direct. We antwoorden steeds binnen de 24 uur op werkdagen.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item fade-in fade-in-delay-1">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-title">Depot Veurne</div>
+            <div class="contact-item-text">Industriezone Veurne<br>8630 Veurne, België</div>
+          </div>
+        </div>
+        <div class="contact-item fade-in fade-in-delay-2">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-title">Depot Kortrijk</div>
+            <div class="contact-item-text">Industriezone Kortrijk<br>8500 Kortrijk, België</div>
+          </div>
+        </div>
+        <div class="contact-item fade-in fade-in-delay-3">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-title">Telefoon</div>
+            <div class="contact-item-text"><a href="tel:+3258000000">+32 58 00 00 00</a><br>Ma–Vr: 7:00 – 17:00</div>
+          </div>
+        </div>
+        <div class="contact-item fade-in fade-in-delay-4">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-item-title">E-mail</div>
+            <div class="contact-item-text"><a href="mailto:info@devisch.be">info@devisch.be</a><br>We reageren binnen 24u</div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:16px;padding:24px;border:.5px solid rgba(0,0,0,.07);margin-top:8px;" class="fade-in fade-in-delay-5">
+          <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:8px;">Openingsuren depot</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            <div style="font-size:12px;color:var(--gray);">Maandag – Vrijdag</div>
+            <div style="font-size:12px;color:var(--dark);font-weight:600;">6:00 – 17:00</div>
+            <div style="font-size:12px;color:var(--gray);">Zaterdag</div>
+            <div style="font-size:12px;color:var(--dark);font-weight:600;">6:00 – 12:00</div>
+            <div style="font-size:12px;color:var(--gray);">Zondag</div>
+            <div style="font-size:12px;color:var(--gray-light);font-weight:600;">Gesloten</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form fade-in">
+        <h3>Stuur ons een bericht</h3>
+        <div id="contactFormWrap">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Voornaam</label>
+              <input type="text" id="f-voornaam" placeholder="Jan">
+            </div>
+            <div class="form-field">
+              <label>Achternaam</label>
+              <input type="text" id="f-naam" placeholder="Janssen">
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Zaak / Restaurant</label>
+            <input type="text" id="f-zaak" placeholder="Brasserie 't Centrum">
+          </div>
+          <div class="form-field">
+            <label>E-mailadres</label>
+            <input type="email" id="f-email" placeholder="jan@uw zaak.be">
+          </div>
+          <div class="form-field">
+            <label>Telefoon</label>
+            <input type="tel" id="f-tel" placeholder="+32 ...">
+          </div>
+          <div class="form-field">
+            <label>Type aanvraag</label>
+            <select id="f-type">
+              <option value="">Selecteer een optie...</option>
+              <option>Nieuw klantenaccount aanvragen</option>
+              <option>Informatie over assortiment</option>
+              <option>Vraag over levering / route</option>
+              <option>Klacht of opmerking</option>
+              <option>Andere</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Bericht</label>
+            <textarea id="f-bericht" placeholder="Vertel ons meer over uw horeca-onderneming en hoe wij u kunnen helpen..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Verzend bericht →</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">✅</div>
+          <div class="form-success-title">Bericht verzonden!</div>
+          <div class="form-success-text">Bedankt voor uw interesse in Devisch Foodservice. We nemen binnen 24 uur contact met u op.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">D</div>
+          <div class="footer-logo-name">Devisch Foodservice</div>
+        </div>
+        <div class="footer-tagline">Uw vertrouwde leverancier van horecaproducten in West-Vlaanderen. Vers, stipt en persoonlijk – elke dag opnieuw.</div>
+        <div style="margin-top:20px;display:flex;gap:10px;">
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--gray);">Veurne</div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--gray);">Kortrijk</div>
+          <div style="background:rgba(232,133,90,.15);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--orange);border:1px solid rgba(232,133,90,.2);">Oresto Partner</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Diensten</div>
+        <div class="footer-links">
+          <a href="#diensten">Dagelijkse levering</a>
+          <a href="#diensten">Gekoeld transport</a>
+          <a href="#assortiment">Assortiment</a>
+          <a href="#diensten">Bestelapp</a>
+          <a href="#diensten">Persoonlijk advies</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Bedrijf</div>
+        <div class="footer-links">
+          <a href="#waarom">Over ons</a>
+          <a href="#team">Ons team</a>
+          <a href="#regio">Levergebied</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <a href="mailto:info@devisch.be">info@devisch.be</a>
+          <a href="tel:+3258000000">+32 58 00 00 00</a>
+          <a href="#">Depot Veurne</a>
+          <a href="#">Depot Kortrijk</a>
+        </div>
+        <div style="margin-top:20px;">
+          <div class="footer-col-title">Openingsuren</div>
+          <div style="font-size:12px;color:var(--gray);line-height:2;">
+            Ma–Vr: 6:00–17:00<br>
+            Za: 6:00–12:00<br>
+            Zo: Gesloten
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-l">© 2025 Devisch Foodservice · Esca Food. Alle rechten voorbehouden.</div>
+      <div class="footer-bottom-r">
+        <a href="#">Privacybeleid</a> · <a href="#">Algemene voorwaarden</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+
+  // Mobile menu
+  function openMobileMenu(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+  function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if(id === '#') return;
+      const el = document.querySelector(id);
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+
+  // Contact form
+  function submitForm(){
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Verzenden...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contactFormWrap').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    }, 1200);
+  }
+
+  // Hero counter animation
+  function animateCounters(){
+    document.querySelectorAll('.hero-stat-n').forEach(el => {
+      const text = el.textContent;
+      const match = text.match(/(\d+)/);
+      if(!match) return;
+      const target = parseInt(match[1]);
+      const suffix = text.replace(/\d+/, '');
+      let current = 0;
+      const step = target / 40;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.innerHTML = Math.floor(current) + suffix.replace(/(\d)/, '');
+        if(current >= target) clearInterval(timer);
+      }, 30);
+    });
+  }
+  // Run counters once on load
+  window.addEventListener('load', () => setTimeout(animateCounters, 300));
+</script>
+</body>
+</html>
