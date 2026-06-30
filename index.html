@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/gilles/Downloads/index_61.html -->
+<!-- saved from url=(0058)file:///C:/Users/gilles/Downloads/Devisch_Esca_Food_7.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/c45dd58c-fa65-4536-b938-e3c26ed788b9">
+<link rel="manifest" id="pwa-manifest" href="blob:null/e8c1e777-8879-4d71-942d-6614a1877aa2">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -158,7 +158,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
 </head>
 <body>
 <div id="app">
-  <div class="toast" id="toast">✓ Foto verstuurd naar dashboard!</div>
+  <div class="toast" id="toast">Verkeerde code — probeer opnieuw</div>
 
   <!-- LOADER -->
   <div class="screen" id="s-loader" style="background:#2c2c2a;align-items:center;justify-content:center;gap:20px;">
@@ -166,7 +166,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div style="color:#888780;font-size:26px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
       <div style="color:#e8855a;font-size:15px;font-weight:500;margin-top:6px;">oresto partner</div>
     </div>
-    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ 13 klanten geladen</div>
+    <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ 2 klanten geladen</div>
   </div>
 
   <!-- LOGIN -->
@@ -179,27 +179,27 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="scroll" id="login-scroll">
       <div class="label">Kies chauffeur</div>
       <div id="driver-list">
-    <div class="card" onclick="selectDriver(&#39;TJ&#39;)">
+    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">TJ</div>
       <div><div class="name">Tjorven</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;JA&#39;)">
+    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
       <div class="av">JA</div>
       <div><div class="name">Jarne</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;FE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;FE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">FE</div>
       <div><div class="name">Femija</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;SE&#39;)">
+    <div class="card" onclick="selectDriver(&#39;SE&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">SE</div>
       <div><div class="name">Selmir</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;CH&#39;)">
+    <div class="card" onclick="selectDriver(&#39;CH&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">CH</div>
       <div><div class="name">Christophe</div></div>
       <div class="chevron">›</div>
@@ -373,7 +373,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   </div>
 
   <!-- CALENDAR -->
-  <div class="screen" id="s-calendar">
+  <div class="screen active" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
       <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA069</span>
@@ -447,8 +447,8 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       13
     </div><div class="cal-d" onclick="">
       14
-    </div><div class="cal-d has-del sel today" onclick="pickDay(15)">
-      15<div class="dot-del"></div>
+    </div><div class="cal-d" onclick="">
+      15
     </div><div class="cal-d" onclick="">
       16
     </div><div class="cal-d" onclick="">
@@ -477,15 +477,15 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       28
     </div><div class="cal-d" onclick="">
       29
-    </div><div class="cal-d" onclick="">
-      30
+    </div><div class="cal-d has-del sel today" onclick="pickDay(30)">
+      30<div class="dot-del"></div>
     </div></div>
       <div id="cal-summary"><div class="sum-bar">
     <div>
-      <div style="color:#888780;font-size:12px;">📅 Vandaag — ma 15 juni 2026</div>
-      <div style="color:#fff;font-size:20px;font-weight:600;">13 klanten</div>
+      <div style="color:#888780;font-size:12px;">📅 Vandaag — di 30 juni 2026</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">Geen leveringen</div>
     </div>
-    <button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>
+    <div style="color:#5f5e5a;font-size:12px;">Geen ritten</div>
   </div></div>
     </div>
   </div>
@@ -494,454 +494,22 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-klanten">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-calendar&#39;)">‹</button>
-      <span class="topbar-title" id="kl-title">15 jun – Jarne</span>
+      <span class="topbar-title" id="kl-title">Klanten</span>
       <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
       <button onclick="stuurDagsamenvatting()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Dagsamenvatting mailen">📊</button>
     </div>
-    <div class="scroll" id="kl-list">
-    <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:13px 15px;margin-bottom:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-size:12px;color:#888780;font-weight:500;">Dagvoortgang</span>
-        <span style="font-size:12px;font-weight:700;color:#2c2c2a;">1/13 · 10%</span>
-      </div>
-      <div style="background:#f1efe8;border-radius:6px;height:10px;overflow:hidden;">
-        <div style="background:#e8855a;height:100%;width:10%;border-radius:6px;transition:width .3s;"></div>
-      </div>
-      
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <div class="label" style="margin:0;">Klanten vandaag (13)</div>
-      <button onclick="toggleSorteer()" id="btn-sorteer" style="background:#f1efe8;color:#888780;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">
-        ⇅ Volgorde
-      </button>
-    </div>
-    
-    <div id="klant-sorteer-lijst"><div class="card" data-id="3971" data-idx="0" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(3971,0)">
-        
-        <div class="av-sq" style="background:#eaf3de;color:#3b6d11;">✓</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Cinema K-FE</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Marktplein 1, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-green">✓ Klaar</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(3971,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(3971)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Marktplein%201%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="4891" data-idx="1" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(4891,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">2</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dali Restaurant</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeedijk 332, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(4891,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(4891)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeedijk%20332%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="4735" data-idx="2" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(4735,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">3</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Eethuis Blekkertje</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeelaan 103, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(4735,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(4735)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeelaan%20103%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="6799" data-idx="3" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6799,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">4</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kommilfoo</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeedijk 279, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(6799,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(6799)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeedijk%20279%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="4265" data-idx="4" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(4265,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">5</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Malouin Brasserie</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeedijk 359, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(4265,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(4265)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeedijk%20359%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="6529" data-idx="5" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6529,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">6</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Mistral (Alize)</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Koninklijkebaan 119, 8670 KOKSIJDE</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(6529,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(6529)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Koninklijkebaan%20119%2C%208670%20KOKSIJDE" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="1274" data-idx="6" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(1274,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">7</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Mozart Restaurant bvba</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">M.Blieckstraat 6, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(1274,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(1274)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=M.Blieckstraat%206%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="5152" data-idx="7" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(5152,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">8</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Seahorse Hotel</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeelaan 254, 8670 Koksijde-Bad</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(5152,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(5152)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeelaan%20254%2C%208670%20Koksijde-Bad" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="5653" data-idx="8" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(5653,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">9</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">In 't dorp - BV Kate's Place</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeelaan 59, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(5653,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(5653)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeelaan%2059%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="590" data-idx="9" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(590,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">10</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Verdi Brasserie</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Westendestraat 1, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">2 bonnen</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(590,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(590)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Westendestraat%201%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="3900" data-idx="10" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(3900,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">11</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ID aan Zee bvba</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strandlaan 387, 8670 Koksijde</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(3900,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(3900)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Strandlaan%20387%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="6141" data-idx="11" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6141,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">12</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">L'ABBAYE</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Strandlaan 345, 8670 KOKSIJDE</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(6141,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(6141)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Strandlaan%20345%2C%208670%20KOKSIJDE" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div><div class="card" data-id="6102" data-idx="12" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6102,0)">
-        
-        <div class="av-sq" style="background:#faece7;color:#e8855a;">13</div>
-        <div style="flex:1;min-width:0;">
-          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">De Verbeelding Bras. Drank</div>
-          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeedijk 471, 8670 OOSTDUINKERKE</div>
-          
-        </div>
-        <div class="badge badge-orange">1 bon</div>
-      </div>
-      
-      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
-        <button onclick="openBonEnLeer(6102,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <button onclick="addNote(6102)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
-        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeedijk%20471%2C%208670%20OOSTDUINKERKE" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
-      </div></div></div></div>
+    <div class="scroll" id="kl-list"></div>
   </div>
 
   <!-- BON -->
-  <div class="screen active" id="s-bon">
+  <div class="screen" id="s-bon">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-klanten&#39;)">‹</button>
-      <span class="topbar-title" id="bon-klant-name">Cinema K-FE</span>
+      <span class="topbar-title" id="bon-klant-name">Bon</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="bon-tabs" id="bon-tabs" style="display:none;"></div>
-    <div class="scroll" id="bon-content"><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-    <div style="display:flex;justify-content:space-between;margin-bottom:7px;">
-      <span style="font-size:12px;color:#888780;font-weight:500;">Voortgang</span>
-      <span style="font-size:12px;font-weight:600;color:#3b6d11;">14/14 ✓ Volledig</span>
-    </div>
-    <div style="background:#f1efe8;border-radius:6px;height:8px;overflow:hidden;">
-      <div style="background:#63991a;height:100%;width:100%;border-radius:6px;transition:width .3s;"></div>
-    </div>
-    
-  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:14px;margin-bottom:10px;font-size:12px;">
-
-    <!-- Logo rij -->
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:10px;border-bottom:.5px solid rgba(0,0,0,.08);margin-bottom:10px;">
-      <div>
-        <div style="font-size:18px;font-weight:700;color:#2c2c2a;letter-spacing:-.5px;">devisch – esca food</div>
-        <div style="font-size:12px;color:#e8855a;font-weight:600;">oresto partner</div>
-      </div>
-      <div style="text-align:right;font-size:10px;color:#e8855a;font-weight:600;line-height:1.6;">
-        Devisch - Oresto Partner<br>
-        <span style="color:#888780;font-weight:400;">Devisch Foodservice bv<br>
-        Koksijdestraat 20, B-8630 Veurne<br>
-        T +32 (0)58 52 38 04<br>
-        info@devisch.be</span>
-      </div>
-    </div>
-
-    <!-- Bestelnota info -->
-    <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-      <div>
-        <div style="font-weight:700;color:#2c2c2a;font-size:13px;">BESTELNOTA 70639</div>
-        <div style="color:#888780;margin-top:2px;">Datum : 15-06-2026</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-weight:600;color:#2c2c2a;">Cinema K-FE</div>
-        <div style="color:#888780;">Marktplein 1, 8670 Koksijde</div>
-      </div>
-    </div>
-
-    <!-- Klant meta -->
-    <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:.5px solid rgba(0,0,0,.08);">
-      <div style="color:#888780;">Klantnummer 3971<br>BE0825376265</div>
-      <div style="text-align:right;color:#888780;">Chauffeur: <span style="color:#2c2c2a;font-weight:600;">Jarne</span></div>
-    </div>
-    
-  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;overflow:hidden;margin-bottom:10px;">
-    <table style="width:100%;border-collapse:collapse;font-size:11px;">
-      <thead>
-        <tr style="background:#2c2c2a;color:#fff;">
-          <th style="padding:8px 10px;text-align:left;font-weight:600;width:14%;">Code</th>
-          <th style="padding:8px 6px;text-align:left;font-weight:600;">Omschrijving</th>
-          <th style="padding:8px 6px;text-align:center;font-weight:600;width:10%;">Aantal</th>
-          <th style="padding:8px 8px;text-align:right;font-weight:600;width:12%;">Status</th>
-        </tr>
-      </thead>
-      <tbody><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">211079</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Selder geraspt 2.3 kg Oresto
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">285023</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Room 20 % 1 liter Cul. Oresto
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">12</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">111203</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Friet 7/7 2 x 5 kg Lutosa vers pr/ doos
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">301008</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Américain Spread 1.25 kg Oresto
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">235015</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Roquefort snee 100 gr
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">12</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">311140</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Pepersaus 1L Pauwels
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">311013</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Americaine Vleminckx 1l
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">171061</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Grand Marnier cord.Rou 40° /st 70 cl
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">174036</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Red Bull blik 24 x 25cl pr/kt
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">251199</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Sambal Oelek 720gr Royal Orient
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">324110</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Calamares Panko Epic 700 gr
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">226001</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Vanille roomijs Oresto Bourbon 5l - PROMO
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">3</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">323002</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Kaaskroket Oresto 25x80g Ambachtelijk
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr><tr style="background:#eaf3de;border-top:.5px solid rgba(0,0,0,.05);">
-      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">313100</td>
-      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
-        Rietsuiker Sucre de cannes 1 l Il Doge
-        
-      </td>
-      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
-      <td style="padding:8px 8px;text-align:right;"><span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span></td>
-    </tr></tbody></table></div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:4px;font-size:12px;">
-    <div style="display:flex;justify-content:space-between;padding:4px 0;">
-      <span style="color:#888780;">Netto Basis</span><span style="color:#888780;">BTW %</span><span style="color:#888780;">BTW-bedrag</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:.5px solid rgba(0,0,0,.08);padding-bottom:10px;">
-      <span style="font-weight:600;color:#2c2c2a;">€ 263.36</span>
-      <span style="color:#2c2c2a;">6,0%</span>
-      <span style="color:#2c2c2a;">€ 21.24</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;">
-      <span style="font-size:13px;font-weight:700;color:#2c2c2a;">TOTAAL TE BETALEN</span>
-      <span style="font-size:18px;font-weight:800;color:#2c2c2a;">€ 310.20</span>
-    </div>
-  </div>
-  <div style="height:24px;"></div></div>
+    <div class="scroll" id="bon-content"></div>
     <div class="bot-bar">
       <button class="btn-scan" onclick="openScan()">▣ Scannen</button>
       <button class="btn-miss" onclick="openMiss()">Ontbrekend</button>
@@ -1037,24 +605,34 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
 
     <!-- FOTO OVERLAY -->
-    <div id="foto-ov" style="display: none; position: absolute; inset: 0px; background: rgba(44, 44, 42, 0.85); z-index: 20; align-items: flex-end;">
-      <div style="background:#fff;border-radius:20px 20px 0 0;padding:22px 18px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));width:100%;max-height:85%;overflow-y:auto;">
-        <h3 style="font-size:17px;font-weight:600;color:#2c2c2a;margin-bottom:8px;">📷 Foto bij levering</h3>
-        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering.</p>
-        <div id="foto-preview" style="margin-bottom:14px;">
-      <div style="border-radius:12px;overflow:hidden;margin-bottom:4px;">
-        <img src="data:image/jpeg;base64,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" style="width:100%;border-radius:12px;max-height:220px;object-fit:cover;">
-      </div></div>
-        <label style="display:block;width:100%;background:#e8855a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;margin-bottom:8px;box-sizing:border-box;">
-          📷 Camera
-          <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(this)">
-        </label>
-        <label style="display:block;width:100%;background:#2c2c2a;color:#fff;border-radius:12px;padding:15px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;margin-bottom:8px;box-sizing:border-box;">
-          🖼 Bibliotheek
-          <input type="file" accept="image/*" style="display:none;" onchange="fotoGekozen(this)">
-        </label>
-        <button id="btn-foto-ok" style="display: block; width: 100%; background: rgb(59, 109, 17); color: rgb(255, 255, 255); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 12px; padding: 15px; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 8px;" onclick="fotoBevestigen()" disabled="">Bezig...</button>
-        <button id="btn-foto-skip" style="width: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(136, 135, 128); font-size: 13px; cursor: pointer; padding: 10px; display: none;" onclick="closeFoto()">Overslaan — geen foto</button>
+    <div class="sheet-bg" id="foto-ov" style="display:none;">
+      <div class="sheet">
+        <h3>📷 Foto bij levering</h3>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering bij <strong id="foto-klant-naam"></strong>.</p>
+        <div id="foto-preview" style="margin-bottom:14px;"></div>
+
+        <div id="foto-stap-kiezen">
+          <label style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#e8855a;color:#fff;border-radius:12px;padding:16px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;">
+            📷 Camera
+            <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(this)">
+          </label>
+          <label style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#2c2c2a;color:#fff;border-radius:12px;padding:16px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;">
+            🖼 Bibliotheek
+            <input type="file" accept="image/*" style="display:none;" onchange="fotoGekozen(this)">
+          </label>
+        </div>
+
+        <div id="foto-stap-verstuur" style="display:none;">
+          <button id="btn-foto-verstuur" style="width:100%;background:#3b6d11;color:#fff;border:none;border-radius:12px;padding:18px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px;" onclick="fotoVerstuurKlik(this)">
+            📤 Foto versturen naar dashboard
+          </button>
+          <label style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;background:#f5f4f0;color:#444;border-radius:12px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;">
+            🔄 Andere foto nemen
+            <input type="file" accept="image/*" style="display:none;" onchange="fotoGekozen(this)">
+          </label>
+        </div>
+
+        <button class="btn-ghost" onclick="closeFoto()">Annuleren</button>
       </div>
     </div>
 
@@ -1077,22 +655,27 @@ const SUPA_KEY='sb_publishable_tIPI6f4RfE4a5DCfibFn5Q_NVZPvlbN';
 
 async function supaFetch(endpoint, method='GET', body=null){
   try{
-    const headers={
-      'Content-Type':'application/json',
-      'apikey':SUPA_KEY,
-      'Authorization':'Bearer '+SUPA_KEY,
-      'Accept':'application/json',
-    };
-    if(method==='POST'||method==='PATCH')headers['Prefer']='return=representation';
-    if(method==='DELETE')headers['Prefer']='return=minimal';
+    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+    if(method==='DELETE'||method==='PATCH'||method==='POST'){
+      headers['Prefer']='return=minimal';
+    }
     const opts={method,headers};
     if(body)opts.body=JSON.stringify(body);
+    // Timeout van 10 seconden zodat de app nooit oneindig blijft hangen
+    const controller=new AbortController();
+    const timeoutId=setTimeout(()=>controller.abort(),10000);
+    opts.signal=controller.signal;
     const r=await fetch(SUPA_URL+'/rest/v1/'+endpoint,opts);
-    if(r.status===204)return true;
-    if(!r.ok){console.warn('Supabase fout:',r.status);return null;}
+    clearTimeout(timeoutId);
+    if(r.status===204)return true; // No content (DELETE/PATCH)
+    if(!r.ok){
+      const err=await r.text();
+      console.warn('Supabase fout:',r.status,err.substring(0,200));
+      return null;
+    }
     const txt=await r.text();
-    if(!txt||txt==='null')return null;
-    try{return JSON.parse(txt);}catch(e){return null;}
+    if(!txt)return true;
+    try{return JSON.parse(txt);}catch(e){return true;}
   }catch(e){console.warn('Supabase fout:',e.message);return null;}
 }
 
@@ -1112,48 +695,27 @@ async function slaLeveringOp(){
   );
 }
 
-
-// ── OFFLINE SYNC ──────────────────────────────────────
-function queueOfflineUpdate(payload){
-  try{const q=JSON.parse(localStorage.getItem('offline_queue')||'[]');
-  const idx=q.findIndex(x=>x.datum===payload.datum&&x.chauffeur_id===payload.chauffeur_id&&x.product_id===payload.product_id);
-  if(idx>=0)q[idx]=payload;else q.push(payload);
-  localStorage.setItem('offline_queue',JSON.stringify(q));}catch(e){}
-}
-async function flushOfflineQueue(){
-  try{const q=JSON.parse(localStorage.getItem('offline_queue')||'[]');
-  if(!q.length)return;const gelukt=[];
-  for(const p of q){
-    await supaFetch(`voortgang?datum=eq.${encodeURIComponent(p.datum)}&chauffeur_id=eq.${p.chauffeur_id}&product_id=eq.${p.product_id}`,'DELETE');
-    const r=await supaFetch('voortgang','POST',p);if(r!==null)gelukt.push(p);
-  }
-  if(gelukt.length){const rest=q.filter(x=>!gelukt.includes(x));localStorage.setItem('offline_queue',JSON.stringify(rest));showToast(`✓ ${gelukt.length} offline update(s) gesynchroniseerd`);}}catch(e){}
-}
-async function stuurWachtendeFotos(){
-  try{const wacht=JSON.parse(localStorage.getItem('fotos_wacht')||'[]');
-  if(!wacht.length)return;const gelukt=[];
-  for(const f of wacht){const r=await supaFetch('fotos','POST',f);if(r!==null)gelukt.push(f);}
-  if(gelukt.length){const rest=wacht.filter(f=>!gelukt.includes(f));localStorage.setItem('fotos_wacht',JSON.stringify(rest));showToast(`✓ ${gelukt.length} foto(s) verstuurd`);}}catch(e){}
-}
-function updateOnlineBanner(){
-  let banner=document.getElementById('offline-banner');
-  if(navigator.onLine){if(banner)banner.remove();flushOfflineQueue();stuurWachtendeFotos();}
-  else if(!banner){banner=document.createElement('div');banner.id='offline-banner';
-    banner.style.cssText='position:fixed;top:0;left:0;right:0;background:#a32d2d;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:6px 16px;z-index:100;';
-    banner.textContent='📵 Geen internet — voortgang wordt lokaal opgeslagen';document.body.appendChild(banner);}
-}
-window.addEventListener('online',updateOnlineBanner);
-window.addEventListener('offline',updateOnlineBanner);
-
 // Update voortgang in Supabase (realtime)
 async function updateVoortgangSupabase(klant, bon, prod){
   if(!selDriver)return;
   const datum=localStorage.getItem('def_loaded_date')||'';
-  const payload={datum,chauffeur_id:selDriver.id,klant_id:klant.id,klant_naam:klant.name,bon_num:bon.num,product_id:prod.id,product_naam:prod.name,product_code:prod.code,gescand:prod.scanned,totaal:prod.qty,missing:prod.missing||false,miss_reden:prod.missReden||''};
-  if(!navigator.onLine){queueOfflineUpdate(payload);return;}
+  // Verwijder eerst bestaande rij voor dit product
   await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datum)}&chauffeur_id=eq.${selDriver.id}&product_id=eq.${prod.id}`,'DELETE');
-  const r=await supaFetch('voortgang','POST',payload);
-  if(r===null)queueOfflineUpdate(payload);
+  // Voeg nieuwe rij in
+  await supaFetch('voortgang','POST',{
+    datum,
+    chauffeur_id:selDriver.id,
+    klant_id:klant.id,
+    klant_naam:klant.name,
+    bon_num:bon.num,
+    product_id:prod.id,
+    product_naam:prod.name,
+    product_code:prod.code,
+    gescand:prod.scanned,
+    totaal:prod.qty,
+    missing:prod.missing||false,
+    miss_reden:prod.missReden||''
+  });
 }
 
 // Stuur notificatie via Supabase
@@ -1261,9 +823,8 @@ let KLANTEN=[];
 let RAW_KLANTEN_FALLBACK=RAW_KLANTEN;
 
 // State
-let selDriver=null, pinVal='';
-const _nu=new Date();
-let calY=_nu.getFullYear(), calM=_nu.getMonth(), selDay=_nu.getDate();
+const _vandaag=new Date();
+let selDriver=null, pinVal='', calY=_vandaag.getFullYear(), calM=_vandaag.getMonth(), selDay=_vandaag.getDate();
 let aktKlant=null, aktBonIdx=0, missToggles={};
 let appReady=false;
 
@@ -1441,80 +1002,111 @@ function renderCodes(lijst){
 }
 
 async function loadAppData(){
-  const isOpstart=!selDriver;
+  showLoader('Data laden...');
 
-  // Laad chauffeur config
+  // Bewaar altijd de standaard chauffeurs als fallback
+  const DEFAULT_DRIVERS=[
+    {id:'TJ',name:'Tjorven',pin:'1111'},
+    {id:'JA',name:'Jarne',pin:'2222'},
+    {id:'FE',name:'Femija',pin:'3333'},
+    {id:'SE',name:'Selmir',pin:'4444'},
+    {id:'CH',name:'Christophe',pin:'5555'},
+  ];
+
+  // Laad chauffeur config uit Supabase
   try{
     const config=await supaFetch(`notificaties?van=eq.SYSTEEM&naar=eq.CHAUFFEUR_CONFIG&gelezen=eq.false&order=created_at.desc&limit=1`);
     if(config&&config.length>0){
       const drivers=JSON.parse(config[0].tekst);
-      if(drivers&&drivers.length===5){DRIVERS.length=0;drivers.forEach(x=>DRIVERS.push(x));}
+      if(drivers&&drivers.length===5){
+        // Alleen vervangen als alle 5 chauffeurs aanwezig zijn
+        DRIVERS.length=0;drivers.forEach(x=>DRIVERS.push(x));
+      }
+      // Anders: behoud de standaard DRIVERS array
     }
-  }catch(e){}
-  renderDrivers();
-
-  // Bij opstarten: toon login en stop hier
-  if(isOpstart){
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('s-login').classList.add('active');
-    appReady=true;
-    return;
+  }catch(e){
+    // Fout: behoud standaard DRIVERS
+    console.log('Config niet geladen, gebruik standaard drivers');
   }
 
-  // Na voertuigkeuze: laad ritten
-  showLoader('Ritten laden...');
-
-  // 1. Supabase
+  // 1. Probeer eerst Supabase — geen datumfilter, meest recente data
   try{
     const nu=new Date();
-    const datumVandaag=`${String(nu.getDate()).padStart(2,'0')}-${String(nu.getMonth()+1).padStart(2,'0')}-${nu.getFullYear()}`;
-    const supLev=await supaFetch(`leveringen?datum=eq.${encodeURIComponent(datumVandaag)}&order=created_at.desc&limit=20`);
+    // Haal de meest recente leveringen op (geen strict datumfilter)
+    const supLev=await supaFetch(`leveringen?order=created_at.desc&limit=20`);
     if(supLev&&supLev.length>0){
-      let gevonden=supLev.find(r=>r.chauffeur_id===selDriver.id);
-      if(!gevonden)gevonden=supLev.find(r=>r.chauffeur_id==='ALL'&&r.klanten?.klanten?.some(k=>k.chauffeur===selDriver.id));
+      // Zoek eerst rij specifiek voor deze chauffeur
+      let gevonden=supLev.find(r=>r.chauffeur_id===selDriver?.id);
+      // Fallback: zoek rij met klanten voor deze chauffeur
+      if(!gevonden)gevonden=supLev.find(r=>r.klanten?.klanten?.some(k=>k.chauffeur===selDriver?.id));
+      // Laatste fallback: nieuwste rij
+      if(!gevonden)gevonden=supLev[0];
+
       if(gevonden&&gevonden.klanten&&gevonden.klanten.klanten){
         const d=gevonden.klanten;
+        const gebruikteDatum=gevonden.datum||`${String(nu.getDate()).padStart(2,'0')}-${String(nu.getMonth()+1).padStart(2,'0')}-${nu.getFullYear()}`;
         if(d.deliveryDays&&d.deliveryDays.length>0){DEL_DAYS.length=0;d.deliveryDays.forEach(x=>DEL_DAYS.push(x));}
+        // Filter klanten voor deze chauffeur
         const alleKlanten=d.klanten||[];
-        const mijnKlanten=alleKlanten.filter(k=>k.chauffeur===selDriver.id);
+        const mijnKlanten=alleKlanten.filter(k=>k.chauffeur===selDriver?.id);
         KLANTEN=cloneData(mijnKlanten.length>0?mijnKlanten:alleKlanten);
+        // Bewaar offline
         localStorage.setItem('def_klanten',JSON.stringify(KLANTEN));
-        localStorage.setItem('def_loaded_date',datumVandaag);
-        localStorage.setItem('def_chauffeur_id',selDriver.id);
-        calY=nu.getFullYear();calM=nu.getMonth();selDay=nu.getDate();
+        localStorage.setItem('def_loaded_date',gebruikteDatum);
+        localStorage.setItem('def_data_date',gebruikteDatum);
+        localStorage.setItem('def_chauffeur_id',selDriver?.id||'');
+        // Zet kalender op de datum van de geladen data
+        const dParts=gebruikteDatum.split('-');
+        if(dParts.length===3){calY=parseInt(dParts[2]);calM=parseInt(dParts[1])-1;selDay=parseInt(dParts[0]);}
+        else{calY=nu.getFullYear();calM=nu.getMonth();selDay=nu.getDate();}
+        showLoader(`✓ ${KLANTEN.length} klanten geladen`);
+        setTimeout(hideLoader,600);
         // Herstel voortgang
-        const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datumVandaag)}&chauffeur_id=eq.${selDriver.id}&order=updated_at.desc`);
+        const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(gebruikteDatum)}&chauffeur_id=eq.${selDriver?.id||''}&order=updated_at.desc`);
         if(vData&&vData.length>0){
           vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
         }
-        showLoader(`✓ ${KLANTEN.length} klanten geladen`);
-        setTimeout(()=>{renderCalendar();go('s-calendar');appReady=true;},600);
+        renderDrivers();appReady=true;
         return;
       }
     }
   }catch(e){console.log('Supabase niet beschikbaar - gebruik offline data');}
 
-  // 2. Offline fallback
+  // 2. Offline fallback: gebruik lokaal opgeslagen data (niet datumgebonden)
   try{
     const savedKlanten=localStorage.getItem('def_klanten');
     const savedDate=localStorage.getItem('def_loaded_date');
     const savedChauffeur=localStorage.getItem('def_chauffeur_id');
-    const nu=new Date();
-    const datumVandaag=`${String(nu.getDate()).padStart(2,'0')}-${String(nu.getMonth()+1).padStart(2,'0')}-${nu.getFullYear()}`;
-    if(savedKlanten&&savedDate===datumVandaag&&savedChauffeur===selDriver.id){
+    if(savedKlanten&&savedChauffeur===selDriver?.id){
       KLANTEN=cloneData(JSON.parse(savedKlanten));
-      const parts=savedDate.split('-');
-      calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);
+      if(savedDate){
+        const parts=savedDate.split('-');
+        if(parts.length===3){calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);}
+      }
       loadScanProgress();
       showLoader('📱 Offline — lokale data geladen');
-      setTimeout(()=>{renderCalendar();go('s-calendar');appReady=true;},800);
+      setTimeout(hideLoader,800);
+      renderDrivers();appReady=true;
       return;
     }
   }catch(e){}
 
-  // 3. Geen data
+  // 3. Geen data beschikbaar
   showLoader('Geen ritten gevonden voor vandaag');
-  setTimeout(()=>{renderCalendar();go('s-calendar');appReady=true;},1500);
+  setTimeout(()=>{hideLoader();renderDrivers();appReady=true;},1500);
+
+  // 3. Herstel voortgang
+  const datum=localStorage.getItem('def_loaded_date')||'';
+  try{
+    const supData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datum)}&order=updated_at.desc`);
+    if(supData&&supData.length>0){
+      supData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
+    }
+  }catch(e){loadScanProgress();}
+
+  const parts=datum.split('-');
+  if(parts.length===3){calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);}
+  renderDrivers();appReady=true;
 }
 
 // Navigation
@@ -1637,8 +1229,8 @@ function kiesVoertuig(numplaat){
     localStorage.setItem('recent_voertuigen_'+(selDriver?.id||''),JSON.stringify(recent));
   }catch(e){}
   document.getElementById('cal-driver-name').textContent=selDriver.name+' · '+selVoertuig;
-  // Laad data nu chauffeur en voertuig bekend zijn
-  loadAppData();
+  renderCalendar();
+  go('s-calendar');
   // Controleer op berichten van kantoor
   setTimeout(checkNotificaties, 500);
 }
@@ -1660,8 +1252,8 @@ function renderCalendar(){
     const dataM=dataParts.length===3?parseInt(dataParts[1])-1:-1;
     const dataY=dataParts.length===3?parseInt(dataParts[2]):0;
     const isDel=d===dataD&&calM===dataM&&calY===dataY;
-    const isSel=d===selDay&&calM===dataM&&calY===dataY;
-    const nu2=new Date();const isToday=d===nu2.getDate()&&calM===nu2.getMonth()&&calY===nu2.getFullYear();
+    const isSel=d===selDay;
+    const _nu=new Date();const isToday=d===_nu.getDate()&&calM===_nu.getMonth()&&calY===_nu.getFullYear();
     grid.innerHTML+=`<div class="cal-d${isDel?' has-del':''}${isSel?' sel':''}${isToday?' today':''}" onclick="${isDel?`pickDay(${d})`:''}">
       ${d}${isDel?`<div class="dot-del"></div>`:''}
     </div>`;
@@ -2041,7 +1633,6 @@ function renderBon(){
     const statusIcon=p.missing?`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`
       :done?'<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>'
       :`<span style="color:#888780;">${p.scanned}/${p.qty}</span>`;
-    const manualBtn=(!done&&!p.missing)?`<button onclick="manuaalAfvinken('${p.id}')" style="display:block;width:100%;margin-top:5px;padding:4px 6px;background:#f5f4f0;border:0.5px solid rgba(0,0,0,.15);border-radius:6px;font-size:10px;color:#888780;cursor:pointer;text-align:center;">✓ Handmatig afvinken</button>`:'';
     html+=`<tr style="background:${bg};border-top:.5px solid rgba(0,0,0,.05);">
       <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">${p.code}</td>
       <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
@@ -2049,7 +1640,7 @@ function renderBon(){
         ${p.ean?`<div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">${p.ean}</div>`:''}
       </td>
       <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">${p.qty}</td>
-      <td style="padding:8px 8px;text-align:right;">${statusIcon}${manualBtn}</td>
+      <td style="padding:8px 8px;text-align:right;">${statusIcon}</td>
     </tr>`;
   });
 
@@ -2074,22 +1665,6 @@ function renderBon(){
 
   el.innerHTML=html;
   el.scrollTop=0;
-}
-
-function manuaalAfvinken(prodId){
-  if(!aktKlant)return;
-  const bon=aktKlant.bons[aktBonIdx];
-  const p=bon.prods.find(x=>x.id===prodId);
-  if(!p||p.missing)return;
-  p.scanned=p.qty;
-  showToast('✓ Handmatig afgevinkt — '+p.code);
-  updateVoortgangSupabase(aktKlant,bon,p);
-  const ki=KLANTEN.findIndex(k=>k.id===aktKlant.id);
-  KLANTEN[ki]=aktKlant;
-  saveState();
-  renderBon();
-  const allDone=bon.prods.every(x=>x.scanned>=x.qty||x.missing);
-  if(allDone)setTimeout(showAlleGescand,400);
 }
 
 // ── SCAN ──────────────────────────────────────────────
@@ -2608,95 +2183,120 @@ function openFoto(klantId, bonNum){
   fotoKlantId=klantId;
   fotoBonNum=bonNum;
   fotoData=null;
+  const k=KLANTEN.find(x=>x.id===klantId);
+  const naamEl=document.getElementById('foto-klant-naam');
+  if(naamEl)naamEl.textContent=k?.name||'';
   document.getElementById('foto-preview').innerHTML='';
-  document.getElementById('btn-foto-ok').style.display='none';
-  document.getElementById('btn-foto-skip').style.display='block';
+  document.getElementById('foto-stap-kiezen').style.display='block';
+  document.getElementById('foto-stap-verstuur').style.display='none';
+  const btn=document.getElementById('btn-foto-verstuur');
+  if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+  // Reset alle file inputs in de overlay
+  document.querySelectorAll('#foto-ov input[type=file]').forEach(i=>i.value='');
   document.getElementById('foto-ov').style.display='flex';
 }
-function fotoBgClick(e){}
-
-function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
-function fotoBgClick(e){}
 
 function fotoGekozen(input){
   const file=input.files[0];
   if(!file)return;
-  // createImageBitmap werkt betrouwbaar op iOS (new Image+onload niet altijd)
-  createImageBitmap(file).then(bitmap=>{
-    const canvas=document.createElement('canvas');
-    const maxW=900;
-    const scale=Math.min(1,maxW/bitmap.width);
-    canvas.width=Math.round(bitmap.width*scale);
-    canvas.height=Math.round(bitmap.height*scale);
-    canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
-    fotoData=canvas.toDataURL('image/jpeg',0.75);
-    document.getElementById('foto-preview').innerHTML=`
-      <div style="border-radius:12px;overflow:hidden;margin-bottom:4px;">
-        <img src="${fotoData}" style="width:100%;border-radius:12px;max-height:220px;object-fit:cover;">
-      </div>`;
-    document.getElementById('btn-foto-ok').style.display='block';
-    document.getElementById('btn-foto-skip').style.display='none';
-  }).catch(()=>{
-    // Fallback: FileReader zonder resize
-    const reader=new FileReader();
-    reader.onload=r=>{
-      fotoData=r.result;
-      document.getElementById('foto-preview').innerHTML=`
-        <div style="border-radius:12px;overflow:hidden;margin-bottom:4px;">
-          <img src="${fotoData}" style="width:100%;border-radius:12px;max-height:220px;object-fit:cover;">
-        </div>`;
-      document.getElementById('btn-foto-ok').style.display='block';
-      document.getElementById('btn-foto-skip').style.display='none';
+  const reader=new FileReader();
+  reader.onload=function(r){
+    const img=new Image();
+    img.onload=function(){
+      const canvas=document.createElement('canvas');
+      const maxW=800;
+      const scale=Math.min(1,maxW/img.width);
+      canvas.width=img.width*scale;
+      canvas.height=img.height*scale;
+      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+      fotoData=canvas.toDataURL('image/jpeg',0.75);
+      document.getElementById('foto-preview').innerHTML=
+        '<div style="position:relative;border-radius:12px;overflow:hidden;margin-bottom:8px;">' +
+        '<img src="'+fotoData+'" style="width:100%;border-radius:12px;max-height:260px;object-fit:cover;">' +
+        '<div style="position:absolute;top:8px;left:8px;background:rgba(44,44,42,.75);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">📷 Foto klaar</div>' +
+        '</div>';
+      document.getElementById('foto-stap-kiezen').style.display='none';
+      document.getElementById('foto-stap-verstuur').style.display='block';
+      const btn=document.getElementById('btn-foto-verstuur');
+      if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+      input.value='';
     };
-    reader.readAsDataURL(file);
-  });
+    img.src=r.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function fotoOpnieuw(){
+  fotoData=null;
+  document.getElementById('foto-preview').innerHTML='';
+  document.getElementById('foto-stap-kiezen').style.display='block';
+  document.getElementById('foto-stap-verstuur').style.display='none';
+  const btn=document.getElementById('btn-foto-verstuur');
+  if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+}
+
+function fotoVerstuurKlik(btn){
+  btn.disabled=true;
+  btn.textContent='⏳ Versturen...';
+  fotoBevestigen();
 }
 
 async function fotoBevestigen(){
-  if(!fotoData||!fotoKlantId)return;
-  const btn=document.getElementById('btn-foto-ok');
-  if(btn){btn.disabled=true;btn.textContent='Bezig...';}
+  const btn=document.getElementById('btn-foto-verstuur');
+  // Failsafe: na 12 seconden altijd de overlay sluiten, ongeacht wat er gebeurt
+  const failsafe=setTimeout(()=>{
+    console.warn('Foto versturen: failsafe getriggerd (timeout)');
+    closeFoto();
+    showToast('⚠ Verbinding duurt te lang — probeer opnieuw');
+    if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+  },12000);
   try{
+    if(!fotoKlantId||!fotoData){clearTimeout(failsafe);closeFoto();return;}
     const k=KLANTEN.find(x=>x.id===fotoKlantId);
     const datum=localStorage.getItem('def_loaded_date')||'';
-    // Verklein stapsgewijs via createImageBitmap
+    // Verklein extra als te groot (doel: onder 700KB base64)
     let fotoVersturen=fotoData;
-    const comp=async(src,maxW,kw)=>{
-      const r=await fetch(src);const bl=await r.blob();
-      const bm=await createImageBitmap(bl);
-      const c=document.createElement('canvas');
-      const sc=Math.min(1,maxW/bm.width);
-      c.width=Math.round(bm.width*sc);c.height=Math.round(bm.height*sc);
-      c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
-      return c.toDataURL('image/jpeg',kw);
-    };
-    if(fotoVersturen.length>300000)fotoVersturen=await comp(fotoVersturen,800,0.7);
-    if(fotoVersturen.length>200000)fotoVersturen=await comp(fotoVersturen,600,0.5);
-    if(fotoVersturen.length>150000)fotoVersturen=await comp(fotoVersturen,400,0.4);
-    // Lokaal opslaan
+    if(fotoData.length>700000){
+      const img=new Image();
+      await new Promise(res=>{img.onload=res;img.src=fotoData;});
+      const canvas=document.createElement('canvas');
+      const maxW=600;
+      const scale=Math.min(1,maxW/img.width);
+      canvas.width=img.width*scale;
+      canvas.height=img.height*scale;
+      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+      fotoVersturen=canvas.toDataURL('image/jpeg',0.55);
+    }
+    // Sla lokaal op
     if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoVersturen;saveState();}
-    // Naar Supabase
-    const payload={datum,chauffeur_id:selDriver?.id||'',klant_id:fotoKlantId,klant_naam:k?.name||'',bon_num:fotoBonNum,foto_data:fotoVersturen};
-    const resp=await fetch(SUPA_URL+'/rest/v1/fotos',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'},
-      body:JSON.stringify(payload)
+    // Stuur naar Supabase
+    const r=await supaFetch('fotos','POST',{
+      datum,
+      chauffeur_id:selDriver?.id||'',
+      chauffeur_naam:selDriver?.name||'',
+      klant_id:fotoKlantId,
+      klant_naam:k?.name||'',
+      bon_num:fotoBonNum,
+      foto_data:fotoVersturen
     });
-    const tekst=await resp.text();
+    clearTimeout(failsafe);
     closeFoto();
-    if(resp.ok||resp.status===201||resp.status===204){
+    if(r!==null){
       showToast('✓ Foto verstuurd naar dashboard!');
     } else {
-      showToast('✗ '+resp.status+': '+tekst.substring(0,60));
+      showToast('⚠ Geen verbinding — foto lokaal bewaard');
     }
   }catch(e){
-    closeFoto();
-    showToast('⚠ '+e.message);
+    clearTimeout(failsafe);
+    console.error('Foto fout:',e);
+    if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+    showToast('⚠ Fout: '+e.message);
   }
 }
 
-async function stuurWachtendeFotos(){}
-
+function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
+function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
+function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
 
 // ── PUSH NOTIFICATIES ──
 function checkNotificaties(){
@@ -2817,7 +2417,6 @@ function checkInstallHint(){
 }
 function dismissInstall(el){localStorage.setItem('install_dismissed','1');el.remove();}
 checkInstallHint();
-updateOnlineBanner();
 loadAppData();
 
 // Controleer elke 30 seconden op nieuwe notificaties
