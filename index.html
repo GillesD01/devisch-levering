@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/gilles/Downloads/Devisch_Esca_Food_7.html -->
+<!-- saved from url=(0059)file:///C:/Users/gilles/Downloads/Devisch_Esca_Food_10.html -->
 <html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="Devisch Levering">
 <meta name="theme-color" content="#2c2c2a">
 <title>Devisch – Esca Food</title>
-<link rel="manifest" id="pwa-manifest" href="blob:null/e8c1e777-8879-4d71-942d-6614a1877aa2">
+<link rel="manifest" id="pwa-manifest" href="blob:null/9b0de8f1-bb47-45ca-9397-788dbd15688e">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
@@ -158,7 +158,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
 </head>
 <body>
 <div id="app">
-  <div class="toast" id="toast">Verkeerde code — probeer opnieuw</div>
+  <div class="toast" id="toast">⚠ Niet verstuurd: HTTP 400: {"code":"PGRST204","details":null,"hint":null,"message":"Could not find the 'chauffeur_naam' column of 'fotos' in the schema cache"}</div>
 
   <!-- LOADER -->
   <div class="screen" id="s-loader" style="background:#2c2c2a;align-items:center;justify-content:center;gap:20px;">
@@ -179,12 +179,12 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div class="scroll" id="login-scroll">
       <div class="label">Kies chauffeur</div>
       <div id="driver-list">
-    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
+    <div class="card" onclick="selectDriver(&#39;TJ&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
       <div class="av">TJ</div>
       <div><div class="name">Tjorven</div></div>
       <div class="chevron">›</div>
     </div>
-    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgb(232, 133, 90); background: rgb(250, 236, 231);">
+    <div class="card" onclick="selectDriver(&#39;JA&#39;)" style="border-color: rgba(0, 0, 0, 0.09); background: rgb(255, 255, 255);">
       <div class="av">JA</div>
       <div><div class="name">Jarne</div></div>
       <div class="chevron">›</div>
@@ -205,7 +205,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div class="chevron">›</div>
     </div></div>
       <div id="pin-area" style="display: block;">
-        <div class="label" id="pin-label">Code voor Jarne</div>
+        <div class="label" id="pin-label">Code voor Tjorven</div>
         <div class="pin-dots" id="pin-dots">
           <div class="dot"></div><div class="dot"></div>
           <div class="dot"></div><div class="dot"></div>
@@ -232,19 +232,12 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-voertuig">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="vrt-driver-name">Jarne</span>
+      <span class="topbar-title" id="vrt-driver-name">Tjorven</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="scroll">
       <div class="label">Kies jouw bestelwagen vandaag</div>
-      <div id="voertuig-list"><div class="card" onclick="kiesVoertuig(&#39;2DJA069&#39;)" style="margin-bottom:8px;">
-      <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">2DJA069</div>
-        
-      </div>
-      <div class="chevron">›</div>
-    </div><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
+      <div id="voertuig-list"><div class="card" onclick="kiesVoertuig(&#39;1FDN178&#39;)" style="margin-bottom:8px;">
       <div style="width:42px;height:42px;border-radius:10px;background:#f1efe8;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚐</div>
       <div style="flex:1;min-width:0;">
         <div style="font-size:15px;font-weight:700;color:#2c2c2a;font-family:monospace;letter-spacing:1px;">1FDN178</div>
@@ -376,7 +369,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen active" id="s-calendar">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-login&#39;)">‹</button>
-      <span class="topbar-title" id="cal-driver-name">Jarne · 2DJA069</span>
+      <span class="topbar-title" id="cal-driver-name">Tjorven · 1FDN178</span>
       <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
       <button onclick="openNotifStuur()" style="background:none;border:none;color:#e8855a;font-size:20px;cursor:pointer;padding:0;position:relative;" title="Bericht sturen">
         🔔
@@ -483,9 +476,9 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
       <div id="cal-summary"><div class="sum-bar">
     <div>
       <div style="color:#888780;font-size:12px;">📅 Vandaag — di 30 juni 2026</div>
-      <div style="color:#fff;font-size:20px;font-weight:600;">Geen leveringen</div>
+      <div style="color:#fff;font-size:20px;font-weight:600;">2 klanten</div>
     </div>
-    <div style="color:#5f5e5a;font-size:12px;">Geen ritten</div>
+    <button onclick="openKlanten()" style="background:#e8855a;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;">Bekijk lijst ›</button>
   </div></div>
     </div>
   </div>
@@ -494,22 +487,216 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
   <div class="screen" id="s-klanten">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-calendar&#39;)">‹</button>
-      <span class="topbar-title" id="kl-title">Klanten</span>
+      <span class="topbar-title" id="kl-title">30 jun – Tjorven</span>
       <button onclick="openCodes()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Codes klanten">🔑</button>
       <button onclick="stuurDagsamenvatting()" style="background:none;border:none;color:#e8855a;font-size:18px;cursor:pointer;padding:0 4px;" title="Dagsamenvatting mailen">📊</button>
     </div>
-    <div class="scroll" id="kl-list"></div>
+    <div class="scroll" id="kl-list">
+    <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:13px 15px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:12px;color:#888780;font-weight:500;">Dagvoortgang</span>
+        <span style="font-size:12px;font-weight:700;color:#2c2c2a;">0/2 · 0%</span>
+      </div>
+      <div style="background:#f1efe8;border-radius:6px;height:10px;overflow:hidden;">
+        <div style="background:#e8855a;height:100%;width:0%;border-radius:6px;transition:width .3s;"></div>
+      </div>
+      
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div class="label" style="margin:0;">Klanten vandaag (2)</div>
+      <button onclick="toggleSorteer()" id="btn-sorteer" style="background:#f1efe8;color:#888780;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;">
+        ⇅ Volgorde
+      </button>
+    </div>
+    
+    <div id="klant-sorteer-lijst"><div class="card" data-id="6801" data-idx="0" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6801,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">1</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">BISTRO NOVA VOF ( ONTVANGEN )</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zeelaan(kok) 184, 8670 Koksijde</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(6801,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(6801)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Zeelaan(kok)%20184%2C%208670%20Koksijde" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div><div class="card" data-id="6812" data-idx="1" style="flex-direction: column; align-items: stretch; padding: 0px; overflow: hidden; margin-bottom: 9px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;" onclick="openBonEnLeer(6812,0)">
+        
+        <div class="av-sq" style="background:#faece7;color:#e8855a;">2</div>
+        <div style="flex:1;min-width:0;">
+          <div class="name" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">SONIA'S EN CLAUDES FOODBAR BV</div>
+          <div style="font-size:12px;color:#888780;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">LEOPOLD II LAAN 6, 8670 Oostduinkerke</div>
+          
+        </div>
+        <div class="badge badge-orange">1 bon</div>
+      </div>
+      
+      <div style="display:flex;border-top:.5px solid rgba(0,0,0,.06);">
+        <button onclick="openBonEnLeer(6812,0)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📋 Bon</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <button onclick="addNote(6812)" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">📝 Notitie</button>
+        <div style="width:.5px;background:rgba(0,0,0,.06);"></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=LEOPOLD%20II%20LAAN%206%2C%208670%20Oostduinkerke" target="_blank" style="flex:1;background:none;border:none;padding:9px;font-size:12px;color:#888780;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;">🗺️ Route</a>
+      </div></div></div></div>
   </div>
 
   <!-- BON -->
   <div class="screen" id="s-bon">
     <div class="topbar">
       <button class="topbar-back" onclick="go(&#39;s-klanten&#39;)">‹</button>
-      <span class="topbar-title" id="bon-klant-name">Bon</span>
+      <span class="topbar-title" id="bon-klant-name">BISTRO NOVA VOF ( ONTVANGEN )</span>
       <span class="topbar-sub">D–EF</span>
     </div>
     <div class="bon-tabs" id="bon-tabs" style="display:none;"></div>
-    <div class="scroll" id="bon-content"></div>
+    <div class="scroll" id="bon-content"><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:7px;">
+      <span style="font-size:12px;color:#888780;font-weight:500;">Voortgang</span>
+      <span style="font-size:12px;font-weight:600;color:#2c2c2a;">0/9</span>
+    </div>
+    <div style="background:#f1efe8;border-radius:6px;height:8px;overflow:hidden;">
+      <div style="background:#63991a;height:100%;width:0%;border-radius:6px;transition:width .3s;"></div>
+    </div>
+    
+  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:14px;margin-bottom:10px;font-size:12px;">
+
+    <!-- Logo rij -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:10px;border-bottom:.5px solid rgba(0,0,0,.08);margin-bottom:10px;">
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#2c2c2a;letter-spacing:-.5px;">devisch – esca food</div>
+        <div style="font-size:12px;color:#e8855a;font-weight:600;">oresto partner</div>
+      </div>
+      <div style="text-align:right;font-size:10px;color:#e8855a;font-weight:600;line-height:1.6;">
+        Devisch - Oresto Partner<br>
+        <span style="color:#888780;font-weight:400;">Devisch Foodservice bv<br>
+        Koksijdestraat 20, B-8630 Veurne<br>
+        T +32 (0)58 52 38 04<br>
+        info@devisch.be</span>
+      </div>
+    </div>
+
+    <!-- Bestelnota info -->
+    <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+      <div>
+        <div style="font-weight:700;color:#2c2c2a;font-size:13px;">BESTELNOTA 71964</div>
+        <div style="color:#888780;margin-top:2px;">Datum : 30-06-2026</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-weight:600;color:#2c2c2a;">BISTRO NOVA VOF ( ONTVANGEN )</div>
+        <div style="color:#888780;">Zeelaan(kok) 184, 8670 Koksijde</div>
+      </div>
+    </div>
+
+    <!-- Klant meta -->
+    <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:.5px solid rgba(0,0,0,.08);">
+      <div style="color:#888780;">Klantnummer 6436<br>BE1005195063</div>
+      <div style="text-align:right;color:#888780;">Chauffeur: <span style="color:#2c2c2a;font-weight:600;">Tjorven</span></div>
+    </div>
+    <div style="margin-top:8px;background:#f5f4f0;border-radius:6px;padding:6px 10px;font-size:11px;color:#444441;font-style:italic;">ONTVANGEN BIJ LEVERING</div>
+  </div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead>
+        <tr style="background:#2c2c2a;color:#fff;">
+          <th style="padding:8px 10px;text-align:left;font-weight:600;width:14%;">Code</th>
+          <th style="padding:8px 6px;text-align:left;font-weight:600;">Omschrijving</th>
+          <th style="padding:8px 6px;text-align:center;font-weight:600;width:10%;">Aantal</th>
+          <th style="padding:8px 8px;text-align:right;font-weight:600;width:12%;">Status</th>
+        </tr>
+      </thead>
+      <tbody><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">311080</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Risso vinaigr. bieslook 2l Vandemoortele
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/2</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">311000</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Mayonaise 10 l Oresto
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">314005</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Demi glace Garde d'Or 1L kn
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">3</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/3</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">311205</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Ketchup 1 l Oresto
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/2</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">171125</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Hendrick's Gin 70cl 41.4 °
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">161033</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Taglia nesten portie 24 x 200 gr The Smiling Cook
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">323001</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Garnalenkroket Oresto 25x80g Ambachtelijk
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">1</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/1</span></td>
+    </tr><tr style="background:#fafaf8;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">323002</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Kaaskroket Oresto 25x80g Ambachtelijk
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">2</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/2</span></td>
+    </tr><tr style="background:#fff;border-top:.5px solid rgba(0,0,0,.05);">
+      <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">111117</td>
+      <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
+        Friet Belgische Lutosa 2.5kg DV Foodservice
+        
+      </td>
+      <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">12</td>
+      <td style="padding:8px 8px;text-align:right;"><span style="color:#888780;">0/12</span></td>
+    </tr></tbody></table></div><div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:12px;padding:12px 14px;margin-bottom:4px;font-size:12px;">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;">
+      <span style="color:#888780;">Netto Basis</span><span style="color:#888780;">BTW %</span><span style="color:#888780;">BTW-bedrag</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:.5px solid rgba(0,0,0,.08);padding-bottom:10px;">
+      <span style="font-weight:600;color:#2c2c2a;">€ 254,49</span>
+      <span style="color:#2c2c2a;">6,0%</span>
+      <span style="color:#2c2c2a;">€ 22,45</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;">
+      <span style="font-size:13px;font-weight:700;color:#2c2c2a;">TOTAAL TE BETALEN</span>
+      <span style="font-size:18px;font-weight:800;color:#2c2c2a;">€ 311,11</span>
+    </div>
+  </div>
+  <div style="height:24px;"></div></div>
     <div class="bot-bar">
       <button class="btn-scan" onclick="openScan()">▣ Scannen</button>
       <button class="btn-miss" onclick="openMiss()">Ontbrekend</button>
@@ -605,13 +792,13 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     </div>
 
     <!-- FOTO OVERLAY -->
-    <div class="sheet-bg" id="foto-ov" style="display:none;">
+    <div class="sheet-bg" id="foto-ov" style="display: none;">
       <div class="sheet">
         <h3>📷 Foto bij levering</h3>
-        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering bij <strong id="foto-klant-naam"></strong>.</p>
+        <p style="font-size:13px;color:#888780;margin-bottom:14px;">Maak een foto als bewijs van aflevering bij <strong id="foto-klant-naam">BISTRO NOVA VOF ( ONTVANGEN )</strong>.</p>
         <div id="foto-preview" style="margin-bottom:14px;"></div>
 
-        <div id="foto-stap-kiezen">
+        <div id="foto-stap-kiezen" style="display: block;">
           <label style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#e8855a;color:#fff;border-radius:12px;padding:16px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:8px;">
             📷 Camera
             <input type="file" accept="image/*" capture="environment" style="display:none;" onchange="fotoGekozen(this)">
@@ -622,10 +809,8 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
           </label>
         </div>
 
-        <div id="foto-stap-verstuur" style="display:none;">
-          <button id="btn-foto-verstuur" style="width:100%;background:#3b6d11;color:#fff;border:none;border-radius:12px;padding:18px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px;" onclick="fotoVerstuurKlik(this)">
-            📤 Foto versturen naar dashboard
-          </button>
+        <div id="foto-stap-verstuur" style="display: none;">
+          <button id="btn-foto-verstuur" style="width:100%;background:#3b6d11;color:#fff;border:none;border-radius:12px;padding:18px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:8px;" onclick="fotoVerstuurKlik(this)">📤 Foto versturen naar dashboard</button>
           <label style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;background:#f5f4f0;color:#444;border-radius:12px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;">
             🔄 Andere foto nemen
             <input type="file" accept="image/*" style="display:none;" onchange="fotoGekozen(this)">
@@ -671,12 +856,17 @@ async function supaFetch(endpoint, method='GET', body=null){
     if(!r.ok){
       const err=await r.text();
       console.warn('Supabase fout:',r.status,err.substring(0,200));
+      window._laatsteSupaFout=`HTTP ${r.status}: ${err.substring(0,150)}`;
       return null;
     }
     const txt=await r.text();
     if(!txt)return true;
     try{return JSON.parse(txt);}catch(e){return true;}
-  }catch(e){console.warn('Supabase fout:',e.message);return null;}
+  }catch(e){
+    console.warn('Supabase fout:',e.message);
+    window._laatsteSupaFout=`${e.name}: ${e.message}`;
+    return null;
+  }
 }
 
 // Laad leveringen voor chauffeur vanuit Supabase
@@ -2199,31 +2389,75 @@ function openFoto(klantId, bonNum){
 function fotoGekozen(input){
   const file=input.files[0];
   if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(r){
-    const img=new Image();
-    img.onload=function(){
-      const canvas=document.createElement('canvas');
-      const maxW=800;
-      const scale=Math.min(1,maxW/img.width);
-      canvas.width=img.width*scale;
-      canvas.height=img.height*scale;
-      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-      fotoData=canvas.toDataURL('image/jpeg',0.75);
-      document.getElementById('foto-preview').innerHTML=
-        '<div style="position:relative;border-radius:12px;overflow:hidden;margin-bottom:8px;">' +
-        '<img src="'+fotoData+'" style="width:100%;border-radius:12px;max-height:260px;object-fit:cover;">' +
-        '<div style="position:absolute;top:8px;left:8px;background:rgba(44,44,42,.75);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">📷 Foto klaar</div>' +
-        '</div>';
-      document.getElementById('foto-stap-kiezen').style.display='none';
-      document.getElementById('foto-stap-verstuur').style.display='block';
-      const btn=document.getElementById('btn-foto-verstuur');
-      if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
-      input.value='';
-    };
-    img.src=r.result;
-  };
-  reader.readAsDataURL(file);
+  verwerkFotoBestand(file,input);
+}
+
+async function verwerkFotoBestand(file,input){
+  try{
+    let bitmap=null;
+
+    // Methode 1: createImageBitmap - werkt voor HEIC, WebP, en de meeste moderne formaten
+    if(window.createImageBitmap){
+      try{
+        bitmap=await createImageBitmap(file);
+      }catch(e){
+        console.warn('createImageBitmap mislukt, val terug op <img>:',e.message);
+      }
+    }
+
+    let bronW,bronH,tekenBron;
+
+    if(bitmap){
+      bronW=bitmap.width;
+      bronH=bitmap.height;
+      tekenBron=bitmap;
+    } else {
+      // Methode 2 (terugval): via FileReader + <img>, werkt voor JPG/PNG
+      const dataUrl=await new Promise((res,rej)=>{
+        const reader=new FileReader();
+        reader.onload=()=>res(reader.result);
+        reader.onerror=()=>rej(new Error('Kon bestand niet lezen'));
+        reader.readAsDataURL(file);
+      });
+      const img=await new Promise((res,rej)=>{
+        const im=new Image();
+        im.onload=()=>res(im);
+        im.onerror=()=>rej(new Error('Bestandsformaat wordt niet ondersteund door deze browser'));
+        im.src=dataUrl;
+      });
+      bronW=img.naturalWidth||img.width;
+      bronH=img.naturalHeight||img.height;
+      tekenBron=img;
+    }
+
+    if(!bronW||!bronH)throw new Error('Ongeldige afbeelding (geen afmetingen)');
+
+    // Verklein en teken op canvas
+    const canvas=document.createElement('canvas');
+    const maxW=800;
+    const scale=Math.min(1,maxW/bronW);
+    canvas.width=Math.round(bronW*scale);
+    canvas.height=Math.round(bronH*scale);
+    canvas.getContext('2d').drawImage(tekenBron,0,0,canvas.width,canvas.height);
+    fotoData=canvas.toDataURL('image/jpeg',0.75);
+
+    if(bitmap&&bitmap.close)bitmap.close();
+
+    document.getElementById('foto-preview').innerHTML=
+      '<div style="position:relative;border-radius:12px;overflow:hidden;margin-bottom:8px;">' +
+      '<img src="'+fotoData+'" style="width:100%;border-radius:12px;max-height:260px;object-fit:cover;">' +
+      '<div style="position:absolute;top:8px;left:8px;background:rgba(44,44,42,.75);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">📷 Foto klaar</div>' +
+      '</div>';
+    document.getElementById('foto-stap-kiezen').style.display='none';
+    document.getElementById('foto-stap-verstuur').style.display='block';
+    const btn=document.getElementById('btn-foto-verstuur');
+    if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+    input.value='';
+  }catch(e){
+    console.error('Foto verwerken volledig mislukt:',e);
+    showToast('⚠ Foto kon niet verwerkt worden: '+e.message);
+    input.value='';
+  }
 }
 
 function fotoOpnieuw(){
@@ -2243,29 +2477,37 @@ function fotoVerstuurKlik(btn){
 
 async function fotoBevestigen(){
   const btn=document.getElementById('btn-foto-verstuur');
-  // Failsafe: na 12 seconden altijd de overlay sluiten, ongeacht wat er gebeurt
+  // Failsafe: na 15 seconden altijd de overlay sluiten, ongeacht wat er gebeurt
   const failsafe=setTimeout(()=>{
     console.warn('Foto versturen: failsafe getriggerd (timeout)');
     closeFoto();
-    showToast('⚠ Verbinding duurt te lang — probeer opnieuw');
+    showToast('⚠ Te lang geduurd — probeer opnieuw (controleer internet)');
     if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
-  },12000);
+  },15000);
   try{
     if(!fotoKlantId||!fotoData){clearTimeout(failsafe);closeFoto();return;}
     const k=KLANTEN.find(x=>x.id===fotoKlantId);
     const datum=localStorage.getItem('def_loaded_date')||'';
-    // Verklein extra als te groot (doel: onder 700KB base64)
+    // Verklein extra als te groot (doel: onder 700KB base64) — met eigen timeout zodat dit nooit blokkeert
     let fotoVersturen=fotoData;
     if(fotoData.length>700000){
-      const img=new Image();
-      await new Promise(res=>{img.onload=res;img.src=fotoData;});
-      const canvas=document.createElement('canvas');
-      const maxW=600;
-      const scale=Math.min(1,maxW/img.width);
-      canvas.width=img.width*scale;
-      canvas.height=img.height*scale;
-      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-      fotoVersturen=canvas.toDataURL('image/jpeg',0.55);
+      try{
+        const img=new Image();
+        await Promise.race([
+          new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=fotoData;}),
+          new Promise((_,rej)=>setTimeout(()=>rej(new Error('Foto verkleinen duurde te lang')),5000))
+        ]);
+        const canvas=document.createElement('canvas');
+        const maxW=600;
+        const scale=Math.min(1,maxW/img.width);
+        canvas.width=img.width*scale;
+        canvas.height=img.height*scale;
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        fotoVersturen=canvas.toDataURL('image/jpeg',0.55);
+      }catch(resizeErr){
+        console.warn('Foto verkleinen mislukt, gebruik origineel:',resizeErr.message);
+        // Ga gewoon door met de originele (grotere) foto
+      }
     }
     // Sla lokaal op
     if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoVersturen;saveState();}
@@ -2284,7 +2526,8 @@ async function fotoBevestigen(){
     if(r!==null){
       showToast('✓ Foto verstuurd naar dashboard!');
     } else {
-      showToast('⚠ Geen verbinding — foto lokaal bewaard');
+      const fout=window._laatsteSupaFout||'onbekende fout';
+      showToast('⚠ Niet verstuurd: '+fout);
     }
   }catch(e){
     clearTimeout(failsafe);
