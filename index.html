@@ -2532,7 +2532,6 @@ async function fotoBevestigen(){
     const r=await supaFetch('fotos','POST',{
       datum,
       chauffeur_id:selDriver?.id||'',
-      chauffeur_naam:selDriver?.name||'',
       klant_id:fotoKlantId,
       klant_naam:k?.name||'',
       bon_num:fotoBonNum,
