@@ -2474,6 +2474,8 @@ function openMiss(){
 function renderMissList(){
   const bon=aktKlant.bons[aktBonIdx];
   const el=document.getElementById('miss-list');
+  const sheet=el.closest('.sheet');
+  const scrollPos=sheet?sheet.scrollTop:0;
   el.innerHTML=bon.prods.map(p=>{
     const mq=missQtys[p.id]||0;
     return `
@@ -2503,6 +2505,7 @@ function renderMissList(){
       </div>`:''}
     </div>`;
   }).join('');
+  if(sheet)sheet.scrollTop=scrollPos;
 }
 
 function wijzigMissQty(id,delta){
