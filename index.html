@@ -1820,9 +1820,10 @@ function renderBon(){
   bon.prods.forEach((p,i)=>{
     const done=p.scanned>=p.qty;
     const bg=p.missing?'#fcebeb':done?'#eaf3de':i%2===0?'#fff':'#fafaf8';
+    const tikbaar=!p.missing&&!done;
     const statusIcon=p.missing?`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`
       :done?'<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>'
-      :`<span style="color:#888780;">${p.scanned}/${p.qty}</span>`;
+      :`<span style="color:#e8855a;font-weight:700;text-decoration:underline;">${p.scanned}/${p.qty}</span>`;
     html+=`<tr style="background:${bg};border-top:.5px solid rgba(0,0,0,.05);">
       <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">${p.code}</td>
       <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
@@ -1830,7 +1831,7 @@ function renderBon(){
         ${p.ean?`<div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">${p.ean}</div>`:''}
       </td>
       <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">${p.qty}</td>
-      <td style="padding:8px 8px;text-align:right;">${statusIcon}</td>
+      <td style="padding:12px 8px;text-align:right;${tikbaar?'cursor:pointer;':''}" ${tikbaar?`onclick="doScanById('${p.id}')"`:''}>${statusIcon}</td>
     </tr>`;
   });
 
