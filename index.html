@@ -904,7 +904,8 @@ async function updateVoortgangSupabase(klant, bon, prod){
     gescand:prod.scanned,
     totaal:prod.qty,
     missing:prod.missing||false,
-    miss_reden:prod.missReden||''
+    miss_reden:prod.missReden||'',
+    miss_qty:prod.missQty||0
   });
 }
 
@@ -1010,12 +1011,14 @@ function cloneData(raw){
   return raw.map(k=>({...k,bons:k.bons.map(b=>({...b,prods:b.prods.map(p=>({...p,scanned:0,missing:false}))}))}));
 }
 let KLANTEN=[];
+// Een product is 'klaar' zodra het gescande aantal + het (deels) ontbrekende aantal samen de bestelde hoeveelheid dekken
+function isProdKlaar(p){return (p.scanned||0)+(p.missQty||0)>=p.qty;}
 let RAW_KLANTEN_FALLBACK=RAW_KLANTEN;
 
 // State
 const _vandaag=new Date();
 let selDriver=null, pinVal='', calY=_vandaag.getFullYear(), calM=_vandaag.getMonth(), selDay=_vandaag.getDate();
-let aktKlant=null, aktBonIdx=0, missToggles={};
+let aktKlant=null, aktBonIdx=0, missQtys={};
 let appReady=false;
 
 // Save/restore scan progress to localStorage
@@ -1070,7 +1073,7 @@ function loadScanProgress(){
             const sb=sk.bons&&sk.bons[bi];
             if(sb)b.prods.forEach((p,pi)=>{
               const sp=sb.prods&&sb.prods[pi];
-              if(sp&&sp.id===p.id){p.scanned=sp.scanned||0;p.missing=sp.missing||false;}
+              if(sp&&sp.id===p.id){p.scanned=sp.scanned||0;p.missQty=sp.missQty||0;p.missing=sp.missing||false;p.missReden=sp.missReden||'';}
             });
           });
         });
@@ -1096,8 +1099,8 @@ function stuurDagsamenvatting(){
   const datum=localStorage.getItem('def_loaded_date')||'';
   const klanten=KLANTEN.filter(k=>k.chauffeur===selDriver.id);
   if(!klanten.length){showToast('Geen klanten gevonden');return;}
-  const gedaan=klanten.filter(k=>k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing)));
-  const tekorten=klanten.flatMap(k=>k.bons.flatMap(b=>b.prods.filter(p=>p.missing).map(p=>({...p,klant:k.name}))));
+  const gedaan=klanten.filter(k=>k.bons.every(b=>b.prods.every(p=>isProdKlaar(p))));
+  const tekorten=klanten.flatMap(k=>k.bons.flatMap(b=>b.prods.filter(p=>p.missing||(p.missQty||0)>0).map(p=>({...p,klant:k.name}))));
   const totBons=klanten.reduce((s,k)=>s+k.bons.length,0);
   const subject=encodeURIComponent(`Dagsamenvatting ${selDriver.name} — ${datum}`);
   let body=`Dagsamenvatting ${selDriver.name}\n`;
@@ -1105,15 +1108,15 @@ function stuurDagsamenvatting(){
   body+=`${'━'.repeat(30)}\n\n`;
   body+=`LEVERINGEN: ${gedaan.length}/${klanten.length} klanten afgerond (${totBons} bonnen)\n\n`;
   klanten.forEach(k=>{
-    const alles=k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing));
-    const hasTekort=k.bons.some(b=>b.prods.some(p=>p.missing));
+    const alles=k.bons.every(b=>b.prods.every(p=>isProdKlaar(p)));
+    const hasTekort=k.bons.some(b=>b.prods.some(p=>p.missing||(p.missQty||0)>0));
     body+=`${alles?(hasTekort?'⚠':'✓'):'✗'} ${k.name}\n`;
   });
   if(tekorten.length>0){
     body+=`\nTEKORTEN (${tekorten.length}):\n`;
-    tekorten.forEach(p=>{body+=`  ✗ [${p.code}] ${p.name}${p.missReden?' — '+p.missReden:''} (${p.klant})\n`;});
+    tekorten.forEach(p=>{const aantal=p.missing?p.qty:p.missQty;body+=`  ✗ [${p.code}] ${p.name} — ${aantal}x${p.missReden?' — '+p.missReden:''} (${p.klant})\n`;});
   }
-  const niets=klanten.filter(k=>!k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing)));
+  const niets=klanten.filter(k=>!k.bons.every(b=>b.prods.every(p=>isProdKlaar(p))));
   if(niets.length>0){body+=`\nNIET AFGEROND:\n`;niets.forEach(k=>{body+=`  ✗ ${k.name}\n`;});}
   body+=`\nMet vriendelijke groeten,\n${selDriver.name} — Devisch–Esca Food`;
   window.location.href=`mailto:bestellingen@devisch.be?subject=${subject}&body=${encodeURIComponent(body)}`;
@@ -1254,7 +1257,7 @@ async function loadAppData(){
         // Herstel voortgang
         const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(gebruikteDatum)}&chauffeur_id=eq.${selDriver?.id||''}&order=updated_at.desc`);
         if(vData&&vData.length>0){
-          vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
+          vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missQty=row.miss_qty||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
         }
         renderDrivers();appReady=true;
         return;
@@ -1290,7 +1293,7 @@ async function loadAppData(){
   try{
     const supData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(datum)}&order=updated_at.desc`);
     if(supData&&supData.length>0){
-      supData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
+      supData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missQty=row.miss_qty||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
     }
   }catch(e){loadScanProgress();}
 
@@ -1541,9 +1544,9 @@ function openKlanten(){
 
   // Dag voortgang
   const totaalProds=driverK.reduce((s,k)=>s+k.bons.reduce((s2,b)=>s2+b.prods.length,0),0);
-  const gedaanProds=driverK.reduce((s,k)=>s+k.bons.reduce((s2,b)=>s2+b.prods.filter(p=>p.scanned>=p.qty||p.missing).length,0),0);
+  const gedaanProds=driverK.reduce((s,k)=>s+k.bons.reduce((s2,b)=>s2+b.prods.filter(p=>isProdKlaar(p)).length,0),0);
   const dagPct=totaalProds>0?Math.round(gedaanProds/totaalProds*100):0;
-  const gedaanKlanten=driverK.filter(k=>k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing))).length;
+  const gedaanKlanten=driverK.filter(k=>k.bons.every(b=>b.prods.every(p=>isProdKlaar(p)))).length;
 
   const el=document.getElementById('kl-list');
   el.innerHTML=`
@@ -1576,10 +1579,10 @@ function renderKlantenLijst(driverK){
   container.innerHTML='';
 
   driverK.forEach((k,i)=>{
-    const allDone=k.bons.every(b=>b.prods.every(p=>p.scanned>=p.qty||p.missing));
+    const allDone=k.bons.every(b=>b.prods.every(p=>isProdKlaar(p)));
     const nBons=k.bons.length;
     const totP=k.bons.reduce((s,b)=>s+b.prods.length,0);
-    const gedP=k.bons.reduce((s,b)=>s+b.prods.filter(p=>p.scanned>=p.qty||p.missing).length,0);
+    const gedP=k.bons.reduce((s,b)=>s+b.prods.filter(p=>isProdKlaar(p)).length,0);
     const pct=totP>0?Math.round(gedP/totP*100):0;
     const hasNote=k.note&&k.note.trim();
     const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(k.addr)}`;
@@ -1750,7 +1753,7 @@ function renderBon(){
   const bon=aktKlant.bons[aktBonIdx];
   const el=document.getElementById('bon-content');
   const missCnt=bon.prods.filter(p=>p.missing).length;
-  const scanCnt=bon.prods.filter(p=>p.scanned>=p.qty&&!p.missing).length;
+  const scanCnt=bon.prods.filter(p=>!p.missing&&isProdKlaar(p)).length;
   const total=bon.prods.length;
   const pct=total>0?Math.round((scanCnt+missCnt)/total*100):0;
 
@@ -1818,12 +1821,23 @@ function renderBon(){
       <tbody>`;
 
   bon.prods.forEach((p,i)=>{
-    const done=p.scanned>=p.qty;
-    const bg=p.missing?'#fcebeb':done?'#eaf3de':i%2===0?'#fff':'#fafaf8';
-    const tikbaar=!p.missing&&!done;
-    const statusIcon=p.missing?`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`
-      :done?'<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>'
-      :`<span style="color:#e8855a;font-weight:700;text-decoration:underline;">${p.scanned}/${p.qty}</span>`;
+    const missQty=p.missQty||0;
+    const klaar=isProdKlaar(p);
+    const bg=p.missing?'#fcebeb':klaar?'#eaf3de':i%2===0?'#fff':'#fafaf8';
+    const tikbaar=!p.missing&&!klaar;
+    let statusIcon;
+    if(p.missing){
+      statusIcon=`<div style="text-align:right;"><span style="color:#a32d2d;font-size:14px;font-weight:700;">✗</span>${p.missReden?`<div style="font-size:9px;color:#a32d2d;margin-top:2px;line-height:1.2;">${p.missReden}</div>`:''}</div>`;
+    } else if(missQty>0){
+      statusIcon=`<div style="text-align:right;">
+        <span style="color:${klaar?'#3b6d11':'#e8855a'};font-weight:700;${klaar?'':'text-decoration:underline;'}">${p.scanned}/${p.qty}</span>
+        <div style="font-size:9px;color:#a32d2d;margin-top:2px;">−${missQty} tekort${p.missReden?': '+p.missReden:''}</div>
+      </div>`;
+    } else if(klaar){
+      statusIcon='<span style="color:#3b6d11;font-size:14px;font-weight:700;">✓</span>';
+    } else {
+      statusIcon=`<span style="color:#e8855a;font-weight:700;text-decoration:underline;">${p.scanned}/${p.qty}</span>`;
+    }
     html+=`<tr style="background:${bg};border-top:.5px solid rgba(0,0,0,.05);">
       <td style="padding:8px 10px;font-family:monospace;color:#e8855a;font-weight:600;font-size:10px;">${p.code}</td>
       <td style="padding:8px 6px;color:#2c2c2a;line-height:1.3;">
@@ -1831,7 +1845,7 @@ function renderBon(){
         ${p.ean?`<div style="font-size:9px;color:#b4b2a9;font-family:monospace;margin-top:1px;">${p.ean}</div>`:''}
       </td>
       <td style="padding:8px 6px;text-align:center;font-weight:700;color:#2c2c2a;">${p.qty}</td>
-      <td style="padding:12px 8px;text-align:right;${tikbaar?'cursor:pointer;':''}" ${tikbaar?`onclick="doScanById('${p.id}')"`:''}>${statusIcon}</td>
+      <td style="padding:12px 8px;text-align:right;${tikbaar?'cursor:pointer;':''}" ${tikbaar?`onclick="voltooiProduct('${p.id}')"`:''}>${statusIcon}</td>
     </tr>`;
   });
 
@@ -1883,7 +1897,7 @@ function switchToManual(){
 
 function renderManualList(){
   const bon=aktKlant.bons[aktBonIdx];
-  const scannable=bon.prods.filter(p=>!p.missing&&p.scanned<p.qty);
+  const scannable=bon.prods.filter(p=>!p.missing&&!isProdKlaar(p));
   const el=document.getElementById('scan-prods');
   if(scannable.length===0){
     el.innerHTML=`<div style="color:#888780;text-align:center;padding:30px;font-size:15px;">✓ Alle producten gescand</div>`;
@@ -2061,14 +2075,14 @@ function snapAndDecode(btn){
 function handleScannedEan(ean){
   if(scanCooldown)return;
   const bon=aktKlant.bons[aktBonIdx];
-  const p=bon.prods.find(x=>x.ean===ean&&!x.missing&&x.scanned<x.qty);
+  const p=bon.prods.find(x=>x.ean===ean&&!x.missing&&!isProdKlaar(x));
   if(p){
     if(navigator.vibrate)navigator.vibrate([80,40,80]);
     setStatus('✓ '+p.code+' – '+p.name.substring(0,28),'#3b6d11');
     scanCooldown=true;
     doScanById(p.id);
     const bon2=aktKlant.bons[aktBonIdx];
-    const allDone=bon2.prods.every(x=>x.scanned>=x.qty||x.missing);
+    const allDone=bon2.prods.every(x=>isProdKlaar(x));
     if(allDone){
       setTimeout(()=>{
         closeScan();
@@ -2079,24 +2093,37 @@ function handleScannedEan(ean){
       setTimeout(()=>{scanCooldown=false;setStatus('Richt op een EAN barcode','#888780');},1200);
     }
   } else {
-    const done=bon.prods.find(x=>x.ean===ean&&(x.scanned>=x.qty||x.missing));
+    const done=bon.prods.find(x=>x.ean===ean&&(isProdKlaar(x)));
     setStatus(done?'⚠ '+done.code+' al volledig gescand':'⚠ Barcode niet gevonden op bon','#e8855a');
     scanCooldown=true;
     setTimeout(()=>{scanCooldown=false;setStatus('Richt op een EAN barcode','#888780');},2000);
   }
 }
 
+function voltooiProduct(pid){
+  const bon=aktKlant.bons[aktBonIdx];
+  const p=bon.prods.find(x=>x.id===pid);
+  if(!p)return;
+  p.scanned=p.qty-(p.missQty||0);
+  const ki=KLANTEN.findIndex(k=>k.id===aktKlant.id);
+  KLANTEN[ki]=aktKlant;
+  saveState();
+  updateVoortgangSupabase(aktKlant,bon,p);
+  renderBon();
+  renderManualList();
+}
+
 function doScanById(pid){
   const bon=aktKlant.bons[aktBonIdx];
   const p=bon.prods.find(x=>x.id===pid);
   if(!p)return;
-  p.scanned=Math.min(p.scanned+1,p.qty);
+  p.scanned=Math.min(p.scanned+1,p.qty-(p.missQty||0));
   const ki=KLANTEN.findIndex(k=>k.id===aktKlant.id);
   KLANTEN[ki]=aktKlant;
   saveState();
   // Stuur voortgang naar Supabase
   updateVoortgangSupabase(aktKlant,bon,p);
-  if(p.scanned<p.qty) showToast('✓ '+p.code+' ('+p.scanned+'/'+p.qty+')');
+  if(!isProdKlaar(p)) showToast('✓ '+p.code+' ('+p.scanned+'/'+p.qty+')');
   renderBon();
   renderManualList();
 }
@@ -2110,7 +2137,7 @@ function closeScan(){
 }
 
 function showAlleGescand(){
-  const miss=aktKlant.bons[aktBonIdx].prods.filter(p=>p.missing).length;
+  const miss=aktKlant.bons[aktBonIdx].prods.filter(p=>p.missing||(p.missQty||0)>0).length;
   const ov=document.createElement('div');
   ov.id='done-ov';
   ov.style.cssText='position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(59,109,17,.95);z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;';
@@ -2138,7 +2165,7 @@ function showAlleGescand(){
 // Mail
 function openMail(){
   const bon=aktKlant.bons[aktBonIdx];
-  const miss=bon.prods.filter(p=>p.missing).length;
+  const miss=bon.prods.filter(p=>p.missing||(p.missQty||0)>0).length;
   document.getElementById('mail-bon-info').textContent='Bon '+bon.num+' · '+aktKlant.name;
   const st=document.getElementById('mail-status');
   if(miss>0){
@@ -2151,17 +2178,20 @@ function openMail(){
 
 function doMail(){
   const bon=aktKlant.bons[aktBonIdx];
-  const miss=bon.prods.filter(p=>p.missing);
-  const ok=bon.prods.filter(p=>!p.missing);
+  const missing=bon.prods.filter(p=>p.missing);
+  const partial=bon.prods.filter(p=>!p.missing&&(p.missQty||0)>0);
+  const ok=bon.prods.filter(p=>!p.missing&&(p.missQty||0)===0);
   const subject=encodeURIComponent(`Leveringsbon ${bon.num} – ${aktKlant.name} – ${bon.datum}`);
 
   // Producten rijen
   let prodRijen='';
   bon.prods.forEach((p,i)=>{
-    const bg=p.missing?'#fcebeb':i%2===0?'#ffffff':'#f9f8f6';
+    const isPartial=!p.missing&&(p.missQty||0)>0;
+    const bg=p.missing?'#fcebeb':isPartial?'#fff8e6':i%2===0?'#ffffff':'#f9f8f6';
     const kleur=p.missing?'#a32d2d':'#2c2c2a';
-    const status=p.missing?'✗ Niet beschikbaar':'✓ Geleverd';
-    const statusKleur=p.missing?'#a32d2d':'#3b6d11';
+    const geleverd=p.qty-(p.missQty||0);
+    const status=p.missing?'✗ Niet beschikbaar':isPartial?`⚠ ${geleverd}/${p.qty} geleverd`:'✓ Geleverd';
+    const statusKleur=p.missing?'#a32d2d':isPartial?'#a06a00':'#3b6d11';
     prodRijen+=`<tr style="background:${bg};">
       <td style="padding:8px 12px;font-family:monospace;font-size:11px;color:#e8855a;font-weight:700;border-bottom:1px solid #f0ede8;">${p.code}</td>
       <td style="padding:8px 12px;font-size:12px;color:${kleur};border-bottom:1px solid #f0ede8;${p.missing?'text-decoration:line-through;':''}">${p.name}</td>
@@ -2172,9 +2202,10 @@ function doMail(){
 
   // Tekort sectie
   let tekortSectie='';
-  if(miss.length>0){
+  const totTekort=missing.length+partial.length;
+  if(totTekort>0){
     tekortSectie=`<tr><td colspan="4" style="padding:10px 12px;background:#fcebeb;font-size:12px;color:#a32d2d;font-weight:600;">
-      ⚠ ${miss.length} product(en) niet beschikbaar bij levering
+      ⚠ ${totTekort} product(en) niet volledig geleverd
     </td></tr>`;
   }
 
@@ -2268,7 +2299,8 @@ function doMail(){
   // Open mail met plain text body + link naar HTML versie
   const plainBody=`Geachte,\n\nHierbij de leveringsbon ${bon.num} voor ${aktKlant.name}.\nDatum: ${bon.datum} | Chauffeur: ${selDriver?.name||''}\n\nGELEVERDE PRODUCTEN:\n`
     +ok.map(p=>`✓ [${p.code}] ${p.name} — ${p.qty}x`).join('\n')
-    +(miss.length>0?'\n\nNIET BESCHIKBAAR:\n'+miss.map(p=>`✗ [${p.code}] ${p.name} — ${p.qty}x${p.missReden?' ('+p.missReden+')':''}`).join('\n'):'')
+    +(partial.length>0?'\n\nGEDEELTELIJK GELEVERD:\n'+partial.map(p=>`⚠ [${p.code}] ${p.name} — ${p.qty-(p.missQty||0)}/${p.qty}x geleverd${p.missReden?' ('+p.missReden+')':''}`).join('\n'):'')
+    +(missing.length>0?'\n\nNIET BESCHIKBAAR:\n'+missing.map(p=>`✗ [${p.code}] ${p.name} — ${p.qty}x${p.missReden?' ('+p.missReden+')':''}`).join('\n'):'')
     +`\n\nNetto: €${bon.netto} | BTW ${bon.btwpct}: €${bon.btw} | TOTAAL: €${bon.totaal}`
     +`\n\nMet vriendelijke groeten,\nDevisch – Esca Food\nKoksijdestraat 20, B-8630 Veurne\nT +32 (0)58 52 38 04 | info@devisch.be`;
 
@@ -2289,10 +2321,10 @@ let missRedens={};
 
 function openMiss(){
   const bon=aktKlant.bons[aktBonIdx];
-  missToggles={};
+  missQtys={};
   missRedens={};
   bon.prods.forEach(p=>{
-    missToggles[p.id]=p.missing;
+    missQtys[p.id]=p.missQty||(p.missing?p.qty:0);
     missRedens[p.id]=p.missReden||'';
   });
   renderMissList();
@@ -2302,16 +2334,24 @@ function openMiss(){
 function renderMissList(){
   const bon=aktKlant.bons[aktBonIdx];
   const el=document.getElementById('miss-list');
-  el.innerHTML=bon.prods.map(p=>`
+  el.innerHTML=bon.prods.map(p=>{
+    const mq=missQtys[p.id]||0;
+    return `
     <div class="miss-row" id="miss-row-${p.id}" style="flex-direction:column;align-items:stretch;padding:10px 0;border-bottom:.5px solid rgba(0,0,0,.07);">
-      <div style="display:flex;align-items:center;gap:10px;">
+      <div style="display:flex;align-items:center;gap:8px;">
         <div style="flex:1;">
           <span class="code-tag">${p.code}</span>
           <div class="miss-name">${p.name}</div>
+          <div style="font-size:10px;color:#b4b2a9;margin-top:1px;">besteld: ${p.qty}</div>
         </div>
-        <button class="toggle${missToggles[p.id]?' on':''}" id="tog-${p.id}" onclick="toggleMiss('${p.id}')"></button>
+        <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
+          <button onclick="wijzigMissQty('${p.id}',-1)" style="width:30px;height:30px;border-radius:8px;border:none;background:#f5f4f0;color:#2c2c2a;font-size:17px;font-weight:700;cursor:pointer;">−</button>
+          <span style="min-width:24px;text-align:center;font-weight:700;font-size:14px;color:${mq>0?'#a32d2d':'#888780'};">${mq}</span>
+          <button onclick="wijzigMissQty('${p.id}',1)" style="width:30px;height:30px;border-radius:8px;border:none;background:#f5f4f0;color:#2c2c2a;font-size:17px;font-weight:700;cursor:pointer;">+</button>
+          <button onclick="zetMissQtyAlles('${p.id}')" style="background:${mq===p.qty?'#e8855a':'#f5f4f0'};color:${mq===p.qty?'#fff':'#444441'};border:none;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:600;cursor:pointer;">Alles</button>
+        </div>
       </div>
-      ${missToggles[p.id]?`
+      ${mq>0?`
       <div style="margin-top:8px;padding-left:4px;">
         <div style="font-size:11px;color:#888780;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Reden:</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
@@ -2321,12 +2361,26 @@ function renderMissList(){
         </div>
         ${missRedens[p.id]?`<div style="font-size:11px;color:#3b6d11;margin-top:5px;">✓ ${missRedens[p.id]}</div>`:'<div style="font-size:11px;color:#e8855a;margin-top:5px;">⚠ Kies een reden</div>'}
       </div>`:''}
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
-function toggleMiss(id){
-  missToggles[id]=!missToggles[id];
-  if(!missToggles[id])missRedens[id]='';
+function wijzigMissQty(id,delta){
+  const bon=aktKlant.bons[aktBonIdx];
+  const p=bon.prods.find(x=>x.id===id);
+  if(!p)return;
+  const nieuw=Math.max(0,Math.min(p.qty,(missQtys[id]||0)+delta));
+  missQtys[id]=nieuw;
+  if(nieuw===0)missRedens[id]='';
+  renderMissList();
+}
+
+function zetMissQtyAlles(id){
+  const bon=aktKlant.bons[aktBonIdx];
+  const p=bon.prods.find(x=>x.id===id);
+  if(!p)return;
+  missQtys[id]=missQtys[id]===p.qty?0:p.qty;
+  if(missQtys[id]===0)missRedens[id]='';
   renderMissList();
 }
 
@@ -2337,16 +2391,19 @@ function setReden(id, reden){
 
 function confirmMiss(){
   const bon=aktKlant.bons[aktBonIdx];
-  // Controleer of alle missing producten een reden hebben
-  const zonderReden=bon.prods.filter(p=>missToggles[p.id]&&!missRedens[p.id]);
+  // Controleer of elk tekort (deel of volledig) een reden heeft
+  const zonderReden=bon.prods.filter(p=>(missQtys[p.id]||0)>0&&!missRedens[p.id]);
   if(zonderReden.length>0){
     showToast('⚠ Kies een reden voor elk tekort');
     return;
   }
   bon.prods.forEach(p=>{
-    p.missing=missToggles[p.id]??p.missing;
-    p.missReden=missRedens[p.id]||'';
+    const mq=missQtys[p.id]||0;
+    p.missQty=mq;
+    p.missReden=mq>0?(missRedens[p.id]||''):'';
+    p.missing=mq>=p.qty; // volledig ontbrekend
     if(p.missing)p.scanned=0;
+    else p.scanned=Math.min(p.scanned,p.qty-mq);
     // Stuur naar Supabase
     updateVoortgangSupabase(aktKlant,bon,p);
   });
