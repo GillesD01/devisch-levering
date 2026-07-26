@@ -2474,8 +2474,6 @@ function openMiss(){
 function renderMissList(){
   const bon=aktKlant.bons[aktBonIdx];
   const el=document.getElementById('miss-list');
-  const sheet=el.closest('.sheet');
-  const scrollPos=sheet?sheet.scrollTop:0;
   el.innerHTML=bon.prods.map(p=>{
     const mq=missQtys[p.id]||0;
     return `
@@ -2488,24 +2486,40 @@ function renderMissList(){
         </div>
         <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
           <button onclick="wijzigMissQty('${p.id}',-1)" style="width:30px;height:30px;border-radius:8px;border:none;background:#f5f4f0;color:#2c2c2a;font-size:17px;font-weight:700;cursor:pointer;">−</button>
-          <span style="min-width:24px;text-align:center;font-weight:700;font-size:14px;color:${mq>0?'#a32d2d':'#888780'};">${mq}</span>
+          <span id="miss-qty-${p.id}" style="min-width:24px;text-align:center;font-weight:700;font-size:14px;color:${mq>0?'#a32d2d':'#888780'};">${mq}</span>
           <button onclick="wijzigMissQty('${p.id}',1)" style="width:30px;height:30px;border-radius:8px;border:none;background:#f5f4f0;color:#2c2c2a;font-size:17px;font-weight:700;cursor:pointer;">+</button>
-          <button onclick="zetMissQtyAlles('${p.id}')" style="background:${mq===p.qty?'#e8855a':'#f5f4f0'};color:${mq===p.qty?'#fff':'#444441'};border:none;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:600;cursor:pointer;">Alles</button>
+          <button id="miss-alles-${p.id}" onclick="zetMissQtyAlles('${p.id}')" style="background:${mq===p.qty?'#e8855a':'#f5f4f0'};color:${mq===p.qty?'#fff':'#444441'};border:none;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:600;cursor:pointer;">Alles</button>
         </div>
       </div>
-      ${mq>0?`
-      <div style="margin-top:8px;padding-left:4px;">
+      <div id="miss-reason-wrap-${p.id}" style="margin-top:8px;padding-left:4px;display:${mq>0?'block':'none'};">
         <div style="font-size:11px;color:#888780;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Reden:</div>
         <div style="display:flex;flex-wrap:wrap;gap:5px;">
           ${MISS_REDENEN.map(r=>`
-            <button onclick="setReden('${p.id}','${r}')" style="background:${missRedens[p.id]===r?'#e8855a':'#f5f4f0'};color:${missRedens[p.id]===r?'#fff':'#444441'};border:none;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;">${r}</button>
+            <button id="miss-reden-${p.id}-${r.replace(/[^a-z0-9]/gi,'')}" onclick="setReden('${p.id}','${r}')" style="background:${missRedens[p.id]===r?'#e8855a':'#f5f4f0'};color:${missRedens[p.id]===r?'#fff':'#444441'};border:none;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;">${r}</button>
           `).join('')}
         </div>
-        ${missRedens[p.id]?`<div style="font-size:11px;color:#3b6d11;margin-top:5px;">✓ ${missRedens[p.id]}</div>`:'<div style="font-size:11px;color:#e8855a;margin-top:5px;">⚠ Kies een reden</div>'}
-      </div>`:''}
+        <div id="miss-reden-status-${p.id}" style="font-size:11px;margin-top:5px;color:${missRedens[p.id]?'#3b6d11':'#e8855a'};">${missRedens[p.id]?'✓ '+missRedens[p.id]:'⚠ Kies een reden'}</div>
+      </div>
     </div>`;
   }).join('');
-  if(sheet)sheet.scrollTop=scrollPos;
+}
+
+// Werkt enkel tekst/kleur bij van één rij, zonder knoppen te vernietigen/herbouwen (voorkomt de scroll-naar-boven-sprong)
+function updateMissRowUI(id){
+  const bon=aktKlant.bons[aktBonIdx];
+  const p=bon.prods.find(x=>x.id===id);
+  if(!p)return;
+  const mq=missQtys[id]||0;
+  const span=document.getElementById('miss-qty-'+id);
+  if(span){span.textContent=mq;span.style.color=mq>0?'#a32d2d':'#888780';}
+  const allesBtn=document.getElementById('miss-alles-'+id);
+  if(allesBtn){
+    const actief=mq===p.qty;
+    allesBtn.style.background=actief?'#e8855a':'#f5f4f0';
+    allesBtn.style.color=actief?'#fff':'#444441';
+  }
+  const wrap=document.getElementById('miss-reason-wrap-'+id);
+  if(wrap)wrap.style.display=mq>0?'block':'none';
 }
 
 function wijzigMissQty(id,delta){
@@ -2515,7 +2529,7 @@ function wijzigMissQty(id,delta){
   const nieuw=Math.max(0,Math.min(p.qty,(missQtys[id]||0)+delta));
   missQtys[id]=nieuw;
   if(nieuw===0)missRedens[id]='';
-  renderMissList();
+  updateMissRowUI(id);
 }
 
 function zetMissQtyAlles(id){
@@ -2524,12 +2538,21 @@ function zetMissQtyAlles(id){
   if(!p)return;
   missQtys[id]=missQtys[id]===p.qty?0:p.qty;
   if(missQtys[id]===0)missRedens[id]='';
-  renderMissList();
+  updateMissRowUI(id);
 }
 
 function setReden(id, reden){
   missRedens[id]=reden;
-  renderMissList();
+  MISS_REDENEN.forEach(r=>{
+    const btn=document.getElementById('miss-reden-'+id+'-'+r.replace(/[^a-z0-9]/gi,''));
+    if(btn){
+      const actief=r===reden;
+      btn.style.background=actief?'#e8855a':'#f5f4f0';
+      btn.style.color=actief?'#fff':'#444441';
+    }
+  });
+  const status=document.getElementById('miss-reden-status-'+id);
+  if(status){status.textContent='✓ '+reden;status.style.color='#3b6d11';}
 }
 
 function confirmMiss(){
