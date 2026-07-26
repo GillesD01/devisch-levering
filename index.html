@@ -1013,6 +1013,18 @@ function cloneData(raw){
 let KLANTEN=[];
 // Een product is 'klaar' zodra het gescande aantal + het (deels) ontbrekende aantal samen de bestelde hoeveelheid dekken
 function isProdKlaar(p){return (p.scanned||0)+(p.missQty||0)>=p.qty;}
+
+// Voert fn uit en behoudt daarna de scrollpositie van container, ook tegen Safari's eigen
+// vertraagde scroll-correctie in (die soms na de synchrone update alsnog terugspringt).
+function metScrollBehoud(container,fn){
+  if(!container){fn();return;}
+  const pos=container.scrollTop;
+  fn();
+  container.scrollTop=pos;
+  requestAnimationFrame(()=>{container.scrollTop=pos;});
+  setTimeout(()=>{container.scrollTop=pos;},60);
+  setTimeout(()=>{container.scrollTop=pos;},200);
+}
 let RAW_KLANTEN_FALLBACK=RAW_KLANTEN;
 
 // State
@@ -2099,8 +2111,7 @@ function voltooiProduct(pid){
   KLANTEN[ki]=aktKlant;
   saveState();
   updateVoortgangSupabase(aktKlant,bon,p);
-  renderBon();
-  renderManualList();
+  metScrollBehoud(document.getElementById('bon-content'),()=>{renderBon();renderManualList();});
   checkBonCompleetNaTik(bon);
 }
 
@@ -2115,8 +2126,7 @@ function doScanById(pid){
   // Stuur voortgang naar Supabase
   updateVoortgangSupabase(aktKlant,bon,p);
   if(!isProdKlaar(p)) showToast('✓ '+p.code+' ('+p.scanned+'/'+p.qty+')');
-  renderBon();
-  renderManualList();
+  metScrollBehoud(document.getElementById('bon-content'),()=>{renderBon();renderManualList();});
   if(bon.prods.every(x=>isProdKlaar(x))&&!bon._compleetGemeld){
     setTimeout(()=>{closeScan();showAlleGescand();},800);
   }
@@ -2577,7 +2587,7 @@ function confirmMiss(){
   KLANTEN[ki]=aktKlant;
   saveState();
   closeMiss();
-  renderBon();
+  metScrollBehoud(document.getElementById('bon-content'),()=>renderBon());
   showToast('✓ Tekorten opgeslagen');
   checkBonCompleetNaTik(bon);
 }
