@@ -1143,6 +1143,10 @@ async function laadVoortgang(){
   }
 }
 
+// Een product is 'klaar' zodra gescand + (deels) ontbrekend aantal samen het totaal dekken
+function isVoortgangKlaar(p){return (p.gescand||0)+(p.miss_qty||0)>=p.totaal;}
+function heeftTekort(p){return p.missing||(p.miss_qty||0)>0;}
+
 function getStats(driverId){
   let alleKlanten={};
   if(allLeveringen&&allLeveringen.klanten){
@@ -1160,8 +1164,8 @@ function getStats(driverId){
   let gedaanKlanten=0,tekorten=0;
   Object.values(alleKlanten).forEach(k=>{
     if(k.prods.length>0){
-      if(k.prods.every(p=>p.gescand>=p.totaal||p.missing))gedaanKlanten++;
-      if(k.prods.some(p=>p.missing))tekorten++;
+      if(k.prods.every(p=>isVoortgangKlaar(p)))gedaanKlanten++;
+      if(k.prods.some(p=>heeftTekort(p)))tekorten++;
     }
   });
   const pct=totKlanten>0?Math.round(gedaanKlanten/totKlanten*100):0;
@@ -1181,9 +1185,9 @@ function renderDashboard(){
     if(s&&Object.keys(s.klanten).length>0){
       Object.values(s.klanten).forEach(k=>{
         const hs=k.prods.length>0;
-        const al=hs&&k.prods.every(p=>p.gescand>=p.totaal||p.missing);
+        const al=hs&&k.prods.every(p=>isVoortgangKlaar(p));
         const bz=hs&&k.prods.some(p=>p.gescand>0)&&!al;
-        const tk=hs&&k.prods.some(p=>p.missing);
+        const tk=hs&&k.prods.some(p=>heeftTekort(p));
         if(al&&!tk)totKlaar++;
         const ic=al?(tk?'⚠':'✓'):bz?'⟳':'○';
         const kl=al?(tk?'tekort':'ok'):bz?'bezig':'wacht';
@@ -1192,8 +1196,9 @@ function renderDashboard(){
           <span class="kl-naam">${k.naam}</span>
           <span style="font-size:11px;" class="${kl}">${al?(tk?'Tekort':'Klaar'):bz?'Bezig':'Wacht'}</span>
         </div>`;
-        k.prods.filter(p=>p.missing).forEach(p=>{
-          kHTML+=`<div style="padding:2px 0 4px 26px;font-size:11px;color:#a32d2d;">✗ ${p.product_code} ${p.product_naam.substring(0,30)}${p.miss_reden?' · '+p.miss_reden:''}</div>`;
+        k.prods.filter(p=>heeftTekort(p)).forEach(p=>{
+          const aantal=p.missing?p.totaal:p.miss_qty;
+          kHTML+=`<div style="padding:2px 0 4px 26px;font-size:11px;color:#a32d2d;">✗ ${aantal}x ${p.product_code} ${p.product_naam.substring(0,30)}${p.miss_reden?' · '+p.miss_reden:''}</div>`;
         });
       });
     } else kHTML='<div class="geen">Nog geen activiteit</div>';
@@ -1227,12 +1232,14 @@ function toonDetail(dId,naam){
   const rows=allVoortgang.filter(r=>r.chauffeur_id===dId&&r.klant_naam===naam);
   document.getElementById('modal-title').textContent=naam;
   document.getElementById('modal-body').innerHTML=rows.length?rows.map(p=>{
-    const done=p.gescand>=p.totaal;
-    const bg=p.missing?'#fcebeb':done?'#eaf3de':'#fff';
+    const done=isVoortgangKlaar(p);
+    const partial=!p.missing&&(p.miss_qty||0)>0;
+    const bg=p.missing?'#fcebeb':partial?'#fff8e6':done?'#eaf3de':'#fff';
+    const statusTekst=p.missing?'✗ '+p.miss_reden:partial?`⚠ ${p.gescand}/${p.totaal} (−${p.miss_qty} tekort)`:done?'✓':p.gescand+'/'+p.totaal;
     return`<div style="display:flex;align-items:center;gap:8px;padding:7px;border-radius:6px;background:${bg};margin-bottom:3px;">
       <span style="font-family:monospace;font-size:10px;background:#2c2c2a;color:#e8855a;padding:2px 5px;border-radius:4px;">${p.product_code}</span>
       <span style="flex:1;font-size:12px;">${p.product_naam}</span>
-      <span style="font-size:12px;font-weight:600;" class="${p.missing?'tekort':done?'ok':'wacht'}">${p.missing?'✗ '+p.miss_reden:done?'✓':''+p.gescand+'/'+p.totaal}</span>
+      <span style="font-size:12px;font-weight:600;" class="${p.missing||partial?'tekort':done?'ok':'wacht'}">${statusTekst}</span>
     </div>`;
   }).join(''):'<div class="geen">Nog niet gescand</div>';
   document.getElementById('modal-bg').classList.add('open');
@@ -1249,11 +1256,11 @@ function toonAlles(dId){
   let html='';
   Object.entries(klanten).forEach(([naam,prods])=>{
     html+=`<div style="font-size:11px;font-weight:700;color:#888780;text-transform:uppercase;margin:10px 0 5px;">${naam}</div>`;
-    html+=prods.map(p=>{const done=p.gescand>=p.totaal;const bg=p.missing?'#fcebeb':done?'#eaf3de':'#fff';
+    html+=prods.map(p=>{const done=isVoortgangKlaar(p);const partial=!p.missing&&(p.miss_qty||0)>0;const bg=p.missing?'#fcebeb':partial?'#fff8e6':done?'#eaf3de':'#fff';
       return`<div style="display:flex;align-items:center;gap:8px;padding:6px;border-radius:6px;background:${bg};margin-bottom:3px;">
         <span style="font-family:monospace;font-size:10px;background:#2c2c2a;color:#e8855a;padding:2px 4px;border-radius:3px;">${p.product_code}</span>
         <span style="flex:1;font-size:12px;">${p.product_naam}</span>
-        <span style="font-size:11px;font-weight:600;" class="${p.missing?'tekort':done?'ok':'wacht'}">${p.missing?'✗':done?'✓':p.gescand+'/'+p.totaal}</span>
+        <span style="font-size:11px;font-weight:600;" class="${p.missing||partial?'tekort':done?'ok':'wacht'}">${p.missing?'✗':partial?`⚠ −${p.miss_qty}`:done?'✓':p.gescand+'/'+p.totaal}</span>
       </div>`;}).join('');
   });
   document.getElementById('modal-body').innerHTML=html||'<div class="geen">Geen data</div>';
