@@ -1234,6 +1234,15 @@ async function loadAppData(){
     console.log('Config niet geladen, gebruik standaard drivers');
   }
 
+  // Klanten/voortgang worden pas opgehaald NA het inloggen (zie laadKlantenVoorChauffeur,
+  // aangeroepen vanuit nkOk) — anders is selDriver nog niet gekend en kan voortgang nooit
+  // correct hersteld worden, waardoor de app bij elke herstart 'alles vergeet'.
+  hideLoader();
+  renderDrivers();appReady=true;
+}
+
+async function laadKlantenVoorChauffeur(){
+  showLoader('Data laden...');
   // 1. Probeer eerst Supabase — geen datumfilter, meest recente data
   try{
     const nu=new Date();
@@ -1271,7 +1280,7 @@ async function loadAppData(){
         if(vData&&vData.length>0){
           vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missQty=row.miss_qty||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
         }
-        renderDrivers();appReady=true;
+        hideLoader();
         return;
       }
     }
@@ -1291,14 +1300,13 @@ async function loadAppData(){
       loadScanProgress();
       showLoader('📱 Offline — lokale data geladen');
       setTimeout(hideLoader,800);
-      renderDrivers();appReady=true;
       return;
     }
   }catch(e){}
 
   // 3. Geen data beschikbaar
   showLoader('Geen ritten gevonden voor vandaag');
-  setTimeout(()=>{hideLoader();renderDrivers();appReady=true;},1500);
+  setTimeout(()=>{hideLoader();},1500);
 
   // 3. Herstel voortgang
   const datum=localStorage.getItem('def_loaded_date')||'';
@@ -1311,7 +1319,6 @@ async function loadAppData(){
 
   const parts=datum.split('-');
   if(parts.length===3){selDay=parseInt(parts[0]);}
-  renderDrivers();appReady=true;
 }
 
 // Navigation
@@ -1374,8 +1381,10 @@ function nkOk(){
     document.getElementById('cal-driver-name').textContent=selDriver.name;
     document.getElementById('vrt-driver-name').textContent=selDriver.name;
     pinVal=''; updateDots();
-    renderVoertuigen();
-    go('s-voertuig');
+    laadKlantenVoorChauffeur().then(()=>{
+      renderVoertuigen();
+      go('s-voertuig');
+    });
   } else {
     pinVal=''; updateDots();
     showToast('Verkeerde code — probeer opnieuw');
