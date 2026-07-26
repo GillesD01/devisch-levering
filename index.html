@@ -2488,26 +2488,43 @@ async function fotoBevestigen(){
     if(!fotoKlantId||!fotoData){clearTimeout(failsafe);closeFoto();return;}
     const k=KLANTEN.find(x=>x.id===fotoKlantId);
     const datum=localStorage.getItem('def_loaded_date')||'';
-    // Verklein extra als te groot (doel: onder 700KB base64) — met eigen timeout zodat dit nooit blokkeert
+    // Verklein ALTIJD (voorheen enkel boven 700KB) en garandeer een veilige maximale grootte,
+    // zodat een mislukte/onvolledige verkleining nooit meer een te grote foto naar Supabase stuurt (oorzaak van stille 400-fouten).
     let fotoVersturen=fotoData;
-    if(fotoData.length>700000){
-      try{
-        const img=new Image();
-        await Promise.race([
-          new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=fotoData;}),
-          new Promise((_,rej)=>setTimeout(()=>rej(new Error('Foto verkleinen duurde te lang')),5000))
-        ]);
-        const canvas=document.createElement('canvas');
-        const maxW=600;
-        const scale=Math.min(1,maxW/img.width);
-        canvas.width=img.width*scale;
-        canvas.height=img.height*scale;
-        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-        fotoVersturen=canvas.toDataURL('image/jpeg',0.55);
-      }catch(resizeErr){
-        console.warn('Foto verkleinen mislukt, gebruik origineel:',resizeErr.message);
-        // Ga gewoon door met de originele (grotere) foto
+    try{
+      const img=new Image();
+      await Promise.race([
+        new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=fotoData;}),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('Foto laden duurde te lang')),5000))
+      ]);
+      const maxW=600;
+      const scale=Math.min(1,maxW/img.width);
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.round(img.width*scale);
+      canvas.height=Math.round(img.height*scale);
+      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+      const MAX_LEN=500000; // ~375KB binair — ruim onder gangbare gateway-limieten
+      let kwaliteit=0.55;
+      fotoVersturen=canvas.toDataURL('image/jpeg',kwaliteit);
+      while(fotoVersturen.length>MAX_LEN&&kwaliteit>0.15){
+        kwaliteit-=0.1;
+        fotoVersturen=canvas.toDataURL('image/jpeg',kwaliteit);
       }
+      if(fotoVersturen.length>MAX_LEN){
+        // Nog steeds te groot: ook de afmetingen verder verkleinen
+        const canvas2=document.createElement('canvas');
+        canvas2.width=Math.round(canvas.width*0.6);
+        canvas2.height=Math.round(canvas.height*0.6);
+        canvas2.getContext('2d').drawImage(canvas,0,0,canvas2.width,canvas2.height);
+        fotoVersturen=canvas2.toDataURL('image/jpeg',0.5);
+      }
+    }catch(resizeErr){
+      console.warn('Foto verkleinen mislukt:',resizeErr.message);
+      clearTimeout(failsafe);
+      closeFoto();
+      showToast('⚠ Foto kon niet verwerkt worden — probeer een nieuwe foto');
+      if(btn){btn.disabled=false;btn.textContent='📤 Foto versturen naar dashboard';}
+      return;
     }
     // Sla lokaal op
     if(k){if(!k.fotos)k.fotos={};k.fotos[fotoBonNum]=fotoVersturen;saveState();}
