@@ -1104,6 +1104,11 @@ function hideLoader(){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s-login').classList.add('active');
 }
+// Verbergt enkel de laadspinner, zonder terug naar het loginscherm te springen —
+// voor gebruik NA het inloggen (anders 'smijt' de vertraagde hideLoader() de chauffeur terug naar login).
+function dismissLoader(){
+  document.getElementById('s-loader').classList.remove('active');
+}
 
 // ── DAGSAMENVATTING ──────────────────────────────────────
 function stuurDagsamenvatting(){
@@ -1274,13 +1279,13 @@ async function laadKlantenVoorChauffeur(){
         if(dParts.length===3){selDay=parseInt(dParts[0]);}
         else{selDay=nu.getDate();}
         showLoader(`✓ ${KLANTEN.length} klanten geladen`);
-        setTimeout(hideLoader,600);
+        setTimeout(dismissLoader,600);
         // Herstel voortgang
         const vData=await supaFetch(`voortgang?datum=eq.${encodeURIComponent(gebruikteDatum)}&chauffeur_id=eq.${selDriver?.id||''}&order=updated_at.desc`);
         if(vData&&vData.length>0){
           vData.forEach(row=>{KLANTEN.forEach(k=>{if(k.id===row.klant_id){k.bons&&k.bons.forEach(b=>{if(b.num===row.bon_num){b.prods&&b.prods.forEach(p=>{if(p.id===row.product_id){p.scanned=row.gescand||0;p.missQty=row.miss_qty||0;p.missing=row.missing||false;p.missReden=row.miss_reden||'';}});}});}});});
         }
-        hideLoader();
+        dismissLoader();
         return;
       }
     }
@@ -1299,14 +1304,14 @@ async function laadKlantenVoorChauffeur(){
       }
       loadScanProgress();
       showLoader('📱 Offline — lokale data geladen');
-      setTimeout(hideLoader,800);
+      setTimeout(dismissLoader,800);
       return;
     }
   }catch(e){}
 
   // 3. Geen data beschikbaar
   showLoader('Geen ritten gevonden voor vandaag');
-  setTimeout(()=>{hideLoader();},1500);
+  setTimeout(()=>{dismissLoader();},1500);
 
   // 3. Herstel voortgang
   const datum=localStorage.getItem('def_loaded_date')||'';
