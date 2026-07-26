@@ -2081,17 +2081,7 @@ function handleScannedEan(ean){
     setStatus('✓ '+p.code+' – '+p.name.substring(0,28),'#3b6d11');
     scanCooldown=true;
     doScanById(p.id);
-    const bon2=aktKlant.bons[aktBonIdx];
-    const allDone=bon2.prods.every(x=>isProdKlaar(x));
-    if(allDone){
-      setTimeout(()=>{
-        closeScan();
-        // Toon grote groene bevestiging
-        showAlleGescand();
-      },800);
-    } else {
-      setTimeout(()=>{scanCooldown=false;setStatus('Richt op een EAN barcode','#888780');},1200);
-    }
+    setTimeout(()=>{scanCooldown=false;setStatus('Richt op een EAN barcode','#888780');},1200);
   } else {
     const done=bon.prods.find(x=>x.ean===ean&&(isProdKlaar(x)));
     setStatus(done?'⚠ '+done.code+' al volledig gescand':'⚠ Barcode niet gevonden op bon','#e8855a');
@@ -2111,6 +2101,7 @@ function voltooiProduct(pid){
   updateVoortgangSupabase(aktKlant,bon,p);
   renderBon();
   renderManualList();
+  checkBonCompleetNaTik(bon);
 }
 
 function doScanById(pid){
@@ -2126,6 +2117,9 @@ function doScanById(pid){
   if(!isProdKlaar(p)) showToast('✓ '+p.code+' ('+p.scanned+'/'+p.qty+')');
   renderBon();
   renderManualList();
+  if(bon.prods.every(x=>isProdKlaar(x))&&!bon._compleetGemeld){
+    setTimeout(()=>{closeScan();showAlleGescand();},800);
+  }
 }
 
 function closeScan(){
@@ -2137,17 +2131,20 @@ function closeScan(){
 }
 
 function showAlleGescand(){
-  const miss=aktKlant.bons[aktBonIdx].prods.filter(p=>p.missing||(p.missQty||0)>0).length;
+  const bon=aktKlant.bons[aktBonIdx];
+  meldBonCompleetAanBureau(bon);
+  const miss=bon.prods.filter(p=>p.missing||(p.missQty||0)>0).length;
   const ov=document.createElement('div');
   ov.id='done-ov';
   ov.style.cssText='position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(59,109,17,.95);z-index:25;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;';
   ov.innerHTML=`
     <div style="font-size:72px;">✓</div>
-    <div style="color:#fff;font-size:22px;font-weight:800;text-align:center;">Alle producten<br>gecontroleerd!</div>
+    <div style="color:#fff;font-size:22px;font-weight:800;text-align:center;">Bon compleet!</div>
+    <div style="background:rgba(255,255,255,.2);border-radius:10px;padding:8px 18px;color:#fff;font-size:12px;text-align:center;">✓ Bureau verwittigd</div>
     ${miss>0?`<div style="background:rgba(255,255,255,.2);border-radius:10px;padding:10px 20px;color:#fff;font-size:14px;text-align:center;">⚠ ${miss} product(en) niet beschikbaar</div>`:''}
     <div style="display:flex;flex-direction:column;gap:10px;width:100%;margin-top:8px;">
-      <button onclick="document.getElementById('done-ov').remove();openMail();" style="background:#fff;color:#3b6d11;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;cursor:pointer;">
-        📧 Mail bon versturen
+      <button id="btn-pdf-klant" onclick="stuurBonPdfNaarKlant()" style="background:#fff;color:#3b6d11;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;cursor:pointer;">
+        📄 Bon versturen naar klant
       </button>
       <button onclick="document.getElementById('done-ov').remove();openFoto(aktKlant.id,aktKlant.bons[aktBonIdx].num);" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:12px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;">
         📷 Foto nemen (optioneel)
@@ -2160,6 +2157,21 @@ function showAlleGescand(){
   if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);
   renderBon();
   // Also refresh klanten done status
+}
+
+// Meldt een compleet afgewerkte bon één keer aan het bureau (dashboard/meldingen)
+function meldBonCompleetAanBureau(bon){
+  if(bon._compleetGemeld)return;
+  bon._compleetGemeld=true;
+  const missCnt=bon.prods.filter(p=>p.missing||(p.missQty||0)>0).length;
+  stuurNotificatieSupabase('Kantoor',`✓ Bon ${bon.num} compleet — ${aktKlant?.name||''} (${selDriver?.name||''})${missCnt>0?` · ⚠ ${missCnt} tekort(en)`:''}`).catch(()=>{});
+}
+
+// Checkt na een tik/tekort-wijziging of de bon nu volledig klaar is, en toont dan dezelfde 'Bon compleet'-flow
+function checkBonCompleetNaTik(bon){
+  if(!bon.prods.every(p=>isProdKlaar(p)))return;
+  if(bon._compleetGemeld)return;
+  showAlleGescand();
 }
 
 // Mail
@@ -2315,6 +2327,134 @@ function doMail(){
 function closeMail(){document.getElementById('mail-ov').style.display='none';}
 function mailBgClick(e){if(e.target===document.getElementById('mail-ov'))closeMail();}
 
+// ── BON ALS PDF NAAR KLANT (zelfde uitzicht als de Papyrus-bestelnota) ──
+async function laadJsPdfAlsNodig(){
+  if(window.jspdf)return;
+  await new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload=res;s.onerror=rej;
+    document.head.appendChild(s);
+  });
+  await new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js';
+    s.onload=res;s.onerror=rej;
+    document.head.appendChild(s);
+  });
+}
+
+async function genereerBonPdfBlob(bon){
+  await laadJsPdfAlsNodig();
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4'});
+  const links=15, rechts=210-15;
+
+  // ── Header: logo-tekst links, Devisch-Oresto Partner blok rechts ──
+  doc.setFont('helvetica','bold');doc.setFontSize(19);doc.setTextColor(44,44,42);
+  doc.text('devisch – esca food',links,17);
+  doc.setFontSize(11);doc.setTextColor(232,133,90);
+  doc.text('oresto partner',links,23);
+
+  doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(196,74,58);
+  doc.text('Devisch - Oresto Partner',rechts,11,{align:'right'});
+  doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(95,94,90);
+  ['Devisch Foodservice bv','CASH & CARRY: Koksijdestraat 20, B-8630 Veurne','MAGAZIJN: Koksijdestraat 20, B-8630 Veurne','T +32 (0)58 52 38 04','info@devisch.be   www.devisch.be']
+    .forEach((l,i)=>doc.text(l,rechts,15.5+i*3.6,{align:'right'}));
+
+  doc.setDrawColor(225,222,214);doc.line(links,30,rechts,30);
+
+  // ── BESTELNOTA + klant-blok ──
+  let y=38;
+  doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(44,44,42);
+  doc.text('BESTELNOTA '+bon.num,links,y);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(95,94,90);
+  doc.text('Datum : '+bon.datum,links,y+6);
+
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(95,94,90);
+  doc.text('Klantnummer '+(bon.klnr||''),110,y-2);
+
+  doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(44,44,42);
+  doc.text(aktKlant.name,rechts,y-2,{align:'right'});
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(95,94,90);
+  doc.text(aktKlant.addr||'',rechts,y+3,{align:'right'});
+  doc.text(bon.btwnr||'',110,y+3);
+
+  if(bon.note){
+    doc.setDrawColor(225,222,214);doc.rect(links,y+9,rechts-links,7);
+    doc.setFont('helvetica','italic');doc.setFontSize(8.5);doc.setTextColor(70,70,66);
+    doc.text(bon.note,links+2,y+13.5);
+    y+=9;
+  }
+
+  // ── Productentabel ──
+  const rijen=bon.prods.map(p=>{
+    const isMiss=p.missing;
+    const isPartial=!p.missing&&(p.missQty||0)>0;
+    const status=isMiss?'✗ Niet beschikbaar':isPartial?`⚠ ${p.qty-(p.missQty||0)}/${p.qty} geleverd`:'';
+    return [p.code, p.name+(status?'\n'+status:''), String(p.qty), p.prijs||'', p.bedrag||'', p.btwpct||bon.btwpct||''];
+  });
+  doc.autoTable({
+    startY:y+13,
+    head:[['Code','Omschrijving','Aantal','Prijs EUR','Bedrag EUR','BTW']],
+    body:rijen,
+    theme:'plain',
+    margin:{left:links,right:15},
+    styles:{fontSize:8.5,cellPadding:{top:2,bottom:2,left:2,right:2},textColor:[44,44,42]},
+    headStyles:{fillColor:[44,44,42],textColor:255,fontStyle:'bold',fontSize:8},
+    columnStyles:{0:{cellWidth:20},2:{cellWidth:16,halign:'center'},3:{cellWidth:22,halign:'right'},4:{cellWidth:24,halign:'right'},5:{cellWidth:16,halign:'right'}},
+    didParseCell:(data)=>{
+      const p=bon.prods[data.row.index];
+      if(p&&p.missing&&data.section==='body')data.cell.styles.fillColor=[252,235,235];
+      else if(p&&!p.missing&&(p.missQty||0)>0&&data.section==='body')data.cell.styles.fillColor=[255,248,230];
+    }
+  });
+
+  // ── Totalen ──
+  let ty=doc.lastAutoTable.finalY+10;
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(95,94,90);
+  doc.text('Netto Basis',links,ty);doc.text('BTW %',links+45,ty);doc.text('BTW-bedrag',links+80,ty);
+  doc.setTextColor(44,44,42);
+  doc.text('€ '+(bon.netto||''),links,ty+5);doc.text(bon.btwpct||'',links+45,ty+5);doc.text('€ '+(bon.btw||''),links+80,ty+5);
+  doc.setDrawColor(225,222,214);doc.line(links,ty+8,rechts,ty+8);
+
+  doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(44,44,42);
+  doc.text('TOTAAL TE BETALEN',links,ty+15);
+  doc.setFontSize(15);
+  doc.text('€ '+(bon.totaal||''),rechts,ty+15,{align:'right'});
+
+  // ── Footer ──
+  doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(140,138,130);
+  doc.text('Devisch Foodservice bv · Koksijdestraat 20, B-8630 Veurne · info@devisch.be · www.devisch.be',105,287,{align:'center'});
+
+  return doc.output('blob');
+}
+
+async function stuurBonPdfNaarKlant(){
+  const bon=aktKlant.bons[aktBonIdx];
+  const btn=document.getElementById('btn-pdf-klant');
+  if(btn){btn.disabled=true;btn.textContent='⏳ PDF wordt gemaakt...';}
+  try{
+    const blob=await genereerBonPdfBlob(bon);
+    const bestandsnaam=`Bestelnota_${bon.num}_${(aktKlant.name||'klant').replace(/[^a-z0-9]/gi,'_')}.pdf`;
+    const file=new File([blob],bestandsnaam,{type:'application/pdf'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:'Leveringsbon '+bon.num,text:'Leveringsbon '+bon.num+' — '+aktKlant.name});
+      showToast('✓ Bon gedeeld');
+    } else {
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download=bestandsnaam;a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),5000);
+      showToast('✓ PDF gedownload — verstuur die zelf naar de klant');
+    }
+  }catch(e){
+    if(e.name!=='AbortError'){console.error('PDF fout:',e);showToast('⚠ PDF maken mislukt: '+e.message);}
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='📄 Bon versturen naar klant';}
+  }
+}
+
 // Missing
 const MISS_REDENEN=['Niet in stock','Vergeten te laden','Beschadigd','Vervangen door ander product','Klant niet aanwezig'];
 let missRedens={};
@@ -2413,6 +2553,7 @@ function confirmMiss(){
   closeMiss();
   renderBon();
   showToast('✓ Tekorten opgeslagen');
+  checkBonCompleetNaTik(bon);
 }
 function closeMiss(){document.getElementById('miss-ov').style.display='none';}
 function missBgClick(e){if(e.target===document.getElementById('miss-ov'))closeMiss();}
