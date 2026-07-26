@@ -1055,8 +1055,8 @@ function loadFotos(){
 function loadScanProgress(){
   try{
     const k=localStorage.getItem('def_klanten');
-    const s=localStorage.getItem('def_state');
-    if(s){const st=JSON.parse(s);calY=st.calY||calY;calM=st.calM||calM;selDay=st.selDay||null;}
+    // Kalenderpositie NIET herstellen uit localStorage — altijd starten op vandaag
+    // (calY, calM en selDay staan al op _vandaag via de initialisatie hierboven)
     // alleen scan-voortgang herstellen als het dezelfde dag is
     if(k){
       const saved=JSON.parse(k);
@@ -1245,10 +1245,10 @@ async function loadAppData(){
         localStorage.setItem('def_loaded_date',gebruikteDatum);
         localStorage.setItem('def_data_date',gebruikteDatum);
         localStorage.setItem('def_chauffeur_id',selDriver?.id||'');
-        // Zet kalender op de datum van de geladen data
+        // Kalender blijft op de huidige maand staan — enkel selDay volgt de geladen data (voor het klantenoverzicht)
         const dParts=gebruikteDatum.split('-');
-        if(dParts.length===3){calY=parseInt(dParts[2]);calM=parseInt(dParts[1])-1;selDay=parseInt(dParts[0]);}
-        else{calY=nu.getFullYear();calM=nu.getMonth();selDay=nu.getDate();}
+        if(dParts.length===3){selDay=parseInt(dParts[0]);}
+        else{selDay=nu.getDate();}
         showLoader(`✓ ${KLANTEN.length} klanten geladen`);
         setTimeout(hideLoader,600);
         // Herstel voortgang
@@ -1271,7 +1271,7 @@ async function loadAppData(){
       KLANTEN=cloneData(JSON.parse(savedKlanten));
       if(savedDate){
         const parts=savedDate.split('-');
-        if(parts.length===3){calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);}
+        if(parts.length===3){selDay=parseInt(parts[0]);}
       }
       loadScanProgress();
       showLoader('📱 Offline — lokale data geladen');
@@ -1295,7 +1295,7 @@ async function loadAppData(){
   }catch(e){loadScanProgress();}
 
   const parts=datum.split('-');
-  if(parts.length===3){calY=parseInt(parts[2]);calM=parseInt(parts[1])-1;selDay=parseInt(parts[0]);}
+  if(parts.length===3){selDay=parseInt(parts[0]);}
   renderDrivers();appReady=true;
 }
 
@@ -1442,8 +1442,8 @@ function renderCalendar(){
     const dataM=dataParts.length===3?parseInt(dataParts[1])-1:-1;
     const dataY=dataParts.length===3?parseInt(dataParts[2]):0;
     const isDel=d===dataD&&calM===dataM&&calY===dataY;
-    const isSel=d===selDay;
     const _nu=new Date();const isToday=d===_nu.getDate()&&calM===_nu.getMonth()&&calY===_nu.getFullYear();
+    const isSel=isToday;
     grid.innerHTML+=`<div class="cal-d${isDel?' has-del':''}${isSel?' sel':''}${isToday?' today':''}" onclick="${isDel?`pickDay(${d})`:''}">
       ${d}${isDel?`<div class="dot-del"></div>`:''}
     </div>`;

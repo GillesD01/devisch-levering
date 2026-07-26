@@ -249,6 +249,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- TAB: UPLOAD -->
 <div id="tab-upload" class="main" style="display: none;">
   <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">🗂️ Automatische map (Papyrus-export)</h2>
+    <p style="font-size:13px;color:#888780;margin-bottom:16px;">Koppel de map waar Papyrus de PDF's van ritten en bonnen in opslaat. Het dashboard controleert die map zelf periodiek en verwerkt nieuwe bestanden automatisch — geen manueel uploaden meer nodig. Werkt enkel in Chrome/Edge, en enkel zolang dit tabblad open staat.</p>
+    <div id="auto-folder-status" style="background:#f5f4f0;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#2c2c2a;">Nog geen map gekoppeld</div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn" onclick="koppelAutoMap()">📁 Map koppelen</button>
+      <button class="btn" id="auto-check-btn" onclick="folderControleren()" disabled style="background:#f5f4f0;color:#2c2c2a;">🔄 Nu controleren</button>
+    </div>
+    <div id="auto-log" class="dlog" style="margin-top:12px;"></div>
+  </div>
+
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
     <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">📂 Nieuwe leveringsdag instellen</h2>
     <p style="font-size:13px;color:#888780;margin-bottom:20px;">Upload per chauffeur de PDF bonnen. Je kan meerdere PDF's tegelijk uploaden voor 1 chauffeur.</p>
 
@@ -276,10 +287,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div style="background:#f5f4f0;border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
-      <input type="checkbox" id="heeft-rittenblad" style="width:18px;height:18px;accent-color:#e8855a;cursor:pointer;flex-shrink:0;">
-      <label for="heeft-rittenblad" style="font-size:13px;color:#2c2c2a;cursor:pointer;line-height:1.4;">
-        <strong>Rittenblad aanwezig</strong> — één van de PDF's is een rittenblad (overzicht van ritten, geen bonnen). Dit wordt niet meegeteld als bon.
-      </label>
+      <span style="font-size:16px;flex-shrink:0;">🛈</span>
+      <div style="font-size:13px;color:#2c2c2a;line-height:1.4;">
+        Het rittenblad (voorblad met "Rit : NAAM") wordt automatisch herkend tussen de PDF's en niet als bon meegeteld — geen vinkje meer nodig.
+      </div>
     </div>
 
     <button id="dag-btn" class="btn" onclick="dagVerwerk()" style="width:100%;font-size:15px;padding:14px;">⚡ Verwerken en opslaan</button>
@@ -1253,6 +1264,128 @@ function closeModal(){document.getElementById('modal-bg').classList.remove('open
 
 // ── UPLOAD ────────────────────────────────────────
 let dagFiles=[];
+
+// ── AUTOMATISCHE MAP (Papyrus PDF-export) ──────────────────────────────
+// Koppelt een lokale map via de File System Access API (Chrome/Edge) en
+// hergebruikt de bestaande dagVerwerk()-pijplijn voor nieuw gevonden PDF's.
+const AUTO_DB='devisch_auto_map',AUTO_STORE='handles',AUTO_KEY='papyrus_map';
+
+function autoIdbOpen(){
+  return new Promise((res,rej)=>{
+    const req=indexedDB.open(AUTO_DB,1);
+    req.onupgradeneeded=()=>req.result.createObjectStore(AUTO_STORE);
+    req.onsuccess=()=>res(req.result);
+    req.onerror=()=>rej(req.error);
+  });
+}
+async function autoIdbSet(key,val){
+  const db=await autoIdbOpen();
+  return new Promise((res,rej)=>{
+    const tx=db.transaction(AUTO_STORE,'readwrite');
+    tx.objectStore(AUTO_STORE).put(val,key);
+    tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);
+  });
+}
+async function autoIdbGet(key){
+  const db=await autoIdbOpen();
+  return new Promise((res,rej)=>{
+    const tx=db.transaction(AUTO_STORE,'readonly');
+    const req=tx.objectStore(AUTO_STORE).get(key);
+    req.onsuccess=()=>res(req.result||null);req.onerror=()=>rej(req.error);
+  });
+}
+function autoLog(msg,t='info'){
+  const el=document.getElementById('auto-log');
+  if(!el)return;
+  el.innerHTML+=`<div class="dlog-${t}">${msg}</div>`;
+  el.scrollTop=el.scrollHeight;
+}
+function autoVerwerkteBestanden(){
+  try{return JSON.parse(localStorage.getItem('auto_verwerkte_bestanden')||'[]');}catch(e){return[];}
+}
+function autoMarkeerVerwerkt(lijst){
+  const nieuw=autoVerwerkteBestanden().concat(lijst);
+  localStorage.setItem('auto_verwerkte_bestanden',JSON.stringify(nieuw.slice(-500)));
+}
+
+async function koppelAutoMap(){
+  if(!window.showDirectoryPicker){
+    autoLog('✗ Deze browser ondersteunt geen mapkoppeling — gebruik Chrome of Edge','err');
+    return;
+  }
+  try{
+    const handle=await window.showDirectoryPicker({mode:'read'});
+    await autoIdbSet(AUTO_KEY,handle);
+    document.getElementById('auto-folder-status').innerHTML=`✓ Gekoppeld aan map: <strong>${handle.name}</strong>`;
+    document.getElementById('auto-check-btn').disabled=false;
+    autoLog(`✓ Map "${handle.name}" gekoppeld`,'ok');
+    startAutoCheckInterval();
+    folderControleren();
+  }catch(e){
+    if(e.name!=='AbortError')autoLog(`✗ Kon map niet koppelen: ${e.message}`,'err');
+  }
+}
+
+async function haalAutoMapHandle(){
+  const handle=await autoIdbGet(AUTO_KEY);
+  if(!handle)return null;
+  const perm=await handle.queryPermission({mode:'read'});
+  if(perm==='granted')return handle;
+  const nieuwePerm=await handle.requestPermission({mode:'read'});
+  return nieuwePerm==='granted'?handle:null;
+}
+
+let autoCheckInterval=null;
+function startAutoCheckInterval(){
+  if(autoCheckInterval)clearInterval(autoCheckInterval);
+  autoCheckInterval=setInterval(folderControleren,3*60*1000); // elke 3 minuten
+}
+
+async function folderControleren(){
+  const handle=await haalAutoMapHandle();
+  if(!handle){
+    autoLog('✗ Geen toegang tot de gekoppelde map — klik opnieuw op "Map koppelen"','err');
+    return;
+  }
+  const verwerkt=autoVerwerkteBestanden();
+  const nieuweFiles=[];
+  for await (const [name,entryHandle] of handle.entries()){
+    if(entryHandle.kind!=='file')continue;
+    if(!name.toLowerCase().endsWith('.pdf'))continue;
+    const file=await entryHandle.getFile();
+    const vingerafdruk=`${name}_${file.size}_${file.lastModified}`;
+    if(verwerkt.includes(vingerafdruk))continue;
+    nieuweFiles.push({file,vingerafdruk});
+  }
+  if(nieuweFiles.length===0){
+    autoLog(`— Geen nieuwe bestanden (${new Date().toLocaleTimeString('nl-BE')})`);
+    return;
+  }
+  autoLog(`📄 ${nieuweFiles.length} nieuwe PDF('s) gevonden — verwerken...`);
+  dagFiles=nieuweFiles.map(x=>x.file);
+  renderDagFiles();
+  document.getElementById('dag-datum').value=new Date().toISOString().slice(0,10);
+  document.getElementById('dag-chauffeur').value='ALL';
+  await dagVerwerk();
+  autoMarkeerVerwerkt(nieuweFiles.map(x=>x.vingerafdruk));
+  autoLog(`✓ ${nieuweFiles.length} bestand(en) verwerkt en gemarkeerd`,'ok');
+}
+
+// Bij opstarten: check of er al een map gekoppeld was in een vorige sessie
+(async function initAutoMap(){
+  try{
+    const handle=await autoIdbGet(AUTO_KEY);
+    if(!handle)return;
+    const perm=await handle.queryPermission({mode:'read'});
+    const statusEl=document.getElementById('auto-folder-status');
+    if(statusEl)statusEl.innerHTML=perm==='granted'
+      ?`✓ Gekoppeld aan map: <strong>${handle.name}</strong>`
+      :`⚠ Gekoppeld aan map "<strong>${handle.name}</strong>" — klik "Nu controleren" om toegang te bevestigen`;
+    const btn=document.getElementById('auto-check-btn');
+    if(btn)btn.disabled=false;
+    startAutoCheckInterval();
+  }catch(e){}
+})();
 (()=>{const t=new Date();document.getElementById('dag-datum').value=t.toISOString().split('T')[0];})();
 
 function dagAddFiles(files){
@@ -1353,7 +1486,9 @@ async function dagVerwerk(){
   const dateVal=document.getElementById('dag-datum').value;
   const dateFmt=dateVal.split('-').reverse().join('-');
   const chauffeurIdKeuze=document.getElementById('dag-chauffeur').value;
-  const heeftRittenblad=document.getElementById('heeft-rittenblad')?.checked||false;
+  // Rittenblad-detectie draait voortaan altijd automatisch (elke rit heeft standaard een voorblad + bonnen) —
+  // het vinkje is enkel nog informatief en gate't de logica niet meer.
+  const heeftRittenblad=true;
 
   dlog(`📅 Datum: ${dateFmt}`);
   dlog(`📄 ${dagFiles.length} PDF bestand(en) laden...`);
@@ -1496,7 +1631,6 @@ async function dagVerwerk(){
       showToast(`✓ ${totK} klanten opgeslagen voor ${dateFmt}!`);
       addLog('📂',`Dag ${dateFmt}: ${totK} klanten, ${bonnenTekst}`,'ok');
       dagFiles=[];renderDagFiles();
-      document.getElementById('heeft-rittenblad').checked=false;
       renderUploadLijst();
       setTimeout(()=>{laadVoortgang().then(()=>{renderDashboard();renderLog();});},1500);
     }
