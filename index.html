@@ -1308,11 +1308,11 @@ function go(id){
 
 // Toast
 let toastTimer;
-function showToast(msg){
+function showToast(msg,duurMs){
   const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2500);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),duurMs||2500);
 }
 
 // Driver list
@@ -2544,7 +2544,15 @@ async function fotoBevestigen(){
       showToast('✓ Foto verstuurd naar dashboard!');
     } else {
       const fout=window._laatsteSupaFout||'onbekende fout';
-      showToast('⚠ Niet verstuurd: '+fout);
+      showToast('⚠ Niet verstuurd — kantoor is verwittigd. Probeer straks opnieuw.',10000);
+      // Stuur de echte technische foutmelding naar een debug-kanaal zodat dit op afstand
+      // kan uitgezocht worden, zonder dat de chauffeur iets moet aflezen/doorgeven.
+      supaFetch('notificaties','POST',{
+        van:selDriver?.name||'chauffeur',
+        naar:'FOTO_UPLOAD_DEBUG',
+        tekst:`Foto-upload mislukt | klant_id:${fotoKlantId} bon:${fotoBonNum} datum:${datum} fotolengte:${fotoVersturen?.length||0} | fout: ${fout}`,
+        gelezen:false
+      }).catch(()=>{});
     }
   }catch(e){
     clearTimeout(failsafe);
