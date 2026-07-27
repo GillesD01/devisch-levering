@@ -109,7 +109,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="tabs">
   <div class="tab" onclick="showTab(&#39;vandaag&#39;,this)">📊 Vandaag</div>
   <div class="tab" onclick="showTab(&#39;upload&#39;,this)">📂 Nieuwe dag</div>
-  <div class="tab" onclick="showTab(&#39;meldingen&#39;,this)">🔔 Meldingen</div>
+  <div class="tab" onclick="showTab(&#39;meldingen&#39;,this)">🔔 Meldingen<span id="meldingen-badge" style="display:none;background:#e8855a;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:6px;"></span></div>
   <div class="tab" onclick="showTab(&#39;chauffeurs&#39;,this)">👥 Chauffeurs</div>
   <div class="tab" onclick="showTab(&#39;historiek&#39;,this)">📋 Historiek</div>
   <div class="tab active" onclick="showTab(&#39;fotos&#39;,this)">📷 Foto's</div>
@@ -1706,17 +1706,28 @@ async function laadBerichtenVanChauffeurs(){
   const el=document.getElementById('kantoor-berichten');
   if(!el)return;
   const data=await supaFetch(`notificaties?naar=ilike.KANTOOR&order=created_at.desc&limit=20`);
-  if(!data||!data.length){el.innerHTML='<div class="geen">Geen berichten van chauffeurs</div>';return;}
-  el.innerHTML=data.map(b=>{
+  const vandaag=getVandaag(); // dd-mm-jjjj lokale vergelijking
+  const vandaagData=(data||[]).filter(b=>{
+    const d=new Date(b.created_at);
+    return `${String(d.getDate()).padStart(2,'0')}-${String(d.getMonth()+1).padStart(2,'0')}-${d.getFullYear()}`===vandaag;
+  });
+  const badge=document.getElementById('meldingen-badge');
+  const aantalNieuw=vandaagData.filter(b=>!b.gelezen).length;
+  if(badge){
+    badge.style.display=aantalNieuw>0?'inline-block':'none';
+    badge.textContent=aantalNieuw;
+  }
+  if(!vandaagData.length){el.innerHTML='<div class="geen">Geen berichten van chauffeurs vandaag</div>';return;}
+  el.innerHTML=vandaagData.map(b=>{
     const tijd=new Date(b.created_at).toLocaleString('nl-BE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     const isNieuw=!b.gelezen;
-    return`<div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:${isNieuw?'#faece7':'#f5f4f0'};border-radius:10px;margin-bottom:8px;border-left:3px solid ${isNieuw?'#e8855a':'transparent'};">
+    return`<div style="display:flex;align-items:flex-start;gap:12px;padding:${isNieuw?'14px':'12px'};background:${isNieuw?'#fff3ec':'#f5f4f0'};border-radius:10px;margin-bottom:8px;border:${isNieuw?'2px solid #e8855a':'1px solid transparent'};box-shadow:${isNieuw?'0 2px 8px rgba(232,133,90,.25)':'none'};">
       <div style="width:36px;height:36px;border-radius:50%;background:#2c2c2a;color:#e8855a;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
         ${DRIVERS.find(d=>b.tekst.startsWith(d.name+':'))?.id||'?'}
       </div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;color:#2c2c2a;line-height:1.5;">${b.tekst}</div>
-        <div style="font-size:11px;color:#888780;margin-top:4px;">${tijd}${isNieuw?' · <span style="color:#e8855a;font-weight:600;">Nieuw</span>':''}</div>
+        <div style="font-size:${isNieuw?'14px':'13px'};color:#2c2c2a;line-height:1.5;font-weight:${isNieuw?'600':'400'};">${b.tekst}</div>
+        <div style="font-size:11px;color:#888780;margin-top:4px;">${tijd}${isNieuw?' · <span style="color:#e8855a;font-weight:700;">● NIEUW</span>':''}</div>
       </div>
       ${isNieuw?`<button onclick="markeerGelezen('${b.id}',this)" style="background:#e8855a;color:#fff;border:none;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;flex-shrink:0;">✓ Gelezen</button>`:''}
     </div>`;
@@ -1936,6 +1947,18 @@ try{const s=localStorage.getItem('chauffeur_config');if(s)DRIVERS=JSON.parse(s);
 addLog('🚀','Dashboard gestart','ok');
 renderDashboard();
 renderLog();
+
+// Oude meldingen (van vorige dagen) opruimen — enkel echte chauffeur/kantoor-berichten,
+// systeeminstellingen (CHAUFFEUR_CONFIG, KLANT_CODES, DASH_PW, ...) blijven onaangeroerd.
+(async function ruimOudeMeldingenOp(){
+  try{
+    const vandaagStart=new Date();
+    vandaagStart.setHours(0,0,0,0);
+    const grens=vandaagStart.toISOString();
+    const targets=[...DRIVERS.map(d=>d.id),'KANTOOR','ALL'].map(t=>`naar.eq.${t}`).join(',');
+    await supaFetch(`notificaties?or=(${targets})&created_at=lt.${encodeURIComponent(grens)}`,'DELETE');
+  }catch(e){}
+})();
 
 (async()=>{
   try{

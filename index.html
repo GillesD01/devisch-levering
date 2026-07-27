@@ -405,7 +405,7 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
           <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Klant weigert levering&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">❌ Weigering</button>
           <button onclick="document.getElementById(&#39;notif-tekst&#39;).value=&#39;Alle leveringen zijn klaar&#39;" style="background:#f5f4f0;color:#444441;border:none;border-radius:7px;padding:6px 10px;font-size:11px;cursor:pointer;">✅ Klaar</button>
         </div>
-        <button class="btn-full" onclick="verstuurNaarKantoor()">📤 Sturen naar kantoor</button>
+        <button id="notif-stuur-btn" class="btn-full" onclick="verstuurNaarKantoor()">📤 Sturen naar kantoor</button>
         <button class="btn-ghost" onclick="closeNotifStuur()">Annuleren</button>
       </div>
     </div>
@@ -2848,6 +2848,8 @@ function openNotifStuur(){
   const el=document.getElementById('notif-van-naam');
   if(el)el.textContent=naam;
   document.getElementById('notif-tekst').value='';
+  const btn=document.getElementById('notif-stuur-btn');
+  if(btn)btn.disabled=false;
   document.getElementById('notif-stuur-ov').style.display='flex';
 }
 function closeNotifStuur(){document.getElementById('notif-stuur-ov').style.display='none';}
@@ -2856,23 +2858,25 @@ async function verstuurNaarKantoor(){
   const tekst=document.getElementById('notif-tekst').value.trim();
   if(!tekst){showToast('⚠ Typ een bericht');return;}
   const van=selDriver?.name||'Chauffeur';
-  const vanId=selDriver?.id||'?';
+  const btn=document.getElementById('notif-stuur-btn');
+  if(btn){if(btn.disabled)return;btn.disabled=true;}
 
-  // Stuur naar KANTOOR via Supabase
-  await stuurNotificatieSupabase('KANTOOR', `${van}: ${tekst}`);
-  // Ook via localStorage voor fallback
-  stuurNotificatie('KANTOOR', `${van}: ${tekst}`, van);
+  // stuurNotificatie() stuurt zowel naar Supabase als naar de lokale offline-fallback in één keer —
+  // voorheen werd stuurNotificatieSupabase() hier ook nog eens apart aangeroepen, waardoor elk
+  // bericht dubbel in Supabase terechtkwam.
+  await stuurNotificatie('KANTOOR', `${van}: ${tekst}`, van);
 
   closeNotifStuur();
   showToast('✓ Bericht verstuurd naar kantoor!');
   addLog?.('📤', `${van} → kantoor: "${tekst.substring(0,40)}"`, 'ok');
+  if(btn)btn.disabled=false;
 }
 
 function verstuurNotif(){verstuurNaarKantoor();}
 
-function stuurNotificatie(driverId, tekst, van){
+async function stuurNotificatie(driverId, tekst, van){
   // Stuur via Supabase (online) EN localStorage (offline fallback)
-  stuurNotificatieSupabase(driverId, tekst);
+  await stuurNotificatieSupabase(driverId, tekst);
   try{
     const key='notif_'+driverId;
     const notifs=JSON.parse(localStorage.getItem(key)||'[]');
