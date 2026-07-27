@@ -2194,7 +2194,7 @@ function meldBonCompleetAanBureau(bon){
   if(bon._compleetGemeld)return;
   bon._compleetGemeld=true;
   const missCnt=bon.prods.filter(p=>p.missing||(p.missQty||0)>0).length;
-  stuurNotificatieSupabase('Kantoor',`✓ Bon ${bon.num} compleet — ${aktKlant?.name||''} (${selDriver?.name||''})${missCnt>0?` · ⚠ ${missCnt} tekort(en)`:''}`).catch(()=>{});
+  stuurNotificatieSupabase('KANTOOR',`✓ Bon ${bon.num} compleet — ${aktKlant?.name||''} (${selDriver?.name||''})${missCnt>0?` · ⚠ ${missCnt} tekort(en)`:''}`).catch(()=>{});
 }
 
 // Checkt na een tik/tekort-wijziging of de bon nu volledig klaar is, en toont dan dezelfde 'Bon compleet'-flow
@@ -2818,7 +2818,6 @@ async function fotoBevestigen(){
 
 function closeFoto(){document.getElementById('foto-ov').style.display='none';fotoData=null;}
 function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
-function fotoBgClick(e){if(e.target===document.getElementById('foto-ov'))closeFoto();}
 
 // ── PUSH NOTIFICATIES ──
 function checkNotificaties(){
@@ -2870,17 +2869,6 @@ async function verstuurNaarKantoor(){
 }
 
 function verstuurNotif(){verstuurNaarKantoor();}
-function closeNotifStuur(){document.getElementById('notif-stuur-ov').style.display='none';}
-function verstuurNotif(){
-  const to=document.getElementById('notif-to').value;
-  const tekst=document.getElementById('notif-tekst').value.trim();
-  if(!tekst){showToast('⚠ Typ een bericht');return;}
-  const targets=to==='ALL'?['TJ','JA','FE','SE','CH']:[to];
-  targets.forEach(id=>stuurNotificatie(id,tekst,'Kantoor'));
-  closeNotifStuur();
-  document.getElementById('notif-tekst').value='';
-  showToast('✓ Bericht verstuurd naar '+(to==='ALL'?'alle chauffeurs':to));
-}
 
 function stuurNotificatie(driverId, tekst, van){
   // Stuur via Supabase (online) EN localStorage (offline fallback)
