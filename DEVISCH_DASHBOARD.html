@@ -1949,7 +1949,14 @@ renderLog();
 })();
 
 setInterval(async()=>{
-  try{await laadVoortgang();renderDashboard();renderLog();}catch(e){}
+  try{
+    await laadVoortgang();
+    renderDashboard();
+    renderLog();
+    // Ververs ook de berichten-tab automatisch als die open staat, i.p.v. enkel bij tabwissel
+    const meldingenTab=document.getElementById('tab-meldingen');
+    if(meldingenTab&&meldingenTab.style.display!=='none')await laadBerichtenVanChauffeurs();
+  }catch(e){}
 },15000);
 </script>
 
