@@ -1351,34 +1351,49 @@ function startAutoCheckInterval(){
   autoCheckInterval=setInterval(folderControleren,3*60*1000); // elke 3 minuten
 }
 
+let autoVerwerkBezig=false;
 async function folderControleren(){
-  const handle=await haalAutoMapHandle();
-  if(!handle){
-    autoLog('✗ Geen toegang tot de gekoppelde map — klik opnieuw op "Map koppelen"','err');
+  if(autoVerwerkBezig){
+    autoLog('— Al bezig met verwerken, even geduld...');
     return;
   }
-  const verwerkt=autoVerwerkteBestanden();
-  const nieuweFiles=[];
-  for await (const [name,entryHandle] of handle.entries()){
-    if(entryHandle.kind!=='file')continue;
-    if(!name.toLowerCase().endsWith('.pdf'))continue;
-    const file=await entryHandle.getFile();
-    const vingerafdruk=`${name}_${file.size}_${file.lastModified}`;
-    if(verwerkt.includes(vingerafdruk))continue;
-    nieuweFiles.push({file,vingerafdruk});
+  autoVerwerkBezig=true;
+  const checkBtn=document.getElementById('auto-check-btn');
+  if(checkBtn)checkBtn.disabled=true;
+  try{
+    const handle=await haalAutoMapHandle();
+    if(!handle){
+      autoLog('✗ Geen toegang tot de gekoppelde map — klik opnieuw op "Map koppelen"','err');
+      return;
+    }
+    const verwerkt=autoVerwerkteBestanden();
+    const nieuweFiles=[];
+    for await (const [name,entryHandle] of handle.entries()){
+      if(entryHandle.kind!=='file')continue;
+      if(!name.toLowerCase().endsWith('.pdf'))continue;
+      const file=await entryHandle.getFile();
+      const vingerafdruk=`${name}_${file.size}_${file.lastModified}`;
+      if(verwerkt.includes(vingerafdruk))continue;
+      nieuweFiles.push({file,vingerafdruk});
+    }
+    if(nieuweFiles.length===0){
+      autoLog(`— Geen nieuwe bestanden (${new Date().toLocaleTimeString('nl-BE')})`);
+      return;
+    }
+    autoLog(`📄 ${nieuweFiles.length} nieuwe PDF('s) gevonden — verwerken...`);
+    // Markeer als verwerkt VOOR het eigenlijke verwerken start, zodat een overlappende
+    // check (bv. handmatig geklikt tijdens de AI-verwerking) dezelfde bestanden nooit dubbel oppikt.
+    autoMarkeerVerwerkt(nieuweFiles.map(x=>x.vingerafdruk));
+    dagFiles=nieuweFiles.map(x=>x.file);
+    renderDagFiles();
+    document.getElementById('dag-datum').value=new Date().toISOString().slice(0,10);
+    document.getElementById('dag-chauffeur').value='ALL';
+    await dagVerwerk();
+    autoLog(`✓ ${nieuweFiles.length} bestand(en) verwerkt en gemarkeerd`,'ok');
+  }finally{
+    autoVerwerkBezig=false;
+    if(checkBtn)checkBtn.disabled=false;
   }
-  if(nieuweFiles.length===0){
-    autoLog(`— Geen nieuwe bestanden (${new Date().toLocaleTimeString('nl-BE')})`);
-    return;
-  }
-  autoLog(`📄 ${nieuweFiles.length} nieuwe PDF('s) gevonden — verwerken...`);
-  dagFiles=nieuweFiles.map(x=>x.file);
-  renderDagFiles();
-  document.getElementById('dag-datum').value=new Date().toISOString().slice(0,10);
-  document.getElementById('dag-chauffeur').value='ALL';
-  await dagVerwerk();
-  autoMarkeerVerwerkt(nieuweFiles.map(x=>x.vingerafdruk));
-  autoLog(`✓ ${nieuweFiles.length} bestand(en) verwerkt en gemarkeerd`,'ok');
 }
 
 // Bij opstarten: check of er al een map gekoppeld was in een vorige sessie
