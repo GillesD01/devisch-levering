@@ -1462,25 +1462,30 @@ async function leesRittenbladTekst(file){
 }
 
 function parseerRittenblad(tekst){
-  // Haal chauffeur-naam op via "Rit : JARNE" of "Chauffeur :Jarne"
-  let chaufNaam=null;
-  const ritMatch=tekst.match(/Rit\s*:\s*([A-Za-zÀ-ÿ\s]+?)(?:\n|\s{2,}|Regio|Chauffeur|Voertuig|$)/i);
-  if(ritMatch)chaufNaam=ritMatch[1].trim();
-  if(!chaufNaam){
-    const chMatch=tekst.match(/Chauffeur\s*:\s*([A-Za-zÀ-ÿ\s]+?)(?:\n|\s{2,}|Voertuig|$)/i);
-    if(chMatch)chaufNaam=chMatch[1].trim();
-  }
-
-  // Zoek de chauffeur-id via naam (case-insensitief)
-  let chaufId=null;
-  if(chaufNaam){
-    const naam=chaufNaam.toLowerCase().trim();
-    const match=DRIVERS.find(d=>
-      naam===d.name.toLowerCase()||
-      naam.startsWith(d.name.toLowerCase())||
-      d.name.toLowerCase().startsWith(naam)
-    );
-    if(match)chaufId=match.id;
+  // Meest robuuste methode: zoek rechtstreeks naar een van de 5 gekende chauffeursnamen
+  // in de volledige tekst. Dit werkt onafhankelijk van de exacte woordvolgorde die pdf.js
+  // teruggeeft (tabellen/kolommen worden niet altijd in leesvolgorde geëxtraheerd, waardoor
+  // een positie-gebaseerde regex op "Rit : NAAM" soms faalt terwijl de naam wel degelijk
+  // ergens in de tekst staat).
+  const tekstLower=tekst.toLowerCase();
+  let chaufId=null, chaufNaam=null;
+  const gevonden=DRIVERS.filter(d=>tekstLower.includes(d.name.toLowerCase()));
+  if(gevonden.length===1){
+    chaufId=gevonden[0].id;
+    chaufNaam=gevonden[0].name;
+  } else if(gevonden.length>1){
+    // Meerdere namen gevonden (zeldzaam) — neem degene die het dichtst bij "Rit :" staat
+    const ritPos=tekstLower.indexOf('rit :')>=0?tekstLower.indexOf('rit :'):tekstLower.indexOf('rit:');
+    if(ritPos>=0){
+      let dichtsteAfstand=Infinity;
+      gevonden.forEach(d=>{
+        const pos=tekstLower.indexOf(d.name.toLowerCase());
+        const afstand=Math.abs(pos-ritPos);
+        if(afstand<dichtsteAfstand){dichtsteAfstand=afstand;chaufId=d.id;chaufNaam=d.name;}
+      });
+    } else {
+      chaufId=gevonden[0].id;chaufNaam=gevonden[0].name;
+    }
   }
 
   // Haal klantnamen op: regels met patroon "GETAL  Naam van klant"
