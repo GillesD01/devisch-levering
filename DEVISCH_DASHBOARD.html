@@ -97,6 +97,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </style>
 </head>
 <body>
+<div id="dash-auth-gate" style="position:fixed;top:0;left:0;right:0;bottom:0;background:#2c2c2a;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;">
+  <div style="text-align:center;margin-bottom:8px;">
+    <div style="color:#888780;font-size:24px;font-weight:500;letter-spacing:-.5px;">devisch – esca food</div>
+    <div style="color:#e8855a;font-size:14px;font-weight:500;margin-top:4px;">Dashboard</div>
+  </div>
+  <div style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:12px;">
+    <div style="text-align:center;color:#5f5e5a;font-size:13px;margin-bottom:6px;">Log in om het dashboard te ontgrendelen<br>(blijft 6 uur geldig)</div>
+    <input type="email" id="auth-email" placeholder="E-mailadres" autocomplete="username" style="padding:14px;border-radius:12px;border:none;font-size:15px;">
+    <input type="password" id="auth-wachtwoord" placeholder="Wachtwoord" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAuthLogin()" style="padding:14px;border-radius:12px;border:none;font-size:15px;">
+    <button id="auth-login-btn" onclick="doAuthLogin()" style="background:#e8855a;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;">Inloggen</button>
+    <div id="auth-fout" style="color:#ff8a7a;font-size:13px;text-align:center;display:none;"></div>
+  </div>
+</div>
 <div class="header">
   <div><div class="logo">devisch – esca food · Dashboard</div><div class="sub">Live leveringsoverzicht</div></div>
   <div class="hdr-right">
@@ -1037,9 +1050,86 @@ let toastT;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3000);}
 
 // Supabase
+// ── AUTH (kantoor-account, sessie 6 uur geldig) ──────────────
+const AUTH_STORAGE_KEY='devisch_auth_sessie';
+const AUTH_MAX_UUR=6;
+function getAuthSession(){
+  try{return JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY)||'null');}catch(e){return null;}
+}
+function saveAuthSession(s){localStorage.setItem(AUTH_STORAGE_KEY,JSON.stringify(s));}
+function clearAuthSession(){localStorage.removeItem(AUTH_STORAGE_KEY);}
+function isSessionGeldig(s){
+  if(!s||!s.access_token||!s.login_tijd)return false;
+  return (Date.now()-s.login_tijd)<AUTH_MAX_UUR*60*60*1000;
+}
+async function doAuthLogin(){
+  const email=document.getElementById('auth-email').value.trim();
+  const wachtwoord=document.getElementById('auth-wachtwoord').value;
+  const foutEl=document.getElementById('auth-fout');
+  const btn=document.getElementById('auth-login-btn');
+  foutEl.style.display='none';
+  if(!email||!wachtwoord){foutEl.textContent='Vul e-mailadres en wachtwoord in';foutEl.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Bezig...';
+  try{
+    const resp=await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:wachtwoord})
+    });
+    const data=await resp.json();
+    if(!resp.ok||!data.access_token){
+      foutEl.textContent='Inloggen mislukt — controleer e-mailadres en wachtwoord';
+      foutEl.style.display='block';
+      btn.disabled=false;btn.textContent='Inloggen';
+      return;
+    }
+    saveAuthSession({access_token:data.access_token,refresh_token:data.refresh_token,login_tijd:Date.now()});
+    startAuthRefreshTimer();
+    document.getElementById('dash-auth-gate').style.display='none';
+    dashInit();
+  }catch(e){
+    foutEl.textContent='Geen verbinding — probeer opnieuw';
+    foutEl.style.display='block';
+    btn.disabled=false;btn.textContent='Inloggen';
+  }
+}
+async function verversAuthToken(){
+  const s=getAuthSession();
+  if(!s||!s.refresh_token)return null;
+  try{
+    const resp=await fetch(`${SUPA_URL}/auth/v1/token?grant_type=refresh_token`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({refresh_token:s.refresh_token})
+    });
+    if(!resp.ok)return null;
+    const data=await resp.json();
+    if(!data.access_token)return null;
+    const nieuw={access_token:data.access_token,refresh_token:data.refresh_token,login_tijd:s.login_tijd};
+    saveAuthSession(nieuw);
+    return nieuw;
+  }catch(e){return null;}
+}
+let authRefreshTimer=null;
+function startAuthRefreshTimer(){
+  if(authRefreshTimer)clearInterval(authRefreshTimer);
+  authRefreshTimer=setInterval(async()=>{
+    const s=getAuthSession();
+    if(!isSessionGeldig(s)){
+      clearAuthSession();
+      clearInterval(authRefreshTimer);
+      location.reload();
+      return;
+    }
+    await verversAuthToken();
+  },45*60*1000);
+}
+
 async function supaFetch(endpoint,method='GET',body=null){
   try{
-    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+    const sessie=getAuthSession();
+    const token=sessie?.access_token||SUPA_KEY;
+    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+token};
     if(method==='GET')headers['Prefer']='return=representation';
     else if(method==='POST')headers['Prefer']='return=representation';
     else if(method==='PATCH')headers['Prefer']='return=representation';
@@ -1944,6 +2034,7 @@ try{const s=localStorage.getItem('chauffeur_config');if(s)DRIVERS=JSON.parse(s);
 (()=>{const n=new Date();const el=document.getElementById('foto-filter-datum');if(el)el.value=n.toISOString().split('T')[0];})();
 
 // Start
+function dashInit(){
 addLog('🚀','Dashboard gestart','ok');
 renderDashboard();
 renderLog();
@@ -1981,6 +2072,17 @@ setInterval(async()=>{
     if(meldingenTab&&meldingenTab.style.display!=='none')await laadBerichtenVanChauffeurs();
   }catch(e){}
 },15000);
+}
+
+(function initMetAuth(){
+  const sessie=getAuthSession();
+  if(isSessionGeldig(sessie)){
+    document.getElementById('dash-auth-gate').style.display='none';
+    startAuthRefreshTimer();
+    dashInit();
+  }
+  // Anders blijft de login-overlay gewoon zichtbaar (staat al standaard open)
+})();
 </script>
 
 

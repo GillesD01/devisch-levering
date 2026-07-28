@@ -172,6 +172,22 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
     <div id="loader-msg" style="color:#5f5e5a;font-size:13px;">✓ 2 klanten geladen</div>
   </div>
 
+  <!-- AUTH GATE -->
+  <div class="screen" id="s-auth">
+    <div class="login-hero">
+      <div class="brand-main">devisch – esca food</div>
+      <div class="brand-sub">oresto partner</div>
+      <div class="brand-loc">Veurne &nbsp;·&nbsp; Kortrijk</div>
+    </div>
+    <div class="scroll" style="display:flex;flex-direction:column;justify-content:center;gap:14px;padding:30px 24px;">
+      <div style="text-align:center;color:#888780;font-size:13px;margin-bottom:6px;">Log eenmalig in om de app te ontgrendelen<br>(blijft 6 uur geldig)</div>
+      <input type="email" id="auth-email" placeholder="E-mailadres" autocomplete="username" style="padding:14px;border-radius:12px;border:1px solid rgba(0,0,0,.1);font-size:15px;">
+      <input type="password" id="auth-wachtwoord" placeholder="Wachtwoord" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAuthLogin()" style="padding:14px;border-radius:12px;border:1px solid rgba(0,0,0,.1);font-size:15px;">
+      <button id="auth-login-btn" onclick="doAuthLogin()" style="background:#e8855a;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;">Inloggen</button>
+      <div id="auth-fout" style="color:#a32d2d;font-size:13px;text-align:center;display:none;"></div>
+    </div>
+  </div>
+
   <!-- LOGIN -->
   <div class="screen" id="s-login">
     <div class="login-hero">
@@ -841,9 +857,88 @@ html,body{height:100%;overflow:hidden;background:#2c2c2a;font-family:-apple-syst
 const SUPA_URL='https://pbogaopudoawkwsosjqy.supabase.co';
 const SUPA_KEY='sb_publishable_tIPI6f4RfE4a5DCfibFn5Q_NVZPvlbN';
 
+// ── AUTH (gedeeld chauffeurs-account, sessie 6 uur geldig) ──────────────
+const AUTH_STORAGE_KEY='devisch_auth_sessie';
+const AUTH_MAX_UUR=6;
+function getAuthSession(){
+  try{return JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY)||'null');}catch(e){return null;}
+}
+function saveAuthSession(s){localStorage.setItem(AUTH_STORAGE_KEY,JSON.stringify(s));}
+function clearAuthSession(){localStorage.removeItem(AUTH_STORAGE_KEY);}
+function isSessionGeldig(s){
+  if(!s||!s.access_token||!s.login_tijd)return false;
+  return (Date.now()-s.login_tijd)<AUTH_MAX_UUR*60*60*1000;
+}
+async function doAuthLogin(){
+  const email=document.getElementById('auth-email').value.trim();
+  const wachtwoord=document.getElementById('auth-wachtwoord').value;
+  const foutEl=document.getElementById('auth-fout');
+  const btn=document.getElementById('auth-login-btn');
+  foutEl.style.display='none';
+  if(!email||!wachtwoord){foutEl.textContent='Vul e-mailadres en wachtwoord in';foutEl.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Bezig...';
+  try{
+    const resp=await fetch(`${SUPA_URL}/auth/v1/token?grant_type=password`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:wachtwoord})
+    });
+    const data=await resp.json();
+    if(!resp.ok||!data.access_token){
+      foutEl.textContent='Inloggen mislukt — controleer e-mailadres en wachtwoord';
+      foutEl.style.display='block';
+      btn.disabled=false;btn.textContent='Inloggen';
+      return;
+    }
+    saveAuthSession({access_token:data.access_token,refresh_token:data.refresh_token,login_tijd:Date.now()});
+    startAuthRefreshTimer();
+    document.getElementById('s-auth').classList.remove('active');
+    loadAppData();
+  }catch(e){
+    foutEl.textContent='Geen verbinding — probeer opnieuw';
+    foutEl.style.display='block';
+    btn.disabled=false;btn.textContent='Inloggen';
+  }
+}
+async function verversAuthToken(){
+  const s=getAuthSession();
+  if(!s||!s.refresh_token)return null;
+  try{
+    const resp=await fetch(`${SUPA_URL}/auth/v1/token?grant_type=refresh_token`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({refresh_token:s.refresh_token})
+    });
+    if(!resp.ok)return null;
+    const data=await resp.json();
+    if(!data.access_token)return null;
+    // login_tijd blijft behouden — de 6-uur-klok start bij de echte inlog, niet bij elke ververs
+    const nieuw={access_token:data.access_token,refresh_token:data.refresh_token,login_tijd:s.login_tijd};
+    saveAuthSession(nieuw);
+    return nieuw;
+  }catch(e){return null;}
+}
+let authRefreshTimer=null;
+function startAuthRefreshTimer(){
+  if(authRefreshTimer)clearInterval(authRefreshTimer);
+  authRefreshTimer=setInterval(async()=>{
+    const s=getAuthSession();
+    if(!isSessionGeldig(s)){
+      // 6 uur voorbij: sessie wissen en terug naar login
+      clearAuthSession();
+      clearInterval(authRefreshTimer);
+      location.reload();
+      return;
+    }
+    await verversAuthToken();
+  },45*60*1000); // elke 45 minuten verversen (ruim binnen de gangbare 1u-vervaltijd van het access-token)
+}
+
 async function supaFetch(endpoint, method='GET', body=null){
   try{
-    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+    const sessie=getAuthSession();
+    const token=sessie?.access_token||SUPA_KEY;
+    const headers={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+token};
     if(method==='DELETE'||method==='PATCH'||method==='POST'){
       headers['Prefer']='return=minimal';
     }
@@ -2931,7 +3026,17 @@ function checkInstallHint(){
 }
 function dismissInstall(el){localStorage.setItem('install_dismissed','1');el.remove();}
 checkInstallHint();
-loadAppData();
+(function initMetAuth(){
+  const sessie=getAuthSession();
+  if(isSessionGeldig(sessie)){
+    startAuthRefreshTimer();
+    loadAppData();
+  }else{
+    clearAuthSession();
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('s-auth').classList.add('active');
+  }
+})();
 
 // Controleer elke 30 seconden op nieuwe notificaties
 setInterval(()=>{if(selDriver&&appReady)checkNotificaties();},30000);
