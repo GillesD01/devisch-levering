@@ -119,6 +119,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div id="systeemfout-banner" style="display:none;align-items:center;gap:10px;background:#a32d2d;color:#fff;padding:10px 20px;font-size:13px;cursor:pointer;">
+  <span>⚠</span>
+  <span id="systeemfout-tekst" style="flex:1;"></span>
+  <span style="font-size:11px;opacity:.85;">tik om te bevestigen</span>
+</div>
+
 <div class="tabs">
   <div class="tab" onclick="showTab(&#39;vandaag&#39;,this)">📊 Vandaag</div>
   <div class="tab" onclick="showTab(&#39;upload&#39;,this)">📂 Nieuwe dag</div>
@@ -127,6 +133,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="tab" onclick="showTab(&#39;historiek&#39;,this)">📋 Historiek</div>
   <div class="tab active" onclick="showTab(&#39;fotos&#39;,this)">📷 Foto's</div>
   <div class="tab" onclick="showTab(&#39;codes&#39;,this)">🔑 Codes</div>
+  <div class="tab" onclick="showTab(&#39;rapportage&#39;,this)">📈 Rapportage</div>
 </div>
 
 <!-- TAB: VANDAAG -->
@@ -1007,6 +1014,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<!-- TAB: RAPPORTAGE -->
+<div id="tab-rapportage" class="main" style="display: none;">
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">📉 Meest voorkomende tekorten</h2>
+    <p style="font-size:12px;color:#888780;margin-bottom:16px;">Laatste 90 dagen — producten die het vaakst (deels) niet geleverd konden worden</p>
+    <div id="rap-tekorten"><div class="geen">Laden...</div></div>
+  </div>
+
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;margin-bottom:16px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">⏱️ Gemiddelde actieve tijd per chauffeur</h2>
+    <p style="font-size:12px;color:#888780;margin-bottom:16px;">Laatste 90 dagen — tijd tussen eerste en laatste scan per dag (bij benadering, geen exacte klok-in/klok-uit)</p>
+    <div id="rap-levertijd"><div class="geen">Laden...</div></div>
+  </div>
+
+  <div style="background:#fff;border:.5px solid rgba(0,0,0,.09);border-radius:14px;padding:22px;">
+    <h2 style="font-size:16px;font-weight:700;color:#2c2c2a;margin-bottom:4px;">💶 Omzet per dag</h2>
+    <p style="font-size:12px;color:#888780;margin-bottom:16px;">Laatste 30 dagen — enkel bonnen die na de recentste update van de app-verwerking werden ingelezen, hebben prijsgegevens</p>
+    <div id="rap-omzet"><div class="geen">Laden...</div></div>
+  </div>
+</div>
+
 <!-- FOTO MODAL -->
 <div class="modal-bg" id="foto-modal-bg" onclick="if(event.target===this)this.style.display=&#39;none&#39;" style="background:rgba(0,0,0,.92);">
   <div style="max-width:600px;width:90%;text-align:center;">
@@ -1157,13 +1185,14 @@ function showTab(tab,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+tab).style.display='block';
   if(el)el.classList.add('active');
-  else document.querySelectorAll('.tab')[['vandaag','upload','meldingen','chauffeurs','historiek','fotos','codes'].indexOf(tab)]?.classList.add('active');
+  else document.querySelectorAll('.tab')[['vandaag','upload','meldingen','chauffeurs','historiek','fotos','codes','rapportage'].indexOf(tab)]?.classList.add('active');
   if(tab==='historiek')laadHistoriek();
   if(tab==='chauffeurs')renderChauffeurGrid();
   if(tab==='upload')renderUploadLijst();
   if(tab==='fotos')laadFotos();
   if(tab==='meldingen')laadBerichtenVanChauffeurs();
   if(tab==='codes')laadCodesTab();
+  if(tab==='rapportage')laadRapportage();
 }
 
 // ── FOTO'S ────────────────────────────────────────
@@ -1239,6 +1268,26 @@ async function laadVoortgang(){
 // Een product is 'klaar' zodra gescand + (deels) ontbrekend aantal samen het totaal dekken
 function isVoortgangKlaar(p){return (p.gescand||0)+(p.miss_qty||0)>=p.totaal;}
 function heeftTekort(p){return p.missing||(p.miss_qty||0)>0;}
+
+// Stuur/log een technische foutmelding vanuit het dashboard zelf naar het SYSTEEM-kanaal
+function meldSysteemFoutDash(bron,detail){
+  supaFetch('notificaties','POST',{van:'Dashboard',naar:'SYSTEEM',tekst:`[${bron}] ${detail}`,gelezen:false}).catch(()=>{});
+}
+
+// Toont een altijd-zichtbare banner (los van welk tabblad open staat) met openstaande systeemfouten
+async function checkSysteemFouten(){
+  const data=await supaFetch(`notificaties?naar=eq.SYSTEEM&gelezen=eq.false&order=created_at.desc&limit=10`);
+  const banner=document.getElementById('systeemfout-banner');
+  if(!banner)return;
+  if(!data||data.length===0){banner.style.display='none';return;}
+  banner.style.display='flex';
+  banner.querySelector('#systeemfout-tekst').textContent=
+    data.length===1?data[0].tekst:`${data.length} technische fouten — nieuwste: ${data[0].tekst}`;
+  banner.onclick=async()=>{
+    await Promise.all(data.map(d=>supaFetch(`notificaties?id=eq.${d.id}`,'PATCH',{gelezen:true})));
+    banner.style.display='none';
+  };
+}
 
 function getStats(driverId){
   let alleKlanten={};
@@ -1673,9 +1722,9 @@ async function dagVerwerk(){
       })
     });
     dprog(75);
-    if(!resp.ok){dlog(`✗ Server fout: ${await resp.text()}`,'err');btn.disabled=false;return;}
+    if(!resp.ok){const t=await resp.text();dlog(`✗ Server fout: ${t}`,'err');meldSysteemFoutDash('AI-verwerking',`server fout bij verwerken PDF's (${dateFmt}): ${t.substring(0,200)}`);btn.disabled=false;return;}
     const result=await resp.json();
-    if(!result.success){dlog(`✗ Verwerkingsfout: ${result.error}`,'err');btn.disabled=false;return;}
+    if(!result.success){dlog(`✗ Verwerkingsfout: ${result.error}`,'err');meldSysteemFoutDash('AI-verwerking',`verwerkingsfout bij PDF's (${dateFmt}): ${result.error}`);btn.disabled=false;return;}
 
     const parsed=result.data;
     dlog('✓ Bonnen verwerkt door AI','ok');dprog(85);
@@ -1738,7 +1787,7 @@ async function dagVerwerk(){
         klanten:{...parsed,klanten:klantenVoorChauffeur}
       });
       if(r)dlog(`✓ ${cNaam}: ${klantenVoorChauffeur.length} klanten opgeslagen`,'ok');
-      else{dlog(`✗ Fout bij opslaan ${cNaam}`,'err');opslaanOk=false;}
+      else{dlog(`✗ Fout bij opslaan ${cNaam}`,'err');opslaanOk=false;meldSysteemFoutDash('Opslaan leveringen',`opslaan mislukt voor ${cNaam} (${dateFmt})`);}
     }
 
     if(opslaanOk){
@@ -1754,7 +1803,7 @@ async function dagVerwerk(){
       renderUploadLijst();
       setTimeout(()=>{laadVoortgang().then(()=>{renderDashboard();renderLog();});},1500);
     }
-  }catch(e){dlog(`✗ Fout: ${e.message}`,'err');}
+  }catch(e){dlog(`✗ Fout: ${e.message}`,'err');meldSysteemFoutDash('AI-verwerking',`onverwachte fout bij verwerken (${dateFmt}): ${e.message}`);}
   btn.disabled=false;renderLog();
 }
 
@@ -1889,6 +1938,130 @@ async function slaChauffeursOp(){
 }
 
 // ── HISTORIEK ────────────────────────────────────────
+// ── RAPPORTAGE ────────────────────────────────────────
+async function laadRapportage(){
+  const negentigDagen=new Date();negentigDagen.setDate(negentigDagen.getDate()-90);
+  const grens=negentigDagen.toISOString();
+  const voortgangData=await supaFetch(`voortgang?created_at=gte.${encodeURIComponent(grens)}&order=created_at.desc&limit=5000`);
+
+  // 1. Meest voorkomende tekorten
+  const tekortEl=document.getElementById('rap-tekorten');
+  if(voortgangData&&voortgangData.length){
+    const tellers={};
+    voortgangData.forEach(p=>{
+      const aantalTekort=p.missing?p.totaal:(p.miss_qty||0);
+      if(aantalTekort>0){
+        const key=p.product_naam||'Onbekend';
+        if(!tellers[key])tellers[key]={naam:key,keer:0,totaalAantal:0};
+        tellers[key].keer++;
+        tellers[key].totaalAantal+=aantalTekort;
+      }
+    });
+    const top=Object.values(tellers).sort((a,b)=>b.keer-a.keer).slice(0,10);
+    if(top.length===0){
+      tekortEl.innerHTML='<div class="geen">Geen tekorten in deze periode 🎉</div>';
+    }else{
+      const maxKeer=top[0].keer;
+      tekortEl.innerHTML=top.map(t=>`
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;">
+            <span style="color:#2c2c2a;">${t.naam}</span>
+            <span style="color:#888780;">${t.keer}x · ${t.totaalAantal} stuks</span>
+          </div>
+          <div style="background:#f5f4f0;border-radius:5px;height:8px;overflow:hidden;">
+            <div style="background:#e8855a;height:100%;width:${(t.keer/maxKeer*100)}%;"></div>
+          </div>
+        </div>`).join('');
+    }
+  }else{
+    tekortEl.innerHTML='<div class="geen">Geen data</div>';
+  }
+
+  // 2. Gemiddelde actieve tijd per chauffeur (tijd tussen eerste en laatste scan per dag)
+  const tijdEl=document.getElementById('rap-levertijd');
+  if(voortgangData&&voortgangData.length){
+    const perChauffeurDag={};
+    voortgangData.forEach(p=>{
+      const key=p.chauffeur_id+'|'+p.datum;
+      if(!perChauffeurDag[key])perChauffeurDag[key]={chauffeur_id:p.chauffeur_id,tijden:[]};
+      perChauffeurDag[key].tijden.push(new Date(p.created_at).getTime());
+    });
+    const perChauffeur={};
+    Object.values(perChauffeurDag).forEach(d=>{
+      if(d.tijden.length<2)return;
+      const duur=(Math.max(...d.tijden)-Math.min(...d.tijden))/60000;
+      if(!perChauffeur[d.chauffeur_id])perChauffeur[d.chauffeur_id]=[];
+      perChauffeur[d.chauffeur_id].push(duur);
+    });
+    const rijen=Object.entries(perChauffeur).map(([cId,duren])=>{
+      const gem=duren.reduce((a,b)=>a+b,0)/duren.length;
+      const naam=DRIVERS.find(d=>d.id===cId)?.name||cId;
+      return{naam,gem,dagen:duren.length};
+    }).sort((a,b)=>b.gem-a.gem);
+    if(rijen.length===0){
+      tijdEl.innerHTML='<div class="geen">Onvoldoende data</div>';
+    }else{
+      const maxGem=Math.max(...rijen.map(r=>r.gem));
+      tijdEl.innerHTML=rijen.map(r=>`
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;">
+            <span style="color:#2c2c2a;">${r.naam}</span>
+            <span style="color:#888780;">${Math.floor(r.gem/60)}u${String(Math.round(r.gem%60)).padStart(2,'0')} · over ${r.dagen} dag(en)</span>
+          </div>
+          <div style="background:#f5f4f0;border-radius:5px;height:8px;overflow:hidden;">
+            <div style="background:#3b6d11;height:100%;width:${(r.gem/maxGem*100)}%;"></div>
+          </div>
+        </div>`).join('');
+    }
+  }else{
+    tijdEl.innerHTML='<div class="geen">Geen data</div>';
+  }
+
+  // 3. Omzet per dag (laatste 30 dagen)
+  const dertigDagen=new Date();dertigDagen.setDate(dertigDagen.getDate()-30);
+  const levGrens=dertigDagen.toISOString();
+  const leveringenData=await supaFetch(`leveringen?created_at=gte.${encodeURIComponent(levGrens)}&order=created_at.desc&limit=500`);
+  const omzetEl=document.getElementById('rap-omzet');
+  if(leveringenData&&leveringenData.length){
+    const perDag={};
+    leveringenData.forEach(r=>{
+      const datum=r.datum;
+      let dagTotaal=0;
+      (r.klanten?.klanten||[]).forEach(k=>{
+        (k.bons||[]).forEach(b=>{
+          if(b.totaal){
+            const bedrag=parseFloat(String(b.totaal).replace(/\./g,'').replace(',','.'));
+            if(!isNaN(bedrag))dagTotaal+=bedrag;
+          }
+        });
+      });
+      if(!perDag[datum])perDag[datum]=0;
+      perDag[datum]+=dagTotaal;
+    });
+    const dagen=Object.entries(perDag).filter(([,v])=>v>0).sort((a,b)=>{
+      const [da,ma,ja]=a[0].split('-');const [db,mb,jb]=b[0].split('-');
+      return new Date(jb,mb-1,db)-new Date(ja,ma-1,da);
+    });
+    if(dagen.length===0){
+      omzetEl.innerHTML='<div class="geen">Nog geen prijsgegevens beschikbaar — pas zichtbaar zodra nieuwe bonnen met de bijgewerkte AI-verwerking worden ingelezen</div>';
+    }else{
+      const maxOmzet=Math.max(...dagen.map(([,v])=>v));
+      omzetEl.innerHTML=dagen.map(([datum,bedrag])=>`
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;">
+            <span style="color:#2c2c2a;">${datum}</span>
+            <span style="color:#888780;font-weight:600;">€ ${bedrag.toFixed(2).replace('.',',')}</span>
+          </div>
+          <div style="background:#f5f4f0;border-radius:5px;height:8px;overflow:hidden;">
+            <div style="background:#2c2c2a;height:100%;width:${(bedrag/maxOmzet*100)}%;"></div>
+          </div>
+        </div>`).join('');
+    }
+  }else{
+    omzetEl.innerHTML='<div class="geen">Geen data</div>';
+  }
+}
+
 async function laadHistoriek(){
   const el=document.getElementById('hist-lijst');
   el.innerHTML='<div class="geen">Laden...</div>';
@@ -2038,6 +2211,19 @@ function dashInit(){
 addLog('🚀','Dashboard gestart','ok');
 renderDashboard();
 renderLog();
+checkSysteemFouten();
+
+// Foto's en leveringen ouder dan 6 maand automatisch wissen
+(async function ruimOudeDataOp(){
+  try{
+    const zesMaandGeleden=new Date();
+    zesMaandGeleden.setMonth(zesMaandGeleden.getMonth()-6);
+    const grens=zesMaandGeleden.toISOString();
+    await supaFetch(`fotos?created_at=lt.${encodeURIComponent(grens)}`,'DELETE');
+    await supaFetch(`leveringen?created_at=lt.${encodeURIComponent(grens)}`,'DELETE');
+    await supaFetch(`voortgang?created_at=lt.${encodeURIComponent(grens)}`,'DELETE');
+  }catch(e){}
+})();
 
 // Oude meldingen (van vorige dagen) opruimen — enkel echte chauffeur/kantoor-berichten,
 // systeeminstellingen (CHAUFFEUR_CONFIG, KLANT_CODES, DASH_PW, ...) blijven onaangeroerd.
@@ -2067,6 +2253,7 @@ setInterval(async()=>{
     await laadVoortgang();
     renderDashboard();
     renderLog();
+    checkSysteemFouten();
     // Ververs ook de berichten-tab automatisch als die open staat, i.p.v. enkel bij tabwissel
     const meldingenTab=document.getElementById('tab-meldingen');
     if(meldingenTab&&meldingenTab.style.display!=='none')await laadBerichtenVanChauffeurs();

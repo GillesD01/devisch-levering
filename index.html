@@ -1007,7 +1007,23 @@ async function updateVoortgangSupabase(klant, bon, prod){
   });
 }
 
-// Stuur notificatie via Supabase
+// Stuur een technische foutmelding naar het 'SYSTEEM'-kanaal, zichtbaar op het dashboard.
+// Ontdubbelt dezelfde fout binnen 5 minuten (localStorage) zodat herhaalde pogingen niet spammen.
+function meldSysteemFout(bron, detail){
+  try{
+    const sleutel='sysfout_laatste_'+bron;
+    const vorige=JSON.parse(localStorage.getItem(sleutel)||'null');
+    const vingerafdruk=detail.substring(0,120);
+    if(vorige&&vorige.vingerafdruk===vingerafdruk&&(Date.now()-vorige.tijd)<5*60*1000)return;
+    localStorage.setItem(sleutel,JSON.stringify({vingerafdruk,tijd:Date.now()}));
+  }catch(e){}
+  supaFetch('notificaties','POST',{
+    van:selDriver?.name||'chauffeur',
+    naar:'SYSTEEM',
+    tekst:`[${bron}] ${detail}`,
+    gelezen:false
+  }).catch(()=>{});
+}
 async function stuurNotificatieSupabase(naar, tekst){
   await supaFetch('notificaties','POST',{
     van:'Kantoor',
@@ -2574,7 +2590,7 @@ async function stuurBonPdfNaarKlant(){
       showToast('✓ PDF gedownload — verstuur die zelf naar de klant');
     }
   }catch(e){
-    if(e.name!=='AbortError'){console.error('PDF fout:',e);showToast('⚠ PDF maken mislukt: '+e.message);}
+    if(e.name!=='AbortError'){console.error('PDF fout:',e);showToast('⚠ PDF maken mislukt: '+e.message);meldSysteemFout('Bon-PDF',`bon:${bon?.num||'?'} | fout: ${e.message}`);}
   }finally{
     if(btn){btn.disabled=false;btn.textContent='📄 Bon versturen naar klant';}
   }
@@ -2894,14 +2910,7 @@ async function fotoBevestigen(){
     } else {
       const fout=window._laatsteSupaFout||'onbekende fout';
       showToast('⚠ Niet verstuurd — kantoor is verwittigd. Probeer straks opnieuw.',10000);
-      // Stuur de echte technische foutmelding naar een debug-kanaal zodat dit op afstand
-      // kan uitgezocht worden, zonder dat de chauffeur iets moet aflezen/doorgeven.
-      supaFetch('notificaties','POST',{
-        van:selDriver?.name||'chauffeur',
-        naar:'FOTO_UPLOAD_DEBUG',
-        tekst:`Foto-upload mislukt | klant_id:${fotoKlantId} bon:${fotoBonNum} datum:${datum} fotolengte:${fotoVersturen?.length||0} | fout: ${fout}`,
-        gelezen:false
-      }).catch(()=>{});
+      meldSysteemFout('Foto-upload',`klant_id:${fotoKlantId} bon:${fotoBonNum} datum:${datum} fotolengte:${fotoVersturen?.length||0} | fout: ${fout}`);
     }
   }catch(e){
     clearTimeout(failsafe);
