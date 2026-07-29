@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devisch – Esca Food | Totaalleverancier HoReCa West-Vlaanderen</title>
+<meta name="description" content="Devisch – Esca Food: totaalleverancier voor HoReCa, collectiviteiten en verenigingen in West-Vlaanderen. Vestigingen in Veurne en Heule (Kortrijk).">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --charcoal: #2c2c2a;
+  --charcoal-dark: #1e1e1c;
+  --orange: #e8855a;
+  --orange-hover: #d97548;
+  --cream: #f5f4f0;
+  --cream-dark: #f0ede8;
+  --grey-mid: #888780;
+  --white: #ffffff;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--charcoal);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===================== NAV ===================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 2rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nav.scrolled {
+  background: var(--charcoal);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.nav-logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--white);
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
+}
+
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav-logo-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.nav-logo-sub {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.03em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  background: var(--orange) !important;
+  color: var(--white) !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+
+.nav-cta:hover {
+  background: var(--orange-hover) !important;
+  color: var(--white) !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 72px; left: 0; right: 0;
+  background: var(--charcoal);
+  padding: 1.5rem 2rem 2rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mobile-menu a:hover { color: var(--orange); }
+
+.mobile-menu .mob-cta {
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-align: center;
+  display: block;
+  font-weight: 600;
+}
+
+.mobile-menu .mob-cta:hover { background: var(--orange-hover); color: var(--white); }
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 680px;
+  background: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(232,133,90,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+  padding-bottom: 230px;
+  max-width: 900px;
+}
+
+.hero-chip {
+  display: inline-block;
+  background: rgba(232,133,90,0.15);
+  border: 1px solid rgba(232,133,90,0.35);
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255,255,255,0.65);
+  max-width: 540px;
+  margin: 0 auto 0.75rem;
+}
+
+.hero-tagline {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.38);
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  border-color: var(--orange);
+}
+
+.btn-primary:hover {
+  background: var(--orange-hover);
+  border-color: var(--orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(232,133,90,0.35);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.btn-ghost:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-1px);
+}
+
+/* ===================== ROAD SCENE ===================== */
+.road-scene {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 180px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.road {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(180deg, #1a1a18 0%, #222220 40%, #2a2a28 100%);
+}
+
+.road-edge {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+}
+
+.road-dashes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 400%;
+  height: 4px;
+  display: flex;
+  animation: dashMove 1.2s linear infinite;
+  transform: translateY(-50%);
+}
+
+.road-dash-item {
+  width: 80px;
+  height: 4px;
+  background: rgba(255,255,255,0.4);
+  margin-right: 60px;
+  flex-shrink: 0;
+}
+
+@keyframes dashMove {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(-140px); }
+}
+
+.truck-wrapper {
+  position: absolute;
+  bottom: 36px;
+  animation: truckDrive 14s linear infinite;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+}
+
+@keyframes truckDrive {
+  0%   { left: -950px; }
+  100% { left: 110%; }
+}
+
+/* ===================== SCROLL ARROW ===================== */
+.scroll-arrow {
+  position: absolute;
+  bottom: 198px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.scroll-arrow-icon {
+  animation: arrowBounce 2s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50%       { transform: translateY(6px); opacity: 0.65; }
+}
+
+/* ===================== STATS ===================== */
+.stats {
+  background: var(--charcoal-dark);
+  padding: 3rem 2rem;
+}
+
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-number {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* ===================== OVER ONS ===================== */
+.over-ons {
+  background: var(--cream);
+  padding: 6rem 2rem;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.over-ons-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.over-ons-left h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--charcoal);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.over-ons-left p {
+  color: #555550;
+  margin-bottom: 1.1rem;
+  font-size: 0.975rem;
+  line-height: 1.78;
+}
+
+.oresto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(232,133,90,0.1);
+  border: 1px solid rgba(232,133,90,0.25);
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  margin-top: 0.75rem;
+}
+
+.oresto-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature-block {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(232,133,90,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.875rem;
+  color: var(--orange);
+}
+
+.feature-block h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+
+.feature-block p {
+  font-size: 0.875rem;
+  color: var(--grey-mid);
+  line-height: 1.65;
+}
+
+/* ===================== ASSORTIMENT ===================== */
+.assortiment {
+  background: var(--charcoal);
+  padding: 6rem 2rem;
+}
+
+.assortiment-header {
+  max-width: 1100px;
+  margin: 0 auto 3.5rem;
+}
+
+.assortiment-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+.product-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.product-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 2rem 1.75rem;
+  transition: all 0.25s ease;
+}
+
+.product-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(232,133,90,0.35);
+  transform: translateY(-3px);
+}
+
+.product-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.product-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 0.855rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+}
+
+/* ===================== VESTIGINGEN ===================== */
+.vestigingen {
+  background: var(--cream-dark);
+  padding: 6rem 2rem;
+}
+
+.section-header {
+  max-width: 1100px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+.section-header .section-label { justify-content: center; display: block; }
+
+.vestigingen-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.vestiging-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+}
+
+.vestiging-badge {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+
+.vestiging-card h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--charcoal);
+  margin-bottom: 1.5rem;
+}
+
+.vestiging-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.vestiging-row {
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.vestiging-row-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--orange);
+}
+
+.vestiging-row-content {
+  font-size: 0.875rem;
+  color: #555550;
+  line-height: 1.6;
+}
+
+.vestiging-row-content strong {
+  color: var(--charcoal);
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.uren-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.uren-note {
+  color: var(--orange) !important;
+  font-size: 0.82rem !important;
+}
+
+.btn-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--orange);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-tel:hover {
+  background: var(--orange-hover);
+  transform: translateY(-1px);
+}
+
+/* ===================== CONTACT ===================== */
+.contact {
+  background: var(--white);
+  padding: 6rem 2rem;
+}
+
+.contact-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-left h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.contact-left > p {
+  color: #555550;
+  font-size: 0.975rem;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-detail-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(232,133,90,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--orange);
+}
+
+.contact-detail-text strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.03em;
+}
+
+.contact-detail-text span,
+.contact-detail-text a {
+  font-size: 0.875rem;
+  color: var(--grey-mid);
+  text-decoration: none;
+}
+
+.contact-detail-text a:hover { color: var(--orange); }
+
+.contact-form-wrap {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--charcoal);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,133,90,0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888780' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.25rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--orange-hover);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.form-success.show { display: block; }
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(232,133,90,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  color: var(--orange);
+}
+
+.form-success h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.form-success p {
+  color: var(--grey-mid);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ===================== FOOTER ===================== */
+.footer {
+  background: var(--charcoal-dark);
+  padding: 4rem 2rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 2rem;
+}
+
+.footer-brand p {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1rem;
+  line-height: 1.75;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-col ul a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.footer-col ul a:hover { color: var(--orange); }
+
+.footer-address {
+  font-size: 0.855rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+}
+
+.footer-address strong {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.875rem;
+  margin-bottom: 0.3rem;
+}
+
+.footer-address + .footer-address { margin-top: 1.75rem; }
+
+.footer-address a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+}
+
+.footer-address a:hover { color: var(--orange); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.28);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-bottom a { color: rgba(255,255,255,0.38); text-decoration: none; }
+.footer-bottom a:hover { color: var(--orange); }
+
+/* ===================== FADE-IN ===================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+.fade-in-delay-5 { transition-delay: 0.5s; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .over-ons-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .vestigingen-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .stat-item:last-child, .stat-item:nth-last-child(2) { border-bottom: none; }
+}
+
+@media (max-width: 600px) {
+  .hero-content { padding-bottom: 200px; }
+  .product-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .stat-item:last-child { border-bottom: none; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .truck-wrapper svg { width: 560px !important; height: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="#" class="nav-logo" aria-label="Devisch – Esca Food – naar startpagina">
+    <div class="nav-logo-mark" aria-hidden="true">D</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Devisch – Esca Food</span>
+      <span class="nav-logo-sub">Totaalleverancier HoReCa</span>
+    </div>
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#over-ons">Over ons</a></li>
+    <li><a href="#assortiment">Assortiment</a></li>
+    <li><a href="#vestigingen">Vestigingen</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobiele navigatie">
+  <a href="#over-ons">Over ons</a>
+  <a href="#assortiment">Assortiment</a>
+  <a href="#vestigingen">Vestigingen</a>
+  <a href="#contact" class="mob-cta">Contact opnemen</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero" aria-label="Welkomst sectie">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-chip" aria-label="Regio">Veurne &middot; Heule &middot; West-Vlaanderen</div>
+    <h1 class="hero-title">Devisch – Esca Food</h1>
+    <p class="hero-subtitle">Totaalleverancier voor HoReCa, collectiviteiten en verenigingen in West-Vlaanderen</p>
+    <p class="hero-tagline">"Hier draagt men graag zorg voor elke klant, groot en klein"</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary">Neem contact op</a>
+      <a href="#assortiment" class="btn btn-ghost">Ontdek ons assortiment</a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-arrow" aria-hidden="true">
+    <svg class="scroll-arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+
+  <!-- ===================== ROAD SCENE ===================== -->
+  <div class="road-scene" aria-hidden="true">
+    <div class="road">
+      <div class="road-edge"></div>
+      <div class="road-dashes" id="roadDashes"></div>
+
+      <div class="truck-wrapper" id="truckWrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" width="880" height="260" role="img" aria-label="Rijdende bestelwagen Devisch Esca Food">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fafaf8"/>
+              <stop offset="100%" stop-color="#eeecea"/>
+            </linearGradient>
+            <linearGradient id="wrapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#e8d5b5"/>
+              <stop offset="100%" stop-color="#b88840"/>
+            </linearGradient>
+            <linearGradient id="cabineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#f0f0ee"/>
+              <stop offset="100%" stop-color="#e0e0dc"/>
+            </linearGradient>
+            <linearGradient id="koelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#d8d8d6"/>
+              <stop offset="100%" stop-color="#c4c4c2"/>
+            </linearGradient>
+            <linearGradient id="ruitRefl" x1="0%" y1="0%" x2="80%" y2="80%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.0)"/>
+            </linearGradient>
+            <clipPath id="wrapClip">
+              <rect x="280" y="60" width="380" height="140"/>
+            </clipPath>
+          </defs>
+
+          <!-- Schaduw onder voertuig -->
+          <ellipse cx="440" cy="258" rx="420" ry="12" fill="rgba(0,0,0,0.3)"/>
+
+          <!-- ===== LAADBAK ===== -->
+          <!-- Hoofd laadbak body -->
+          <rect x="48" y="60" width="614" height="148" fill="url(#bodyGrad)" rx="3"/>
+
+          <!-- Daklijn donkerder -->
+          <rect x="48" y="60" width="614" height="9" fill="#d4d4d0" rx="2"/>
+
+          <!-- Achterpaneel (links = achter) -->
+          <rect x="48" y="69" width="30" height="139" fill="#d8d8d4"/>
+          <rect x="48" y="69" width="30" height="5" fill="#c8c8c4"/>
+
+          <!-- Achterdeuren split -->
+          <line x1="63" y1="72" x2="63" y2="206" stroke="#c4c4c0" stroke-width="2"/>
+
+          <!-- Achterdeuren grepen -->
+          <rect x="53" y="140" width="5" height="18" rx="2.5" fill="#a8a8a4"/>
+          <rect x="68" y="140" width="5" height="18" rx="2.5" fill="#a8a8a4"/>
+
+          <!-- Voedselwrap decoratie (rechter deel) -->
+          <g clip-path="url(#wrapClip)">
+            <rect x="280" y="60" width="380" height="140" fill="url(#wrapGrad)" opacity="0.42"/>
+            <!-- Abstracte voedselvormen - warmbruin -->
+            <ellipse cx="340" cy="108" rx="30" ry="22" fill="#9a6a38" opacity="0.4"/>
+            <ellipse cx="395" cy="132" rx="26" ry="16" fill="#aa7848" opacity="0.38"/>
+            <ellipse cx="450" cy="96" rx="22" ry="30" fill="#8a5828" opacity="0.42"/>
+            <ellipse cx="508" cy="122" rx="34" ry="20" fill="#b88850" opacity="0.32"/>
+            <ellipse cx="564" cy="100" rx="24" ry="26" fill="#a06838" opacity="0.4"/>
+            <ellipse cx="625" cy="128" rx="28" ry="18" fill="#b07848" opacity="0.34"/>
+            <!-- Linker grens van wrap -->
+            <rect x="280" y="60" width="5" height="140" fill="#e8855a" opacity="0.55"/>
+          </g>
+
+          <!-- Tekst op laadbak -->
+          <text x="88" y="128"
+            font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            font-size="27"
+            font-weight="700"
+            fill="#2c2c2a"
+            opacity="0.9">devisch – esca food</text>
+          <text x="88" y="151"
+            font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            font-size="10.5"
+            font-weight="600"
+            fill="#666660"
+            letter-spacing="2.5">ORESTO PARTNER</text>
+
+          <!-- Oranje logo cirkel naast tekst -->
+          <circle cx="77" cy="147" r="8" fill="#e8855a"/>
+          <text x="77" y="151"
+            text-anchor="middle"
+            font-family="sans-serif"
+            font-size="8"
+            font-weight="800"
+            fill="#ffffff">D</text>
+
+          <!-- Sierlijnen op laadbak -->
+          <line x1="78" y1="162" x2="655" y2="162" stroke="rgba(0,0,0,0.07)" stroke-width="1.5"/>
+
+          <!-- Onderbalk laadbak -->
+          <rect x="48" y="200" width="614" height="10" fill="#c4c4c0" rx="1"/>
+
+          <!-- ===== KOELUNIT OP DAK ===== -->
+          <rect x="82" y="33" width="228" height="29" rx="6" fill="url(#koelGrad)"/>
+          <!-- Ventilatiesleuven -->
+          <line x1="102" y1="37" x2="102" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="118" y1="37" x2="118" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="134" y1="37" x2="134" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="150" y1="37" x2="150" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="166" y1="37" x2="166" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="182" y1="37" x2="182" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="198" y1="37" x2="198" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="214" y1="37" x2="214" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="230" y1="37" x2="230" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="246" y1="37" x2="246" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="262" y1="37" x2="262" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="278" y1="37" x2="278" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <line x1="294" y1="37" x2="294" y2="59" stroke="#d0d0ce" stroke-width="2.5"/>
+          <!-- Montagebeugels -->
+          <rect x="94" y="59" width="20" height="6" rx="2" fill="#aaaaaa"/>
+          <rect x="290" y="59" width="20" height="6" rx="2" fill="#aaaaaa"/>
+          <!-- Label -->
+          <text x="196" y="51"
+            text-anchor="middle"
+            font-family="sans-serif"
+            font-size="7.5"
+            fill="#909090"
+            letter-spacing="1.5">KOELING</text>
+
+          <!-- ===== CABINE ===== -->
+          <rect x="660" y="62" width="208" height="140" fill="url(#cabineGrad)" rx="3"/>
+          <!-- Daklijn cabine -->
+          <rect x="660" y="62" width="208" height="8" fill="#d0d0cc" rx="2"/>
+
+          <!-- A-stijl scheidingslijn -->
+          <line x1="720" y1="62" x2="726" y2="154" stroke="#bbbbb8" stroke-width="3"/>
+
+          <!-- Zijruit -->
+          <rect x="661" y="70" width="57" height="80" rx="3" fill="#1a2535" opacity="0.9"/>
+          <!-- Zijruit reflectie -->
+          <path d="M663,72 L685,72 L685,94 L663,104 Z" fill="url(#ruitRefl)"/>
+
+          <!-- Buitenspiegel -->
+          <polygon points="648,84 660,84 660,98 646,98 644,91" fill="#d0d0cc" stroke="#b8b8b4" stroke-width="1"/>
+          <rect x="640" y="86" width="10" height="12" rx="2" fill="#c0c0bc"/>
+          <!-- Spiegel glas -->
+          <rect x="642" y="88" width="7" height="8" rx="1" fill="#2a3a50" opacity="0.8"/>
+
+          <!-- Voorruit -->
+          <path d="M726,70 L868,73 L868,188 L726,191 Z" fill="#1a2535" opacity="0.9"/>
+          <!-- Voorruit reflectie -->
+          <path d="M730,74 L790,74 L790,100 L730,110 Z" fill="url(#ruitRefl)" opacity="0.6"/>
+
+          <!-- Ruitenwisser -->
+          <line x1="732" y1="185" x2="826" y2="175" stroke="rgba(255,255,255,0.14)" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- ===== VOORKANT ===== -->
+          <!-- Smal voorpaneel -->
+          <rect x="865" y="62" width="15" height="148" fill="#d8d8d4" rx="1"/>
+
+          <!-- Bovenste koplamp (LED) -->
+          <rect x="862" y="68" width="16" height="22" rx="3" fill="#f5edd8"/>
+          <rect x="863" y="69" width="14" height="10" rx="2" fill="#fff5d8"/>
+          <!-- DRL strip -->
+          <rect x="862" y="92" width="16" height="3" rx="1.5" fill="#ead870"/>
+
+          <!-- Grille gebied -->
+          <rect x="858" y="99" width="22" height="56" rx="2" fill="#181816"/>
+          <!-- Grille barren -->
+          <line x1="859" y1="109" x2="879" y2="109" stroke="#252522" stroke-width="2"/>
+          <line x1="859" y1="118" x2="879" y2="118" stroke="#252522" stroke-width="2"/>
+          <line x1="859" y1="127" x2="879" y2="127" stroke="#252522" stroke-width="2"/>
+          <line x1="859" y1="136" x2="879" y2="136" stroke="#252522" stroke-width="2"/>
+          <line x1="859" y1="145" x2="879" y2="145" stroke="#252522" stroke-width="2"/>
+          <!-- ORANJE ACCENT STREEP — Renault E-Tech kenmerk -->
+          <rect x="858" y="99" width="22" height="8" rx="1" fill="#e8855a"/>
+
+          <!-- Mistlamp -->
+          <rect x="858" y="158" width="16" height="10" rx="2" fill="#e8e870" opacity="0.65"/>
+
+          <!-- Voorbumper -->
+          <path d="M854,197 L880,194 L880,212 L854,214 Z" fill="#c8c8c4" rx="2"/>
+          <rect x="856" y="207" width="24" height="4" rx="1" fill="#b0b0ac"/>
+
+          <!-- ===== ONDERCHASSIS ===== -->
+          <rect x="48" y="200" width="832" height="10" fill="#1e1e1c"/>
+
+          <!-- Uitlaatpijp (achter) -->
+          <rect x="34" y="194" width="18" height="9" rx="4.5" fill="#484840"/>
+          <ellipse cx="34" cy="198" rx="5" ry="4" fill="#383830"/>
+
+          <!-- ===== ACHTERSTE WIEL ===== -->
+          <g transform="translate(152,216)">
+            <!-- Wiel schaduw op grond -->
+            <ellipse cx="0" cy="44" rx="42" ry="8" fill="rgba(0,0,0,0.22)"/>
+            <!-- Buitenste band -->
+            <circle cx="0" cy="0" r="46" fill="#252520"/>
+            <!-- Band detail ring -->
+            <circle cx="0" cy="0" r="42" fill="none" stroke="#1c1c18" stroke-width="4"/>
+            <!-- Velg binnenring -->
+            <circle cx="0" cy="0" r="37" fill="#323230"/>
+            <!-- Draaibaar deel -->
+            <g id="rearWheelInner">
+              <!-- 8 spaken -->
+              <line x1="0" y1="-35" x2="0" y2="-17" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="24.75" y1="-24.75" x2="12.02" y2="-12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="35" y1="0" x2="17" y2="0" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="24.75" y1="24.75" x2="12.02" y2="12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="0" y1="35" x2="0" y2="17" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-24.75" y1="24.75" x2="-12.02" y2="12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-35" y1="0" x2="-17" y2="0" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-24.75" y1="-24.75" x2="-12.02" y2="-12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <!-- Naaf -->
+              <circle cx="0" cy="0" r="15" fill="#424240"/>
+              <circle cx="0" cy="0" r="7" fill="#5a5a58"/>
+              <!-- Boutjes -->
+              <circle cx="0" cy="-10.5" r="2" fill="#363634"/>
+              <circle cx="9.9" cy="-5.25" r="2" fill="#363634"/>
+              <circle cx="6.1" cy="8.8" r="2" fill="#363634"/>
+              <circle cx="-6.1" cy="8.8" r="2" fill="#363634"/>
+              <circle cx="-9.9" cy="-5.25" r="2" fill="#363634"/>
+            </g>
+          </g>
+
+          <!-- Wielscherm achter -->
+          <path d="M102,176 Q153,148 204,176" fill="none" stroke="#c8c8c4" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- ===== VOORSTE WIEL ===== -->
+          <g transform="translate(748,216)">
+            <!-- Wiel schaduw op grond -->
+            <ellipse cx="0" cy="44" rx="42" ry="8" fill="rgba(0,0,0,0.22)"/>
+            <!-- Buitenste band -->
+            <circle cx="0" cy="0" r="46" fill="#252520"/>
+            <!-- Band detail ring -->
+            <circle cx="0" cy="0" r="42" fill="none" stroke="#1c1c18" stroke-width="4"/>
+            <!-- Velg binnenring -->
+            <circle cx="0" cy="0" r="37" fill="#323230"/>
+            <!-- Draaibaar deel -->
+            <g id="frontWheelInner">
+              <!-- 8 spaken -->
+              <line x1="0" y1="-35" x2="0" y2="-17" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="24.75" y1="-24.75" x2="12.02" y2="-12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="35" y1="0" x2="17" y2="0" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="24.75" y1="24.75" x2="12.02" y2="12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="0" y1="35" x2="0" y2="17" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-24.75" y1="24.75" x2="-12.02" y2="12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-35" y1="0" x2="-17" y2="0" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <line x1="-24.75" y1="-24.75" x2="-12.02" y2="-12.02" stroke="#6c6c68" stroke-width="5" stroke-linecap="round"/>
+              <!-- Naaf -->
+              <circle cx="0" cy="0" r="15" fill="#424240"/>
+              <circle cx="0" cy="0" r="7" fill="#5a5a58"/>
+              <!-- Boutjes -->
+              <circle cx="0" cy="-10.5" r="2" fill="#363634"/>
+              <circle cx="9.9" cy="-5.25" r="2" fill="#363634"/>
+              <circle cx="6.1" cy="8.8" r="2" fill="#363634"/>
+              <circle cx="-6.1" cy="8.8" r="2" fill="#363634"/>
+              <circle cx="-9.9" cy="-5.25" r="2" fill="#363634"/>
+            </g>
+          </g>
+
+          <!-- Wielscherm voor -->
+          <path d="M698,176 Q748,148 798,176" fill="none" stroke="#c8c8c4" stroke-width="2.5" stroke-linecap="round"/>
+
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats" aria-label="Cijfers en statistieken">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-number">60+</div>
+      <div class="stat-label">Jaar ervaring</div>
+    </div>
+    <div class="stat-item fade-in fade-in-delay-1">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Vestigingen</div>
+    </div>
+    <div class="stat-item fade-in fade-in-delay-2">
+      <div class="stat-number">400+</div>
+      <div class="stat-label">Klanten</div>
+    </div>
+    <div class="stat-item fade-in fade-in-delay-3">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Productengroepen</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OVER ONS ===================== -->
+<section class="over-ons" id="over-ons" aria-labelledby="over-ons-title">
+  <div class="over-ons-inner">
+    <div class="over-ons-left fade-in">
+      <span class="section-label">Ons verhaal</span>
+      <h2 id="over-ons-title">Twee sterke merken, één passie</h2>
+      <p>Devisch Foodservice heeft zijn wortels in de jaren '60 en groeide uit tot een gerenommeerde naam in de West-Vlaamse voedingssector. Met decennia aan vakmanschap en een diep begrip van de professionele keuken bouwde het merk een solide vertrouwensbasis op bij horeca, collectiviteiten en verenigingen.</p>
+      <p>Esca Food werd in 1992 opgericht en werd snel een vaste partner voor grootkeukens en cateraars in de regio. De combinatie van brede productkennis en persoonlijke service zorgde voor een trouwe klantenbasis doorheen West-Vlaanderen.</p>
+      <p>In april 2023 namen Peter en Dominique de samengevoegde groep over — en dat deden ze met echte <em>goesting</em>. Ze combineren de rijke erfenis van beide merken met een frisse aanpak en oprechte gedrevenheid om elke klant, groot of klein, het allerbeste te bieden.</p>
+      <div class="oresto-badge">
+        <span class="oresto-dot"></span>
+        Oresto Food Partners &mdash; lid sinds 1998
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-block fade-in fade-in-delay-1">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+          </svg>
+        </div>
+        <h3>Vers &amp; kwaliteit</h3>
+        <p>Van topvlees en gevogelte tot verse charcuterie: dagverse leveringen met de kwaliteitsgarantie die uw professionele keuken verdient. Betrouwbaar op tijd, elke dag.</p>
+      </div>
+
+      <div class="feature-block fade-in fade-in-delay-2">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <h3>Oresto geïntegreerd</h3>
+        <p>Als Oresto Food Partners-lid profiteert u van een breed nationaal inkoopnetwerk met scherpe condities — zonder in te boeten op de lokale service en persoonlijke aanpak die ons onderscheidt.</p>
+      </div>
+
+      <div class="feature-block fade-in fade-in-delay-3">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3>Persoonlijk contact</h3>
+        <p>Peter en Dominique kennen hun klanten bij naam. Geen callcenter, geen anonimiteit — een vaste contactpersoon die uw noden begrijpt, meedenkt en er voor u is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ASSORTIMENT ===================== -->
+<section class="assortiment" id="assortiment" aria-labelledby="assortiment-title">
+  <div class="assortiment-header fade-in">
+    <span class="section-label">Wat wij leveren</span>
+    <h2 id="assortiment-title">Ons volledige assortiment</h2>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card fade-in">
+      <span class="product-card-icon" aria-hidden="true">🥩</span>
+      <h3>Vers</h3>
+      <p>Topkwaliteit vlees, gevogelte en charcuterie — dagvers geleverd bij uw zaak of afgehaald in onze vestigingen.</p>
+    </div>
+    <div class="product-card fade-in fade-in-delay-1">
+      <span class="product-card-icon" aria-hidden="true">❄️</span>
+      <h3>Diepvries</h3>
+      <p>Een uitgebreid gamma diepvriesproducten voor snelle bereiding — zonder in te boeten op smaak of kwaliteit.</p>
+    </div>
+    <div class="product-card fade-in fade-in-delay-2">
+      <span class="product-card-icon" aria-hidden="true">🛒</span>
+      <h3>Droog</h3>
+      <p>Pasta, sauzen, conserven, kruiden en specerijen — alles wat uw professionele keuken dagelijks nodig heeft.</p>
+    </div>
+    <div class="product-card fade-in fade-in-delay-3">
+      <span class="product-card-icon" aria-hidden="true">🧴</span>
+      <h3>Non-food &amp; Hygiëne</h3>
+      <p>Schoonmaakproducten, verpakkingsmateriaal en hygiëneartikelen voor uw horecabedrijf of instelling.</p>
+    </div>
+    <div class="product-card fade-in fade-in-delay-4">
+      <span class="product-card-icon" aria-hidden="true">🍳</span>
+      <h3>Keuken &amp; Tafelwaren</h3>
+      <p>Bestek, servies, keukengereedschap en tafelwaren — volledig assortiment voor de professionele keuken en zaal.</p>
+    </div>
+    <div class="product-card fade-in fade-in-delay-5">
+      <span class="product-card-icon" aria-hidden="true">🏪</span>
+      <h3>Cash &amp; Carry</h3>
+      <p>Afhaalmogelijkheid in onze vestigingen in Veurne en Heule. Flexibel, snel en voordelig voor uw zaak.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VESTIGINGEN ===================== -->
+<section class="vestigingen" id="vestigingen" aria-labelledby="vestigingen-title">
+  <div class="section-header fade-in">
+    <span class="section-label">Waar u ons vindt</span>
+    <h2 id="vestigingen-title">Onze vestigingen</h2>
+  </div>
+
+  <div class="vestigingen-grid">
+    <!-- VEURNE -->
+    <article class="vestiging-card fade-in" aria-label="Vestiging Veurne">
+      <span class="vestiging-badge">Veurne</span>
+      <h3>Devisch – Esca Food Veurne</h3>
+      <div class="vestiging-info">
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Adres</strong>
+            Koksijdestraat 20<br>8630 Veurne
+          </div>
+        </div>
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Telefoon</strong>
+            <a href="tel:+3258523804">+32 (0)58 52 38 04</a>
+          </div>
+        </div>
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Openingsuren</strong>
+            <div class="uren-list">
+              <span>Ma – Vr: 09:00 – 12:30 &amp; 13:30 – 17:30</span>
+              <span class="uren-note">Woensdag namiddag gesloten</span>
+              <span>Zaterdag: 09:00 – 16:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="tel:+3258523804" class="btn-tel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+        </svg>
+        Bel Veurne
+      </a>
+    </article>
+
+    <!-- HEULE -->
+    <article class="vestiging-card fade-in fade-in-delay-2" aria-label="Vestiging Heule">
+      <span class="vestiging-badge">Heule (Kortrijk)</span>
+      <h3>Devisch – Esca Food Heule</h3>
+      <div class="vestiging-info">
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Adres</strong>
+            Waterven 5<br>8501 Wevelgem (Heule)
+          </div>
+        </div>
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Telefoon</strong>
+            <a href="tel:+3256372600">+32 (0)56 37 26 00</a>
+          </div>
+        </div>
+        <div class="vestiging-row">
+          <svg class="vestiging-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <div class="vestiging-row-content">
+            <strong>Openingsuren</strong>
+            <div class="uren-list">
+              <span>Ma – Do: 08:30 – 12:00 &amp; 13:30 – 17:30</span>
+              <span>Vrijdag: 08:30 – 12:00 &amp; 13:30 – 15:30</span>
+              <span>Zaterdag: 08:00 – 10:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="tel:+3256372600" class="btn-tel">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+        </svg>
+        Bel Heule
+      </a>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact-inner">
+    <div class="contact-left fade-in">
+      <span class="section-label">Contacteer ons</span>
+      <h2 id="contact-title">Samen werken aan uw succes</h2>
+      <p>Bent u op zoek naar een betrouwbare totaalleverancier voor uw horecazaak, instelling of vereniging? Neem vandaag nog contact op — Peter en Dominique helpen u graag verder met een aanbod op maat.</p>
+
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Vestiging Veurne</strong>
+            <span>Koksijdestraat 20, 8630 Veurne</span>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+            </svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Telefoon Veurne</strong>
+            <a href="tel:+3258523804">+32 (0)58 52 38 04</a>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Vestiging Heule</strong>
+            <span>Waterven 5, 8501 Wevelgem (Heule)</span>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12 19.79 19.79 0 011.61 3.41 2 2 0 013.6 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.7a16 16 0 006 6l.86-.86a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.73 16a2 2 0 01.27.92z"/>
+            </svg>
+          </div>
+          <div class="contact-detail-text">
+            <strong>Telefoon Heule</strong>
+            <a href="tel:+3256372600">+32 (0)56 37 26 00</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap fade-in fade-in-delay-2">
+      <div id="contactFormFields">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="voornaam">Voornaam</label>
+            <input type="text" id="voornaam" name="voornaam" placeholder="Jan" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="naam">Naam</label>
+            <input type="text" id="naam" name="naam" placeholder="De Smedt" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="zaak">Naam zaak of instelling</label>
+          <input type="text" id="zaak" name="zaak" placeholder="Restaurant De Kroon" autocomplete="organization">
+        </div>
+        <div class="form-group">
+          <label for="email">E-mailadres <span style="color:var(--orange)">*</span></label>
+          <input type="email" id="email" name="email" placeholder="jan@uw-zaak.be" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="telefoon">Telefoonnummer</label>
+          <input type="tel" id="telefoon" name="telefoon" placeholder="+32 ..." autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label for="vestiging">Vestiging voorkeur</label>
+          <select id="vestiging" name="vestiging">
+            <option value="">Selecteer een vestiging</option>
+            <option value="veurne">Veurne — Koksijdestraat 20</option>
+            <option value="heule">Heule (Kortrijk) — Waterven 5</option>
+            <option value="geen-voorkeur">Geen voorkeur</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bericht">Uw bericht <span style="color:var(--orange)">*</span></label>
+          <textarea id="bericht" name="bericht" placeholder="Vertel ons over uw noden, uw zaak of een specifieke vraag..." required></textarea>
+        </div>
+        <button type="button" class="btn-submit" id="submitBtn">Stuur uw bericht</button>
+      </div>
+
+      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+        <div class="success-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3>Bericht verzonden!</h3>
+        <p>Bedankt voor uw bericht. Peter en Dominique nemen zo snel mogelijk contact met u op om u verder te helpen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="pointer-events:none; cursor:default;">
+        <div class="nav-logo-mark" aria-hidden="true">D</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name" style="font-size:1.05rem;">Devisch – Esca Food</span>
+          <span class="nav-logo-sub">Totaalleverancier HoReCa</span>
+        </div>
+      </div>
+      <p>Meer dan 60 jaar expertise in voedingsdistributie voor de professionele sector. Met vestigingen in Veurne en Heule — in het hart van West-Vlaanderen.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigatie</h4>
+      <ul>
+        <li><a href="#over-ons">Over ons</a></li>
+        <li><a href="#assortiment">Assortiment</a></li>
+        <li><a href="#vestigingen">Vestigingen</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Assortiment</h4>
+      <ul>
+        <li><a href="#assortiment">Vers</a></li>
+        <li><a href="#assortiment">Diepvries</a></li>
+        <li><a href="#assortiment">Droog</a></li>
+        <li><a href="#assortiment">Non-food &amp; Hygiëne</a></li>
+        <li><a href="#assortiment">Keuken &amp; Tafelwaren</a></li>
+        <li><a href="#assortiment">Cash &amp; Carry</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Onze vestigingen</h4>
+      <div class="footer-address">
+        <strong>Veurne</strong>
+        Koksijdestraat 20<br>
+        8630 Veurne<br>
+        <a href="tel:+3258523804">+32 (0)58 52 38 04</a><br>
+        <span style="font-size:0.8rem; color:rgba(255,255,255,0.3);">
+          Ma–Vr 09:00–12:30 &amp; 13:30–17:30<br>
+          (woe-nm gesloten) &middot; Za 09:00–16:00
+        </span>
+      </div>
+      <div class="footer-address">
+        <strong>Heule (Kortrijk)</strong>
+        Waterven 5<br>
+        8501 Wevelgem<br>
+        <a href="tel:+3256372600">+32 (0)56 37 26 00</a><br>
+        <span style="font-size:0.8rem; color:rgba(255,255,255,0.3);">
+          Ma–Do 08:30–12:00 &amp; 13:30–17:30<br>
+          Vr tot 15:30 &middot; Za 08:00–10:00
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2024 Devisch – Esca Food. Alle rechten voorbehouden.</span>
+    <span>
+      Oresto Food Partners &middot;
+      <a href="#over-ons">Over ons</a> &middot;
+      <a href="#vestigingen">Vestigingen</a> &middot;
+      <a href="#contact">Contact</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- NAV SCROLL EFFECT ----
+  var nav = document.getElementById('mainNav');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- HAMBURGER MENU ----
+  var hamburgerBtn = document.getElementById('hamburger');
+  var mobileMenuEl = document.getElementById('mobileMenu');
+  var menuOpen = false;
+
+  hamburgerBtn.addEventListener('click', function() {
+    menuOpen = !menuOpen;
+    mobileMenuEl.classList.toggle('open', menuOpen);
+    hamburgerBtn.setAttribute('aria-expanded', String(menuOpen));
+  });
+
+  mobileMenuEl.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      menuOpen = false;
+      mobileMenuEl.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---- ROAD DASHES ----
+  var dashContainer = document.getElementById('roadDashes');
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < 36; i++) {
+    var dash = document.createElement('div');
+    dash.className = 'road-dash-item';
+    fragment.appendChild(dash);
+  }
+  dashContainer.appendChild(fragment);
+
+  // ---- WHEEL ANIMATION (rAF, centred on each wheel's own origin) ----
+  var rearWheelEl = document.getElementById('rearWheelInner');
+  var frontWheelEl = document.getElementById('frontWheelInner');
+  var angle = 0;
+
+  function animateWheels() {
+    angle = (angle - 2.8) % 360;
+    var t = 'rotate(' + angle + ')';
+    if (rearWheelEl)  rearWheelEl.setAttribute('transform', t);
+    if (frontWheelEl) frontWheelEl.setAttribute('transform', t);
+    requestAnimationFrame(animateWheels);
+  }
+  requestAnimationFrame(animateWheels);
+
+  // ---- INTERSECTION OBSERVER (fade-in) ----
+  var fadeEls = document.querySelectorAll('.fade-in');
+
+  if (!window.IntersectionObserver) {
+    fadeEls.forEach(function(el) { el.classList.add('visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    fadeEls.forEach(function(el) { io.observe(el); });
+  }
+
+  // ---- CONTACT FORM ----
+  var submitBtn = document.getElementById('submitBtn');
+  var formFields = document.getElementById('contactFormFields');
+  var formSuccess = document.getElementById('formSuccess');
+
+  function markInvalid(el) {
+    el.style.borderColor = '#e8855a';
+    el.addEventListener('input', function clearError() {
+      el.style.borderColor = '';
+      el.removeEventListener('input', clearError);
+    });
+  }
+
+  submitBtn.addEventListener('click', function() {
+    var voornaam = document.getElementById('voornaam').value.trim();
+    var naam     = document.getElementById('naam').value.trim();
+    var email    = document.getElementById('email').value.trim();
+    var bericht  = document.getElementById('bericht').value.trim();
+    var valid = true;
+
+    if (!voornaam) { markInvalid(document.getElementById('voornaam')); valid = false; }
+    if (!naam)     { markInvalid(document.getElementById('naam'));     valid = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      markInvalid(document.getElementById('email')); valid = false;
+    }
+    if (!bericht)  { markInvalid(document.getElementById('bericht')); valid = false; }
+
+    if (!valid) return;
+
+    submitBtn.textContent = 'Verzenden…';
+    submitBtn.disabled = true;
+
+    setTimeout(function() {
+      formFields.style.display = 'none';
+      formSuccess.classList.add('show');
+    }, 800);
+  });
+
+})();
+</script>
+
+</body>
+</html>
